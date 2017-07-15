@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Music Player</title>
+
+        <!--jQuery-->
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+
+        <!--bootstrap-->
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css">
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/js/bootstrap.js">
+        <!-- Latest compiled and minified CSS -->
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+
+        <!-- Optional theme -->
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+        <!-- Latest compiled and minified JavaScript -->
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+        <!--font-awesome-->
+        <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrap.com/font-awesome/4.7.0/css/font-awesome.min.css"/>-->
+        <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+        <!--<link rel="stylesheet" href="./font-awesome/css/font-awesome.css">-->
+        <!--<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">-->
+
+        <!--CSS file-->
+        <link rel="stylesheet" href="css/style.css">
+        <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Handlee" type="text/css">-->
+        <!--JS file-->
+        <script src="js/AlbumForm.js"></script>
+        <script src="js/AlbumsBoard.js"></script>
+        <script src="js/DataService.js"></script>
+        <script src="js/Player.js"></script>
+        <script src="js/Templates.js"></script>
+        <script src="js/Validation.js"></script>
+    </head>
+    <body>
+        <form action="" id="add-album-form" method="post">
+            <div id="album-details" class="row">
+                <div class="col-md-3">
+                    <div id="album-form">
+                        <div class="form-group">
+                            <label class="control-label">Album Name:</label>
+                            <input type="text" class="form-control" id="album-name" name="name" placeholder="e.g. Blood Sugar Sex Magic" title="Album Name" required="" value="AM">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Artist:</label>
+                            <input type="text" class="form-control" id="artist-name" name="artist" placeholder="e.g. Red Hot Chilli Peppers" title="Artist" required="" value="Arctic Monkeys">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Image URL:</label>
+                            <input type="text" class="form-control" id="img-url" name="img" placeholder="http://" title="Image URL" required="" value="https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Year:</label>
+                            <input type="text" class="form-control" id="year" name="year" placeholder="Year" title="Year" required="" value="2013">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description" cols="30" rows="10" placeholder="Description" title="Description" required="">AM is the fifth studio album by English indie rock band Arctic Monkeys.</textarea>
+                        </div>
+                    </div>
+
+                    <div id="songs-form">
+                        <div class="form-group song">
+                            <input class="form-control" type="text" value="Song1" placeholder="Song name">
+                            <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                        </div>
+
+                        <div class="form-group song">
+                            <input class="form-control" type="text" value="Song2" placeholder="Song name">
+                            <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                        </div>
+
+                        <div class="form-group song">
+                            <input class="form-control" type="text" value="Song3" placeholder="Song name">
+                            <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                        </div>
+
+                        <div class="form-group song">
+                            <input class="form-control" type="text" value="Song4" placeholder="Song name">
+                            <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="add-song">
+                        <button>Add Song</button>
+                    </div>
+                </div>
+
+                <div class="col-md-6 cover-preview">
+                    <img src="https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png" class="img-responsive img-circle" alt="Album Cover">
+                </div>
+            </div>
+
+            <button id="save-album">Save</button>
+
+            <!--<input type="button" class="btn btn-warning" value="Save Album" id="next">
+            <input type="reset" class="btn btn-warning" value="Reset Fields">-->
+        </form>
+
+        <!--<script src="js/add_album.js"></script>-->
+    </body>
+</html>
