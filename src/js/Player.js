@@ -1,8 +1,8 @@
 import $ from 'jquery';
 
-export default Player = {
+let Player = {
     playAlbum: function ( album ) {
-
+        alert('Playing')
     },
 
     bindEvents: function () {
@@ -13,3 +13,5 @@ export default Player = {
         this.bindEvents();
     }
 };
+
+export default Player;

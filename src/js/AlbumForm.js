@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-export default AlbumForm = {
+let AlbumForm = {
     // Using the function 'collectValues' we bring all the values in the inputs and textarea related to album (name, artist, image, year and description)
     collectValues: function() {
         var regexes = {
@@ -115,3 +115,5 @@ export default AlbumForm = {
         this.bindEvents();
     }
 };
+
+export default AlbumForm;

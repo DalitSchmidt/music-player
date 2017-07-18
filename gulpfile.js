@@ -44,7 +44,8 @@ gulp.task('watchify', function () {
     let args = merge(watchify.args, { debug: true })
     let bundler = watchify(browserify('./src/js/App.js', args))
     .transform(babelify.configure({
-        presets: ["es2015"]
+        presets: ["es2015"],
+        sourceType: "module"
     }))
     bundle_js(bundler)
 
@@ -71,7 +72,8 @@ function bundle_js(bundler) {
 gulp.task('browserify', function () {
     let bundler = browserify('./src/js/App.js', { debug: true })
     .transform(babelify.configure({
-        presets: ["es2015"]
+        presets: ["es2015"],
+        sourceType: "module"
     }))
 
     return bundle_js(bundler)

@@ -1,11 +1,11 @@
-export default Templates = {
+let Templates = {
     album: function( album ) {
-        var html =
+        let html =
             `
             <div class="col-md-3">
                 <div class="record" data-album-id="${album.id}">
                     <div class="curved-container">
-                        <h4 class="album-name text-center curved-text">${album.name}</h4>
+                        <h4 class="album-name text-center curved-text" data-album-id="${album.id}">${album.name}</h4>
                     </div>
                     <img src="${album.img}" alt="${album.name}" class="img-responsive img-circle">
                     <a href="#" class="remove-icon" data-album-id="${album.id}">
@@ -26,3 +26,5 @@ export default Templates = {
         return html;
     },
 };
+
+export default Templates;

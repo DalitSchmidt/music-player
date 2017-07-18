@@ -5,10 +5,14 @@ import AlbumBoard from './AlbumsBoard';
 
 const App = {
     init: function() {
+        console.log("App init");
+
         Player.init();
         AlbumForm.init();
         AlbumBoard.init();
     }
 };
 
-$(document).ready( App.init );
+$(document).ready(function() {
+    App.init();
+});

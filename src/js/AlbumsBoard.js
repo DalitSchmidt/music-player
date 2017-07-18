@@ -1,13 +1,15 @@
 import $ from 'jquery';
 import DataService from './DataService';
 import Templates from './Templates';
+import Player from './Player';
 
-export default AlbumsBoard = {
+let AlbumsBoard = {
     removeLoader: function () {
         $('#album-list').removeClass('loading');
     },
 
     appendAlbums: function( albums ) {
+        alert('getAllAlbums');
         this.removeLoader();
         let html = '';
         for ( let i = 0; i < albums.length; i++ )
@@ -17,7 +19,7 @@ export default AlbumsBoard = {
     },
 
     getAllAlbums: function() {
-        DataService.getAllAlbums().then( this.appendAlbums );
+        DataService.getAllAlbums().then( $.proxy(this.appendAlbums, this) );
     },
 
     displayAlbum: function( e ) {
@@ -27,8 +29,23 @@ export default AlbumsBoard = {
         DataService.getAlbumById( album_id ).then( Player.playAlbum );
     },
 
+    displayResults: function( results ) {
+
+    },
+
+    searchAlbum: function( e ) {
+        let input = $(e.target)
+        let term = input.val()
+
+        if ( term.length >= 3 ) {
+            DataService.searchAlbum( term ).then( $.proxy( this.displayResults, this ) )
+        }
+    },
+
     bindEvents: function() {
-        $('.play-icon').on('click', $.proxy( this.displayAlbum, this ));
+        $('#album-list').on('click', '.record h4', $.proxy( this.displayAlbum, this ));
+        $('.edit-icon').on('click', $.proxy( this.editAlbum, this ));
+        $('#search').on('keyup', $.proxy( this.searchAlbum, this ))
     },
 
     init: function() {
@@ -36,3 +53,5 @@ export default AlbumsBoard = {
         this.getAllAlbums();
     }
 };
+
+export default AlbumsBoard;

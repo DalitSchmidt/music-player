@@ -1,4 +1,6 @@
-export default DataService = {
+import $ from 'jquery';
+
+let DataService = {
     getAllAlbums: function() {
         return $.getJSON('http://localhost:3000/api/albums');
     },
@@ -30,5 +32,11 @@ export default DataService = {
             contentType: 'application/json',
             method: 'DELETE'
         });
+    },
+
+    searchAlbum: function( term ) {
+        return $.getJSON('http://localhost:3000/api/albums/search/' + term)
     }
 };
+
+export default DataService;
