@@ -9,7 +9,6 @@ let AlbumsBoard = {
     },
 
     appendAlbums: function( albums ) {
-        alert('getAllAlbums');
         this.removeLoader();
         let html = '';
         for ( let i = 0; i < albums.length; i++ )
@@ -29,23 +28,11 @@ let AlbumsBoard = {
         DataService.getAlbumById( album_id ).then( Player.playAlbum );
     },
 
-    displayResults: function( results ) {
 
-    },
-
-    searchAlbum: function( e ) {
-        let input = $(e.target)
-        let term = input.val()
-
-        if ( term.length >= 3 ) {
-            DataService.searchAlbum( term ).then( $.proxy( this.displayResults, this ) )
-        }
-    },
 
     bindEvents: function() {
         $('#album-list').on('click', '.record h4', $.proxy( this.displayAlbum, this ));
         $('.edit-icon').on('click', $.proxy( this.editAlbum, this ));
-        $('#search').on('keyup', $.proxy( this.searchAlbum, this ))
     },
 
     init: function() {

@@ -36,10 +36,6 @@ router.get('/', function(req, res) {
 router.get('/:album_id', function(req, res) {
     let album_id = req.params.album_id
 
-    let User = models.User
-    User.findById( album_id , function( results ) {
-        res.json( results )
-    })
 })
 
 router.post('/', function(req, res) {
@@ -48,10 +44,19 @@ router.post('/', function(req, res) {
 
 router.get('/search/:term', function(req, res) {
     let term = req.params.term
-    let User = models.User
-    User.findAll({ where: { album_name: { like: `%${term}%` } } }, function( results ) {
-        res.json( results )
-    })
+    let Album = models.Album
+
+    res.json([
+        {
+            name: 'erg4erg',
+            id: 5
+        },
+        {
+            name: 'erg4tg4g',
+            id: 6
+        }
+    ])
+
 })
 
 module.exports = router

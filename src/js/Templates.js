@@ -25,6 +25,18 @@ let Templates = {
 
         return html;
     },
+
+    searchResults( results ) {
+        let html = '<ul>'
+
+        results.forEach((index, result) => {
+            html += `<li data-album-id=${result.id}>${result.name}</li>`
+        })
+
+        html += '</ul>'
+
+        return html
+    }
 };
 
 export default Templates;
