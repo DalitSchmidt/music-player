@@ -1,42 +1,40 @@
-import $ from 'jquery';
+import $ from 'jquery'
 
-let DataService = {
-    getAllAlbums: function() {
-        return $.getJSON('http://localhost:3000/api/albums');
-    },
+export default class DataService {
+    static getAllAlbums() {
+        return $.getJSON('http://localhost:3000/api/albums')
+    }
 
-    getAlbumById: function( album_id ) {
-        return $.getJSON('http://localhost:3000/api/albums/' + album_id);
-    },
+    static getAlbumById( album_id ) {
+        return $.getJSON('http://localhost:3000/api/albums/' + album_id)
+    }
 
-    saveAlbum: function () {
+    static saveAlbum() {
         return $.ajax({
             url: 'http://localhost:3000/api/albums',
             contentType: 'application/json',
             method: 'POST',
             data: JSON.stringify( album )
-        });
-    },
+        })
+    }
 
-    updateAlbum: function( album_id ) {
+    static updateAlbum( album_id ) {
         return $.ajax({
             url: 'http://localhost:3000/api/albums' + album_id,
             contentType: 'application/json',
             method: 'PUT'
-        });
-    },
+        })
+    }
 
-    deleteAlbum: function( album_id ) {
+    static deleteAlbum( album_id ) {
         return $.ajax({
             url: 'http://localhost:3000/api/albums' + album_id,
             contentType: 'application/json',
             method: 'DELETE'
-        });
-    },
+        })
+    }
 
-    searchAlbum: function( term ) {
+    static searchAlbum( term ) {
         return $.getJSON('http://localhost:3000/api/albums/search/' + term)
     }
-};
-
-export default DataService;
+}

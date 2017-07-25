@@ -1,17 +1,15 @@
-import $ from 'jquery';
+import $ from 'jquery'
 
-let Player = {
-    playAlbum: function ( album ) {
-        alert('Playing')
-    },
-
-    bindEvents: function () {
-
-    },
-
-    init: function () {
-        this.bindEvents();
+export default class Player {
+    constructor() {
+        this.bindEvents()
     }
-};
 
-export default Player;
+    playAlbum( album ) {
+        alert('Playing')
+    }
+
+    bindEvents() {
+
+    }
+}

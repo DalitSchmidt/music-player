@@ -8,25 +8,25 @@ router.get('/', function(req, res) {
             id: 123,
             name: 'Head full of dreams',
             artist: 'Coldplay',
-            img: 'https://i.ytimg.com/vi/1ybrgGaLtRI/hqdefault.jpg'
+            img: 'https://upload.wikimedia.org/wikipedia/en/3/3d/Coldplay_-_A_Head_Full_of_Dreams.png'
+        },
+        {
+            id: 124,
+            name: 'AM',
+            artist: 'Arctic Monkeys',
+            img: 'https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png'
         },
         {
             id: 123,
             name: 'Head full of dreams',
             artist: 'Coldplay',
-            img: 'https://i.ytimg.com/vi/1ybrgGaLtRI/hqdefault.jpg'
+            img: 'https://upload.wikimedia.org/wikipedia/en/3/3d/Coldplay_-_A_Head_Full_of_Dreams.png'
         },
         {
-            id: 123,
-            name: 'Head full of dreams',
-            artist: 'Coldplay',
-            img: 'https://i.ytimg.com/vi/1ybrgGaLtRI/hqdefault.jpg'
-        },
-        {
-            id: 123,
-            name: 'Head full of dreams',
-            artist: 'Coldplay',
-            img: 'https://i.ytimg.com/vi/1ybrgGaLtRI/hqdefault.jpg'
+            id: 124,
+            name: 'AM',
+            artist: 'Arctic Monkeys',
+            img: 'https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png'
         }
     ]
 
@@ -46,17 +46,33 @@ router.get('/search/:term', function(req, res) {
     let term = req.params.term
     let Album = models.Album
 
-    res.json([
+    let albums = [
         {
-            name: 'erg4erg',
-            id: 5
+            id: 123,
+            name: 'Head full of dreams',
+            artist: 'Coldplay',
+            img: 'https://upload.wikimedia.org/wikipedia/en/3/3d/Coldplay_-_A_Head_Full_of_Dreams.png'
         },
         {
-            name: 'erg4tg4g',
-            id: 6
+            id: 124,
+            name: 'AM',
+            artist: 'Arctic Monkeys',
+            img: 'https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png'
+        },
+        {
+            id: 123,
+            name: 'Head full of dreams',
+            artist: 'Coldplay',
+            img: 'https://upload.wikimedia.org/wikipedia/en/3/3d/Coldplay_-_A_Head_Full_of_Dreams.png'
+        },
+        {
+            id: 124,
+            name: 'AM',
+            artist: 'Arctic Monkeys',
+            img: 'https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png'
         }
-    ])
-
+    ]
+    res.json(albums)
 })
 
 module.exports = router

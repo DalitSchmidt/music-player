@@ -37,7 +37,8 @@ gulp.task('sass', () => {
 gulp.task('start-server', () => {
     nodemon({
         script: './bin/www',
-        env: { 'NODE_ENV': 'development' }
+        env: { 'NODE_ENV': 'development' },
+        ignore: './public'
     })
 })
 

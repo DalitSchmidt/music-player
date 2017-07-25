@@ -4,12 +4,13 @@ import Templates from './Templates'
 
 export default class Search {
     constructor() {
-        this.bindEvents();
+        this.bindEvents()
     }
 
     displayResults( results ) {
         let html = Templates.searchResults( results )
-        $('#results').append( html )
+        console.log( html )
+        $('#results-list').html( html )
     }
 
     searchAlbum( e ) {
@@ -18,6 +19,8 @@ export default class Search {
 
         if ( term.length >= 3 )
             DataService.searchAlbum( term ).then( $.proxy( this.displayResults, this ) )
+
+        // Check if the length is smaller than 3, we have to remove all the results
     }
 
     bindEvents() {
