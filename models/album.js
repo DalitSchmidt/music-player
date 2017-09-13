@@ -1,9 +1,5 @@
-'use strict'
-
-// ייצוא היכולות של המודול המבצע שימוש ב- sequelize שזהו מודול העוזר לנו לתקשר אל מול מסד הנתונים
-module.exports = function(sequelize, DataTypes) {
-    // המשתנה Album מכיל את האובייקטים album_id, album_name, album_image, album_artist ו- album_description שבאמצעות שימוש ב- sequelize הם מאפשרים לנו לתקשר אל מול מסד הנתונים ולמעשה הם מכילים את העמודות של הטבלאות במסד הנתונים בהתאם לסוג הנתונים שצרכים להיות מצויים בכל עמודה בטבלה לרבות ביצוע ולידציה על הנתונים המצויים בטבלה
-    let Album = sequelize.define('album', {
+module.exports = function( sequelize, DataTypes ) {
+    let Album = sequelize.define('Album', {
         album_id: {
             type: DataTypes.INTEGER(5).UNSIGNED,
             autoIncrement: true,
@@ -11,9 +7,15 @@ module.exports = function(sequelize, DataTypes) {
         },
         album_name: {
             type: DataTypes.STRING,
+            unique: true,
             validate: {
-                is: /^[A-Z][A-Za-z0-9- ?=.*#?!@_$%^&-()]+$/i,
-                unique: true
+                is: /^[A-Z][A-Za-z0-9- ?=.*#?!@_$%^&-()]+$/i
+            }
+        },
+        album_artist: {
+            type: DataTypes.STRING,
+            validate: {
+                is: /^[A-Z][A-Za-z0-9- ?=.*#?!@_$%^&-()]+$/i
             }
         },
         album_image: {
@@ -30,16 +32,8 @@ module.exports = function(sequelize, DataTypes) {
                 max: new Date().getFullYear()
             }
         },
-        album_artist: {
-            type: DataTypes.STRING,
-            validate: {
-                is: /^[A-Z][A-Za-z0-9- ?=.*#?!@_$%^&-()]+$/i
-            }
-        },
-
-        album_description: DataTypes.TEXT,
+        album_description: DataTypes.TEXT
     })
 
-    // הפונקציה מחזירה את המשתנה Album שלמעשה הוא מכיל את הנתונים שלפיהם נבנה המודל של האלבום במסד הנתונים
     return Album
 }
