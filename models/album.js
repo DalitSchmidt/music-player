@@ -1,6 +1,8 @@
-'use strict';
+'use strict'
 
+// ייצוא היכולות של המודול המבצע שימוש ב- sequelize שזהו מודול העוזר לנו לתקשר אל מול מסד הנתונים
 module.exports = function(sequelize, DataTypes) {
+    // המשתנה Album מכיל את האובייקטים album_id, album_name, album_image, album_artist ו- album_description שבאמצעות שימוש ב- sequelize הם מאפשרים לנו לתקשר אל מול מסד הנתונים ולמעשה הם מכילים את העמודות של הטבלאות במסד הנתונים בהתאם לסוג הנתונים שצרכים להיות מצויים בכל עמודה בטבלה לרבות ביצוע ולידציה על הנתונים המצויים בטבלה
     let Album = sequelize.define('album', {
         album_id: {
             type: DataTypes.INTEGER(5).UNSIGNED,
@@ -36,7 +38,8 @@ module.exports = function(sequelize, DataTypes) {
         },
 
         album_description: DataTypes.TEXT,
-    });
+    })
 
-    return Album;
-};
+    // הפונקציה מחזירה את המשתנה Album שלמעשה הוא מכיל את הנתונים שלפיהם נבנה המודל של האלבום במסד הנתונים
+    return Album
+}

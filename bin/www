@@ -3,40 +3,50 @@
 /**
  * Module dependencies.
  */
-
+// בקובץ www אנו מגדירים את ההגדרות של ההאזנות לשרת
+// הגדרת המשתנה app כקבוע וטעינה של כל היכולות המצויות בקובץ app.js באמצעות חיבור הקובץ
 const app = require('../app')
+//הגדרת המשתנה debug כקבוע המכיל את כל היכולות של המודולים debug ו- express-sequelize באמצעות חיבורם
 const debug = require('debug')('express-sequelize')
+// הגדרת המשתנה http כקבוע המכיל את כל היכולות של המודול באמצעות חיבורו
 const http = require('http')
+// הגדרת המשתנה models כקבוע וטעינה של כל היכולות המצויות בקבצים שמצויים בתיקיית models באמצעות חיבור התיקייה
 const models = require('../models')
 
 /**
  * Get port from environment and store in Express.
  */
-
+// המשתנה port מכיל את החיבור לפורט שאנו מעוניינים שהשרת יאזין לו, כאשר ה- port שמספרו 3000 מוגדר כברירת מחדל
 const port = normalizePort(process.env.PORT || '3000')
 app.set('port', port)
+
 /**
  * Create HTTP server.
  */
+// המשתנה server יוצר חיבור לשרת באמצעות הפונקציה createServer המקבלת את המשתנה app ושמצויה תחת המשתנה http
 const server = http.createServer(app)
 
+// הפעלה של הפונקציה sync המצויה תחת ה- models של sequelize ולאר מכן נפעיל פרומיס על ההאזנה של השרת ל- port המסוים והצגת הודעה לאיזה פורט השרת שאקספרס מבצע בו שימוש מאזין
 models.sequelize.sync().then(function() {
     /**
      * Listen on provided port, on all network interfaces.
      */
+    //
     server.listen(port, function() {
         debug('Express server listening on port ' + server.address().port)
     })
+    // הפעלה של הפונקציה on המצויה תחת המשתנה server וכאשר ה- event error הופעל, נפעיל את הפונקציה onError
     server.on('error', onError)
+    // הפעלה של הפונקציה on המצויה תחת המשתנה server וכאשר ה- event listening הופעל, נפעיל את הפונקציה onListening
     server.on('listening', onListening)
 })
 
 /**
  * Normalize a port into a number, string, or false.
  */
-
+// באמצעות הפונקציה normalizePort אנו בודקים שה- port אליו השרת של אקספרס מאזין הוא תקין
 function normalizePort(val) {
-    var port = parseInt(val, 10)
+    let port = parseInt(val, 10)
 
     if (isNaN(port)) {
         // named pipe
@@ -54,13 +64,12 @@ function normalizePort(val) {
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
     if (error.syscall !== 'listen') {
         throw error
     }
 
-    var bind = typeof port === 'string'
+    let bind = typeof port === 'string'
         ? 'Pipe ' + port
         : 'Port ' + port
 
@@ -82,7 +91,6 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
-
 function onListening() {
     let addr = server.address()
     let bind = typeof addr === 'string'
