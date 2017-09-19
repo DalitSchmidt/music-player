@@ -1,19 +1,19 @@
-// בקובץ ה- gulp אנו משתמשים עבור על מיני משימות שאנו מעוניינים שיתבצעו באופן קבוע עם הרצת המשימה של ה- gulp
-// הגדרת המשתנה gulp כקבוע המכיל את כל היכולות של המודול באמצעות חיבורו
+// בקובץ זה אנו משתמשים עבור כל מיני משימות שאנו מעוניינים שיתבצעו באופן קבוע עם הרצת הקובץ של ה- gulp
+// המשתנה gulp מכיל את כל היכולות של המודול באמצעות חיבורו
 const gulp = require('gulp')
-// הגדרת המשתנה browserify כקבוע המכיל את כל היכולות של המודול באמצעות חיבורו
+// המשתנה browserify מכיל את כל היכולות של המודול באמצעות חיבורו
 const browserify = require('browserify')
-// הגדרת המשתנה source כקבוע המכיל את כל היכולות של המודול 'vinyl-source-stream' באמצעות חיבורו
+// המשתנה source מכיל את כל היכולות של המודול 'vinyl-source-stream' באמצעות חיבורו
 const source = require('vinyl-source-stream')
-// הגדרת המשתנה gutil כקבוע המכיל את כל היכולות של המודול 'gulp-util' באמצעות חיבורו
+// המשתנה gutil מכיל את כל היכולות של המודול 'gulp-util' באמצעות חיבורו
 const gutil = require('gulp-util')
-// הגדרת המשתנה babelify כקבוע המכיל את כל היכולות של המודול באמצעות חיבורו
+// המשתנה babelify מכיל את כל היכולות של המודול באמצעות חיבורו
 const babelify = require('babelify')
-// הגדרת המשתנה connect כקבוע המכיל את כל היכולות של המודול 'gulp-connect' באמצעות חיבורו
+// המשתנה connect מכיל את כל היכולות של המודול 'gulp-connect' באמצעות חיבורו
 const connect = require('gulp-connect')
-// הגדרת המשתנה sass כקבוע המכיל את כל היכולות של המודול 'gulp-sass' באמצעות חיבורו
+// המשתנה sass מכיל את כל היכולות של המודול 'gulp-sass' באמצעות חיבורו
 const sass = require('gulp-sass')
-// הגדרת המשתנה nodemon כקבוע המכיל את כל היכולות של המודול 'gulp-nodemon' באמצעות חיבורו
+// המשתנה nodemon מכיל את כל היכולות של המודול 'gulp-nodemon' באמצעות חיבורו
 const nodemon = require('gulp-nodemon')
 
 let scripts = 0

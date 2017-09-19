@@ -1,7 +1,7 @@
 // ה- class Templates המתפקד "כמעין" מחלקת שירות מכיל את כל הפונקציות המאפשרות לנו להציג מידע ב- DOM
 // הגדרת ה- class בשם Templates וייצוא היכולות שלו
 export default class Templates {
-    // באמצעות הפונקציה album המקבלת את הפרמטר album אנו יוצרים תבנית html של האלבום להצגה ב- DOM
+    // באמצעות הפונקציה album המקבלת את הפרמטר album, אנו יוצרים תבנית html של האלבום להצגה ב- DOM
     static album( album ) {
         // המשתנה html מכיל תבנית html של האלבום להצגה ב- DOM
         let html =
@@ -31,12 +31,12 @@ export default class Templates {
         return html
     }
     
-    // באמצעות הפונקציה searchResults המקבלת את הפרמטר results אנו יוצרים תבנית html של תוצאות החיפוש להצגה ב- DOM
+    // באמצעות הפונקציה searchResults המקבלת את הפרמטר results, אנו יוצרים תבנית html של תוצאות החיפוש להצגה ב- DOM
     static searchResults( results ) {
         // המשתנה html מכיל את התגית ul ואליו נשרשר נתונים שיאפשרו להציג את תוצאות החיפוש ב- DOM
         let html = '<ul>'
         
-        // הלולאת forEach עוברת על המשתנה results ומוציאה נתונים מהאיברים בהתאם ולמיקום ב- index
+        // הלולאת forEach עוברת על איבר איבר שנמצא במשתנה results ומוציאה נתונים מהאיברים בהתאם ולמיקום ב- index
         results.forEach((result, index) => {
             // המשתנה html משרשר אליו את השורות עם תוצאות החיפוש להצגה ב- DOM
             html += `<li data-album-id="${result.id}">${result.name}</li>`
@@ -49,7 +49,7 @@ export default class Templates {
         return html
     }
 
-    // באמצעות הפונקציה songItem אנו יוצרים תבנית html של השדות להוספת שירים לאלבום
+    // באמצעות הפונקציה songItem, אנו יוצרים תבנית html של השדות להוספת שירים לאלבום
     static songItem() {
         // המשתנה html מכיל תבנית html של השדות להוספת שירים לאלבום
         let html = `
@@ -58,7 +58,7 @@ export default class Templates {
             <input type="text" class="form-control" value="http://lll.mp3" placeholder="Song URL">
         </div>`
 
-        // הפונקציה מחזירה את המשתנה html המכיל תבנית html של של השדות להוספת שירים לאלבום
+        // הפונקציה מחזירה את המשתנה html המכיל תבנית html של השדות להוספת שירים לאלבום
         return html
     }
 }

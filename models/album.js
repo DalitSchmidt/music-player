@@ -1,7 +1,10 @@
+// קובץ זה מכיל את הסכימה של Album המצויה במסד הנתונים, אשר נבנית במסד הנתונים בעזרת שימוש ב- sequelize שהוא מודול המאפשר לנו לתקשר אל מול מסד הנתונים
+// ייצוא היכולות של המודול המבצע שימוש ב- sequelize שזהו מודול העוזר לנו לתקשר אל מול מסד הנתונים
 module.exports = function( sequelize, DataTypes ) {
+    // המשתנה Album מכיל את שם המודול (במקרה זה Album) ואובייקט המכיל את הפרופרטיס album_id, album_name, album_artist, album_image, album_year ו- album_description שבאמצעות שימוש ב- sequelize הם מאפשרים לנו לתקשר אל מול מסד הנתונים ולמעשה הם מכילים את העמודות של הטבלאות במסד הנתונים בהתאם לסוג הנתונים שצריכים להיות מצויים בכל עמודה בטבלה לרבות ביצוע ולידציה על הנתונים המצויים בטבלה, כך שלמעשה המשתנה Album מכיל את הסכימה שלפיה נבנה המודל של Album במסד הנתונים
     let Album = sequelize.define('Album', {
         album_id: {
-            type: DataTypes.INTEGER(5).UNSIGNED,
+            type: DataTypes.INTEGER(7).UNSIGNED,
             autoIncrement: true,
             primaryKey: true
         },
@@ -35,5 +38,6 @@ module.exports = function( sequelize, DataTypes ) {
         album_description: DataTypes.TEXT
     })
 
+    // הפונקציה מחזירה את המשתנה Album המכיל את הסכימה שלפיה נבנה המודל של Album במסד הנתונים
     return Album
 }

@@ -10,13 +10,13 @@ import Player from './Player'
 // ה- class AlbumsBoard מכיל את כל הפונקציות המאפשרות לנו לתקשר אל מול הלוח של האלבומים
 // הגדרת ה- class בשם AlbumsBoard וייצוא היכולות שלו
 export default class AlbumsBoard {
-    // אנו משתמשים בפונקציית הבנאי במחלקה כדי להעביר ערכים ליצירת אינסטנס חדש, ולמעשה פונקציית הבנאי במחלקה מכילה ומפעילה את כל הנתונים שאנו מעוניינים שיעלו עם העלאת הדף
+    // אנו משתמשים בפונקציית הבנאי במחלקה כדי להעביר ערכים ליצירת אינסטנס חדש, כך שלמעשה פונקציית הבנאי במחלקה מכילה ומפעילה את כל הנתונים שאנו מעוניינים שיעלו עם העלאת הדף
     constructor() {
         // הפעלה של הפונקציה bindEvents המכילה את כל ה- eventים הקשורים למחלקה
         this.bindEvents()
         // הפעלה של הפונקציה getAllAlbums המאפשרת לקבל את כל הנתונים של האלבומים ולהציגם ב- DOM
         this.getAllAlbums()
-        // יצירת אינסטנס חדש של Player
+        // יצירת אינסטנס חדש של ה- class Player המכיל את כל הפונקציות המאפשרות לנו לתקשר אל מול נגן המוסיקה
         this.player = new Player()
     }
 
@@ -43,19 +43,19 @@ export default class AlbumsBoard {
 
     // באמצעות הפונקציה getAllAlbums מתאפשר לקבל את כל הנתונים של האלבומים לצורך הצגתם ב- DOM
     getAllAlbums() {
-        // הפעלה של הפונקציה getAllAlbums המצויה תחת ה- class DataService ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה appendAlbums המאפשרת להכניס אלבומים ל- DOM ונשתמש ב- proxy מאחר ואנו רוצים שההקשר של this בתוך הפונקציה appendAlbums יתייחס בכל מקרה ל- class AlbumsBoard
+        // הפעלה של הפונקציה getAllAlbums המצויה תחת ה- class DataService, ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה appendAlbums המאפשרת להכניס אלבומים ל- DOM, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם appendAlbums יתייחס לאלמנט עצמו (במקרה זה לאלמנט שלל הצגת האלבום ב- DOM), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה appendAlbums יתייחס בכל מקרה ל- class AlbumsBoard
         DataService.getAllAlbums().then( $.proxy(this.appendAlbums, this) )
     }
 
     // באמצעות הפונקציה saveAlbum המקבלת את הפרמטר e (המסמל event) מתאפשר לשמור ולהציג ב- DOM אלבום ספציפי לפי המספר id שלו
     displayAlbum( e ) {
-        // מניעת פעולת ברירת המחדל של ___
+        // מניעת פעולת ברירת המחדל של ה- event, המקרה זה ה- event מתייחס ל____
         e.preventDefault()
         // המשתנה el מאפשר לנו לבצע פעולות על האלמנט שהפעיל את האירוע
         let el = $(e.target)
         // המשתנה album_id מכיל את המספר id של האלבום
         let album_id = el.data('album-id')
-        // הפעלה של הפונקציה getAlbumById המצויה תחת DataService ומקבלת את המשתנה album_id המכיל את המספר id של האלבום ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה playAlbum המצויה תחת הערך של player המפעילה את נגן המוסיקה
+        // הפעלה של הפונקציה getAlbumById המצויה תחת ה- class DataService ומקבלת את המשתנה album_id המכיל את המספר id של האלבום, ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה playAlbum המצויה תחת הערך של player היוצר אינסטנס חדש של ה- class Player המכיל את כל הפונקציות המאפשרות לנו לתקשר אל מול נגן המוסיקה
         DataService.getAlbumById( album_id ).then( this.player.playAlbum )
     }
 
@@ -66,9 +66,9 @@ export default class AlbumsBoard {
 
     // הפונקציה bindEvents מכילה את כל ה- eventים המצויים בלוח של האלבומים
     bindEvents() {
-        // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם album-list המכיל את ה- class בשם record ואת תגית h4, אנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם displayAlbum יתייחס לאלמנט עצמו (button) ולא ל- class AlbumsBoard, לכן אנו משתמשים ב- proxy כדי שההקשר של this בתוך הפונקציה displayAlbum יתייחס בכל מקרה ל- class AlbumsBoard
+        // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם album-list המכיל את התגית h4 המצויה תחת ה- class בשם record, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם displayAlbum יתייחס לאלמנט עצמו (במקרה זה לאלמנט button), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה displayAlbum יתייחס בכל מקרה ל- class AlbumsBoard
         $('#album-list').on('click', '.record h4', $.proxy( this.displayAlbum, this ))
-        // כאשר לוחצים על הכפתור שיש לו class בשם edit-icon, אנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם editAlbum יתייחס לאלמנט עצמו (button) ולא ל- class AlbumsBoard, לכן אנו משתמשים ב- proxy כדי שההקשר של this בתוך הפונקציה editAlbum יתייחס בכל מקרה ל- class AlbumsBoard
+          // כאשר לוחצים על הכפתור שיש לו class בשם edit-icon, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם editAlbum יתייחס לאלמנט עצמו (במקרה זה לאלמנט button), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה editAlbum יתייחס בכל מקרה ל- class AlbumsBoard
         $('.edit-icon').on('click', $.proxy( this.editAlbum, this ))
     }
 }

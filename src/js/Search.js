@@ -5,10 +5,10 @@ import DataService from './DataService'
 // ייבוא היכולות של ה- class Templates על-מנת שה- class Search יוכל להשתמש בהן
 import Templates from './Templates'
 
-// ה- class AlbumForm מכיל את כל הפונקציות המאפשרות לנו לבצע את פעולת החיפוש
+// ה- class Search מכיל את כל הפונקציות המאפשרות לנו לבצע את פעולת החיפוש
 // הגדרת ה- class בשם Search וייצוא היכולות שלו
 export default class Search {
-    // אנו משתמשים בפונקציית הבנאי במחלקה כדי להעביר ערכים ליצירת אינסטנס חדש, ולמעשה פונקציית הבנאי במחלקה מכילה ומפעילה את כל הנתונים שאנו מעוניינים שיעלו עם העלאת הדף
+    // אנו משתמשים בפונקציית הבנאי במחלקה כדי להעביר ערכים ליצירת אינסטנס חדש, כך שלמעשה פונקציית הבנאי במחלקה מכילה ומפעילה את כל הנתונים שאנו מעוניינים שיעלו עם העלאת הדף
     constructor() {
         // הפעלה של הפונקציה bindEvents המכילה את כל ה- eventים הקשורים למחלקה
         this.bindEvents()
@@ -16,9 +16,9 @@ export default class Search {
 
     // באמצעות הפונקציה displayResults המקבלת את הפרמטר results אנו מציגים ב- DOM את תוצאות החיפוש
     displayResults( results ) {
-        // המשתנה html מכיל את הפונקציה searchResults המקבלת את הפרמטר results ומצויה תחת ה- class Templates ומפעיל אותה
+        // המשתנה html מכיל את הפונקציה searchResults המצויה תחת ה- class Templates שמקבלת את הפרמטר results ומפעיל אותה
         let html = Templates.searchResults( results )
-        // הצגה בחלון ה- console את התוצאה של החיפוש המצויה במשתנה html
+        // הצגת התוצאה של החיפוש המצויה במשתנה html בחלון ה- console
         console.log( html )
         // הכנסת המשתנה html שהגדרנו לעיל היכן שיש div המכיל מזהה ייחודי בשם results-list, ובכך אנו מציגים למעשה ב- DOM את תוצאות החיפוש
         $('#results-list').html( html )
@@ -33,7 +33,7 @@ export default class Search {
 
         // נבדוק אם אורך התווים במשתנה term הוא גדול או שווה ל- 3 תווים
         if ( term.length >= 3 )
-            // אם הוא אכן גדול, אז נפעיל את הפונקציה searchAlbum המצויה תחת ה- class DataService ומקבלת את המשתנה term המכיל את הערכים של החיפוש, ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה displayResults המציגה ב- DOM את תוצאות החיפוש ונשתמש ב- proxy מאחר ואנו רוצים שההקשר של this בתוך הפונקציה displayResults יתייחס בכל מקרה ל- class Search
+            // אם המשתנה term אכן גדול, אז נפעיל את הפונקציה searchAlbum המצויה תחת ה- class DataService ומקבלת את המשתנה term המכיל את הערכים של החיפוש, ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה displayResults המציגה ב- DOM את תוצאות החיפוש, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם displayResults יתייחס לאלמנט עצמו (במקרה זה לאלמנט של הצגת תוצאות החיפוש ב- DOM), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה displayResults יתייחס בכל מקרה ל- class Search
             DataService.searchAlbum( term ).then( $.proxy( this.displayResults, this ) )
 
         // Check if the length is smaller than 3, we have to remove all the results
@@ -41,7 +41,7 @@ export default class Search {
 
     // הפונקציה bindEvents מכילה את כל ה- eventים המצויים בחיפוש
     bindEvents() {
-        // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם search, אנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchAlbum יתייחס לאלמנט עצמו (הקלדה בתיבת חיפוש) ולא ל- class Search, לכן אנו משתמשים ב- proxy כדי שההקשר של this בתוך הפונקציה searchAlbum יתייחס בכל מקרה ל- class Search
+        // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם search, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchAlbum יתייחס לאלמנט עצמו (במקרה זה הקלדה בתיבת חיפוש), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה searchAlbum יתייחס בכל מקרה ל- class Search
         $('#search').on('keyup', $.proxy( this.searchAlbum, this ))
     }
 }

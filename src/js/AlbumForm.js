@@ -8,11 +8,11 @@ import Templates from './Templates'
 // ה- class AlbumForm מכיל את כל הפונקציות המאפשרות לנו לתקשר אל מול הטופס הוספת אלבום חדש
 // הגדרת ה- class בשם AlbumForm וייצוא היכולות שלו
 export default class AlbumForm {
-    // אנו משתמשים בפונקציית הבנאי במחלקה המקבלת את הפרמטר dataService כדי להעביר ערכים ליצירת אינסטנס חדש, ולמעשה פונקציית הבנאי במחלקה מכילה ומפעילה את כל הנתונים שאנו מעוניינים שיעלו עם העלאת הדף
+    // אנו משתמשים בפונקציית הבנאי במחלקה המקבלת את הפרמטר dataService כדי להעביר ערכים ליצירת אינסטנס חדש, כך שלמעשה פונקציית הבנאי במחלקה מכילה ומפעילה את כל הנתונים שאנו מעוניינים שיעלו עם העלאת הדף
     constructor( dataService ) {
         // הפעלה של הפונקציה bindEvents המכילה את כל ה- eventים הקשורים למחלקה
         this.bindEvents()
-        // יצירת אינסטנס חדש של DataService
+        // יצירת אינסטנס חדש של ה- class DataService המכיל את כל הפונקציות המאפשרות לנו לבצע בקשות שונות אל מול ה- API
         this.dataService = new DataService()
     }
 
@@ -55,7 +55,7 @@ export default class AlbumForm {
                 input.addClass('error-value')
             }
 
-            // המשתנה album, שהוא למעשה אובייקט המכיל מערך של כל ה- inputים שה- attribute שלהם הוא name מכניס לתוך האובייקט את כל הערכים המצויים במשתנה input_value
+            // המשתנה album, שהוא למעשה אובייקט המכיל מערך של כל ה- inputים שה- attribute שלהם הוא name, מכניס לתוך האובייקט את כל הערכים המצויים במשתנה input_value
             album[ input_name ] = input_value
         }
 
@@ -63,7 +63,7 @@ export default class AlbumForm {
         if ( errors )
             return false
 
-        // הפונקציה מחזירה את האובייקט album שלמעשה מכיל מערך עם כל הערכים המצויים בשדות
+        // אם אין שגיאות, הפונקציה מחזירה את האובייקט album שלמעשה מכיל מערך עם כל הערכים המצויים בשדות
         return album
     }
 
@@ -96,7 +96,7 @@ export default class AlbumForm {
 
     // באמצעות הפונקציה saveAlbum המקבלת את הפרמטר e (המסמל event) אנו שומרים ומציגים ב- DOM את האלבום עם השירים שיצרנו
     saveAlbum( e ) {
-        // מניעת פעולת ברירת המחדל של הכפתור save
+        // מניעת פעולת ברירת המחדל של ה- event, במקרה זה ה- event מתייחס לכפתור save
         e.preventDefault()
         // המשתנה el מאפשר לנו לבצע פעולות על האלמנט שהפעיל את האירוע
         let el = $(e.target),
@@ -112,13 +112,13 @@ export default class AlbumForm {
 
         // הכנסת השירים לתוך האלבום
         album.songs = songs
-        // הפעלה של הפונקציה saveAlbum המצויה תחת הערך של dataService ומקבלת את המשתנה album המכיל מערך של כל ה- inputים (הערכים) המצויים בפונקציה collectValues ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה setSuccessMessage המציגה הודעת הצלחה עם יצירת האלבום
+        // הפעלה של הפונקציה saveAlbum המצויה תחת הערך של dataService ומקבלת את המשתנה album המכיל מערך של כל ה- inputים (הערכים) המצויים בפונקציה collectValues, ולאחר מכן נפעיל פרומיס המפעיל את הפונקציה setSuccessMessage המציגה הודעת הצלחה עם יצירת האלבום
         this.dataService.saveAlbum( album ).then( this.setSuccessMessage )
     }
 
     // באמצעות הפונקציה addSong המקבלת את הפרמטר e (המסמל event) מתאפשר להוסיף שדות להוספת שיר בטופס כאשר לוחצים על הכפתור הוספת שיר
     addSong( e ) {
-        // מניעת פעולת ברירת המחדל של הכפתור Add
+        // מניעת פעולת ברירת המחדל של ה- event, במקרה זה ה- event מתייחס לכפתור Add
         e.preventDefault()
         // המשתנה html מכיל את הפונקציה songItem המצויה תחת ה- class Templates ומפעיל אותה
         let html = Templates.songItem()
@@ -129,7 +129,7 @@ export default class AlbumForm {
 
     // הפונקציה bindEvents מכילה את כל ה- eventים המצויים בטופס הוספת אלבום
     bindEvents() {
-        // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם save-album, אנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם saveAlbum יתייחס לאלמנט עצמו (button) ולא ל- class AlbumForm, לכן אנו משתמשים ב- proxy כדי שההקשר של this בתוך הפונקציה saveAlbum יתייחס בכל מקרה ל- class AlbumForm
+        // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם save-album, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם saveAlbum יתייחס לאלמנט עצמו (במקרה זה לאלמנט button), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה saveAlbum יתייחס בכל מקרה ל- class AlbumForm
         $('#save-album').on('click', $.proxy( this.saveAlbum, this ))
         // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם add-song תופעל הפונקציה addSong
         $('#add-song').on('click', this.addSong)
