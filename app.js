@@ -30,7 +30,6 @@ app.use('/api/genres', require('./routes/genres'))
 app.use(function(req, res, next) {
     const err = new Error('Not Found')
     err.status = 404
-    next(err)
 })
 
 // המשתנה app (המכיל את המשתנה express ומפעיל אותו) מאפשר לבצע שימוש בפונקציית callback המקבלת 4 פרמטרים (err, req, res ו- next) ושבאמצעותה תיזרק הודעת שגיאה המכילה את הסטטוס קוד שמספרו 404 (Not Found) האומרת שהקובץ לא זמין או שקיבלנו הודעת שגיאה המכילה את הסטטוס קוד שמספרו 500 (Internal Server Error) האומרת שיש שגיאה בשרת ונציג הודעה המפרטת את השגיאה שקיבלנו (ככל וקיבלנו)

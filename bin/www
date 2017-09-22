@@ -7,7 +7,7 @@
 // המשתנה app מכיל את כל היכולות המצויות בקובץ app.js באמצעות חיבור הקובץ
 const app = require('../app')
 //המשתנה debug מכיל את כל היכולות של המודולים debug ו- express-sequelize באמצעות חיבורם
-const debug = require('debug')('express-sequelize')
+const debug = require('debug')
 // המשתנה http מכיל את כל היכולות של המודול באמצעות חיבורו
 const http = require('http')
 // המשתנה models מכיל את כל היכולות המצויות בקבצים שמצויים בתיקיית models באמצעות חיבור התיקייה

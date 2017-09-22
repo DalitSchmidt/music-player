@@ -53,19 +53,5 @@ router.post('/', function( req, res ) {
         })
 })
 
-// ביצוע בקשת delete לפי המספר id של הז'אנר, ובכך מתאפשר למעשה למחוק ז'אנר ספציפי לפי המספר id שלו
-router.delete('/:genre_id', function( req, res ) {
-    // המשתנה genre_id מכיל את המספר id של הז'אנר
-    let genre_id = req.params.genre_id
-
-    // בבקשה אנחנו מבצעים את פעולת המחיקה לפי המספר id של הז'אנר בהתאם למידע שקיים במשתנה GenreModel (המכיל את המודל של Genre המצוי תחת המשתנה models), ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס של promise, נפעיל promise על התוצאה שקיבלנו בהתאם למספר השורות שהושפעו מפעולת המחיקה, אם התוצאה שקיבלנו היא 0, זאת אומרת שלא הושפעו שורות ונשלח תשובת json המכילה הודעה האומרת שהז'אנר עם המספר id שביקשנו למחוק לא קיים, אם התוצאה היא אחרת, כלומר 1, כי זה המספר המקסימלי של השורות שיכולות להיות מושפעות מאחר ואנו מבקשים למחוק ז'אנר לפי המספר id שלו ויכול להיות רק ז'אנר אחד שמכיל את אותו מספר id, אז נשלח תשובת json עם המספר id של הז'אנר שנמחק
-    GenreModel.destroy({ where: { genre_id } }).then(affected_rows => {
-        if ( affected_rows === 0 )
-            res.json({ message: `Genre id ${genre_id} not found` })
-        else
-            res.json({ genre_id })
-    })
-})
-
 // ייצוא היכולות של המודול router החוצה
 module.exports = router
