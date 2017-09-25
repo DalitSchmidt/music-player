@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
         if (results.length === 0)
             res.status(204).send()
         else
-            res.json(results)
+            res.json( results )
     })
 })
 
@@ -42,7 +42,7 @@ router.get('/:album_id', function (req, res) {
         // המשתנה genres שמצוי תחת המשתנה results מכיל את הז'אנרים של האלבום
         results.genres = genres
         // שליחת תשובת json המכילה את כל הנתונים המצויים במשתנה results
-        res.json(results)
+        res.json( results )
     })
 })
 
@@ -98,10 +98,10 @@ router.delete('/:album_id', (req, res) => {
     ).spread(affected_rows => {
         // אם התוצאה שקיבלנו היא 0, זאת אומרת שלא הושפעו שורות ונשלח תשובת json המכילה הודעה האומרת שהאלבום עם המספר id שביקשנו למחוק לא קיים
         if (affected_rows === 0)
-            res.json({message: `Album id ${album_id} not found`})
+            res.json( {message: `Album id ${album_id} not found`} )
         else
         // אם התוצאה היא אחרת, כלומר 1, כי זה המספר המקסימלי של השורות שיכולות להיות מושפעות מאחר ואנו מבקשים למחוק אלבום ספציפי לפי המספר id שלו ויכול להיות רק אלבום אחד שמכיל את אותו מספר id, אז נשלח תשובת json עם המספר id של האלבום הספציפי שנמחק
-            res.json({album_id})
+            res.json( {album_id} )
     })
 })
 
