@@ -1,0 +1,15 @@
+#album-info {
+    ol#current-playlist {
+        li {
+            cursor: pointer;
+
+            &.playing {
+                font-weight: bold;
+            }
+        }
+    }
+
+    #player-controls {
+        display: none;
+    }
+}

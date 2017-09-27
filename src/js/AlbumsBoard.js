@@ -5,7 +5,7 @@ import DataService from './DataService'
 // ייבוא היכולות של ה- class Templates על-מנת שה- class AlbumsBoard יוכל להשתמש בהן
 import Templates from './Templates'
 // ייבוא היכולות של ה- class Player על-מנת שה- class AlbumsBoard יוכל להשתמש בהן
-import Player from './Player'
+import Player from './AlbumPlayer'
 
 // ה- class AlbumsBoard מכיל את כל הפונקציות המאפשרות לנו לתקשר אל מול הלוח של האלבומים
 // הגדרת ה- class בשם AlbumsBoard וייצוא היכולות שלו

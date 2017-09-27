@@ -759,9 +759,8 @@ input.error-value {
   background: #ffffff;
   margin: 10px 0 0 10px; }
 
-#album-info #left #menu #active {
-  width: 20px;
-  margin-left: 0; }
+#album-info #left #menu .active {
+  font-weight: bold; }
 
 #album-info #left #album-cover {
   height: 250px;
@@ -852,4 +851,10 @@ input.error-value {
 #album-year #album-genres li {
   margin-right: 25px; }
 
-/*Playlist*/
+#album-info ol#current-playlist li {
+  cursor: pointer; }
+  #album-info ol#current-playlist li.playing {
+    font-weight: bold; }
+
+#album-info #player-controls {
+  display: none; }

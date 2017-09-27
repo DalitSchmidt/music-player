@@ -57,7 +57,7 @@ gulp.task('start-server', () => {
 
 // משימה עבור שימוש ב- watch עם sass ו- scripts
 gulp.task('watch', () => {
-    gulp.watch(['./src/sass/style.scss'], ['sass'])
+    gulp.watch(['./src/sass/**/*.scss'], ['sass'])
     gulp.watch(['./src/js/*.js'], ['scripts'])
 })
 
