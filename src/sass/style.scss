@@ -535,9 +535,14 @@ h1 {
 /*OK*/
 #current-playlist {
     /*list-style-type: none;*/
+    /*margin-top: 10px;
+    padding: 0;
+    margin-left: 20px;*/
+
     margin-top: 10px;
     padding: 0;
-    margin-left: 20px;
+    margin-left: 40px;
+    font-size: 18px;
 }
 
 #current-playlist li a {
@@ -560,9 +565,14 @@ h1 {
 
 /*OK*/
 #now-playing-song {
-    display: block;
+    /*display: block;
     font-size: 16px;
+    margin-top: 5px;*/
+
+    display: block;
+    font-size: 20px;
     margin-top: 5px;
+    margin-left: 20px;
 }
 
 /*OK*/
@@ -809,3 +819,165 @@ input.error-value {
 }
 
 /*Add album playlist (form)*/
+
+/*Album information*/
+/*#album-info {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    box-sizing: border-box;
+}*/
+
+#album-info #left {
+    /*width: 30vw;
+    height: 100vh;
+    float: left;
+    background: #FF1733;*/
+    width: 250px;
+    height: 400px;
+    float: left;
+    background: #000000;
+    margin-left: 100px;
+    /*margin-top: 100px;*/
+    position: relative;
+    display: block;
+    /* border-radius: 150px; */
+    margin-bottom: 75px;
+    /* border: 1px solid black; */
+    /* color: #ffffff; */
+    /* opacity: 0.85; */
+    top: 50px;
+}
+
+#album-info #left #menu {
+    margin-top: 175px;
+    width: 100px;
+    font-size: 18px;
+    /*margin-left: 15px;*/
+}
+
+#album-info #left #menu .links {
+    margin-bottom: 10px;
+}
+
+#album-info #left #menu .links a {
+    /*font-size: 12px;*/
+    color: #ffffff;
+    /*font-family: "Oswald", sans-serif;*/
+    float: right;
+}
+
+#album-info #left #menu span {
+    width: 10px;
+    height: 1.2px;
+    display: block;
+    float: left;
+    background: #ffffff;
+    margin: 10px 0 0 10px;
+}
+
+#album-info #left #menu #active {
+    width: 20px;
+    margin-left: 0;
+}
+
+#album-info #left #album-cover {
+    height: 250px;
+    width: 250px;
+    /*background: #222;*/
+    position: absolute;
+    left: 145px;
+    top: 65px;
+    /*overflow: hidden;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    background-image: url("https://res.cloudinary.com/prvnbist/image/upload/v1494142624/6OsSlIr_dq6uav.jpg");
+    background-size: cover;
+    background-blend-mode: screen;*/
+}
+
+#album-info #content {
+    /*width: 70vw;
+    height: 100vh;
+    float: left;
+    background: red;*/
+    width: 850px;
+    /* height: 400px; */
+    float: left;
+    /*background: red;*/
+    margin-top: 50px;
+}
+
+#album-info #content #text {
+    /*height: auto;
+    margin-top: 10vh;
+    padding: 0 10% 0 25%;*/
+
+    height: 400px;
+    /* margin-top: 10vh; */
+    /*padding: 5px;*/
+    /*background: red;*/
+    /* width: 250px; */
+    /* float: left; */
+    /* background: #000000; */
+    margin-left: 130px;
+    /* margin-top: 100px; */
+    position: relative;
+    /* display: block; */
+    /* border-radius: 150px; */
+    /* margin-bottom: 75px; */
+    /* border: 1px solid black; */
+    /* color: #ffffff; */
+    /* opacity: 0.85; */
+    /*top: 50px;*/
+}
+
+#album-info #content #text i {
+    color: #7D7D7D;
+    float: left;
+    font-size: 14px;
+}
+
+#album-info #content #text #album-name {
+    /*font-family: "Oswald", sans-serif;
+    font-size: 30px;
+    color: #222;
+    margin: 80px 0 40px 0;*/
+    font-weight: bold;
+    margin: 20px 20px 10px;
+}
+#album-info #content #text #album-year {
+    /*font-family: "Oswald", sans-serif;
+    font-size: 14px;
+    color: #222;*/
+
+    margin: 10px 20px;
+}
+#album-info #content #text #album-description {
+    /*width: 100%;
+    font-size: 80%;
+    line-height: 20px;
+    color: #9E9E9E;
+    letter-spacing: 0.5px;
+    font-family: "Open Sans", sans-serif;*/
+
+    /* width: 100%; */
+    /* font-size: 80%; */
+    /* line-height: 20px; */
+    /* color: #9E9E9E; */
+    letter-spacing: 0.5px;
+    /* font-family: "Open Sans", sans-serif; */
+    text-align: justify;
+    margin: 10px 20px 20px;
+}
+
+#album-year #album-genres {
+    display: inline-flex;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#album-year #album-genres li {
+    margin-right: 25px;
+}
+
+/*Playlist*/

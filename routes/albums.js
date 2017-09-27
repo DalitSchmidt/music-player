@@ -105,4 +105,5 @@ router.delete('/:album_id', (req, res) => {
     })
 })
 
+// ייצוא היכולות של המודול router החוצה
 module.exports = router

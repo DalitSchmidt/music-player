@@ -10,6 +10,10 @@ export default class DataService {
     }
 
     // באמצעות הפונקציה getAlbumById אנו מבצעים בקשת get לנתיב 'http://localhost:3000/api/albums/' + album_id, ובכך מתאפשר למעשה לקבל את אלבום ספציפי לפי המספר id שלו
+    /**
+     * @param album_id
+     * @returns {Promise}
+     */
     static getAlbumById( album_id ) {
         return $.getJSON('http://localhost:3000/api/albums/' + album_id)
     }
@@ -24,19 +28,19 @@ export default class DataService {
         })
     }
 
-    // באמצעות הפונקציה updateAlbum המקבלת את הפרמטר album_id אנו מבצעים בקשת ajax שהמתוד שלה הוא מסוג PUT לנתיב 'http://localhost:3000/api/albums' + album_id, שה- contentType שהבקשה שולחת הוא מסוג application/json, ובכך מתאפשר למעשה לעדכן נתונים באלבום לפי המספר id שלו
+    // באמצעות הפונקציה updateAlbum המקבלת את הפרמטר album_id אנו מבצעים בקשת ajax שהמתוד שלה הוא מסוג PUT לנתיב 'http://localhost:3000/api/albums/' + album_id, שה- contentType שהבקשה שולחת הוא מסוג application/json, ובכך מתאפשר למעשה לעדכן נתונים באלבום לפי המספר id שלו
     static updateAlbum( album_id ) {
         return $.ajax({
-            url: 'http://localhost:3000/api/albums' + album_id,
+            url: 'http://localhost:3000/api/albums/' + album_id,
             contentType: 'application/json',
             method: 'PUT'
         })
     }
 
-    // באמצעות הפונקציה deleteAlbum המקבלת את הפרמטר album_id אנו מבצעים בקשת ajax שהמתוד שלה הוא מסוג DELETE לנתיב 'http://localhost:3000/api/albums' + album_id, שה- contentType שהבקשה שולחת הוא מסוג application/json, ובכך מתאפשר למעשה למחוק אלבום לפי המספר id שלו
+    // באמצעות הפונקציה deleteAlbum המקבלת את הפרמטר album_id אנו מבצעים בקשת ajax שהמתוד שלה הוא מסוג DELETE לנתיב 'http://localhost:3000/api/albums/' + album_id, שה- contentType שהבקשה שולחת הוא מסוג application/json, ובכך מתאפשר למעשה למחוק אלבום לפי המספר id שלו
     static deleteAlbum( album_id ) {
         return $.ajax({
-            url: 'http://localhost:3000/api/albums' + album_id,
+            url: 'http://localhost:3000/api/albums/' + album_id,
             contentType: 'application/json',
             method: 'DELETE'
         })
