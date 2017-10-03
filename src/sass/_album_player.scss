@@ -1,15 +1,143 @@
+/*Album information & player*/
 #album-info {
-    ol#current-playlist {
-        li {
-            cursor: pointer;
+    #aside-left {
+        width: 250px;
+        height: 400px;
+        float: left;
+        margin-left: 100px;
+        position: relative;
+        display: block;
+        margin-bottom: 75px;
+        top: 50px;
+        background: -webkit-linear-gradient(left top, #000000, #282828, #ffffff);/* Webkit (Chrome 11+) */
+        background: -moz-linear-gradient(left top, #000000, #282828, #ffffff); /* Firefox */
 
-            &.playing {
+        #album-controls {
+            padding: 0;
+            margin: 10px;
+            width: 35px;
+
+            span {
+                padding: 0;
+                display: block;
+
+                a {
+                    font-size: 24px;
+                    /*background: #dadada;*/
+                    background: white;
+                    color: #000000;
+                    padding: 0 7px;
+                    border-radius: 50%;
+                }
+            }
+
+            span:last-child {
+                margin-top: 5px;
+            }
+        }
+
+        #album-image img {
+            height: 250px;
+            width: 250px;
+            position: absolute;
+            left: 125px;
+            top: 70px;
+        }
+
+        #song-youtube {
+            display: none;
+
+            iframe {
+                height: 250px;
+                width: 250px;
+                position: absolute;
+                left: 125px;
+                top: 70px;
+            }
+        }
+
+        #menu {
+            margin-top: 175px;
+            font-size: 20px;
+
+            .links a {
+                color: #ffffff;
+                text-decoration: none;
+                margin-left: 10px;
+            }
+
+            .active {
                 font-weight: bold;
             }
         }
     }
 
-    #player-controls {
-        display: none;
+    #album-player {
+        width: 850px;
+        float: left;
+        margin-top: 50px;
+
+        #album-text {
+            height: 400px;
+            margin-left: 125px;
+
+            #album-name {
+                font-weight: bold;
+                margin: 20px 20px 10px;
+            }
+
+            #album-year {
+                margin: 10px 20px;
+
+                #album-genres {
+                    display: inline-flex;
+                    margin-bottom: 0;
+                    padding-left: 25px;
+
+                    li {
+                        margin-right: 25px;
+                    }
+
+                    &li:last-child {
+                        margin-right: 0;
+                    }
+
+                }
+            }
+
+            #album-description {
+                letter-spacing: 0.5px;
+                text-align: justify;
+                margin: 10px 20px 20px;
+            }
+
+            #player-controls {
+                display: none;
+
+                #now-playing-song {
+                    display: block;
+                    font-size: 20px;
+                    margin-top: 5px;
+                    margin-left: 20px;
+                }
+
+                #player-playlist {
+                    margin-top: 10px;
+                    padding: 0;
+                    margin-left: 40px;
+                    font-size: 18px;
+
+                    li {
+                        cursor: pointer;
+                        padding-left: 5px;
+
+                        &.playing {
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
