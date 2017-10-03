@@ -8,92 +8,96 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="dist/css/style.css">
+</head>
+<body>
+    <div id="album-info">
+        <div id="aside-left">
+            <div id="album-controls" class="col-md-4">
+                <span>
+                    <a href="#" class="remove-icon" data-album-id="">
+                        <i class="fa fa-remove"></i>
+                    </a>
+                </span>
+                <span>
+                    <a href="#" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum" data-album-id="">
+                        <i class="fa fa-pencil"></i>
+                    </a>
+                </span>
+            </div>
+            <!--<div id="album-image">-->
+                <!--<img src="https://upload.wikimedia.org/wikipedia/he/8/8f/Viva_la_Vida.jpg" alt="Viva la Vida">-->
+            <!--</div>-->
+            <div id="song-youtube"></div>
+            <div id="menu">
+                <div class="links"><a href="#">Description</a></div>
+                <div class="links active"><a href="#">Playlist</a></div>
+            </div>
+        </div>
+        <div id="album-player">
+            <div id="album-text">
+                <div class="row"></div>
+                <h2 id="album-name">Viva la Vida - Coldplay</h2>
+                <h4 id="album-year">2008
+                    <ul id="album-genres">
+                        <li>Baroque</li>
+                        <li>Pop</li>
+                        <li></li>
+                    </ul>
+                </h4>
+
+                <p id="album-description">
+                    Viva la Vida or Death and All His Friends, often referred to as simply Viva la Vida, is the fourth
+                    studio album by British rock band Coldplay, released on 12 June 2008 on Parlophone. The album was named
+                    after a Spanish phrase that translates in English as "Live the life", although it can also be taken as
+                    "Long live life". Lyrically, the album contains references to love, life, death, and war.
+                    Recording sessions for the album took place during June 2007 to April 2008 and featured production by
+                    Jon Hopkins, Rik Simpson, Markus Dravs, and Brian Eno. The album was their first to be produced by Eno,
+                    and also their first album to not be produced by long-time Coldplay producer, Ken Nelson. The band
+                    forced themselves to explore experimental styles, as Eno required every song on the album to sound
+                    different, and expanded their musical interests while recording Viva la Vida. The band wanted to make
+                    the album shorter than 42 minutes. Despite this, the album is longer than the length they intended.
+                    Development of the album delayed the release date several times. The album cover of Viva la Vida is the
+                    painting Liberty Leading the People by Eugène Delacroix.
+                    Viva la Vida was both a critical and commercial success. Five songs were released in promotion of the
+                    album; "Violet Hill" and "Viva la Vida" in May 2008, "Lovers in Japan" and "Lost!" in November 2008, and
+                    "Strawberry Swing" in September 2009. "Viva la Vida" became the band's first song to reach number one in
+                    both the United States and the United Kingdom. It won Best Rock Album at the 2009 Grammy Awards and was
+                    also nominated for Album of the Year. It was the best selling album of 2008. By 2011, the album had sold
+                    more than 10 million copies. Viva la Vida was re-released on 25 November 2008 in a deluxe edition
+                    containing the original album and the Prospekt's March EP.
+                </p>
+
+                <div id="player-controls">
+                    <div id="now-playing-song">
+                        <strong>NOW PLAYING: <span id="song-name">Life in Technicolor</span></strong>
+                    </div>
+                    <div id="controls">
+                        <button id="play" disabled>Play</button>
+                        <button id="pause">Pause</button>
+                    </div>
+                    <ol id="player-playlist">
+                        <li data-code="RxmH4v0DJiQ">Life in Technicolor (2:30)</li>
+                        <li data-code="6zkMwEDLBks">Cemeteries of London (3:21)</li>
+                        <li data-code="rMpfsTWneh4">Lost! (3:55)</li>
+                        <li data-code="Z0xfWCDLoCU">42 (3:58)</li>
+                        <li data-code="NRJbviDcTes">Lovers in Japan (6:50)</li>
+                        <li data-code="dx7NWqo4jD4">Yes (7:07)</li>
+                        <li data-code="CeFuwITwEsA">Viva la Vida (4:04)</li>
+                        <li data-code="tQj8XETzBoU">Violet Hill (3:50)</li>
+                        <li data-code="3fkkepbyhAc">Strawberry Swing (4:09)</li>
+                        <li data-code="WjyQSZp3Dhw">Death and All His Friends (3:32)</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="YoutubePlayer.js"></script>
     <script src="AlbumPlayer.js"></script>
-</head>
-<body>
-<div id="album-info">
-    <div id="aside-left">
-        <div id="album-controls" class="col-md-4">
-            <span>
-                <a href="#" class="remove-icon" data-album-id="">
-                    <i class="fa fa-remove"></i>
-                </a>
-            </span>
-            <span>
-                <a href="#" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum" data-album-id="">
-                    <i class="fa fa-pencil"></i>
-                </a>
-            </span>
-        </div>
-        <div id="album-image">
-            <img src="https://upload.wikimedia.org/wikipedia/he/8/8f/Viva_la_Vida.jpg" alt="Viva la Vida">
-        </div>
-        <div id="song-youtube">
-            <iframe width="250" height="250" src="https://www.youtube.com/embed/RxmH4v0DJiQ?autoplay=1" frameborder="0"
-                    allowfullscreen></iframe>
-        </div>
-        <div id="menu">
-            <div class="links active"><a href="#">Description</a></div>
-            <div class="links"><a href="#">Playlist</a></div>
-        </div>
-    </div>
-    <div id="album-player">
-        <div id="album-text">
-            <div class="row"></div>
-            <h2 id="album-name">Viva la Vida - Coldplay</h2>
-            <h4 id="album-year">2008
-                <ul id="album-genres">
-                    <li>Baroque</li>
-                    <li>Pop</li>
-                    <li></li>
-                </ul>
-            </h4>
-
-            <p id="album-description">
-                Viva la Vida or Death and All His Friends, often referred to as simply Viva la Vida, is the fourth
-                studio album by British rock band Coldplay, released on 12 June 2008 on Parlophone. The album was named
-                after a Spanish phrase that translates in English as "Live the life", although it can also be taken as
-                "Long live life". Lyrically, the album contains references to love, life, death, and war.
-                Recording sessions for the album took place during June 2007 to April 2008 and featured production by
-                Jon Hopkins, Rik Simpson, Markus Dravs, and Brian Eno. The album was their first to be produced by Eno,
-                and also their first album to not be produced by long-time Coldplay producer, Ken Nelson. The band
-                forced themselves to explore experimental styles, as Eno required every song on the album to sound
-                different, and expanded their musical interests while recording Viva la Vida. The band wanted to make
-                the album shorter than 42 minutes. Despite this, the album is longer than the length they intended.
-                Development of the album delayed the release date several times. The album cover of Viva la Vida is the
-                painting Liberty Leading the People by Eugène Delacroix.
-                Viva la Vida was both a critical and commercial success. Five songs were released in promotion of the
-                album; "Violet Hill" and "Viva la Vida" in May 2008, "Lovers in Japan" and "Lost!" in November 2008, and
-                "Strawberry Swing" in September 2009. "Viva la Vida" became the band's first song to reach number one in
-                both the United States and the United Kingdom. It won Best Rock Album at the 2009 Grammy Awards and was
-                also nominated for Album of the Year. It was the best selling album of 2008. By 2011, the album had sold
-                more than 10 million copies. Viva la Vida was re-released on 25 November 2008 in a deluxe edition
-                containing the original album and the Prospekt's March EP.
-            </p>
-
-            <div id="player-controls">
-                <div id="now-playing-song">
-                    <strong>NOW PLAYING: <span id="song-name">Life in Technicolor</span></strong>
-                </div>
-                <ol id="player-playlist">
-                    <li data-code="RxmH4v0DJiQ">Life in Technicolor (2:30)</li>
-                    <li data-code="6zkMwEDLBks">Cemeteries of London (3:21)</li>
-                    <li data-code="rMpfsTWneh4">Lost! (3:55)</li>
-                    <li data-code="Z0xfWCDLoCU">42 (3:58)</li>
-                    <li data-code="NRJbviDcTes">Lovers in Japan (6:50)</li>
-                    <li data-code="dx7NWqo4jD4">Yes (7:07)</li>
-                    <li data-code="CeFuwITwEsA">Viva la Vida (4:04)</li>
-                    <li data-code="tQj8XETzBoU">Violet Hill (3:50)</li>
-                    <li data-code="3fkkepbyhAc">Strawberry Swing (4:09)</li>
-                    <li data-code="WjyQSZp3Dhw">Death and All His Friends (3:32)</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
+    <script src="Player.js"></script>
 </body>
 </html>
