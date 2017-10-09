@@ -1,4 +1,4 @@
-/ האובייקט AlbumPlayer מכיל את כל הפונקציות המאפשרות לנו לתקשר אל מול האלבום שמתנגן בנגן המוסיקה
+// האובייקט AlbumPlayer מכיל את כל הפונקציות המאפשרות לנו לתקשר אל מול האלבום שמתנגן בנגן המוסיקה
 // הגדרת האובייקט AlbumPlayer כקבוע
 const AlbumPlayer = {
     // באמצעות הפונקציה switchDetails המקבלת את הפרמטר e המסמל event, אנו מחליפים בין הנתונים המצויים בתיאור האלבום לבין הנתונים המצויים ב- playlist
@@ -12,8 +12,8 @@ const AlbumPlayer = {
 
         // ביצוע הצגה או החלפה בין הנתונים המצויים תחת div המכיל מזהה ייחודי בשם album-description ותחת ה- div המכיל מזהה ייחודי בשם player-controls באמצעות הפונקציה toggle בהתאם לכפתור שנלחץ בתפריט
         $('#album-description, #player-controls').toggle()
-        // ביצוע הצגה או החלפה בין הנתונים המצויים תחת div המכיל מזהה ייחודי בשם song-youtube ותחת ה- div המכיל מזהה ייחודי בשם album-image ושמצויה תחתיו תגית img באמצעות הפונקציה toggle בהתאם לכפתור שנלחץ בתפריט
-        $('#song-youtube, #album-image img').toggle()
+        // ביצוע הצגה או החלפה בין הנתונים המצויים תחת div המכיל מזהה ייחודי בשם song-youtube ותחת ה- div המכיל מזהה ייחודי בשם album-image באמצעות הפונקציה toggle בהתאם לכפתור שנלחץ בתפריט
+        $('#song-youtube, #album-image').toggle()
     },
 
     // הפונקציה bindEvents מכילה את כל ה- eventים הקורים באובייקט AlbumPlayer

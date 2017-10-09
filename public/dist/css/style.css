@@ -384,12 +384,16 @@ input.error-value {
         border-radius: 50%; }
     #album-info #aside-left #album-controls span:last-child {
       margin-top: 5px; }
-  #album-info #aside-left #album-image img {
+  #album-info #aside-left #album-image {
     height: 250px;
     width: 250px;
     position: absolute;
     left: 125px;
     top: 70px; }
+    #album-info #aside-left #album-image img {
+      display: none;
+      height: 250px;
+      width: 250px; }
   #album-info #aside-left #song-youtube {
     height: 250px;
     width: 250px;

@@ -40,12 +40,18 @@
             }
         }
 
-        #album-image img {
+        #album-image {
             height: 250px;
             width: 250px;
             position: absolute;
             left: 125px;
             top: 70px;
+
+            img {
+                display: none;
+                height: 250px;
+                width: 250px;
+            }
         }
 
         #song-youtube {

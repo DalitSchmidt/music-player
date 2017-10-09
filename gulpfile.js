@@ -16,22 +16,17 @@ function bundleApp() {
         debug: true,
     })
 
-    appBundler.transform('babelify', {presets: ['es2015']}).
-        bundle().
-        on('error', gutil.log).
-        pipe(source('app.min.js')).
-        pipe(gulp.dest('./public/dist/js/')).
-        pipe( connect.reload() )
+    appBundler.transform('babelify', {presets: ['es2015']}).bundle().on('error', gutil.log).pipe(source('app.min.js')).pipe(gulp.dest('./public/dist/js/')).pipe(connect.reload())
 }
 
-gulp.task('connect', () => connect.server({ livereload: true, root: './public' }))
+gulp.task('connect', () => connect.server({livereload: true, root: './public'}))
 gulp.task('scripts', () => bundleApp())
 
 gulp.task('sass', () => {
     return gulp.src('./src/sass/style.scss')
-    .pipe( sass({ expended: true }).on('error', sass.logError))
-    .pipe( gulp.dest('./public/dist/css') )
-    .pipe( connect.reload() )
+        .pipe(sass({expended: true}).on('error', sass.logError))
+        .pipe(gulp.dest('./public/dist/css'))
+        .pipe(connect.reload())
 })
 
 gulp.task('watch', () => {
@@ -39,5 +34,4 @@ gulp.task('watch', () => {
     gulp.watch(['./src/js/*.js'], ['scripts'])
 })
 
-// משימת ברירת המחדל מכילה מערך של כל המשימות הקיימות בקובץ ה- gulp ('start-server', 'sass', 'scripts', 'watch', 'connect') ובכך המשימה של ברירת המחדל מכילה את כל המשימות על מנת שאפשר יהיה להשתמש בכולן
-gulp.task('default', ['sass', 'scripts', 'watch', 'connect'])
+gulp.task('default', ['connect', 'scripts', 'sass', 'watch'])
