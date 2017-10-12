@@ -43,4 +43,4 @@ const AlbumTemplate = {
 }
 
 // ייצוא היכולות של האובייקט AlbumTemplate החוצה
-export default AlbumTemplate
+// export default AlbumTemplate

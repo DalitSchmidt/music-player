@@ -1,0 +1,64 @@
+<form action="" id="add-album-form" method="post">
+    <div id="album-details" class="row">
+        <div class="col-md-3">
+            <div id="album-form">
+                <div class="form-group">
+                    <label class="control-label">Album Name:</label>
+                    <input type="text" class="form-control" id="album-name" name="name" placeholder="e.g. Blood Sugar Sex Magic" title="Album Name" required="" value="AM">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Artist:</label>
+                    <input type="text" class="form-control" id="artist-name" name="artist" placeholder="e.g. Red Hot Chilli Peppers" title="Artist" required="" value="Arctic Monkeys">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Image URL:</label>
+                    <input type="text" class="form-control" id="img-url" name="img" placeholder="http://" title="Image URL" required="" value="https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Year:</label>
+                    <input type="text" class="form-control" id="year" name="year" placeholder="Year" title="Year" required="" value="2013">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Description:</label>
+                    <textarea class="form-control" id="description" name="description" cols="30" rows="10" placeholder="Description" title="Description" required="">AM is the fifth studio album by English indie rock band Arctic Monkeys.</textarea>
+                </div>
+            </div>
+
+            <div id="songs-form">
+                <div class="form-group song">
+                    <input class="form-control" type="text" value="Song1" placeholder="Song name">
+                    <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                </div>
+
+                <div class="form-group song">
+                    <input class="form-control" type="text" value="Song2" placeholder="Song name">
+                    <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                </div>
+
+                <div class="form-group song">
+                    <input class="form-control" type="text" value="Song3" placeholder="Song name">
+                    <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                </div>
+
+                <div class="form-group song">
+                    <input class="form-control" type="text" value="Song4" placeholder="Song name">
+                    <input type="text" value="http://lll.mp3" placeholder="Song URL" class="form-control"><br>
+                </div>
+            </div>
+
+            <div class="form-group" id="add-song">
+                <button>Add Song</button>
+            </div>
+        </div>
+
+        <div class="col-md-6 cover-preview">
+            <img src="https://upload.wikimedia.org/wikipedia/he/0/04/Arctic_Monkeys_-_AM.png" class="img-responsive img-circle" alt="Album Cover">
+        </div>
+    </div>
+
+    <button id="save-album">Save</button>
+</form>

@@ -26,5 +26,3 @@ const AlbumTemplate = {
         let genres = this.albumGenres( album.genres )
     }
 }
-
-export default AlbumTemplate
