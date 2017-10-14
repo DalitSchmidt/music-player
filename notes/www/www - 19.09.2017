@@ -1,0 +1,100 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+// בקובץ זה אנו מגדירים את ההגדרות של ההאזנות לשרת
+// המשתנה app מכיל את כל היכולות המצויות בקובץ app.js באמצעות חיבור הקובץ
+const app = require('../app')
+//המשתנה debug מכיל את כל היכולות של המודולים debug ו- express-sequelize באמצעות חיבורם
+const debug = require('debug')('express-sequelize')
+// המשתנה http מכיל את כל היכולות של המודול באמצעות חיבורו
+const http = require('http')
+// המשתנה models מכיל את כל היכולות המצויות בקבצים שמצויים בתיקיית models באמצעות חיבור התיקייה
+const models = require('../models')
+
+/**
+ * Get port from environment and store in Express.
+ */
+// המשתנה port מכיל את החיבור לפורט שאנו מעוניינים שהשרת יאזין לו, כאשר ה- port שמספרו 3000 מוגדר כברירת מחדל
+const port = normalizePort(process.env.PORT || '3000')
+app.set('port', port)
+
+/**
+ * Create HTTP server.
+ */
+// המשתנה server מכיל את החיבור לשרת באמצעות הפונקציה createServer שמצויה תחת המשתנה http ומקבלת את המשתנה app
+const server = http.createServer(app)
+
+// הפעלה של הפונקציה sync המצויה תחת ה- models של sequelize, ולאחר מכן, מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על פרומיס, נפעיל פרומיס על ההאזנה של השרת ל- port מסוים והצגת הודעה לאיזה פורט השרת שאקספרס מבצע בו שימוש מאזין
+models.sequelize.sync().then(function() {
+    /**
+     * Listen on provided port, on all network interfaces.
+     */
+    //
+    server.listen(port, function() {
+        debug('Express server listening on port ' + server.address().port)
+    })
+    // הפעלה של הפונקציה on המצויה תחת המשתנה server וכאשר ה- event בשם error הופעל, תופעל הפונקציה onError
+    server.on('error', onError)
+    // הפעלה של הפונקציה on המצויה תחת המשתנה server וכאשר ה- event בשם listening הופעל, תופעל הפונקציה onListening
+    server.on('listening', onListening)
+})
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+// באמצעות הפונקציה normalizePort אנו בודקים שה- port אליו השרת של אקספרס מאזין הוא תקין
+function normalizePort(val) {
+    let port = parseInt(val, 10)
+
+    if (isNaN(port)) {
+        // named pipe
+        return val
+    }
+
+    if (port >= 0) {
+        // port number
+        return port
+    }
+
+    return false
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error
+    }
+
+    let bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges')
+            process.exit(1)
+            break
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use')
+            process.exit(1)
+            break
+        default:
+            throw error
+    }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+function onListening() {
+    let addr = server.address()
+    let bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port
+    debug('Listening on ' + bind)
+}
