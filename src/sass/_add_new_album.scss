@@ -1,0 +1,61 @@
+/*Modal*/
+/*Add new album (form)*/
+/*label, .form-control, button {
+    margin: 10px 10px 0;
+}*/
+
+.form-control {
+    width: 40%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.cover-preview {
+    top: 50px;
+}
+
+.cover-preview img {
+    border-radius: 50%;
+    /*width: 100%;*/
+}
+
+.cover-preview:before {
+    position: absolute;
+    content: ' ';
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #ffffff;
+    z-index: 1;
+    left: calc(50% - 195px);
+    top: calc(50% - 30px);
+}
+
+input.error-value {
+    border: 1px solid red;
+}
+
+
+.modal-content .modal-header .modal-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.modal-header .close {
+    margin-top: -10px;
+    margin-right: -5px;
+    font-size: 30px;
+}
+
+#artist-name {
+    margin-left: 42px;
+}
+
+#img-url {
+    margin-left: 13px;
+}
+
+#year {
+    margin-left: 50px;
+}

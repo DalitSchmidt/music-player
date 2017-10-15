@@ -70,6 +70,13 @@ h1 {
     color: #000000;
 }
 
-img {
+#main-container {
+    padding: 35px 0;
+    box-sizing: border-box;
+    min-height: 400px;
+}
 
+img {
+    height: 250px;
+    width: 250px;
 }
