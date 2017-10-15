@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import DataService from './DataService'
-import Templates from './Templates'
+import Templates from './Templates/Templates'
 
 export default class Search {
     constructor() {

@@ -463,13 +463,6 @@ input.error-value {
 #year {
   margin-left: 50px; }
 
-.add-new-album-title {
-  border-bottom: 1px solid #dadada; }
-  .add-new-album-title h1 {
-    margin: 0;
-    text-align: center;
-    padding-bottom: 15px; }
-
 .container {
   margin-top: 20px;
   /*Search results - header*/

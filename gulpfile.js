@@ -13,10 +13,10 @@ function bundleApp() {
     scripts++
     let appBundler = browserify({
         entries: './src/js/App.js',
-        debug: true,
+        debug: true
     })
 
-    appBundler.transform('babelify', {presets: ['es2015']}).bundle().on('error', gutil.log).pipe(source('app.min.js')).pipe(gulp.dest('./public/dist/js/')).pipe(connect.reload())
+    appBundler.transform('babelify', {presets: ['es2015']}).bundle().on('error', gutil.log).pipe(source('app.min.js')).pipe(gulp.dest('./public/js/')).pipe(connect.reload())
 }
 
 gulp.task('connect', () => connect.server({livereload: true, root: './public'}))
@@ -25,7 +25,7 @@ gulp.task('scripts', () => bundleApp())
 gulp.task('sass', () => {
     return gulp.src('./src/sass/style.scss')
         .pipe(sass({expended: true}).on('error', sass.logError))
-        .pipe(gulp.dest('./public/dist/css'))
+        .pipe(gulp.dest('./public/css'))
         .pipe(connect.reload())
 })
 

@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-export default class DataService {
+class DataService {
     static getAllAlbums() {
         return $.getJSON('http://localhost:3000/api/albums')
     }
@@ -42,3 +42,5 @@ export default class DataService {
         return $.getJSON('http://localhost:3000/api/albums/search/' + term)
     }
 }
+
+export default DataService

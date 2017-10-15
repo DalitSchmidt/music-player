@@ -1,9 +1,9 @@
 import $ from 'jquery'
 import DataService from './DataService'
-import Templates from './Templates'
+import Templates from './Templates/Templates'
 
-export default class AlbumForm {
-    constructor( dataService ) {
+class AlbumForm {
+    constructor() {
         this.bindEvents()
         this.dataService = new DataService()
     }
@@ -83,7 +83,10 @@ export default class AlbumForm {
     }
 
     bindEvents() {
+        // ef
         $('#save-album').on('click', $.proxy( this.saveAlbum, this ))
         $('#add-song').on('click', this.addSong)
     }
 }
+
+export default AlbumForm

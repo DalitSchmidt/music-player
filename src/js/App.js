@@ -1,18 +1,23 @@
 import $ from 'jquery'
 import AlbumForm from './AlbumForm'
-import AlbumsBoard from './AlbumsBoard'
 import AlbumPlayer from './AlbumPlayer'
+import AlbumsBoard from './AlbumsBoard'
+import Player from './Player'
+import Router from './Router'
 import Search from './Search'
 
-class App {
-    constructor() {
-        AlbumPlayer().init()
-        new AlbumsBoard()
-        new AlbumForm()
-        new Search()
+const App = {
+    init: function() {
+        Router.init()
+
+        setTimeout(() => {
+            AlbumPlayer.init()
+            new AlbumForm()
+            new AlbumsBoard()
+            new Search()
+            Player.init()
+        }, 0)
     }
 }
 
-$(document).ready(function() {
-    new App()
-})
+$( document ).ready( App.init )

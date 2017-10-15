@@ -1,16 +1,18 @@
 import $ from 'jquery'
-import DataService from './DataService'
-import AlbumTemplate from './Templates/AlbumTemplate'
 
 const AlbumPlayer = {
-    fetchAlbum: function () {
-        DataService.getAlbumById( 1 ).then(album => {
-            let html = AlbumTemplate.getTemplate( album )
-        })
+    switchDetails: function( e ) {
+        let el = $( e.target )
+        $('#menu .active').removeClass('active')
+        el.addClass('active')
+
+        $('#album-description, #player-controls').toggle()
+        $('#song-youtube, #album-image img').toggle()
     },
 
     bindEvents: function() {
-
+        $('#player-playlist li').on('click', $.proxy( this.playSong, this ))
+        $('#menu .links').on('click', $.proxy( this.switchDetails, this ))
     },
 
     init: function () {
