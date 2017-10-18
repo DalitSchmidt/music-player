@@ -1,16 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Heebo");
 html, body {
   /*width: 100%;*/
   /*font-size: 14px;*/
-  font-family: Handlee, cursive, sans-serif;
+  /*font-family: Handlee, cursive, sans-serif;*/
+  font-family: 'Heebo', sans-serif;
   color: black; }
 
-@font-face {
-  font-family: 'Handlee';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Handlee Regular"), local("Handlee-Regular"), url(http://fonts.gstatic.com/s/handlee/v5/hN5OFJA7DLALxZ1osZb59Q.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215; }
-
+/*@font-face {
+    font-family: 'Handlee';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Handlee Regular'), local('Handlee-Regular'), url(http://fonts.gstatic.com/s/handlee/v5/hN5OFJA7DLALxZ1osZb59Q.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}*/
 /*Header*/
 header {
   position: relative;
@@ -25,7 +27,7 @@ header span {
 
 /*Add new album button*/
 header .pull-left span a,
-#add-album-form a {
+#add-new-album a {
   color: #ffffff;
   text-decoration: none;
   cursor: pointer;
@@ -41,7 +43,7 @@ header .pull-left span a,
 /*Search window*/
 input[type=search] {
   width: 200px;
-  padding: 5px 2px;
+  padding: 5px;
   font-size: 16px;
   border-radius: 5px;
   border: 3px double;
@@ -68,7 +70,8 @@ h1 {
 
 img {
   height: 250px;
-  width: 250px; }
+  width: 250px;
+  box-sizing: border-box; }
 
 /*Body*/
 /*#music-box{
@@ -419,28 +422,30 @@ img {
     margin: 10px 10px 0;
 }*/
 .form-control {
-  width: 40%;
+  width: 85%;
   display: inline-block;
-  margin-left: 5px; }
+  margin-left: 6px;
+  border: 3px double black; }
 
 .cover-preview {
-  top: 50px; }
+  /*top: 50px;*/
+  margin: 20px; }
 
-.cover-preview img {
-  border-radius: 50%;
-  /*width: 100%;*/ }
-
-.cover-preview:before {
-  position: absolute;
-  content: ' ';
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  background: #ffffff;
-  z-index: 1;
-  left: calc(50% - 195px);
-  top: calc(50% - 30px); }
-
+/*.cover-preview img {
+    /*border-radius: 50%;*/
+/*width: 100%;
+}*/
+/*.cover-preview:before {
+    position: absolute;
+    content: ' ';
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #ffffff;
+    z-index: 1;
+    left: calc(50% - 195px);
+    top: calc(50% - 30px);
+}*/
 input.error-value {
   border: 1px solid red; }
 
@@ -455,13 +460,13 @@ input.error-value {
   font-size: 30px; }
 
 #artist-name {
-  margin-left: 42px; }
+  margin-left: 53px; }
 
-#img-url {
-  margin-left: 13px; }
+#image-url {
+  margin-left: 20px; }
 
 #year {
-  margin-left: 50px; }
+  margin-left: 59px; }
 
 .add-new-album-title {
   border-bottom: 1px solid #dadada; }
@@ -469,6 +474,63 @@ input.error-value {
     margin: 0;
     text-align: center;
     padding-bottom: 15px; }
+
+#add-new-album-details {
+  margin-left: 105px;
+  margin-right: 105px; }
+
+#add-new-album-form .col-md-8 {
+  margin: 20px; }
+
+#description {
+  margin-left: 0;
+  width: 85%;
+  margin-top: 0;
+  height: 250px;
+  text-align: justify;
+  resize: none;
+  float: right; }
+
+label .control-label .form-group {
+  margin-bottom: 12px; }
+
+#save-album {
+  background-color: black;
+  display: block;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  padding: 12px 24px;
+  text-decoration: none;
+  border: none;
+  width: 250px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  margin-right: 20px; }
+
+#reset-album {
+  background-color: black;
+  display: block;
+  cursor: pointer;
+  color: white;
+  font-size: 18px;
+  padding: 12px 24px;
+  text-decoration: none;
+  border: none;
+  width: 250px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  margin-top: 20px; }
+
+#save-album:hover,
+#reset-album:hover {
+  background-color: #0F70A1;
+  color: white; }
+
+label.control-label.form-group {
+  float: left;
+  height: 34px; }
 
 .container {
   margin-top: 20px;

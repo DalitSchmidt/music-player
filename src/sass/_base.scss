@@ -1,17 +1,20 @@
 html, body {
     /*width: 100%;*/
     /*font-size: 14px;*/
-    font-family: Handlee, cursive, sans-serif;
+    /*font-family: Handlee, cursive, sans-serif;*/
+    font-family: 'Heebo', sans-serif;
     color: black;
 }
 
-@font-face {
+/*@font-face {
     font-family: 'Handlee';
     font-style: normal;
     font-weight: 400;
     src: local('Handlee Regular'), local('Handlee-Regular'), url(http://fonts.gstatic.com/s/handlee/v5/hN5OFJA7DLALxZ1osZb59Q.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
+}*/
+
+@import url('https://fonts.googleapis.com/css?family=Heebo');
 
 /*Header*/
 header {
@@ -29,7 +32,7 @@ header span {
 
 /*Add new album button*/
 header .pull-left span a,
-#add-album-form a {
+#add-new-album a {
     color: #ffffff;
     text-decoration: none;
     cursor: pointer;
@@ -47,7 +50,7 @@ header .pull-left span a,
 /*Search window*/
 input[type=search] {
     width: 200px;
-    padding: 5px 2px;
+    padding: 5px;
     font-size: 16px;
     border-radius: 5px;
     border: 3px double;
@@ -79,4 +82,5 @@ h1 {
 img {
     height: 250px;
     width: 250px;
+    box-sizing: border-box;
 }

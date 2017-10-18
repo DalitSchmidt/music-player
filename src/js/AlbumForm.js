@@ -17,7 +17,7 @@ class AlbumForm {
             description: new RegExp("[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
         }
             errors = false,
-            inputs = $('#album-form input, #album-form textarea'),
+            inputs = $('#add-new-album-form input, #add-new-album-form textarea'),
             album = {},
             i, input, input_name, input_value
 
@@ -47,7 +47,7 @@ class AlbumForm {
     }
 
     collectSongs() {
-        let songs_container = $('#songs-form .song')
+        let songs_container = $('#add-album-playlist-form .song')
         let songs_inputs, i, songs = []
 
         for ( i = 0; i < songs_container.length; i++ ) {
@@ -83,7 +83,6 @@ class AlbumForm {
     }
 
     bindEvents() {
-        // ef
         $('#save-album').on('click', $.proxy( this.saveAlbum, this ))
         $('#add-song').on('click', this.addSong)
     }
