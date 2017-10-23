@@ -2,7 +2,7 @@ import $ from 'jquery'
 import DataService from './DataService'
 import Templates from './Templates/Templates'
 
-export default class AlbumsBoard {
+class AlbumsBoard {
     constructor() {
         this.applyAlbums()
     }
@@ -29,3 +29,5 @@ export default class AlbumsBoard {
         })
     }
 }
+
+export default AlbumsBoard

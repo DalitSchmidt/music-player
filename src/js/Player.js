@@ -26,6 +26,10 @@ function onYouTubeIframeAPIReady() {
             'onReady': onPlayerReady
         },
     })
+
+    function onPlayerReady(event) {
+        Player.init()
+    }
 }
 
 const Player = {

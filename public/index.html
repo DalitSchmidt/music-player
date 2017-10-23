@@ -10,22 +10,32 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body style="overflow-x: hidden">
-    <div class="container-full">
+    <div id="container-full">
         <div class="row">
             <div class="col-md-12">
                 <!--header-->
                 <header>
                     <!--Add new album button-->
                     <div class="pull-left">
-                        <span><a href="#add-new-album" title="Add New Album"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Album</a></span>
-                        <span><a href="#all-albums" title="All Albums"><i class="fa fa-plus-circle" aria-hidden="true"></i> All Albums</a></span>
+                        <a href="#add-new-album" title="Add New Album">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Album
+                        </a>
+                        <a href="#all-albums" title="All Albums">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> All Albums
+                        </a>
+                        <a href="#single-album" title="Single Album">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Single Album
+                        </a>
+                        <a href="#search" title="Search">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Search
+                        </a>
                     </div>
 
                     <div class="pull-right">
-                        <span>
-                            <input type="search" name="search" id="search" placeholder="Search albums..." title="Search albums...">
-                            <a href="#" title="Search albums..."><i class="fa fa-search pull-right" aria-hidden="true"></i></a>
-                        </span>
+                        <input type="search" name="search" id="search" placeholder="Search albums..." title="Search albums...">
+                        <a href="#" title="Search albums...">
+                            <i class="fa fa-search pull-right" aria-hidden="true"></i>
+                        </a>
 
                         <div id="results-list" style="display: none">
                             <ul>
@@ -37,10 +47,9 @@
                         </div>
                     </div>
                 </header>
-
-                <div id="main-container"></div>
             </div>
         </div>
+        <div id="main-container"></div>
     </div>
 
     <script src="js/lib/jquery-3.2.1.min.js"></script>

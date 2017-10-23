@@ -19,20 +19,31 @@ const Router = {
 
     setPage: function( page ) {
         page = page || this.getPageName()
-        this.getHTML( page ).then(html => $('#main-container').html( html ))
+
+        let d = $.Deferred()
+
+        this.getHTML( page ).then((html => {
+            $('#main-container').html( html )
+
+            d.resolve()
+        }), xhr => d.reject( xhr ))
+
+        return d.promise()
     },
 
     bindEvents: function () {
         window.onhashchange = () => this.setPage()
     },
 
-    init: function () {
+    init: function( callback ) {
         let page = this.checkURLHash()
 
-        if ( page )
-            this.setPage()
-
-        this.bindEvents()
+        if ( page ) {
+            this.setPage().then(() => {
+                this.bindEvents()
+                callback()
+            })
+        }
     }
 }
 

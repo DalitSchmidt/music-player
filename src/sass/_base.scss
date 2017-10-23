@@ -1,86 +1,91 @@
 html, body {
-    /*width: 100%;*/
-    /*font-size: 14px;*/
-    /*font-family: Handlee, cursive, sans-serif;*/
     font-family: 'Heebo', sans-serif;
     color: black;
 }
 
-/*@font-face {
-    font-family: 'Handlee';
+/* hebrew */
+@font-face {
+    font-family: 'Heebo';
     font-style: normal;
     font-weight: 400;
-    src: local('Handlee Regular'), local('Handlee-Regular'), url(http://fonts.gstatic.com/s/handlee/v5/hN5OFJA7DLALxZ1osZb59Q.woff2) format('woff2');
+    src: local('Heebo'), local('Heebo-Regular'), url(https://fonts.gstatic.com/s/heebo/v3/q17xXvwvpCd8fBgEBABP9w.woff2) format('woff2');
+    unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+
+/* latin */
+@font-face {
+    font-family: 'Heebo';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Heebo'), local('Heebo-Regular'), url(https://fonts.gstatic.com/s/heebo/v3/Q66imbW5v9YuQMRLd0RXOA.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}*/
-
-@import url('https://fonts.googleapis.com/css?family=Heebo');
-
-/*Header*/
-header {
-    position: relative;
-    display: block;
-    background: #0F70A1;
-    height: 80px;
-    box-sizing: border-box;
-}
-
-header span {
-    position: relative;
-    display: inline-block;
-}
-
-/*Add new album button*/
-header .pull-left span a,
-#add-new-album a {
-    color: #ffffff;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.fa-plus-circle {
-    color: #ffffff;
-    font-size: 20px;
-    cursor: pointer;
-    margin-top: 30px;
-    margin-left: 20px;
-}
-
-/*Search window*/
-input[type=search] {
-    width: 200px;
-    padding: 5px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 3px double;
-    background-color: #ffffff;
-    margin-top: 23px;
-    resize: none;
-    box-sizing: border-box;
-}
-
-.fa-search {
-    font-size: 20px;
-    cursor: pointer;
-    margin-right: 15px;
-    margin-top: 30px;
-    color: #ffffff;
-}
-
-h1 {
-    font-weight: bold;
-    color: #000000;
-}
-
-#main-container {
-    padding: 35px 0;
-    box-sizing: border-box;
-    min-height: 400px;
 }
 
 img {
     height: 250px;
     width: 250px;
     box-sizing: border-box;
+}
+
+#container-full {
+    .row {
+        .col-md-12 {
+            /*Header*/
+            header {
+                position: relative;
+                display: block;
+                background: #0F70A1;
+                height: 80px;
+                box-sizing: border-box;
+
+                .pull-left {
+                    a {
+                        color: #ffffff;
+                        text-decoration: none;
+                        cursor: pointer;
+                        font-size: 20px;
+
+                        .fa-plus-circle {
+                            color: #ffffff;
+                            font-size: 20px;
+                            cursor: pointer;
+                            margin-top: 30px;
+                            margin-left: 20px;
+                        }
+                    }
+                }
+
+                .pull-right {
+                    /*Search window*/
+                    input[type=search] {
+                        width: 200px;
+                        padding: 5px;
+                        font-size: 16px;
+                        border-radius: 5px;
+                        border: 3px double;
+                        background-color: #ffffff;
+                        margin-top: 23px;
+                        resize: none;
+                        box-sizing: border-box;
+                    }
+
+                    a {
+                        .fa-search {
+                            font-size: 20px;
+                            cursor: pointer;
+                            margin-right: 15px;
+                            margin-top: 30px;
+                            color: #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #main-container {
+        padding: 35px 0;
+        box-sizing: border-box;
+        min-height: 400px;
+    }
 }

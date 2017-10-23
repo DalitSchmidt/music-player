@@ -3,16 +3,16 @@ import $ from 'jquery'
 const AlbumPlayer = {
     switchDetails: function( e ) {
         let el = $( e.target )
-        $('#menu .active').removeClass('active')
+        $('#album-info-menu .active').removeClass('active')
         el.addClass('active')
 
-        $('#album-description, #player-controls').toggle()
-        $('#song-youtube, #album-image img').toggle()
+        $('#album-info-description, #player-controls').toggle()
+        $('#song-youtube, #album-info-image img').toggle()
     },
 
     bindEvents: function() {
         $('#player-playlist li').on('click', $.proxy( this.playSong, this ))
-        $('#menu .links').on('click', $.proxy( this.switchDetails, this ))
+        $('#album-info-menu .album-info-links').on('click', $.proxy( this.switchDetails, this ))
     },
 
     init: function () {

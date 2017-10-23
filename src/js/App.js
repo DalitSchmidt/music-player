@@ -8,15 +8,13 @@ import Search from './Search'
 
 const App = {
     init: function() {
-        Router.init()
-
-        setTimeout(() => {
+        Router.init(() => {
             AlbumPlayer.init()
             new AlbumForm()
             new AlbumsBoard()
             new Search()
             Player.init()
-        }, 0)
+        })
     }
 }
 

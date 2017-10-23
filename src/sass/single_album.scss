@@ -16,31 +16,37 @@
         background: -webkit-linear-gradient(left top, #000000, #282828, #ffffff);/* Webkit (Chrome 11+) */
         background: -moz-linear-gradient(left top, #000000, #282828, #ffffff); /* Firefox */
 
-        #album-controls {
+        #album-info-controls {
             padding: 0;
             margin: 10px;
             width: 35px;
 
-            span {
-                padding: 0;
-                display: block;
-
-                a {
-                    font-size: 24px;
-                    /*background: #dadada;*/
-                    background: white;
-                    color: #000000;
-                    padding: 0 7px;
-                    border-radius: 50%;
-                }
+            .remove-icon {
+                position: absolute;
+                border-radius: 50%;
+                padding: 0 7px;
+                top: 0;
+                background: #dadada;
+                font-size: 24px;
+                -moz-transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                color: #000000;
             }
 
-            span:last-child {
-                margin-top: 5px;
+            .edit-icon {
+                position: absolute;
+                border-radius: 50%;
+                padding: 0 7px;
+                top: 40px;
+                background: #dadada;
+                font-size: 24px;
+                -moz-transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                color: #000000;
             }
         }
 
-        #album-image {
+        #album-info-image {
             height: 250px;
             width: 250px;
             position: absolute;
@@ -49,32 +55,14 @@
 
             img {
                 display: none;
-                height: 250px;
-                width: 250px;
             }
         }
 
-        #song-youtube {
-            height: 250px;
-            width: 250px;
-            position: absolute;
-            left: 125px;
-            top: 70px;
-
-            iframe {
-                height: 250px;
-                width: 250px;
-                position: absolute;
-                left: 125px;
-                top: 70px;
-            }
-        }
-
-        #menu {
+        #album-info-menu {
             margin-top: 175px;
             font-size: 20px;
 
-            .links a {
+            .album-info-links a {
                 color: #ffffff;
                 text-decoration: none;
                 margin-left: 10px;
@@ -86,24 +74,38 @@
         }
     }
 
-    #album-player {
+    #album-info-player {
         width: 850px;
         float: left;
         margin-top: 50px;
 
-        #album-text {
+        #song-youtube {
+            position: absolute;
+            left: 100px;
+            top: 165px;
+
+            iframe {
+                height: 250px;
+                width: 250px;
+                position: absolute;
+                left: 125px;
+                top: 70px;
+            }
+        }
+
+        #album-info-text {
             height: 400px;
             margin-left: 125px;
 
-            #album-name {
+            #album-info-name {
                 font-weight: bold;
-                margin: 20px 20px 10px;
+                margin: 0 20px 10px;
             }
 
-            #album-year {
+            #album-info-year {
                 margin: 10px 20px;
 
-                #album-genres {
+                #album-info-genres {
                     display: inline-flex;
                     margin-bottom: 0;
                     padding-left: 25px;
@@ -112,14 +114,14 @@
                         margin-right: 25px;
                     }
 
-                    &li:last-child {
+                    li:last-child {
                         margin-right: 0;
                     }
 
                 }
             }
 
-            #album-description {
+            #album-info-description {
                 letter-spacing: 0.5px;
                 text-align: justify;
                 margin: 10px 20px 20px;
@@ -130,6 +132,11 @@
                 #now-playing-song {
                     display: block;
                     font-size: 20px;
+                    margin-top: 5px;
+                    margin-left: 20px;
+                }
+
+                #controls {
                     margin-top: 5px;
                     margin-left: 20px;
                 }

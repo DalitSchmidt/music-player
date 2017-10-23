@@ -4,7 +4,7 @@ const AlbumTemplate = {
             <h2 id="album-name">Album name: ${album.album_name}</h2>
             <h4 id="album-artist">Artist: ${album.album_artist}</h4>
             <h4>Year: <span id="album-year">${album.album_year}</span></h4>
-            <img id="album-image" src="${album.album_img}" alt="">
+            <img id="album-image" src="${album.album_image}" alt="${album.album_name}">
             <h4>Description:</h4>
             <p id="album-description">${album.album_description}</p>
         `
