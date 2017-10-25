@@ -8,13 +8,11 @@ import Search from './Search'
 
 const App = {
     init: function() {
-        Router.init(() => {
-            AlbumPlayer.init()
-            new AlbumForm()
-            new AlbumsBoard()
-            new Search()
-            Player.init()
-        })
+        Router.setupRoutes({
+            'all-albums': AlbumsBoard.init.bind( AlbumsBoard ),
+            'add-new-album': AlbumForm.init.bind( AlbumForm ),
+            'single-album': AlbumPlayer.init.bind( AlbumPlayer )
+        }).init()
     }
 }
 

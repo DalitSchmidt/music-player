@@ -2,18 +2,14 @@ import $ from 'jquery'
 import DataService from './DataService'
 import Templates from './Templates/Templates'
 
-export default class Search {
-    constructor() {
-        this.bindEvents()
-    }
-
-    displayResults( results ) {
+const Search = {
+    displayResults: function( results ) {
         let html = Templates.searchResults( results )
         console.log( html )
         $('#results-list').html( html )
-    }
+    },
 
-    searchAlbum( e ) {
+    searchAlbum: function( e ) {
         let $input = $(e.target)
         let term = $input.val()
 
@@ -21,9 +17,15 @@ export default class Search {
             DataService.searchAlbum( term ).then( $.proxy( this.displayResults, this ) )
 
         // Check if the length is smaller than 3, we have to remove all the results
-    }
+    },
 
-    bindEvents() {
+    bindEvents: function() {
         $('#search').on('keyup', $.proxy( this.searchAlbum, this ))
+    },
+
+    init: function() {
+        this.bindEvents()
     }
 }
+
+export default Search

@@ -1,6 +1,3 @@
-import $ from 'jquery'
-import DataService from './DataService'
-
 const Player = {
     playSong: function( e ) {
         let el = $( e.target )
@@ -45,45 +42,3 @@ const Player = {
         this.bindEvents()
     }
 }
-
-window.Player = Player
-
-const AlbumPlayer = {
-    switchDetails: function( e ) {
-        let el = $( e.target )
-        $('#album-info-menu .active').removeClass('active')
-        el.addClass('active')
-
-        $('#album-info-description, #player-controls').toggle()
-        $('#song-youtube, #album-info-image img').toggle()
-    },
-
-    bindEvents: function() {
-        $('#player-playlist li').on('click', $.proxy( this.playSong, this ))
-        $('#album-info-menu .album-info-links').on('click', $.proxy( this.switchDetails, this ))
-    },
-
-    getAlbumID: function () {
-        let id = location.hash.substring(1).split('/')[1]
-        return id
-    },
-
-    getAlbum: function () {
-        let id = this.getAlbumID()
-        // if ( !id ) {
-        //     location.replace('/')
-        //     return
-        // }
-
-        DataService.getAlbumById( id ).then(album => {
-
-        })
-    },
-
-    init: function () {
-        this.getAlbum()
-        this.bindEvents()
-    }
-}
-
-export default AlbumPlayer

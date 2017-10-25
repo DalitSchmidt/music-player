@@ -1,14 +1,12 @@
 import $ from 'jquery'
 import DataService from './DataService'
+import Player from './Player'
 import Templates from './Templates/Templates'
 
-class AlbumForm {
-    constructor() {
-        this.bindEvents()
-        this.dataService = new DataService()
-    }
+const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
-    collectValues() {
+const AlbumForm = {
+    collectValues: function() {
         let regexes = {
             name: new RegExp("[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
             artist: new RegExp("[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
@@ -50,13 +48,13 @@ class AlbumForm {
             return false
 
         return album
-    }
+    },
 
-    setSuccessMessage() {
+    setSuccessMessage: function() {
         alert('Album has been created :)')
-    }
+    },
 
-    collectSongs() {
+    collectSongs: function() {
         let songs_container = $('#add-album-playlist-form .col-md-12 .song')
         let songs_inputs, i, songs = []
 
@@ -69,9 +67,9 @@ class AlbumForm {
         }
 
         return songs
-    }
+    },
 
-    saveAlbum( e ) {
+    saveAlbum: function( e ) {
         e.preventDefault()
         let el = $(e.target),
 
@@ -83,31 +81,42 @@ class AlbumForm {
 
         album.songs = songs
         this.dataService.saveAlbum( album ).then( this.setSuccessMessage )
-    }
+    },
 
-    addSong( e ) {
+    addSong: function( e ) {
         e.preventDefault()
         let html = Templates.songItem()
 
         $('#add-album-playlist-form').append( html )
-    }
+    },
 
-    setCoverImage( img ) {
+    setCoverImage: function( img ) {
         $('#image-cover-preview img').attr('src', img)
-    }
+    },
 
-    changeCoverImage() {
+    changeCoverImage: function() {
         let img = $('#image-url').val()
         let regex = new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$")
 
+        if ( img === '' ) {
+            this.setCoverImage( PREVIEW_IMG )
+            return
+        }
+
         if ( regex.test( img ) )
             this.setCoverImage( img )
-    }
+    },
 
-    bindEvents() {
+    bindEvents: function() {
         $('#save-album').on('click', $.proxy( this.saveAlbum, this ))
         $('#add-another-song').on('click', this.addSong)
         $('#image-url').on('blur', $.proxy( this.changeCoverImage, this ))
+    },
+
+    init: function() {
+        this.bindEvents()
+        this.dataService = new DataService()
+        Player.init().bind( Player )
     }
 }
 

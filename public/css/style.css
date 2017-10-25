@@ -129,11 +129,11 @@ img {
   width: 850px;
   float: left;
   margin-top: 50px; }
-  #album-info #album-info-player #song-youtube {
+  #album-info #album-info-player #player-wrapper {
     position: absolute;
     left: 100px;
     top: 165px; }
-    #album-info #album-info-player #song-youtube iframe {
+    #album-info #album-info-player #player-wrapper iframe {
       height: 250px;
       width: 250px;
       position: absolute;

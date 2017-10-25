@@ -6,6 +6,7 @@ const babelify = require('babelify')
 const connect = require('gulp-connect')
 const sass = require('gulp-sass')
 const nodemon = require('gulp-nodemon')
+const maps = require('gulp-sourcemaps')
 
 let scripts = 0
 
@@ -16,7 +17,11 @@ function bundleApp() {
         debug: true
     })
 
-    appBundler.transform('babelify', {presets: ['es2015']}).bundle().on('error', gutil.log).pipe(source('app.min.js')).pipe(gulp.dest('./public/js/')).pipe(connect.reload())
+    appBundler.transform('babelify', {presets: ['es2015']})
+        .bundle().on('error', gutil.log)
+        .pipe(source('app.min.js'))
+        .pipe(gulp.dest('./public/js/'))
+        .pipe(connect.reload())
 }
 
 gulp.task('connect', () => connect.server({livereload: true, root: './public'}))

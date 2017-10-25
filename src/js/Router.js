@@ -1,4 +1,6 @@
 const Router = {
+    routes: {},
+
     getPageName: function() {
         let hash = location.hash.substring(1)
         let url = hash.split('/')
@@ -35,15 +37,21 @@ const Router = {
         window.onhashchange = () => this.setPage()
     },
 
-    init: function( callback ) {
-        let page = this.checkURLHash()
+    setupRoutes: function( routes ) {
+        this.routes = routes
+        return this
+    },
 
+    init: function() {
+        let page = this.checkURLHash()
         if ( page ) {
             this.setPage().then(() => {
                 this.bindEvents()
+                let callback = this.routes[ page ]
                 callback()
             })
-        }
+        } else
+            this.bindEvents()
     }
 }
 
