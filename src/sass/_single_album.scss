@@ -1,5 +1,5 @@
 /*Album information & player*/
-#album-info {
+#album {
     button[disabled] {
         opacity: .5;
     }
@@ -104,20 +104,21 @@
 
             #album-info-year {
                 margin: 10px 20px;
+                display: inline-block;
+            }
 
-                #album-info-genres {
-                    display: inline-flex;
-                    margin-bottom: 0;
-                    padding-left: 25px;
+            ul#album-info-genres {
+                margin-bottom: 0;
+                padding-left: 25px;
+                display: inline-block;
 
-                    li {
-                        margin-right: 25px;
-                    }
+                li {
+                    margin-right: 25px;
+                    display: inline-block;
+                }
 
-                    li:last-child {
-                        margin-right: 0;
-                    }
-
+                li:last-child {
+                    margin-right: 0;
                 }
             }
 

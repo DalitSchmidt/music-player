@@ -44,22 +44,28 @@ img {
         margin-left: 20px; }
     #container-full .row .col-md-12 header .pull-right {
       /*Search window*/ }
-      #container-full .row .col-md-12 header .pull-right input[type=search] {
+      #container-full .row .col-md-12 header .pull-right #search-area input[type=search] {
         width: 200px;
         padding: 5px;
         font-size: 16px;
         border-radius: 5px;
         border: 3px double;
         background-color: #ffffff;
-        margin-top: 23px;
+        margin-top: 22px;
         resize: none;
-        box-sizing: border-box; }
-      #container-full .row .col-md-12 header .pull-right a .fa-search {
+        box-sizing: border-box;
+        margin-right: 10px; }
+      #container-full .row .col-md-12 header .pull-right #search-area #search {
+        color: #ffffff;
         font-size: 20px;
         cursor: pointer;
-        margin-right: 15px;
-        margin-top: 30px;
-        color: #ffffff; }
+        margin-right: 20px;
+        background: transparent;
+        border: none; }
+        #container-full .row .col-md-12 header .pull-right #search-area #search .fa-search {
+          right: 20px;
+          top: 30px;
+          position: absolute; }
 
 #container-full #main-container {
   padding: 35px 0;
@@ -67,10 +73,10 @@ img {
   min-height: 400px; }
 
 /*Album information & player*/
-#album-info button[disabled] {
+#album button[disabled] {
   opacity: .5; }
 
-#album-info #aside-left {
+#album #aside-left {
   width: 250px;
   height: 400px;
   float: left;
@@ -83,11 +89,11 @@ img {
   /* Webkit (Chrome 11+) */
   background: -moz-linear-gradient(left top, #000000, #282828, #ffffff);
   /* Firefox */ }
-  #album-info #aside-left #album-info-controls {
+  #album #aside-left #album-info-controls {
     padding: 0;
     margin: 10px;
     width: 35px; }
-    #album-info #aside-left #album-info-controls .remove-icon {
+    #album #aside-left #album-info-controls .remove-icon {
       position: absolute;
       border-radius: 50%;
       padding: 0 7px;
@@ -97,7 +103,7 @@ img {
       -moz-transition: all 0.3s ease-in-out;
       -webkit-transition: all 0.3s ease-in-out;
       color: #000000; }
-    #album-info #aside-left #album-info-controls .edit-icon {
+    #album #aside-left #album-info-controls .edit-icon {
       position: absolute;
       border-radius: 50%;
       padding: 0 7px;
@@ -107,76 +113,78 @@ img {
       -moz-transition: all 0.3s ease-in-out;
       -webkit-transition: all 0.3s ease-in-out;
       color: #000000; }
-  #album-info #aside-left #album-info-image {
+  #album #aside-left #album-info-image {
     height: 250px;
     width: 250px;
     position: absolute;
     left: 125px;
     top: 70px; }
-    #album-info #aside-left #album-info-image img {
+    #album #aside-left #album-info-image img {
       display: none; }
-  #album-info #aside-left #album-info-menu {
+  #album #aside-left #album-info-menu {
     margin-top: 175px;
     font-size: 20px; }
-    #album-info #aside-left #album-info-menu .album-info-links a {
+    #album #aside-left #album-info-menu .album-info-links a {
       color: #ffffff;
       text-decoration: none;
       margin-left: 10px; }
-    #album-info #aside-left #album-info-menu .active {
+    #album #aside-left #album-info-menu .active {
       font-weight: bold; }
 
-#album-info #album-info-player {
+#album #album-info-player {
   width: 850px;
   float: left;
   margin-top: 50px; }
-  #album-info #album-info-player #player-wrapper {
+  #album #album-info-player #player-wrapper {
     position: absolute;
     left: 100px;
     top: 165px; }
-    #album-info #album-info-player #player-wrapper iframe {
+    #album #album-info-player #player-wrapper iframe {
       height: 250px;
       width: 250px;
       position: absolute;
       left: 125px;
       top: 70px; }
-  #album-info #album-info-player #album-info-text {
+  #album #album-info-player #album-info-text {
     height: 400px;
     margin-left: 125px; }
-    #album-info #album-info-player #album-info-text #album-info-name {
+    #album #album-info-player #album-info-text #album-info-name {
       font-weight: bold;
       margin: 0 20px 10px; }
-    #album-info #album-info-player #album-info-text #album-info-year {
-      margin: 10px 20px; }
-      #album-info #album-info-player #album-info-text #album-info-year #album-info-genres {
-        display: inline-flex;
-        margin-bottom: 0;
-        padding-left: 25px; }
-        #album-info #album-info-player #album-info-text #album-info-year #album-info-genres li {
-          margin-right: 25px; }
-        #album-info #album-info-player #album-info-text #album-info-year #album-info-genres li:last-child {
-          margin-right: 0; }
-    #album-info #album-info-player #album-info-text #album-info-description {
+    #album #album-info-player #album-info-text #album-info-year {
+      margin: 10px 20px;
+      display: inline-block; }
+    #album #album-info-player #album-info-text ul#album-info-genres {
+      margin-bottom: 0;
+      padding-left: 25px;
+      display: inline-block; }
+      #album #album-info-player #album-info-text ul#album-info-genres li {
+        margin-right: 25px;
+        display: inline-block; }
+      #album #album-info-player #album-info-text ul#album-info-genres li:last-child {
+        margin-right: 0; }
+    #album #album-info-player #album-info-text #album-info-description {
       letter-spacing: 0.5px;
       text-align: justify;
       margin: 10px 20px 20px;
       display: none; }
-    #album-info #album-info-player #album-info-text #player-controls #now-playing-song {
+    #album #album-info-player #album-info-text #player-controls #now-playing-song {
       display: block;
       font-size: 20px;
       margin-top: 5px;
       margin-left: 20px; }
-    #album-info #album-info-player #album-info-text #player-controls #controls {
+    #album #album-info-player #album-info-text #player-controls #controls {
       margin-top: 5px;
       margin-left: 20px; }
-    #album-info #album-info-player #album-info-text #player-controls #player-playlist {
+    #album #album-info-player #album-info-text #player-controls #player-playlist {
       margin-top: 10px;
       padding: 0;
       margin-left: 40px;
       font-size: 18px; }
-      #album-info #album-info-player #album-info-text #player-controls #player-playlist li {
+      #album #album-info-player #album-info-text #player-controls #player-playlist li {
         cursor: pointer;
         padding-left: 5px; }
-        #album-info #album-info-player #album-info-text #player-controls #player-playlist li.playing {
+        #album #album-info-player #album-info-text #player-controls #player-playlist li.playing {
           font-weight: bold; }
 
 /*Album list (display of disks)*/
@@ -499,16 +507,16 @@ img {
         #search-results .col-md-12 .row .col-md-3 .search-results-record:hover .edit-icon,
         #search-results .col-md-12 .row .col-md-3 .search-results-record:hover .play-icon {
           opacity: 1; }
-      #search-results .col-md-12 .row .col-md-7 .search-results-album-name {
+      #search-results .col-md-12 .row .col-md-9 .search-results-album-name {
         margin-top: 0;
         margin-bottom: 10px;
         font-weight: bold; }
-      #search-results .col-md-12 .row .col-md-7 .search-results-album-description {
+      #search-results .col-md-12 .row .col-md-9 .search-results-album-description {
         text-align: justify;
         margin-top: 10px;
         letter-spacing: 0.5px;
         height: 160px; }
-      #search-results .col-md-12 .row .col-md-7 .search-results-description-button {
+      #search-results .col-md-12 .row .col-md-9 .search-results-description-button {
         background-color: black;
         display: block;
         cursor: pointer;
@@ -519,7 +527,7 @@ img {
         border: none;
         width: 250px;
         box-sizing: border-box; }
-        #search-results .col-md-12 .row .col-md-7 .search-results-description-button:hover {
+        #search-results .col-md-12 .row .col-md-9 .search-results-description-button:hover {
           background-color: #0F70A1;
           color: white; }
       #search-results .col-md-12 .row .search-results-playlist {

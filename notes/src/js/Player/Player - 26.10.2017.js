@@ -1,4 +1,6 @@
 const Player = {
+    playing: true,
+
     playSong: function( e ) {
         let el = $( e.target )
         $('#player-playlist li.playing').removeClass('playing')
@@ -7,6 +9,7 @@ const Player = {
         youtubeplayer.loadVideoById( youtube_id )
         let song_name = el.text()
         $('#now-playing-song #song-name').text( song_name )
+        this.toggleControls()
     },
 
     startPlaylist: function() {
@@ -20,21 +23,29 @@ const Player = {
     },
 
     play: function() {
-        $(this).attr('disabled', 'disabled')
+        this.playing = !this.playing
+        $('#play').attr('disabled', 'disabled')
         $('#pause').removeAttr('disabled')
         youtubeplayer.playVideo()
     },
 
     pause: function() {
-        $(this).attr('disabled', 'disabled')
+        this.playing = !this.playing
+        $('#pause').attr('disabled', 'disabled')
         $('#play').removeAttr('disabled')
         youtubeplayer.pauseVideo()
     },
 
+    toggleControls: function () {
+        if ( this.playing )
+            this.pause()
+        else
+            this.play()
+    },
+
     bindEvents: function() {
         $('#player-playlist li').on('click', $.proxy( this.playSong, this ))
-        $('#play').on('click', this.play)
-        $('#pause').on('click', this.pause)
+        $('#play, #pause').on('click', $.proxy( this.toggleControls, this ))
     },
 
     init: function () {
@@ -42,3 +53,5 @@ const Player = {
         this.bindEvents()
     }
 }
+
+window.Player = Player
