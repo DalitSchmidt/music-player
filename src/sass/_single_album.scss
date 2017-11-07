@@ -1,0 +1,348 @@
+/*Album information & player*/
+#album {
+    button[disabled] {
+        opacity: .5;
+    }
+
+    #aside-left {
+        width: 250px;
+        height: 400px;
+        float: left;
+        margin-left: 100px;
+        position: relative;
+        display: block;
+        margin-bottom: 75px;
+        top: 50px;
+        background: -webkit-linear-gradient(left top, #000000, #282828, #ffffff);/* Webkit (Chrome 11+) */
+        background: -moz-linear-gradient(left top, #000000, #282828, #ffffff); /* Firefox */
+
+        #album-info-controls {
+            padding: 0;
+            margin: 10px;
+            width: 35px;
+
+            .remove-icon {
+                position: absolute;
+                border-radius: 50%;
+                padding: 0 7px;
+                top: 0;
+                background: #dadada;
+                font-size: 24px;
+                -moz-transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                color: #000000;
+            }
+
+            .edit-icon {
+                position: absolute;
+                border-radius: 50%;
+                padding: 0 7px;
+                top: 40px;
+                background: #dadada;
+                font-size: 24px;
+                -moz-transition: all 0.3s ease-in-out;
+                -webkit-transition: all 0.3s ease-in-out;
+                color: #000000;
+            }
+        }
+
+        #album-info-image {
+            height: 250px;
+            width: 250px;
+            position: absolute;
+            left: 125px;
+            top: 70px;
+
+            img {
+                display: none;
+            }
+
+            &:before {
+                position: absolute;
+                content: ' ';
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: #ffffff;
+                right: calc(50% - 25px);
+                top: calc(50% - 25px);
+            }
+        }
+
+        #album-info-menu {
+            margin-top: 175px;
+            font-size: 20px;
+
+            .album-info-links {
+                color: #ffffff;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+
+            .active {
+                font-weight: bold;
+            }
+        }
+    }
+
+    #album-info-player {
+        width: 850px;
+        float: left;
+        margin-top: 50px;
+
+        #player-wrapper {
+            position: absolute;
+            left: 100px;
+            top: 165px;
+
+            iframe {
+                height: 250px;
+                width: 250px;
+                position: absolute;
+                left: 125px;
+                top: 70px;
+            }
+        }
+
+        #album-info-text {
+            height: 400px;
+            margin-left: 125px;
+
+            #album-info-name {
+                font-weight: bold;
+                margin: 0 20px 10px;
+            }
+
+            #album-info-year {
+                display: inline-block;
+                /* background: red; */
+                line-height: 2;
+                margin: 0 20px 20px;
+            }
+
+            #album-info-genres {
+                /*margin-bottom: 0;
+                padding-left: 25px;
+                /*display: inline-block;*/
+                font-size: 18px;
+                /* position: absolute; */
+                /* top: -66px; */
+                /*background: blue;*/
+                /* margin: 10px 20px; */
+                /* padding: 20px; */
+                margin-left: 86px;
+                margin-top: -56px;
+                /* margin-left: 85px; */
+                display: flex;
+                /* top: 180px; */
+                /* left: 278px; */
+                padding: 0;
+                /* margin: 20px; */
+                /* margin-left: 40px; */
+                line-height: 2;
+
+                li {
+                    margin-right: 25px;
+                    /*display: inline-block;*/
+                }
+
+                li:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            #album-info-description {
+                letter-spacing: 0.5px;
+                text-align: justify;
+                margin: 10px 20px 20px;
+                display: none;
+            }
+
+            #player-controls {
+                #now-playing-song {
+                    display: block;
+                    font-size: 20px;
+                    margin-top: 5px;
+                    margin-left: 20px;
+                }
+
+                #controls {
+                    margin-top: 10px;
+                    margin-left: 20px;
+                    background: #dadada;
+                    width: 300px;
+                    height: 35px;
+
+                    .step-backward-icon {
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 5px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+
+                    .play-icon {
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 30px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+
+                    .pause-icon {
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 60px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+
+                    .stop-icon {
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 90px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+
+                    .step-forward-icon {
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 120px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+
+                    .volume-off-icon{
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 210px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+
+                    .volume-down-icon{
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 240px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+
+                    .volume-up-icon {
+                        position: absolute;
+                        /* top: 295px; */
+                        /* opacity: 0; */
+                        font-size: 25px;
+                        /* transition: all 0.3s ease-in-out; */
+                        -moz-transition: all 0.3s ease-in-out;
+                        /* -webkit-transition: all 0.3s ease-in-out; */
+                        color: black;
+                        /* text-align: center; */
+                        /* width: 100%; */
+                        /* z-index: 5; */
+                        /* left: 5px; */
+                        /* cursor: default; */
+                        margin-left: 270px;
+                        /* margin-top: 4px; */
+                        cursor: pointer;
+                    }
+                }
+
+                #player-playlist {
+                    margin-top: 15px;
+                    padding: 0;
+                    margin-left: 40px;
+                    font-size: 18px;
+
+                    li {
+                        cursor: pointer;
+                        padding-left: 5px;
+
+                        &.playing {
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

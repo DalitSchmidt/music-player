@@ -1,0 +1,238 @@
+#add-new-album {
+    #add-new-album-details {
+        margin-left: 100px;
+        margin-right: 100px;
+
+        input.error-value {
+            border: 1px solid red;
+        }
+
+        /*Add New Album*/
+        #add-new-album-title {
+            border-bottom: 4px double #dadada;
+
+            h1 {
+                margin: 0;
+                text-align: center;
+                padding-bottom: 15px;
+                font-weight: bold;
+            }
+        }
+
+        .col-md-12 {
+            #add-new-album-form {
+                #image-cover-preview {
+                    img {
+                        margin: 20px;
+                    }
+
+                    &:before{
+                        position: absolute;
+                        content: ' ';
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        background: #ffffff;
+                        z-index: 1;
+                        right: calc(50% - 375px);
+                        top: calc(50% - 145px);
+                    }
+                }
+
+                .col-md-8 {
+                    margin: 20px;
+
+                    .form-group {
+                        .form-control {
+                            width: 85%;
+                            display: inline-block;
+                            margin-left: 6px;
+                            border: 3px double black;
+                        }
+
+                        input[name="album-artist-name"] {
+                            margin-left: 53px;
+                        }
+
+                        input[name="album-image-url"] {
+                            margin-left: 20px;
+                        }
+
+                        input[name="album-year"] {
+                            margin-left: 59px;
+                        }
+
+                        input[type="checkbox"]:first-of-type {
+                            margin-left: 45px;
+                        }
+
+                        input[type="checkbox"] {
+                            margin-left: 3px;
+                        }
+
+                        textarea[name="album-description"] {
+                            margin-left: 0;
+                            width: 85%;
+                            margin-top: 0;
+                            height: 250px;
+                            text-align: justify;
+                            resize: none;
+                            float: right;
+                        }
+
+                    }
+                }
+            }
+
+            #reset-album {
+                background-color: black;
+                display: block;
+                cursor: pointer;
+                color: white;
+                font-size: 20px;
+                padding: 12px 24px;
+                text-decoration: none;
+                border: none;
+                width: 250px;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+                margin-right: 20px;
+                margin-top: 20px;
+
+                &:hover {
+                    background-color: #0F70A1;
+                    color: white;
+                }
+            }
+
+            #save-album {
+                background-color: black;
+                display: block;
+                cursor: pointer;
+                color: white;
+                font-size: 20px;
+                padding: 12px 24px;
+                text-decoration: none;
+                border: none;
+                width: 250px;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+                margin-right: 20px;
+
+                &:hover {
+                    background-color: #0F70A1;
+                    color: white;
+                }
+            }
+        }
+
+        /*Add Album Playlist*/
+        #add-album-playlist-title {
+            border-bottom: 4px double #dadada;
+
+            h1 {
+                margin: 0;
+                text-align: center;
+                padding-bottom: 15px;
+                font-weight: bold;
+            }
+        }
+
+        .col-md-12 {
+            #add-album-playlist-form {
+                margin: 20px;
+
+                .col-md-12 {
+                    .form-group {
+                        .form-control {
+                            width: 85%;
+                            display: inline-block;
+                            margin-left: 6px;
+                            border: 3px double black;
+                        }
+
+                        input[name="song-name"] {
+                            width: 210px;
+                            margin-left: auto;
+                        }
+
+                        .youtube-url-label {
+                            position: absolute;
+                            top: 8px;
+                            left: 310px;
+                        }
+
+                        input[name="youtube-url"] {
+                            width: 355px;
+                            position: absolute;
+                            top: 0;
+                            left: 400px;
+                            margin-left: auto;
+                        }
+
+                        .song-time-label {
+                            position: absolute;
+                            top: 8px;
+                            left: 760px;
+                        }
+
+                        input[name="song-time"] {
+                            width: 73px;
+                            position: absolute;
+                            top: 0;
+                            left: 835px;
+                            margin-left: auto;
+                            text-align: center;
+                        }
+
+                        .remove-icon {
+                            position: absolute;
+                            border-radius: 50%;
+                            padding: 0 7px;
+                            top: 0;
+                            background: #dadada;
+                            font-size: 24px;
+                            -moz-transition: all 0.3s ease-in-out;
+                            -webkit-transition: all 0.3s ease-in-out;
+                            left: 920px;
+                            color: #000000;
+                        }
+                    }
+                }
+
+                .row {
+                    margin: 10px;
+                }
+
+                #add-another-song {
+                    background-color: transparent;
+                    display: block;
+                    cursor: pointer;
+                    font-size: 20px;
+                    text-decoration: none;
+                    border: none;
+                    box-sizing: border-box;
+                    padding: 12px;
+                }
+
+                #finish-and-save-button {
+                    background-color: black;
+                    display: block;
+                    cursor: pointer;
+                    color: white;
+                    font-size: 20px;
+                    padding: 12px 24px;
+                    text-decoration: none;
+                    border: none;
+                    width: 250px;
+                    box-sizing: border-box;
+
+                    &:hover {
+                        background-color: #0F70A1;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

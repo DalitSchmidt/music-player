@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Music Player</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="overflow-x: hidden">
+    <div id="container-full">
+        <div class="row">
+            <div class="col-md-12">
+                <!--header-->
+                <header>
+                    <!--Add new album button-->
+                    <div class="pull-left">
+                        <a href="#add-new-album" title="Add New Album">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Album
+                        </a>
+                        <a href="#all-albums" title="All Albums">
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i> All Albums
+                        </a>
+                    </div>
+
+                    <div class="pull-right">
+                        <div id="search-area">
+                            <input type="search" name="search" id="search-term" placeholder="Search albums..." title="Search albums...">
+                            <button id="search" title="Search albums...">
+                                <i class="fa fa-search pull-right" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <div id="results-list"></div>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div id="main-container"></div>
+    </div>
+
+    <script src="js/lib/jquery-3.2.1.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/app.min.js"></script>
+    <script src="js/youtube.js"></script>
+</body>
+</html>

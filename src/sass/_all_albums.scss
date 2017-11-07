@@ -1,0 +1,106 @@
+/*Album list (display of disks)*/
+#album-list {
+    min-height: 400px;
+    top: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+    .loading {
+        background: url(../images/loader.gif) no-repeat center center;
+    }
+
+    .row {
+        margin: 10px;
+
+        .col-md-3 {
+            padding-right: 0;
+            padding-left: 0;
+            margin-bottom: 50px;
+
+            .record {
+                position: relative;
+                display: block;
+                opacity: 0.75;
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                &:before {
+                    position: absolute;
+                    content: ' ';
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    background: #ffffff;
+                    z-index: 1;
+                    left: calc(50% - 25px);
+                    top: calc(50% - 5px);
+                }
+
+                .text-center {
+                    .album-list-name {
+                        font-weight: bold;
+                    }
+                }
+
+                img {
+                    margin-top: 20px;
+                }
+
+                .play-icon {
+                    position: absolute;
+                    top: 145px;
+                    opacity: 0;
+                    font-size: 30px;
+                    transition: all 0.3s ease-in-out;
+                    -moz-transition: all 0.3s ease-in-out;
+                    -webkit-transition: all 0.3s ease-in-out;
+                    color: #000000;
+                    text-align: center;
+                    width: 100%;
+                    z-index: 5;
+                    left: 2px;
+                    cursor: default;
+
+                    .fa-play {
+                        cursor: pointer;
+                    }
+                }
+
+                .remove-icon {
+                    position: absolute;
+                    border-radius: 50%;
+                    padding: 0 5px;
+                    top: 55px;
+                    opacity: 0;
+                    background: #dadada;
+                    font-size: 15px;
+                    -moz-transition: all 0.3s ease-in-out;
+                    -webkit-transition: all 0.3s ease-in-out;
+                    left: 115px;
+                    color: #000000;
+                }
+
+                .edit-icon {
+                    position: absolute;
+                    border-radius: 50%;
+                    padding: 0 5px;
+                    top: 55px;
+                    opacity: 0;
+                    background: #dadada;
+                    font-size: 15px;
+                    -moz-transition: all 0.3s ease-in-out;
+                    -webkit-transition: all 0.3s ease-in-out;
+                    left: 145px;
+                    color: #000000;
+                }
+            }
+            .record:hover .play-icon,
+            .record:hover .remove-icon,
+            .record:hover .edit-icon {
+                opacity: 1;
+            }
+        }
+    }
+}
