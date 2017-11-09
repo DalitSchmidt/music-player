@@ -13,7 +13,7 @@ const AlbumsBoard = {
         for ( let i = 0; i < albums.length; i++ )
             html += Templates.album( albums[ i ] )
 
-        $('#album-list .row').append( html )
+        $('#album-list .row').html( html )
     },
 
     getAllAlbums: function() {

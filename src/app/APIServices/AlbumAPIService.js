@@ -13,7 +13,7 @@ const AlbumAPIService = {
         return $.getJSON('http://localhost:3000/api/albums/' + album_id)
     },
 
-    saveAlbum: function() {
+    saveAlbum: function( album ) {
         return $.ajax({
             url: 'http://localhost:3000/api/albums',
             contentType: 'application/json',
@@ -37,6 +37,10 @@ const AlbumAPIService = {
             method: 'DELETE'
         })
     },
+
+    getGenres: function() {
+        return $.getJSON('http://localhost:3000/api/genres')
+    }
 }
 
 export default AlbumAPIService

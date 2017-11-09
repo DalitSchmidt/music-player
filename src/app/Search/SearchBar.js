@@ -3,9 +3,12 @@ import SearchAPIService from '../APIServices/SearchAPIService'
 import SearchResultsTemplate from '../Templates/SearchResultsTemplate'
 
 const SearchBar = {
-    searchAlbum: function () {
+    searchAlbum: function ( e ) {
+        e.preventDefault()
         let term = this.getTerm()
         window.location.href = 'http://localhost:8080/#search/' + term
+
+        return false
     },
 
     getTerm: function () {
@@ -32,8 +35,7 @@ const SearchBar = {
 
     bindEvents: function() {
         $('#search').on('click', $.proxy( this.searchAlbum, this ))
-        $('#search-term').on('keyup', $.proxy( this.getSuggestions, this ))
-        .on('blur', this.clearResults)
+        $('#search-term').on('keyup', $.proxy( this.getSuggestions, this )).on('blur', this.clearResults)
     },
 
     init: function() {

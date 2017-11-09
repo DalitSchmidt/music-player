@@ -2,17 +2,18 @@ import $ from 'jquery'
 import AlbumAPIService from './../APIServices/AlbumAPIService'
 import Player from './../Player'
 import Templates from '../Templates/Templates'
+import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
 const AlbumForm = {
     collectValues: function() {
         let regexes = {
-            name: new RegExp("[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-            artist: new RegExp("[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-            img: new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$"),
-            year: new RegExp("^[0-9]{4}$"),
-            description: new RegExp("[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
+            'album-name': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
+            'album-artist': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
+            'album-image': new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$"),
+            'album-year': new RegExp("^[0-9]{4}$"),
+            'album-description': new RegExp("^[A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
         }
 
         let errors = false
@@ -20,7 +21,7 @@ const AlbumForm = {
         let album = {}
         let i, input, input_name, input_value
 
-        inputs.removeClass('error-value')
+        inputs.removeClass('error')
 
         for ( i = 0; i < inputs.length; i++ ) {
             // Collect the element
@@ -28,6 +29,9 @@ const AlbumForm = {
 
             // Convert the element from native JS element to a jQuery element
             input = $( input )
+            if ( input.attr('type') === 'checkbox' )
+                continue
+
             input_name = input.attr('name')
             input_value = input.val()
 
@@ -37,7 +41,7 @@ const AlbumForm = {
                 // If there is an error with the regex, set errors to be true, mean we have errors in the validation
                 errors = true
                 // Add class of error
-                input.addClass('error-value')
+                input.addClass('error')
             }
 
             // Add the property of the input name inside the album object
@@ -48,6 +52,10 @@ const AlbumForm = {
             return false
 
         return album
+    },
+
+    scrollTop: function () {
+        $("html, body").animate({ scrollTop: 0 }, 1200)
     },
 
     setSuccessMessage: function() {
@@ -68,26 +76,45 @@ const AlbumForm = {
 
         return songs
     },
+    
+    collectGenres: function () {
+        let inputs = $('#album-genres div input[type=checkbox]:checked')
+        let ids = []
+
+        $.each(inputs, ( i, input ) => {
+            ids.push( $( input ).val() )
+        })
+
+        return ids
+    },
 
     saveAlbum: function( e ) {
         e.preventDefault()
-        let el = $(e.target),
+        let album = this.collectValues()
 
-            album = this.collectValues(),
-            songs = this.collectSongs()
-
-        if ( !album || !songs )
+        if ( !album ) {
+            this.scrollTop()
             return
+        }
 
-        album.songs = songs
+        album.genres = this.collectGenres()
+        console.log( album )
+        return
+
+        // let songs = this.collectSongs()
+        //
+        // if ( !album || !songs )
+        //     return
+        //
+        // album.songs = songs
         AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
     },
 
     addSong: function( e ) {
         e.preventDefault()
-        let html = Templates.songItem()
+        let html = AlbumFormTemplates.songItem()
 
-        $('#add-album-playlist-form').append( html )
+        $('#add-new-song').append( html )
     },
 
     setCoverImage: function( img ) {
@@ -107,14 +134,22 @@ const AlbumForm = {
             this.setCoverImage( img )
     },
 
+    setGenres: function() {
+        AlbumAPIService.getGenres().then(genres => {
+            let html = AlbumFormTemplates.genres( genres )
+            $('#album-genres div').html( html )
+        })
+    },
+
     bindEvents: function() {
-        $('#save-album').on('click', $.proxy( this.saveAlbum, this ))
+        $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
         $('#add-another-song').on('click', this.addSong)
         $('#image-url').on('blur', $.proxy( this.changeCoverImage, this ))
     },
 
     init: function() {
         this.bindEvents()
+        this.setGenres()
     }
 }
 

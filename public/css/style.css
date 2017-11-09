@@ -454,8 +454,6 @@ img {
   margin-right: 100px;
   /*Add New Album*/
   /*Add Album Playlist*/ }
-  #add-new-album #add-new-album-details input.error-value {
-    border: 1px solid red; }
   #add-new-album #add-new-album-details #add-new-album-title {
     border-bottom: 4px double #dadada; }
     #add-new-album #add-new-album-details #add-new-album-title h1 {
@@ -482,16 +480,18 @@ img {
       display: inline-block;
       margin-left: 6px;
       border: 3px double black; }
-    #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[name="album-artist-name"] {
+    #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input.error {
+      border-color: red; }
+    #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[name="album-artist"] {
       margin-left: 53px; }
-    #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[name="album-image-url"] {
+    #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[name="album-image"] {
       margin-left: 20px; }
     #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[name="album-year"] {
       margin-left: 59px; }
-    #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[type="checkbox"]:first-of-type {
-      margin-left: 45px; }
     #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[type="checkbox"] {
       margin-left: 3px; }
+      #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group input[type="checkbox"]:first-of-type {
+        margin-left: 45px; }
     #add-new-album #add-new-album-details .col-md-12 #add-new-album-form .col-md-8 .form-group textarea[name="album-description"] {
       margin-left: 0;
       width: 85%;
@@ -500,39 +500,6 @@ img {
       text-align: justify;
       resize: none;
       float: right; }
-  #add-new-album #add-new-album-details .col-md-12 #reset-album {
-    background-color: black;
-    display: block;
-    cursor: pointer;
-    color: white;
-    font-size: 20px;
-    padding: 12px 24px;
-    text-decoration: none;
-    border: none;
-    width: 250px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    margin-right: 20px;
-    margin-top: 20px; }
-    #add-new-album #add-new-album-details .col-md-12 #reset-album:hover {
-      background-color: #0F70A1;
-      color: white; }
-  #add-new-album #add-new-album-details .col-md-12 #save-album {
-    background-color: black;
-    display: block;
-    cursor: pointer;
-    color: white;
-    font-size: 20px;
-    padding: 12px 24px;
-    text-decoration: none;
-    border: none;
-    width: 250px;
-    box-sizing: border-box;
-    margin-bottom: 10px;
-    margin-right: 20px; }
-    #add-new-album #add-new-album-details .col-md-12 #save-album:hover {
-      background-color: #0F70A1;
-      color: white; }
   #add-new-album #add-new-album-details #add-album-playlist-title {
     border-bottom: 4px double #dadada; }
     #add-new-album #add-new-album-details #add-album-playlist-title h1 {
@@ -593,6 +560,22 @@ img {
       border: none;
       box-sizing: border-box;
       padding: 12px; }
+    #add-new-album #add-new-album-details .col-md-12 #add-album-playlist-form #reset-album {
+      background-color: black;
+      display: block;
+      cursor: pointer;
+      color: white;
+      font-size: 20px;
+      padding: 12px 24px;
+      text-decoration: none;
+      border: none;
+      width: 250px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      margin-right: 10px; }
+      #add-new-album #add-new-album-details .col-md-12 #add-album-playlist-form #reset-album:hover {
+        background-color: #0F70A1;
+        color: white; }
     #add-new-album #add-new-album-details .col-md-12 #add-album-playlist-form #finish-and-save-button {
       background-color: black;
       display: block;
