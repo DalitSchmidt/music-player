@@ -63,16 +63,17 @@ const AlbumForm = {
     },
 
     collectSongs: function() {
-        let songs_container = $('#add-album-playlist-form .col-md-12 .song')
-        let songs_inputs, i, songs = []
+        let songs = [], song
 
-        for ( i = 0; i < songs_container.length; i++ ) {
-            songs_inputs = $( songs_container[ i ] ).find('input')
+        $.each( $('.song-item'), ( index, item ) => {
+            song = $(item)
+
             songs.push({
-                name: $(songs_inputs[0]).val(),
-                url: $(songs_inputs[1]).val()
+                name: song.find('input[name=song-name]').val(),
+                youtube: song.find('input[name=youtube-url]').val(),
+                duration: song.find('input[name=song-time]').val()
             })
-        }
+        })
 
         return songs
     },
@@ -111,10 +112,23 @@ const AlbumForm = {
     },
 
     addSong: function( e ) {
-        e.preventDefault()
+        if ( e )
+            e.preventDefault()
         let html = AlbumFormTemplates.songItem()
 
-        $('#add-new-song').append( html )
+        $('#add-album-playlist-form').append( html )
+    },
+
+    removeSongItem: function( e ) {
+        e.preventDefault()
+        let item = $(this).closest('.song-item')
+        item.fadeOut('slow', () => item.remove())
+    },
+    
+    addSongsInputs: function ( items = 5 ) {
+        for ( let i = 1; i <= items; i++ ) {
+            this.addSong()
+        }
     },
 
     setCoverImage: function( img ) {
@@ -145,9 +159,11 @@ const AlbumForm = {
         $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
         $('#add-another-song').on('click', this.addSong)
         $('#image-url').on('blur', $.proxy( this.changeCoverImage, this ))
+        $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
     },
 
     init: function() {
+        this.addSongsInputs()
         this.bindEvents()
         this.setGenres()
     }

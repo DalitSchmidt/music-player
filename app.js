@@ -18,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api/albums', require('./routes/albums'))
 app.use('/api/genres', require('./routes/genres'))
+app.use('/api/youtube', require('./routes/youtube'))
 
 app.use(function(req, res, next) {
     const err = new Error('Not Found')

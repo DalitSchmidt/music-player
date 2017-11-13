@@ -19,27 +19,24 @@ const AlbumFormTemplates = {
 
     songItem: function () {
         let html = `
-        <div class="col-md-12">
-            <div class="form-group song">
-                <label class="song-name-label control-label">Song Name:</label>
-                <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
-            </div>
-
-            <div class="form-group song">
-                <label class="youtube-url-label control-label">YouTube URL:</label>
-                <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
-            </div>
-
-            <div class="form-group song">
-                <label class="song-time-label control-label">Song Time:</label>
-                <input type="text" class="form-control" name="song-time" placeholder="01:23" title="Song Time" required>
+            <div class="col-md-12 song-item">
+                <div class="form-group song">
+                    <label class="song-name-label control-label">Song Name:</label>
+                    <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
+                </div>
+                <div class="form-group song">
+                    <label class="youtube-url-label control-label">YouTube URL:</label>
+                    <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
+                </div>
+                <div class="form-group song">
+                    <label class="song-time-label control-label">Song Time:</label>
+                    <input type="text" class="form-control" name="song-time" placeholder="01:23" title="Song Time" required>
+                </div>
                 <a href="#" class="remove-icon" data-album-id="">
                     <i class="fa fa-remove"></i>
                 </a>
             </div>
-        </div>
-        <div class="row"></div>
-    `
+        `
 
         return html
     }

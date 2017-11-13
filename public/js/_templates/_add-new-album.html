@@ -32,8 +32,36 @@
 
                     <div id="album-genres" class="form-group">
                         <label class="control-label">Genres:</label>
-                        <div>
-                        </div>
+                        <!--<div></div>-->
+                    </div>
+
+                    <div id="tags" class="tagSelector">
+                            <span class="tag">
+                                jQuery <a>×</a>
+                                <input name="tags" type="hidden" value="42">
+                            </span>
+                        <input type="text">
+
+                        <script>
+                            $(function() {
+
+                                var tags = [
+                                    { id: 42, toString: function() { return 'jQuery'; } },
+                                    { id: 31, toString: function() { return 'Python'; } },
+                                    { id: 25, toString: function() { return 'HTML'; } },
+                                    { id: 83, toString: function() { return 'PHP'; } },
+                                    { id: 40, toString: function() { return 'ASP.NET MVC'; } },
+                                    { id: 25, toString: function() { return 'CSS'; } },
+                                    { id: 66, toString: function() { return 'JavaScript'; } },
+                                    { id: 87, toString: function() { return 'C#'; } },
+                                    { id: 28, toString: function() { return 'D'; } },
+                                    { id: 91, toString: function() { return 'Java'; } },
+                                    { id: 10, toString: function() { return 'Ruby'; } },
+                                ];
+                                $('#tags').tagSelector(tags, 'tags');
+
+                            });
+                        </script>
                     </div>
 
                     <div class="form-group">
@@ -50,115 +78,8 @@
 
         <div class="col-md-12">
             <div id="add-album-playlist-form">
-                <div class="col-md-12">
-                    <div class="form-group song">
-                        <label class="song-name-label control-label">Song Name:</label>
-                        <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="youtube-url-label control-label">YouTube URL:</label>
-                        <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="song-time-label control-label">Song Time:</label>
-                        <input type="text" class="form-control" name="song-time" placeholder="01:23" title="Song Time" required>
-                        <a href="#" class="remove-icon" data-album-id="">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="row"></div>
-
-                <div class="col-md-12">
-                    <div class="form-group song">
-                        <label class="song-name-label control-label">Song Name:</label>
-                        <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="youtube-url-label control-label">YouTube URL:</label>
-                        <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="song-time-label control-label">Song Time:</label>
-                        <input type="text" class="form-control" name="song-time" placeholder="01:23" title="Song Time" required>
-                        <a href="#" class="remove-icon" data-album-id="">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="row"></div>
-
-                <div class="col-md-12">
-                    <div class="form-group song">
-                        <label class="song-name-label control-label">Song Name:</label>
-                        <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="youtube-url-label control-label">YouTube URL:</label>
-                        <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="song-time-label control-label">Song Time:</label>
-                        <input type="text" class="form-control" name="song-time" placeholder="01:23" title="Song Time" required>
-                        <a href="#" class="remove-icon" data-album-id="">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="row"></div>
-
-                <div class="col-md-12">
-                    <div class="form-group song">
-                        <label class="song-name-label control-label">Song Name:</label>
-                        <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="youtube-url-label control-label">YouTube URL:</label>
-                        <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="song-time-label control-label">Song Time:</label>
-                        <input type="text" class="form-control" name="song-time" placeholder="01:23" title="Song Time" required>
-                        <a href="#" class="remove-icon" data-album-id="">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="row"></div>
-
-                <div class="col-md-12">
-                    <div class="form-group song">
-                        <label class="song-name-label control-label">Song Name:</label>
-                        <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="youtube-url-label control-label">YouTube URL:</label>
-                        <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
-                    </div>
-
-                    <div class="form-group song">
-                        <label class="song-time-label control-label">Song Time:</label>
-                        <input type="text" class="form-control" name="song-time" placeholder="01:23" title="Song Time" required>
-                        <a href="#" class="remove-icon" data-album-id="">
-                            <i class="fa fa-remove"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="row"></div>
-
-                <div id="add-new-song"></div>
-
-                <div class="row"></div>
-                <div class="row"></div>
+            </div>
+            <div class="controls">
                 <button id="add-another-song" class="pull-left">
                     <i class="fa fa-plus-square" aria-hidden="true"></i> Add another song
                 </button>
@@ -167,7 +88,6 @@
                     <button type="reset" id="reset-album" class="pull-left">RESET ALBUM</button>
                     <button id="finish-and-save-button">FINISH & SAVE</button>
                 </div>
-                <div class="row"></div>
             </div>
         </div>
     </div>
