@@ -73,12 +73,13 @@
 
                     textarea[name="album-description"] {
                         margin-left: 0;
-                        width: 85%;
+                        //width: 85%;
                         margin-top: 0;
                         height: 250px;
                         text-align: justify;
                         resize: none;
                         float: right;
+                        padding: 3px 6px;
                     }
                 }
             }
@@ -99,40 +100,57 @@
         #add-album-playlist-form {
             margin: 20px;
 
+            .song-item {
+                margin-bottom: 40px;
+            }
+
             .form-control {
-                width: 85%;
-                display: inline-block;
-                margin-left: 6px;
+                //width: 85%;
+                //display: inline-block;
+                //margin-left: 6px;
                 border: 3px double black;
             }
 
+            .song-name-label {
+                position: absolute;
+                top: 8px;
+                left: 385px;
+            }
+
             input[name="song-name"] {
-                width: 210px;
+                //width: 210px;
+                //margin-left: auto;
+                position: absolute;
+                top: 0;
+                left: 470px;
                 margin-left: auto;
+                width: 275px;
             }
 
             .youtube-url-label {
                 position: absolute;
                 top: 8px;
-                left: 310px;
+                //left: 310px;
             }
 
             input[name="youtube-url"] {
-                width: 355px;
+                //width: 355px;
                 position: absolute;
                 top: 0;
-                left: 400px;
+                left: 100px;
                 margin-left: auto;
+                width: 275px;
+                /* margin-left: auto; */
             }
 
             .song-time-label {
                 position: absolute;
                 top: 8px;
-                left: 760px;
+                left: 755px;
             }
 
             input[name="song-time"] {
-                width: 73px;
+                width: 70px;
                 position: absolute;
                 top: 0;
                 left: 835px;
@@ -169,11 +187,13 @@
             padding: 12px;
             margin-top: 20px;
             margin-bottom: 20px;
+            margin-left: 8px;
         }
 
         .pull-right {
             margin-top: 20px;
             margin-bottom: 20px;
+            margin-right: 8px;
 
             #reset-album {
                 background-color: black;

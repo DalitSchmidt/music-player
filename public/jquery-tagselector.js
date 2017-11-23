@@ -1,12 +1,4 @@
-/*!
- * Tag Selector plugin for jQuery: Facilitates selecting multiple tags by extending jQuery UI Autocomplete.
- * You may use Tag Selector under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.
- * https://petprojects.googlecode.com/svn/trunk/MIT-LICENSE.txt
- * https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt
- */
-
 $(function() {
-
     var tags = [
         { id: 42, toString: function() { return 'jQuery'; } },
         { id: 31, toString: function() { return 'Python'; } },
@@ -19,13 +11,12 @@ $(function() {
         { id: 28, toString: function() { return 'D'; } },
         { id: 91, toString: function() { return 'Java'; } },
         { id: 10, toString: function() { return 'Ruby'; } },
-    ];
-    $('#tags').tagSelector(tags, 'tags');
+    ]
 
-});
+    $('#tags').tagSelector(tags, 'tags')
+})
 
-(function($) {
-
+$(function($) {
     $.fn.tagSelector = function(source, name) {
         return this.each(function() {
             var selector = $(this),
@@ -45,6 +36,7 @@ $(function() {
                         //<span class=tag>@jcarrascal <a>×</a><input type=hidden name=tag value=1/></span>
                         var tag = $('<span class="tag"/>')
                             .text(ui.item.toString() + ' ')
+                            .attr('data-genre-id', ui.item.id)
                             .append('<a>×</a>')
                             .append($('<input type="hidden"/>').attr('name', name).val(ui.item.id))
                             .insertBefore(input);
@@ -67,4 +59,4 @@ $(function() {
         });
     };
 
-})(jQuery);
+})//(jQuery);

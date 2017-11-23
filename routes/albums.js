@@ -64,26 +64,33 @@ router.get('/:album_id', function (req, res) {
 router.post('/', function (req, res) {
     let album = req.body
 
-    AlbumModel.create(album).then(result => {
+    AlbumModel.create( album ).then(result => {
         let album_id = result.album_id
         let genres = album.genres
+        let songs = album.songs
+
+        // if ( !Array.isArray( songs ) || !Array.isArray( songs ) )
+        //     throw error()
+
         let query = []
 
         genres.forEach(id => query.push(`(${album_id}, ${id})`))
         models.sequelize.query('INSERT INTO albums_to_genres (album_id, genre_id) VALUES ' + query.join(', '))
 
+        // Create the songs in the DB and link theme to the album
+
         res.status(201).json({album_id})
-    })
-        .catch(err => {
-            let errors = err.errors[0]
-            res.status(422).json({
-                error: 'Unable to create album',
-                reason: {
-                    message: errors.message,
-                    error: `${errors.path} '${errors.value}' already exists`
-                }
-            })
+    }).catch(err => {
+        let errors = err.errors[0]
+
+        res.status(422).json({
+            error: 'Unable to create album',
+            reason: {
+                message: errors.message,
+                error: `${errors.path} '${errors.value}' already exists`
+            }
         })
+    })
 })
 
 router.delete('/:album_id', (req, res) => {

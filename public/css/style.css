@@ -373,81 +373,79 @@ img {
 /*Album list (display of disks)*/
 #album-list {
   min-height: 400px;
-  top: 40px;
+  top: 50px;
   margin-left: 50px;
   margin-right: 50px; }
   #album-list .loading {
     background: url(../images/loader.gif) no-repeat center center; }
-  #album-list .row {
-    margin: 10px; }
-    #album-list .row .col-md-3 {
-      padding-right: 0;
-      padding-left: 0;
-      margin-bottom: 50px; }
-      #album-list .row .col-md-3 .record {
-        position: relative;
-        display: block;
-        opacity: 0.75; }
-        #album-list .row .col-md-3 .record:hover {
-          opacity: 1; }
-        #album-list .row .col-md-3 .record:before {
-          position: absolute;
-          content: ' ';
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background: #ffffff;
-          z-index: 1;
-          left: calc(50% - 25px);
-          top: calc(50% - 5px); }
-        #album-list .row .col-md-3 .record .text-center .album-list-name {
-          font-weight: bold; }
-        #album-list .row .col-md-3 .record img {
-          margin-top: 20px; }
-        #album-list .row .col-md-3 .record .play-icon {
-          position: absolute;
-          top: 145px;
-          opacity: 0;
-          font-size: 30px;
-          transition: all 0.3s ease-in-out;
-          -moz-transition: all 0.3s ease-in-out;
-          -webkit-transition: all 0.3s ease-in-out;
-          color: #000000;
-          text-align: center;
-          width: 100%;
-          z-index: 5;
-          left: 2px;
-          cursor: default; }
-          #album-list .row .col-md-3 .record .play-icon .fa-play {
-            cursor: pointer; }
-        #album-list .row .col-md-3 .record .remove-icon {
-          position: absolute;
-          border-radius: 50%;
-          padding: 0 5px;
-          top: 55px;
-          opacity: 0;
-          background: #dadada;
-          font-size: 15px;
-          -moz-transition: all 0.3s ease-in-out;
-          -webkit-transition: all 0.3s ease-in-out;
-          left: 115px;
-          color: #000000; }
-        #album-list .row .col-md-3 .record .edit-icon {
-          position: absolute;
-          border-radius: 50%;
-          padding: 0 5px;
-          top: 55px;
-          opacity: 0;
-          background: #dadada;
-          font-size: 15px;
-          -moz-transition: all 0.3s ease-in-out;
-          -webkit-transition: all 0.3s ease-in-out;
-          left: 145px;
-          color: #000000; }
-      #album-list .row .col-md-3 .record:hover .play-icon,
-      #album-list .row .col-md-3 .record:hover .remove-icon,
-      #album-list .row .col-md-3 .record:hover .edit-icon {
+  #album-list .col-md-3 {
+    padding-right: 0;
+    padding-left: 0;
+    margin-bottom: 50px; }
+    #album-list .col-md-3 .record {
+      position: relative;
+      display: block;
+      opacity: 0.75; }
+      #album-list .col-md-3 .record:hover {
         opacity: 1; }
+      #album-list .col-md-3 .record:before {
+        position: absolute;
+        content: ' ';
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #ffffff;
+        z-index: 1;
+        left: calc(50% - 25px);
+        top: calc(50% - 5px); }
+      #album-list .col-md-3 .record .text-center .album-list-name {
+        font-weight: bold; }
+      #album-list .col-md-3 .record img {
+        margin-top: 20px; }
+      #album-list .col-md-3 .record .play-icon {
+        position: absolute;
+        top: 145px;
+        opacity: 0;
+        font-size: 30px;
+        transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        color: #000000;
+        text-align: center;
+        width: 100%;
+        z-index: 5;
+        left: 2px;
+        cursor: default; }
+        #album-list .col-md-3 .record .play-icon .fa-play {
+          cursor: pointer; }
+      #album-list .col-md-3 .record .remove-icon {
+        position: absolute;
+        border-radius: 50%;
+        padding: 0 5px;
+        top: 55px;
+        opacity: 0;
+        background: #dadada;
+        font-size: 15px;
+        -moz-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        left: 115px;
+        color: #000000; }
+      #album-list .col-md-3 .record .edit-icon {
+        position: absolute;
+        border-radius: 50%;
+        padding: 0 5px;
+        top: 55px;
+        opacity: 0;
+        background: #dadada;
+        font-size: 15px;
+        -moz-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        left: 145px;
+        color: #000000; }
+    #album-list .col-md-3 .record:hover .play-icon,
+    #album-list .col-md-3 .record:hover .remove-icon,
+    #album-list .col-md-3 .record:hover .edit-icon {
+      opacity: 1; }
 
 #add-new-album #add-new-album-details {
   margin-left: 100px;
@@ -494,12 +492,12 @@ img {
         margin-left: 45px; }
     #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group textarea[name="album-description"] {
       margin-left: 0;
-      width: 85%;
       margin-top: 0;
       height: 250px;
       text-align: justify;
       resize: none;
-      float: right; }
+      float: right;
+      padding: 3px 6px; }
   #add-new-album #add-new-album-details #add-album-playlist-title {
     border-bottom: 4px double #dadada; }
     #add-new-album #add-new-album-details #add-album-playlist-title h1 {
@@ -509,30 +507,36 @@ img {
       font-weight: bold; }
   #add-new-album #add-new-album-details #add-album-playlist-form {
     margin: 20px; }
+    #add-new-album #add-new-album-details #add-album-playlist-form .song-item {
+      margin-bottom: 40px; }
     #add-new-album #add-new-album-details #add-album-playlist-form .form-control {
-      width: 85%;
-      display: inline-block;
-      margin-left: 6px;
       border: 3px double black; }
-    #add-new-album #add-new-album-details #add-album-playlist-form input[name="song-name"] {
-      width: 210px;
-      margin-left: auto; }
-    #add-new-album #add-new-album-details #add-album-playlist-form .youtube-url-label {
+    #add-new-album #add-new-album-details #add-album-playlist-form .song-name-label {
       position: absolute;
       top: 8px;
-      left: 310px; }
-    #add-new-album #add-new-album-details #add-album-playlist-form input[name="youtube-url"] {
-      width: 355px;
+      left: 385px; }
+    #add-new-album #add-new-album-details #add-album-playlist-form input[name="song-name"] {
       position: absolute;
       top: 0;
-      left: 400px;
-      margin-left: auto; }
+      left: 470px;
+      margin-left: auto;
+      width: 275px; }
+    #add-new-album #add-new-album-details #add-album-playlist-form .youtube-url-label {
+      position: absolute;
+      top: 8px; }
+    #add-new-album #add-new-album-details #add-album-playlist-form input[name="youtube-url"] {
+      position: absolute;
+      top: 0;
+      left: 100px;
+      margin-left: auto;
+      width: 275px;
+      /* margin-left: auto; */ }
     #add-new-album #add-new-album-details #add-album-playlist-form .song-time-label {
       position: absolute;
       top: 8px;
-      left: 760px; }
+      left: 755px; }
     #add-new-album #add-new-album-details #add-album-playlist-form input[name="song-time"] {
-      width: 73px;
+      width: 70px;
       position: absolute;
       top: 0;
       left: 835px;
@@ -561,10 +565,12 @@ img {
     box-sizing: border-box;
     padding: 12px;
     margin-top: 20px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    margin-left: 8px; }
   #add-new-album #add-new-album-details .pull-right {
     margin-top: 20px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    margin-right: 8px; }
     #add-new-album #add-new-album-details .pull-right #reset-album {
       background-color: black;
       display: block;

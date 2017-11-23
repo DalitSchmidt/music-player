@@ -40,6 +40,10 @@ const AlbumAPIService = {
 
     getGenres: function() {
         return $.getJSON('http://localhost:3000/api/genres')
+    },
+
+    searchYoutubeID: function( youtube_id ) {
+        return $.getJSON('http://localhost:3000/api/youtube/' + youtube_id)
     }
 }
 

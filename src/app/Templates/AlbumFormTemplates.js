@@ -21,12 +21,12 @@ const AlbumFormTemplates = {
         let html = `
             <div class="col-md-12 song-item">
                 <div class="form-group song">
-                    <label class="song-name-label control-label">Song Name:</label>
-                    <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
+                    <label class="youtube-url-label control-label">YouTube ID:</label>
+                    <input type="text" class="form-control" name="youtube-url" placeholder="JT6UCvR7kgU" title="YouTube ID" required>
                 </div>
                 <div class="form-group song">
-                    <label class="youtube-url-label control-label">YouTube URL:</label>
-                    <input type="text" class="form-control" name="youtube-url" placeholder="https://www.youtube.com/embed/JT6UCvR7kgU" title="YouTube URL" required>
+                    <label class="song-name-label control-label">Song Name:</label>
+                    <input type="text" class="form-control" name="song-name" placeholder="The Power of Equality" title="Song Name" required>
                 </div>
                 <div class="form-group song">
                     <label class="song-time-label control-label">Song Time:</label>

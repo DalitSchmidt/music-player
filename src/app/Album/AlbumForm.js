@@ -6,6 +6,27 @@ import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
+function debounce( func, wait, immediate ) {
+    let timeout
+
+    return function() {
+        let context = this, args = arguments
+
+        let later = function() {
+            timeout = null
+            if ( !immediate )
+                func.apply( context, args )
+        }
+
+        let callNow = immediate && !timeout
+        clearTimeout( timeout )
+        timeout = setTimeout( later, wait )
+
+        if ( callNow )
+            func.apply( context, args )
+    }
+}
+
 const AlbumForm = {
     collectValues: function() {
         let regexes = {
@@ -63,16 +84,17 @@ const AlbumForm = {
     },
 
     collectSongs: function() {
-        let songs = [], song
+        let songs = [], song, name, duration, id
 
         $.each( $('.song-item'), ( index, item ) => {
             song = $(item)
 
-            songs.push({
-                name: song.find('input[name=song-name]').val(),
-                youtube: song.find('input[name=youtube-url]').val(),
-                duration: song.find('input[name=song-time]').val()
-            })
+            name = song.find('input[name=song-name]').val()
+            duration = song.find('input[name=song-time]').val()
+            id = song.find('input[name=youtube-url]').val()
+
+            if ( name !== '' && duration !== '' && id !== '' )
+                songs.push({ name, id, duration })
         })
 
         return songs
@@ -155,11 +177,25 @@ const AlbumForm = {
         })
     },
 
+    searchYoutubeVideo: function( e ) {
+        let $input = $( e.target )
+
+        // debounce(function () {
+            let youtube_id = $input.val()
+
+            AlbumAPIService.searchYoutubeID( youtube_id ).then(video => {
+                $input.closest('.song-item').find('input[name=song-name]').val( video.title )
+                $input.closest('.song-item').find('input[name=song-time]').val( video.duration )
+            })
+        // }, 300)
+    },
+
     bindEvents: function() {
         $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
         $('#add-another-song').on('click', this.addSong)
         $('#image-url').on('blur', $.proxy( this.changeCoverImage, this ))
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
+        $('input[name=youtube-url]').on('keyup', this.searchYoutubeVideo.bind( this ))
     },
 
     init: function() {

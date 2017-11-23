@@ -4,23 +4,21 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const should = chai.should()
 const server = require('../app')
-const db = require('../models')
-chai.use(chaiHttp)
+chai.use( chaiHttp )
 
 describe('YouTube REST API', () => {
     describe('GET /youtube_id', () => {
-        it('Should GET youtube_id is valid', done => {
-            chai.request(server).get('/api/youtube_id').end((err, res) => {
+        it('Should find the movie and return title and duration', done => {
+            chai.request( server ).get('/api/youtube/dvgZkm1xWPE').end((err, res) => {
                 res.should.have.status(200)
-                res.body.youtube.should.be.a('7wtfhZwyrcc')
+                res.body.title.should.be.equals('Coldplay - Viva La Vida')
                 done()
             })
         })
 
-        it('Should GET youtube_id is not valid', done => {
-            chai.request(server).get('/api/youtube_id').end((err, res) => {
-                res.should.have.status(204)
-                res.body.youtube.should.be.a('W7HFTzCCRYW')
+        it('Should not found the movie and return title and duration', done => {
+            chai.request(server).get('/api/youtube/W7HFTzCCRYW').end((err, res) => {
+                res.should.have.status(404)
                 done()
             })
         })
