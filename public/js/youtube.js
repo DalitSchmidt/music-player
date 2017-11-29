@@ -21,7 +21,8 @@ function onYouTubeIframeAPIReady() {
             autohide: 0
         },
         events: {
-            'onReady': onPlayerReady
+            'onReady': onPlayerReady,
+            'onStateChange': $.proxy(Player.toggleControls, Player)
         },
     })
 }
