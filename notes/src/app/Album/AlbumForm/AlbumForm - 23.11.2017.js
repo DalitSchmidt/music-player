@@ -435,7 +435,7 @@ const AlbumForm = {
         $('input[name=youtube-url]').on('keyup', this.searchYoutubeVideo.bind( this ))
     },
 
-    // הפונקציה init מכילה את כל הפעולות שאנו מעוניינים שיבוצעו עם הפעלתו של האובייקט AlbumForm
+    // הפונקציה init שמקבלת את המשתנה getAlbum המכיל את הערך בוליאני false, מכילה את כל הפעולות שאנו מעוניינים שיבוצעו עם הפעלתו של האובייקט AlbumForm
     init: function( getAlbum = false ) {
         // הפעלה של הפונקציה addSongsInputs המאפשרת להוסיף 5 שורות ל- DOM עם השדות להוספת שירים
         this.addSongsInputs()
@@ -443,6 +443,7 @@ const AlbumForm = {
         this.bindEvents()
         // הפעלה של הפונקציה setGenres המאפשרת להציג ב- DOM את הז'אנרים המצויים במסד הנתונים
         // this.setGenres()
+        // הפעלה של הפונקציה genresBootstrap המאפשרת להציג את הרצועה של הז'אנרים הקשורים לאלבום
         // this.genresBootstrap()
     }
 }

@@ -368,7 +368,11 @@ img {
         cursor: pointer;
         padding-left: 5px; }
         #album #album-info-player #album-info-text #player-controls #player-playlist li.playing {
-          font-weight: bold; }
+          font-weight: bold;
+          list-style: none; }
+          #album #album-info-player #album-info-text #player-controls #player-playlist li.playing:before {
+            font-family: FontAwesome;
+            content: "\f04b"; }
 
 /*Album list (display of disks)*/
 #album-list {
@@ -376,7 +380,7 @@ img {
   top: 50px;
   margin-left: 50px;
   margin-right: 50px; }
-  #album-list .loading {
+  #album-list.loading {
     background: url(../images/loader.gif) no-repeat center center; }
   #album-list .col-md-3 {
     padding-right: 0;
@@ -385,7 +389,8 @@ img {
     #album-list .col-md-3 .record {
       position: relative;
       display: block;
-      opacity: 0.75; }
+      opacity: 0.75;
+      transition: opacity .5s; }
       #album-list .col-md-3 .record:hover {
         opacity: 1; }
       #album-list .col-md-3 .record:before {

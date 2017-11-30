@@ -1,4 +1,6 @@
+// האובייקט Utils מכיל פונקציות עזר שישמשו אותנו במידת הצורך
 const Utils = {
+    // הפונקציה debounce מאפשרת לנו לבצע השהייה של פעולה מסוימת (לדוגמה, השהיית של ה- event keyup)
     debounce: function (func, wait, immediate) {
         let timeout
 
@@ -21,4 +23,5 @@ const Utils = {
     }
 }
 
+// ייצוא היכולות של האובייקט Utils החוצה
 export default Utils

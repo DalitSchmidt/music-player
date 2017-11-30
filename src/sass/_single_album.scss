@@ -338,6 +338,12 @@
 
                         &.playing {
                             font-weight: bold;
+                            list-style: none;
+
+                            &:before {
+                                font-family: FontAwesome;
+                                content: "\f04b";
+                            }
                         }
                     }
                 }
