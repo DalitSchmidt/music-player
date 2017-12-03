@@ -1,4 +1,5 @@
 // האובייקט Utils מכיל פונקציות עזר שישמשו אותנו במידת הצורך
+// הגדרת האוביביקט Utils כקבוע
 const Utils = {
     // הפונקציה debounce מאפשרת לנו לבצע השהייה של פעולה מסוימת (לדוגמה, השהיית של ה- event keyup)
     debounce: function (func, wait, immediate) {

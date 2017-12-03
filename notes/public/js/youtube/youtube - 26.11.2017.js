@@ -45,7 +45,7 @@ function onYouTubeIframeAPIReady() {
         events: {
             // הפונקציה onPlayerReady מתבצעת כאשר האירוע 'onReady' מתרחש
             'onReady': onPlayerReady,
-            //
+            // כאשר ה- event onStateChange מתרחש, אנו מפעילים את הפונקציה toggleControls המצויה תחת האובייקט Player ושבאמצעותה מתאפשר להחליף בין המקשים בנגן, ומאחר ואנו רוצים לשמור על ההקשר של האובייקט Player נשתמש ב- proxy
             'onStateChange': $.proxy(Player.toggleControls, Player)
         },
     })

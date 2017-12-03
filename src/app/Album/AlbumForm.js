@@ -9,25 +9,21 @@ import AlbumAPIService from './../APIServices/AlbumAPIService'
 import Player from './../Player'
 import Templates from '../Templates/Templates'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
+import Validator from '../Validator'
 
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
 const AlbumForm = {
     collectValues: function() {
-        let regexes = {
-            'album-name': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-            'album-artist': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-            'album-image': new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$"),
-            'album-year': new RegExp("^[0-9]{4}$"),
-            'album-description': new RegExp("^[A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
-        }
-
         let errors = false
-        let inputs = $('#add-new-album-form input, #add-new-album-form textarea')
+        let inputs = $('#add-new-album-form input[required], #add-new-album-form textarea[required]')
         let album = {}
         let i, input, input_name, input_value
 
+
         inputs.removeClass('error')
+        $('span.error').remove()
+
 
         for ( i = 0; i < inputs.length; i++ ) {
             // Collect the element
@@ -35,20 +31,12 @@ const AlbumForm = {
 
             // Convert the element from native JS element to a jQuery element
             input = $( input )
-            if ( input.attr('type') === 'checkbox' )
-                continue
 
             input_name = input.attr('name')
             input_value = input.val()
 
-            // Get the matched regex from the regexes object
-            // Test the value of the input
-            if ( !regexes[ input_name ].test( input_value ) ) {
-                // If there is an error with the regex, set errors to be true, mean we have errors in the validation
+            if( !Validator.validateField( input) )
                 errors = true
-                // Add class of error
-                input.addClass('error')
-            }
 
             // Add the property of the input name inside the album object
             album[ input_name ] = input_value
@@ -175,136 +163,16 @@ const AlbumForm = {
         // }, 300)
     },
 
-    // tagSelectorRef: function ( source, name ) {
-    //     return this.each(function() {
-    //         var selector = $(this),
-    //             input = $('input[type=text]', this);
-    //         selector.click(function() { input.focus(); })
-    //             .delegate('.tag a', 'click', function() {
-    //                 $(this).parent().remove();
-    //             });
-    //         input.keydown(function(e) {
-    //             if (e.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active)
-    //                 e.preventDefault();
-    //         })
-    //             .autocomplete({
-    //                 minLength: 0,
-    //                 source: source,
-    //                 select: function(event, ui) {
-    //                     //<span class=tag>@jcarrascal <a>×</a><input type=hidden name=tag value=1/></span>
-    //                     var tag = $('<span class="tag"/>')
-    //                         .text(ui.item.toString() + ' ')
-    //                         .attr('data-genre-id', ui.item.id)
-    //                         .append('<a>×</a>')
-    //                         .append($('<input type="hidden"/>').attr('name', name).val(ui.item.id))
-    //                         .insertBefore(input);
-    //                     return true;
-    //                 }
-    //             });
-    //         input.data('autocomplete')._renderItem = function(ul, item) {
-    //             return $('<li/>')
-    //                 .data('item.autocomplete', item)
-    //                 .append($('<a/>').text(item.toString()))
-    //                 .appendTo(ul);
-    //         };
-    //         input.data('autocomplete')._resizeMenu = function(ul, item) {
-    //             var ul = this.menu.element;
-    //             ul.outerWidth(Math.max(
-    //                 ul.width('').outerWidth(),
-    //                 selector.outerWidth()
-    //             ));
-    //         };
-    //     });
-    //
-    //     var tags = [
-    //         { id: 42, toString: function() { return 'jQuery'; } },
-    //         { id: 31, toString: function() { return 'Python'; } },
-    //         { id: 25, toString: function() { return 'HTML'; } },
-    //         { id: 83, toString: function() { return 'PHP'; } },
-    //         { id: 40, toString: function() { return 'ASP.NET MVC'; } },
-    //         { id: 25, toString: function() { return 'CSS'; } },
-    //         { id: 66, toString: function() { return 'JavaScript'; } },
-    //         { id: 87, toString: function() { return 'C#'; } },
-    //         { id: 28, toString: function() { return 'D'; } },
-    //         { id: 91, toString: function() { return 'Java'; } },
-    //         { id: 10, toString: function() { return 'Ruby'; } },
-    //
-    //         $('#tags').tagSelector(tags, 'tags')
-    //     ]
-    // },
-    //
-    // genresBootstrap: function () {
-    //     var source = [
-    //         { id: 42, toString: function() { return 'jQuery'; } },
-    //         { id: 31, toString: function() { return 'Python'; } },
-    //         { id: 25, toString: function() { return 'HTML'; } },
-    //         { id: 83, toString: function() { return 'PHP'; } },
-    //         { id: 40, toString: function() { return 'ASP.NET MVC'; } },
-    //         { id: 25, toString: function() { return 'CSS'; } },
-    //         { id: 66, toString: function() { return 'JavaScript'; } },
-    //         { id: 87, toString: function() { return 'C#'; } },
-    //         { id: 28, toString: function() { return 'D'; } },
-    //         { id: 91, toString: function() { return 'Java'; } },
-    //         { id: 10, toString: function() { return 'Ruby'; } },
-    //     ]
-    //
-    //     var name = 'tags'
-    //
-    //     var selector = $('#album-genres'),
-    //         input = $('input[name=album-genres]');
-    //
-    //     selector.click(function() { input.focus(); })
-    //         .delegate('.tag a', 'click', function() {
-    //             $(this).parent().remove();
-    //         });
-    //
-    //     input.autocomplete({
-    //         source: [
-    //             { id: 42, toString: function() { return 'jQuery'; } },
-    //             { id: 31, toString: function() { return 'Python'; } },
-    //             { id: 25, toString: function() { return 'HTML'; } },
-    //             { id: 83, toString: function() { return 'PHP'; } },
-    //             { id: 40, toString: function() { return 'ASP.NET MVC'; } },
-    //             { id: 25, toString: function() { return 'CSS'; } },
-    //             { id: 66, toString: function() { return 'JavaScript'; } },
-    //             { id: 87, toString: function() { return 'C#'; } },
-    //             { id: 28, toString: function() { return 'D'; } },
-    //             { id: 91, toString: function() { return 'Java'; } },
-    //             { id: 10, toString: function() { return 'Ruby'; } },
-    //         ]
-    //     })
-    //     // input.keydown(function(e) {
-    //     //     if (e.keyCode === $.ui.keyCode.TAB && $(this).data('autocomplete').menu.active)
-    //     //         e.preventDefault();
-    //     // })
-    //     //     .autocomplete({
-    //     //         minLength: 0,
-    //     //         source: source,
-    //     //         select: function(event, ui) {
-    //     //             //<span class=tag>@jcarrascal <a>×</a><input type=hidden name=tag value=1/></span>
-    //     //             var tag = $('<span class="tag"/>')
-    //     //                 .text(ui.item.toString() + ' ')
-    //     //                 .attr('data-genre-id', ui.item.id)
-    //     //                 .append('<a>×</a>')
-    //     //                 .append($('<input type="hidden"/>').attr('name', name).val(ui.item.id))
-    //     //                 .insertBefore(input);
-    //     //             return true;
-    //     //         }
-    //     //     });
-    //     // input._renderItem = function(ul, item) {
-    //     //     return $('<li/>')
-    //     //         .data('item.autocomplete', item)
-    //     //         .append($('<a/>').text(item.toString()))
-    //     //         .appendTo(ul);
-    //     // };
-    //     // input._resizeMenu = function(ul, item) {
-    //     //     var ul = this.menu.element;
-    //     //     ul.outerWidth(Math.max(
-    //     //         ul.width('').outerWidth(),
-    //     //         selector.outerWidth()
-    //     //     ));
-    //     // };
-    // },
+    validateField: function ( e ) {
+        let input = $(e.target)
+        console.log(input)
+        if( Validator.validateField( input ) ){
+            console.log('true')
+            input.removeClass('error')
+            input.closest('.error').remove()
+        }
+
+    },
 
     bindEvents: function() {
         $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
@@ -312,6 +180,7 @@ const AlbumForm = {
         $('#image-url').on('blur', $.proxy( this.changeCoverImage, this ))
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
         $('input[name=youtube-url]').on('keyup', this.searchYoutubeVideo.bind( this ))
+        $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
     },
 
     init: function( getAlbum = false ) {
