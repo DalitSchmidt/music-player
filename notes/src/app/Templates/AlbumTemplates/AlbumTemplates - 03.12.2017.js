@@ -1,8 +1,5 @@
-/**
- * Created by Omerico on 29-Oct-17.
- */
-class Templates {
-    static album( album ) {
+const AlbumTemplates = {
+    album: function( album ) {
         let html =
             `
             <div class="col-md-3">
@@ -26,28 +23,6 @@ class Templates {
 
         return html
     }
-
-    static searchResults( results ) {
-        let html = '<ul>'
-
-        results.forEach((result, index) => {
-            html += `<li data-album-id="${result.id}">${result.name}</li>`
-        })
-
-        html += '</ul>'
-
-        return html
-    }
-
-    static songItem() {
-        let html = `
-        <div class="form-group song">
-            <input type="text" class="form-control" value="Song" placeholder="Song name">
-            <input type="text" class="form-control" value="http://lll.mp3" placeholder="Song URL">
-        </div>`
-
-        return html
-    }
 }
 
-export default Templates
+export default AlbumTemplates

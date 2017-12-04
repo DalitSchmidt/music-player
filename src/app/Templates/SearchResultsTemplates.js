@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
-const SearchResultsTemplate = {
-    result: function (album) {
+const SearchResultsTemplates = {
+    result: function ( album ) {
         return `
             <div class="col-md-12">
                   <div class="row">
@@ -30,26 +30,26 @@ const SearchResultsTemplate = {
         `
     },
 
-    results: function (albums) {
+    results: function ( albums ) {
         let html = ''
 
-        $.each(albums, (index, album) => html += this.result(album))
+        $.each(albums, ( index, album ) => html += this.result( album ))
 
         return html
     },
 
-    title: function (term, count) {
+    title: function ( term, count ) {
         return `<h1 class="text-center">Found ${count} results for "${term}"</h1>`
     },
 
-    emptyResults: function (term) {
+    emptyResults: function ( term ) {
         return `<h1 class="text-center">No results for term "${term}"</h1>`
     },
 
-    suggestions: function (suggestions) {
+    suggestions: function ( suggestions ) {
         let html = '<ul>'
 
-        $.each(suggestions, (index, album) => {
+        $.each(suggestions, ( index, album ) => {
             html += `<li><a href="#single-album/${album.album_id}">${album.album_name}</a></li>`
         })
 
@@ -65,4 +65,4 @@ const SearchResultsTemplate = {
     }
 }
 
-export default SearchResultsTemplate
+export default SearchResultsTemplates

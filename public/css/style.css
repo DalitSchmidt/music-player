@@ -30,7 +30,8 @@ img {
     display: block;
     background: #0F70A1;
     height: 80px;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    /*Search window*/ }
     #container-full .row .col-md-12 header .pull-left a {
       color: #ffffff;
       text-decoration: none;
@@ -42,57 +43,58 @@ img {
         cursor: pointer;
         margin-top: 30px;
         margin-left: 20px; }
-    #container-full .row .col-md-12 header .pull-right {
-      /*Search window*/ }
-      #container-full .row .col-md-12 header .pull-right #search-area input[type=search] {
-        width: 200px;
-        padding: 5px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: 3px double;
-        background-color: #ffffff;
-        margin-top: 22px;
-        resize: none;
-        box-sizing: border-box;
-        margin-right: 10px; }
-      #container-full .row .col-md-12 header .pull-right #search-area #search {
-        color: #ffffff;
-        font-size: 20px;
-        cursor: pointer;
-        margin-right: 20px;
-        background: transparent;
-        border: none; }
-        #container-full .row .col-md-12 header .pull-right #search-area #search .fa-search {
-          right: 20px;
-          top: 30px;
-          position: absolute; }
-      #container-full .row .col-md-12 header .pull-right #results-list {
-        background: white;
-        width: 190px;
-        margin-left: 5px; }
-        #container-full .row .col-md-12 header .pull-right #results-list ul {
-          padding: 0; }
-          #container-full .row .col-md-12 header .pull-right #results-list ul li {
-            padding: 0 5px;
-            line-height: 30px;
-            text-align: justify;
-            border-bottom: 4px double #dadada;
-            list-style-type: none;
-            font-weight: bold;
-            width: 190px; }
-            #container-full .row .col-md-12 header .pull-right #results-list ul li a {
-              text-decoration: none;
-              color: black; }
+    #container-full .row .col-md-12 header #search-area input[type=search] {
+      width: 200px;
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 3px double;
+      background-color: #ffffff;
+      margin-top: 22px;
+      resize: none;
+      box-sizing: border-box;
+      margin-right: 10px; }
+    #container-full .row .col-md-12 header #search-area #search {
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      margin-right: 20px;
+      background: transparent;
+      border: none; }
+      #container-full .row .col-md-12 header #search-area #search .fa-search {
+        right: 20px;
+        top: 30px;
+        position: absolute; }
+    #container-full .row .col-md-12 header #results-list {
+      background: white;
+      width: 190px;
+      margin-left: 5px; }
+      #container-full .row .col-md-12 header #results-list ul {
+        padding: 0; }
+        #container-full .row .col-md-12 header #results-list ul li {
+          padding: 0 5px;
+          line-height: 30px;
+          text-align: justify;
+          border-bottom: 4px double #dadada;
+          list-style-type: none;
+          font-weight: bold;
+          width: 190px; }
+          #container-full .row .col-md-12 header #results-list ul li a {
+            text-decoration: none;
+            color: black; }
 
 #container-full #main-container {
   padding: 35px 0;
   box-sizing: border-box;
   min-height: 400px; }
 
-/*Album information & player*/
-#album button[disabled] {
-  opacity: .5; }
+table {
+  font-size: 1em; }
 
+.ui-draggable, .ui-droppable {
+  background-position: top; }
+
+/*Album information & player*/
 #album #aside-left {
   width: 250px;
   height: 400px;
@@ -221,7 +223,7 @@ img {
       margin-top: 10px;
       margin-left: 20px;
       background: #dadada;
-      width: 300px;
+      width: 400px;
       height: 35px; }
       #album #album-info-player #album-info-text #player-controls #controls .step-backward-icon {
         position: absolute;
@@ -257,7 +259,7 @@ img {
         margin-left: 30px;
         /* margin-top: 4px; */
         cursor: pointer; }
-      #album #album-info-player #album-info-text #player-controls #controls .pause-icon {
+      #album #album-info-player #album-info-text #player-controls #controls .stop-icon {
         position: absolute;
         /* top: 295px; */
         /* opacity: 0; */
@@ -274,7 +276,7 @@ img {
         margin-left: 60px;
         /* margin-top: 4px; */
         cursor: pointer; }
-      #album #album-info-player #album-info-text #player-controls #controls .stop-icon {
+      #album #album-info-player #album-info-text #player-controls #controls .step-forward-icon {
         position: absolute;
         /* top: 295px; */
         /* opacity: 0; */
@@ -291,11 +293,11 @@ img {
         margin-left: 90px;
         /* margin-top: 4px; */
         cursor: pointer; }
-      #album #album-info-player #album-info-text #player-controls #controls .step-forward-icon {
+      #album #album-info-player #album-info-text #player-controls #controls time {
         position: absolute;
-        /* top: 295px; */
+        top: 305px;
         /* opacity: 0; */
-        font-size: 25px;
+        font-size: 16px;
         /* transition: all 0.3s ease-in-out; */
         -moz-transition: all 0.3s ease-in-out;
         /* -webkit-transition: all 0.3s ease-in-out; */
@@ -305,9 +307,9 @@ img {
         /* z-index: 5; */
         /* left: 5px; */
         /* cursor: default; */
-        margin-left: 120px;
+        margin-left: 170px;
         /* margin-top: 4px; */
-        cursor: pointer; }
+        /* cursor: pointer; */ }
       #album #album-info-player #album-info-text #player-controls #controls .volume-off-icon {
         position: absolute;
         /* top: 295px; */
@@ -483,6 +485,8 @@ img {
       display: inline-block;
       margin-left: 6px;
       border: 3px double black; }
+    #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group .error-message {
+      color: red; }
     #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input.error {
       border-color: red; }
     #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[name="album-artist"] {

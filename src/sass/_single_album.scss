@@ -1,9 +1,5 @@
 /*Album information & player*/
 #album {
-    button[disabled] {
-        opacity: .5;
-    }
-
     #aside-left {
         width: 250px;
         height: 400px;
@@ -170,7 +166,7 @@
                     margin-top: 10px;
                     margin-left: 20px;
                     background: #dadada;
-                    width: 300px;
+                    width: 400px;
                     height: 35px;
 
                     .step-backward-icon {
@@ -211,7 +207,7 @@
                         cursor: pointer;
                     }
 
-                    .pause-icon {
+                    .stop-icon {
                         position: absolute;
                         /* top: 295px; */
                         /* opacity: 0; */
@@ -230,7 +226,7 @@
                         cursor: pointer;
                     }
 
-                    .stop-icon {
+                    .step-forward-icon {
                         position: absolute;
                         /* top: 295px; */
                         /* opacity: 0; */
@@ -249,11 +245,11 @@
                         cursor: pointer;
                     }
 
-                    .step-forward-icon {
+                    time {
                         position: absolute;
-                        /* top: 295px; */
+                        top: 305px;
                         /* opacity: 0; */
-                        font-size: 25px;
+                        font-size: 16px;
                         /* transition: all 0.3s ease-in-out; */
                         -moz-transition: all 0.3s ease-in-out;
                         /* -webkit-transition: all 0.3s ease-in-out; */
@@ -263,9 +259,9 @@
                         /* z-index: 5; */
                         /* left: 5px; */
                         /* cursor: default; */
-                        margin-left: 120px;
+                        margin-left: 170px;
                         /* margin-top: 4px; */
-                        cursor: pointer;
+                        /* cursor: pointer; */
                     }
 
                     .volume-off-icon{
@@ -349,6 +345,5 @@
                 }
             }
         }
-
     }
 }

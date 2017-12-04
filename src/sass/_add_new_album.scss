@@ -45,6 +45,12 @@
                         border: 3px double black;
                     }
 
+                    .error-message {
+                        //&.error {
+                            color: red;
+                        //}
+                    }
+
                     input {
                         &.error {
                             border-color: red;

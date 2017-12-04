@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="js/lib/jquery-ui-1.12.1.custom/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="icon" type="image/png" href="images/music-icon.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -27,15 +28,14 @@
                         </a>
                     </div>
 
-                    <div class="pull-right">
-                        <div id="search-area">
-                            <form id="search-form">
-                                <input type="search" name="search" id="search-term" placeholder="Search albums..." title="Search albums...">
-                                <button id="search" title="Search albums...">
-                                    <i class="fa fa-search pull-right" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                        </div>
+                    <div id="search-area" class="pull-right">
+                        <form id="search-form">
+                            <input type="search" name="search" id="search-term" placeholder="Search albums..."
+                                   title="Search albums...">
+                            <button id="search" title="Search albums...">
+                                <i class="fa fa-search pull-right" aria-hidden="true"></i>
+                            </button>
+                        </form>
 
                         <div id="results-list"></div>
                     </div>
