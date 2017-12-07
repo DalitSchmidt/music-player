@@ -36,16 +36,12 @@ const Validator = {
             // הוספת class בשם error הצובע באדום את הגבולות של התיבות המצויות במשתנה input ומכילות שגיאות
             // Add class of error
             input.addClass('error')
-            // המשתנה html מפעיל את הפונקציה validateInput המצויה תחת האובייקט AlbumFormTemplates שמכילה תבנית html המציגה ב- DOM את הודעת השגיאה
-            let html = AlbumFormTemplates.validateInput()
-            // הכנסת המשתנה html לתוך אלמנט div שיש לו class בשם error-message
-            $('.error-message').html( html )
-
             // המשתנה errorMessage מכיל את הודעת השגיאה המפורטת בהתאם לשדה שמצוי במשתנה input_name שמכיל את כל ה- inputים שיש להם attribute בשם name
-            let errorMessage = this.error_messages[input_name]
-
-            // הכנסת הנתונים המצויים במשתנים html ו- errorMessage לתחילת אלמנט האב של המשתנה input
-            input.parent().prepend( html + `${errorMessage}` )
+            let errorMessage = this.error_messages[ input_name ]
+            // המשתנה html מפעיל את הפונקציה validateInput המקבלת את המשתנה errorMessage המכיל את הודעת השגיאה המפורטת בהתאם לשדה שמצוי במשתנה input_name שמכיל את כל ה- inputים שיש להם attribute בשם name ומצויה תחת האובייקט AlbumFormTemplates ושבאמצעותה אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה
+            let html = AlbumFormTemplates.validateInput( errorMessage )
+            // הכנסת המשתנה html לתחילת אלמנט האב שיש לו class בשם form-group של המשתנה input
+            input.parent('.form-group').prepend( html )
             // הפונקציה מחזירה את הערך הבוליאני false אם יש שגיאות
             return false
         }

@@ -23,7 +23,7 @@ const AlbumsBoard = {
             // בסיום הדהייה נבצע מחיקה של ה- class בשם loading מהאלמנט div שיש לו מזהה ייחודי album-list, כך שלמעשה התאפשר לנו להציג ב- DOM את ה- loader שטוען את האלבומים
             $('#album-list').removeClass('loading')
         // ביצוע השהייה של שנייה לפני הכנסת המשתנה html הצכחך תבנית html של האלבום לתוך אלמנט div שיש לו מזהה ייחודי בשם album-list, ובכך מתאפשר להציג ב- DOM את כל האלבומים הקיימים לאחר שה- loader הוסר מה- DOM
-        }).delay(1000, function(){
+        }).delay( 1000, function() {
             $('#album-list').html( html )
         })
     },
@@ -37,7 +37,7 @@ const AlbumsBoard = {
     // באמצעות הפונקציה applyAlbums מתאפשר להביא את כל האלבומים שמצויים בשרת ולהציג אותם ב- DOM
     applyAlbums: function() {
         // הפעלה של הפונקציה getAllAlbums המאפשרת לקבל את האלבומים על-ידי ביצוע בקשת get לנתיב 'http://localhost:3000/api/albums', ולאחר מכן נחזיר promise המפעיל את הפונקציה appendAlbums המאפשרת להכניס אלבומים ל- DOM
-        this.getAllAlbums().then(albums => {
+        this.getAllAlbums().then( albums => {
             this.appendAlbums( albums )
         })
     },

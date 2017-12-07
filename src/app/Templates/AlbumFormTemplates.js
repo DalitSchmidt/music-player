@@ -41,11 +41,12 @@ const AlbumFormTemplates = {
         return html
     },
 
-    validateInput: function () {
+    validateInput: function ( errorMessage ) {
         return `<div class="error-message">
                     <span class="error exclamation-circle">
                         <strong>
                             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            ${errorMessage}
                         </strong>
                     </span>
                 </div>

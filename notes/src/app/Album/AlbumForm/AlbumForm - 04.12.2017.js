@@ -36,12 +36,10 @@ const AlbumForm = {
         // הצהרה על המשתנים שאנו הולכים לבצע בהם שימוש בפונקציה
         let i, input, input_name, input_value
 
-
         // ככל ויש שגיאות ולידציה בנתונים שמכיל המשתנה inputs נמחק מהם את ה- class בשם error לפני ביצוע הלולאה
         inputs.removeClass('error')
         // הסרת האלמנט span שיש לו class בשם error מה- DOM
         $('span.error').remove()
-
 
         // כדי לקבל את כל הערכים המצויים בשדות של המשתנה inputs נעבור עליהם באמצעות לולאת for ונבצע בדיקת ולידציה
         for ( i = 0; i < inputs.length; i++ ) {
@@ -61,6 +59,7 @@ const AlbumForm = {
             // נבדוק אם בפונקציה validateField המצויה תחת האובייקט Validator ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לשדות, יש ערך שמצוי במשתנה input המכיל ערך מהשדה המצוי במשתנה inputs עם נתונים שגויים
             if( !Validator.validateField( input ) )
                 // המשתנה errors מכיל את הערך הבוליאני true, כך שלמעשה הוא מכיל שגיאות כלשהן שלא עמדו בולידאציות המוגדרות
+                // If there is an error with the regex, set errors to be true, mean we have errors in the validation
                 errors = true
 
             // המשתנה album, שהוא למעשה אובייקט המכיל מערך של כל ה- inputים שה- attribute שלהם הוא name, מכניס לתוך האובייקט את כל הערכים המצויים במשתנה input_value
@@ -257,14 +256,11 @@ const AlbumForm = {
         console.log( $input )
         // נבדוק אם בפונקציה validateField המצויה תחת האובייקט Validator ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לשדות, יש ערך שמצוי במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event ושעבר בהצלחה את בדיקת התיקוף, ואם אכן אין שגיאות נבצע מספר פעולות נוספות
         if( Validator.validateField( $input ) ){
-            // הצגה בחלון ה- console של הסטרינג true
-            console.log('true')
             // הסרה של ה- class בשם error מהאלמנט המצוי במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
             $input.removeClass('error')
-            // הסרה של ה- class בשם error מהאלמנט הקרובב ביותר לאלמנט המצוי במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
-            $input.closest('.error').remove()
+            // הסרה של ה- class בשם error-message מהאחים של האלמנט המצוי במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
+            $input.siblings('.error-message').remove()
         }
-
     },
 
     // הפונקציה bindEvents מכילה את כל ה- eventים המצויים בטופס הוספת אלבום

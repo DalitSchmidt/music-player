@@ -47,26 +47,16 @@ const AlbumPlayer = {
         $('#controls').html( html )
     },
 
-    setTimeProgressBar: function () {
-        $( "#master" ).slider({
-            value: 60,
-            orientation: "horizontal",
-            range: "min",
-            animate: true
-        })
-    },
-
     getAlbum: function () {
         let id = this.getAlbumID()
 
-        AlbumAPIService.getAlbumById( id ).then(album => {
+        AlbumAPIService.getAlbumById( id ).then( album => {
             this.setPlaylist( album.songs )
             this.setAlbumInfo( album )
             this.setAlbumImage( album.album_image )
             this.setControls()
             this.setNowPlayingSong()
-            this.setTimeProgressBar()
-            Player.setSong($('#player-playlist li').first())
+            Player.setSong( $('#player-playlist li').first() )
         })
     },
 

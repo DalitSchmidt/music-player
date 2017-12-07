@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import Utils from '../Utils'
 
 const SingleAlbumTemplates = {
     albumInfo: function( album ) {
@@ -27,14 +28,10 @@ const SingleAlbumTemplates = {
     },
 
     albumPlaylist: function( playlist ) {
-        function calculateTime( seconds ) {
-            return Math.floor( seconds / 60 ) + ':' + seconds % 60
-        }
-
         let html = ''
 
         $.each(playlist, ( index, song ) => {
-            html += `<li data-code="${song.song_youtube}">${song.song_name} <span>(${calculateTime( song.song_time )})</span></li>`
+            html += `<li data-code="${song.song_youtube}">${song.song_name} <span data-duration="${song.song_time}">(${Utils.calculateTime( song.song_time )})</span></li>`
         })
 
         return html
@@ -61,19 +58,22 @@ const SingleAlbumTemplates = {
             <a id="step-forward" class="step-forward-icon" data-album-id="">
                 <i class="fa fa-step-forward"></i>
             </a>
-            <time>0:00</time>
+            <div id="song-duration-controls">
+                <input type="range" id="song-duration" name="song-duration">
+                <time id="timer"></time>            
+            </div>
             <div id="volume-controls">
-                <div id="master" style="width:85px; margin:12px; float: right;"></div>
-                
-                <a id="volume-off" class="volume-off-icon" data-album-id="">
-                    <i class="fa fa-volume-off"></i>
-                </a>
-                <a id="volume-down" class="volume-down-icon" data-album-id="">
-                    <i class="fa fa-volume-down"></i>
-                </a>
                 <a id="volume-up" class="volume-up-icon" data-album-id="">
                     <i class="fa fa-volume-up"></i>
-                </a>
+                </a>            
+                <input type="range" id="volume" name="volume" min="0" max="100" value="100">
+                
+                <!--<a id="volume-off" class="volume-off-icon" data-album-id="">-->
+                    <!--<i class="fa fa-volume-off"></i>-->
+                <!--</a>-->
+                <!--<a id="volume-down" class="volume-down-icon" data-album-id="">-->
+                    <!--<i class="fa fa-volume-down"></i>-->
+                <!--</a>-->
             </div>
         `
     }

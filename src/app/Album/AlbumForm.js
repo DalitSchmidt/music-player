@@ -18,10 +18,8 @@ const AlbumForm = {
         let album = {}
         let i, input, input_name, input_value
 
-
         inputs.removeClass('error')
         $('span.error').remove()
-
 
         for ( i = 0; i < inputs.length; i++ ) {
             // Collect the element
@@ -34,6 +32,7 @@ const AlbumForm = {
             input_value = input.val()
 
             if( !Validator.validateField( input ) )
+                // If there is an error with the regex, set errors to be true, mean we have errors in the validation
                 errors = true
 
             // Add the property of the input name inside the album object
@@ -165,11 +164,9 @@ const AlbumForm = {
         let $input = $( e.target )
         console.log( $input )
         if( Validator.validateField( $input ) ){
-            console.log('true')
             $input.removeClass('error')
-            $input.closest('.error').remove()
+            $input.siblings('.error-message').remove()
         }
-
     },
 
     bindEvents: function() {

@@ -52,13 +52,14 @@ const AlbumFormTemplates = {
         return html
     },
 
-    // באמצעות הפונקציה validateInput אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה
-    validateInput: function () {
+    // באמצעות הפונקציה validateInput המקבלת את המשתנה errorMessage אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה
+    validateInput: function ( errorMessage ) {
         // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM את הודעת השגיאה הרלוונטית
         return `<div class="error-message">
                     <span class="error exclamation-circle">
                         <strong>
                             <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            ${errorMessage}
                         </strong>
                     </span>
                 </div>

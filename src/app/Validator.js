@@ -26,12 +26,9 @@ const Validator = {
         if ( !this.regexes[ input_name ].test( input_value ) ) {
             // Add class of error
             input.addClass('error')
-            let html = AlbumFormTemplates.validateInput()
-            $('.error-message').html( html )
-
-            let errorMessage = this.error_messages[input_name]
-
-            input.parent().prepend( html + `${errorMessage}` )
+            let errorMessage = this.error_messages[ input_name ]
+            let html = AlbumFormTemplates.validateInput( errorMessage )
+            input.parent('.form-group').prepend( html )
             return false
         }
 

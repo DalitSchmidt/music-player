@@ -1,5 +1,9 @@
+// האובייקט AlbumTemplates המתפקד "כמעין" מחלקת שירות מכיל את כל הפונקציות המאפשרות לנו להציג מידע ב- DOM
+// הגדרת האובייקט בשם AlbumTemplates כקבוע
 const AlbumTemplates = {
+    // באמצעות הפונקציה album המקבלת את הפרמטר album, אנו יוצרים תבנית html של האלבום להצגה ב- DOM
     album: function( album ) {
+        // המשתנה html מכיל תבנית html של האלבום להצגה ב- DOM
         let html =
             `
             <div class="col-md-3">
@@ -21,8 +25,10 @@ const AlbumTemplates = {
             </div>
             `
 
+        // הפונקציה מחזירה את המשתנה html המכיל תבנית html של האלבום להצגה ב- DOM
         return html
     }
 }
 
+// ייצוא היכולות של האובייקט AlbumTemplates החוצה
 export default AlbumTemplates

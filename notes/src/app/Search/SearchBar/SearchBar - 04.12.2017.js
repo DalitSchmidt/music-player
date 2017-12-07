@@ -2,8 +2,8 @@
 import $ from 'jquery'
 // ייבוא היכולות של האובייקט SearchAPIService על-מנת שהאובייקט SearchBar יוכל להשתמש בהן
 import SearchAPIService from '../APIServices/SearchAPIService'
-// ייבוא היכולות של האובייקט SearchResultsTemplate על-מנת שהאובייקט SearchBar יוכל להשתמש בהן
-import SearchResultsTemplate from '../Templates/SearchResultsTemplate'
+// ייבוא היכולות של האובייקט SearchResultsTemplates על-מנת שהאובייקט SearchBar יוכל להשתמש בהן
+import SearchResultsTemplates from '../Templates/SearchResultsTemplates'
 // ייבוא היכולות של האובייקט Utils על-מנת שהאובייקט SearchBar יוכל להשתמש בהן
 import Utils from '../Utils'
 
@@ -58,18 +58,18 @@ const SearchBar = {
         }
 
         // הפעלה של הפונקציה suggestions המקבלת את המשתנה term ומצויה תחת האובייקט SearchAPIService שבאמצעותה מתאפשר לקבל את ההצעות האפשריות לתוצאות החיפוש ממסד הנתונים ולאחר מכן נפעיל promise המכיל את התגובה שקיבלנו, את הסטטוס קוד שנקבל ואת xhr
-        SearchAPIService.suggestions( term ).then( (response, textStatus, xhr) => {
+        SearchAPIService.suggestions( term ).then(( response, textStatus, xhr ) => {
             // הצהרה על המשתנים שנבצע בהם שימוש בפונקציה
             let html
 
             // אם המשתנה xhr מכיל את הסטטוס קוד 204 (No content), האומר שאין תוכן, כלומר שאין תוצאות העונות לחיפוש המתבצע
-            if (xhr.status === 204) {
-                // המשתנה html מפעיל את הפונקציה noSuggestions שמצויה תחת האובייקט SearchResultsTemplate ושבאמצעותה מתאפשר להציג בתוצאות החיפוש כאשר אין הצעות העונות לחיפוש המבוקש הצעה מתאימה
-                html = SearchResultsTemplate.noSuggestions()
+            if ( xhr.status === 204 ) {
+                // המשתנה html מפעיל את הפונקציה noSuggestions שמצויה תחת האובייקט SearchResultsTemplates ושבאמצעותה מתאפשר להציג בתוצאות החיפוש כאשר אין הצעות העונות לחיפוש המבוקש הצעה מתאימה
+                html = SearchResultsTemplates.noSuggestions()
             // אחרת, כלומר יש תוצאות העונות לחיפוש המתבצע
             } else {
-                // המשתנה html מפעיל את הפונקציה suggestions המקבלת את המשתנה response.results ומצויה תחת האובייקט SearchResultsTemplate ושבאמצעותה מתאפשר ליצור תבנית html המאפשרת להציג ב- DOM את ההצעות האפשריות לתוצאות החיפוש
-                html = SearchResultsTemplate.suggestions( response.results )
+                // המשתנה html מפעיל את הפונקציה suggestions המקבלת את המשתנה response.results ומצויה תחת האובייקט SearchResultsTemplates ושבאמצעותה מתאפשר ליצור תבנית html המאפשרת להציג ב- DOM את ההצעות האפשריות לתוצאות החיפוש
+                html = SearchResultsTemplates.suggestions( response.results )
             }
             // הכנסת המשתנה html לתוך אלמנט div שיש לו מזהה ייחודי בשם results-list, ובכך אנו למעשה מציגים ב- DOM את ההצעות האפשריות לתוצאות החיפוש ונוסיף לאלמנט הקרוב ביותר שיש לו class בשם pull-right את ה- class בשם has-suggestion
             $('#results-list').html( html ).closest('.pull-right').addClass('has-suggestion')

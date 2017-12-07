@@ -1,5 +1,7 @@
 // ייבוא היכולות של jQuery על-מנת שהאובייקט SingleAlbumTemplates יוכל להשתמש בהן
 import $ from 'jquery'
+// ייבוא היכולות של האובייקט Utils על-מנת שהאובייקט SingleAlbumTemplates יוכל להשתמש בהן
+import Utils from '../Utils'
 
 // האובייקט בשם SingleAlbumTemplates המתפקד כ"מעין" מחלקת שירות מכיל את כל הפונקציות לנו להציג מידע ב- DOM וקשורות לאלבום
 // הגדרת האובייקט בשם SingleAlbumTemplates כקבוע
@@ -42,19 +44,13 @@ const SingleAlbumTemplates = {
 
     // באמצעות הפונקציה albumPlaylist המקבלת את המשתנה playlist המכיל את רשימת השירים של האלבום, אנו יוצרים תבנית html המציגה ב- DOM את רשימת השירים של האלבום עם הזמן של כל שיר באלבום
     albumPlaylist: function( playlist ) {
-        // באמצעות הפונקציה calculateTime המקבלת את המשתנה seconds המכיל את אורך השיר בשניות, אנו מבצעים חישוב של זמן השיר
-        function calculateTime( seconds ) {
-            // הפונקציה מחזירה את החישוב שמתבצע לגבי זמן השיר
-            return Math.floor( seconds / 60 ) + ':' + seconds % 60
-        }
-
         // המשתנה html מכיל נתונים ריקים על-מנת שנוכל לשרשר אותו ולהוסיף נתונים ל- DOM
         let html = ''
 
         // הלולאת each עוברת איבר-איבר על הנתונים המצויים במשתנה playlist (המכיל מערך עם רשימת השירים של האלבום) ומוציאה ממנו את ה- index ואת השיר המצוי ברשימת השירים
         $.each(playlist, ( index, song ) => {
             // המשתנה html משרשר אליו את האלמנט li המכיל נתונים של שם השיר והזמן שלו לצורך הצגה ב- DOM של התבנית html המכילה את רשימת השירים של האלבום
-            html += `<li data-code="${song.song_youtube}">${song.song_name} <span>(${calculateTime( song.song_time )})</span></li>`
+            html += `<li data-code="${song.song_youtube}">${song.song_name} <span data-duration="${song.song_time}">(${Utils.calculateTime( song.song_time )})</span></li>`
         })
 
         // הפונקציה מחזירה את המשתנה html המכיל תבנית html המכילה את רשימת השירים של האלבום עם הזמן של כל שיר באלבום
@@ -86,19 +82,22 @@ const SingleAlbumTemplates = {
             <a id="step-forward" class="step-forward-icon" data-album-id="">
                 <i class="fa fa-step-forward"></i>
             </a>
-            <time>0:00</time>
+            <div id="song-duration-controls">
+                <input type="range" id="song-duration" name="song-duration">
+                <time id="timer"></time>            
+            </div>
             <div id="volume-controls">
-                <div id="master" style="width:85px; margin:12px; float: right;"></div>
-                
-                <a id="volume-off" class="volume-off-icon" data-album-id="">
-                    <i class="fa fa-volume-off"></i>
-                </a>
-                <a id="volume-down" class="volume-down-icon" data-album-id="">
-                    <i class="fa fa-volume-down"></i>
-                </a>
                 <a id="volume-up" class="volume-up-icon" data-album-id="">
                     <i class="fa fa-volume-up"></i>
-                </a>
+                </a>            
+                <input type="range" id="volume" name="volume" min="0" max="100" value="100">
+                
+                <!--<a id="volume-off" class="volume-off-icon" data-album-id="">-->
+                    <!--<i class="fa fa-volume-off"></i>-->
+                <!--</a>-->
+                <!--<a id="volume-down" class="volume-down-icon" data-album-id="">-->
+                    <!--<i class="fa fa-volume-down"></i>-->
+                <!--</a>-->
             </div>
         `
     }

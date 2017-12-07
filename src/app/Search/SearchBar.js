@@ -37,7 +37,7 @@ const SearchBar = {
         SearchAPIService.suggestions( term ).then(( response, textStatus, xhr ) => {
             let html
 
-            if (xhr.status === 204) {
+            if ( xhr.status === 204 ) {
                 html = SearchResultsTemplates.noSuggestions()
             } else {
                 html = SearchResultsTemplates.suggestions( response.results )

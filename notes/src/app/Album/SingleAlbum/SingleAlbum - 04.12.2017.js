@@ -79,24 +79,13 @@ const AlbumPlayer = {
         $('#controls').html( html )
     },
 
-    // באמצעות הפונקציה setTimeProgressBar מתאפשר להציג ב- DOM סרגל השולט על קצב ההתקדמות של השיר שמתנגן
-    setTimeProgressBar: function () {
-        // הכנסת האובייקט המכיל פרופרטיס עם ערכים שונים לתוך אלמנט div שיש לו מזהה ייחודי בשם master ושמפעיל את הפונקציה slider
-        $( "#master" ).slider({
-            value: 60,
-            orientation: "horizontal",
-            range: "min",
-            animate: true
-        })
-    },
-
     // באמצעות הפונקציה getAlbum מתאפשר לקבל אלבום ספציפי לפי המספר id שלו
     getAlbum: function () {
         // המשתנה id מפעיל את הפונקציה getAlbumID שבאמצעותה מתאפשר לקבל את המספר id של האלבום המצוי ב- URL
         let id = this.getAlbumID()
 
         // הפעלה של הפונקציה getAlbumById (המבצעת בקשת getJSON לנתיב 'http://localhost:3000/api/albums/' + album_id, ובכך מתאפשר למעשה לקבל אלבום ספציפי לפי המספר id שלו) ושמצויה תחת האובייקט בשם AlbumAPIService אשר מקבלת את המשתנה id (המפעיל את הפונקציה getAlbumID שבאמצעותה מתאפשר לקבל את המספר id של האלבום המצוי ב- URL), ולאחר מכן נפעיל promise המקבל את המשתנה album ומפעיל פונקציות שונות הקשורות להצגה של האלבום ב- DOM
-        AlbumAPIService.getAlbumById( id ).then(album => {
+        AlbumAPIService.getAlbumById( id ).then( album => {
             // הפעלה של הפונקציה setPlaylist (המאפשרת להציג ב- DOM את רשימת השירים של האלבום המוצג) המקבלת את השירים של האלבום
             this.setPlaylist( album.songs )
             // הפעלה של הפונקציה setAlbumInfo (המאפשרת להציג ב- DOM את כל המידע הקשור לאלבום המוצג) המקבלת את המשתנה album המכיל את המכיל את הפרטים של האלבום
@@ -107,10 +96,8 @@ const AlbumPlayer = {
             this.setControls()
             // הפעלה של הפונקציה setNowPlayingSong המאפשרת להציג ב- DOM את השם של השיר שמתנגן כעת בנגן
             this.setNowPlayingSong()
-            // הפעלה של הפונקציה setTimeProgressBar המאפשרת להציג ב- DOM סרגל השולט על קצב ההתקדמות של השיר שמתנגן
-            this.setTimeProgressBar()
             // הפעלת הפונקציה playSong שמצויה תחת האובייקט Player על האלמנט li הראשון שמצוי תחת האלמנט ol שיש לו מזהה ייחודי בשם player-playlist
-            Player.setSong($('#player-playlist li').first())
+            Player.setSong( $('#player-playlist li').first() )
         })
     },
 

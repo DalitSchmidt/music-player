@@ -11,7 +11,7 @@ const AlbumsBoard = {
 
         $('#album-list').fadeTo('slow', 1.5, function()  {
             $('#album-list').removeClass('loading')
-        }).delay(1000, function(){
+        }).delay( 1000, function() {
             $('#album-list').html( html )
         })
     },
@@ -21,7 +21,7 @@ const AlbumsBoard = {
     },
 
     applyAlbums: function() {
-        this.getAllAlbums().then(albums => {
+        this.getAllAlbums().then( albums => {
             this.appendAlbums( albums )
         })
     },

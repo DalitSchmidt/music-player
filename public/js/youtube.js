@@ -22,7 +22,7 @@ function onYouTubeIframeAPIReady() {
         },
         events: {
             'onReady': onPlayerReady,
-            'onStateChange': $.proxy(Player.toggleControls, Player)
+            'onStateChange': $.proxy( Player.detectStateChange, Player )
         },
     })
 }
