@@ -11,17 +11,22 @@ const Utils = {
                     func.apply( context, args )
             }
 
-            let callNow = immediate && !timeout
+            let call_now = immediate && !timeout
             clearTimeout( timeout )
             timeout = setTimeout( later, wait )
 
-            if ( callNow )
+            if ( call_now )
                 func.apply( context, args )
         }
     },
 
     calculateTime: function( seconds ) {
         return Math.floor( seconds / 60 ) + ':' + seconds % 60
+    },
+
+    isInArrayOfObjects: function ( arr_to_check, key_to_check, value_to_check ) {
+        let new_arr = arr_to_check.filter( item => item[ key_to_check ] === value_to_check )
+        return new_arr.length > 0
     }
 }
 

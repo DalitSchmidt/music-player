@@ -8,6 +8,7 @@ import ui from 'jquery-ui-browserify'
 import AlbumAPIService from './../APIServices/AlbumAPIService'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import Validator from '../Validator'
+import Utils from '../Utils'
 
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
@@ -19,7 +20,7 @@ const AlbumForm = {
         let i, input, input_name, input_value
 
         inputs.removeClass('error')
-        $('span.error').remove()
+        $('#add-new-album-form span.error').remove()
 
         for ( i = 0; i < inputs.length; i++ ) {
             // Collect the element
@@ -45,8 +46,8 @@ const AlbumForm = {
         return album
     },
 
-    scrollTop: function () {
-        $("html, body").animate({ scrollTop: 0 }, 1200)
+    scrollTop: function ( $el ) {
+        $('html, body').animate({ scrollTop: $el.offset().top }, 800)
     },
 
     setSuccessMessage: function() {
@@ -63,11 +64,16 @@ const AlbumForm = {
             duration = song.find('input[name=song-time]').val()
             id = song.find('input[name=youtube-url]').val()
 
-            if ( name !== '' && duration !== '' && id !== '' )
+            if ( name !== '' && duration !== '' && id !== '' ) {
+
+                let isIdExists = Utils.isInArrayOfObjects( songs, 'id', id )
                 songs.push({ name, id, duration })
+                console.log( songs )
+            }
         })
 
-        return songs
+        Validator.validateInputs( songs, 5, 'songs_youtube_id', $('#add-album-playlist-form') )
+        return songs.length ? songs : false
     },
     
     collectGenres: function () {
@@ -83,23 +89,26 @@ const AlbumForm = {
 
     saveAlbum: function( e ) {
         e.preventDefault()
+
         let album = this.collectValues()
 
         if ( !album ) {
-            this.scrollTop()
+            this.scrollTop( $('#add-new-album') )
+            return
+        }
+
+        let songs = this.collectSongs()
+        if( !songs ) {
+            this.scrollTop( $('#add-album-playlist-title') )
             return
         }
 
         album.genres = this.collectGenres()
-        console.log( album )
-        return
 
-        // let songs = this.collectSongs()
-        //
-        // if ( !album || !songs )
-        //     return
-        //
-        // album.songs = songs
+
+        album.songs = songs
+        // Temporary!!!
+        album.genres = ['Pop']
         AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
     },
 
@@ -149,15 +158,19 @@ const AlbumForm = {
 
     searchYoutubeVideo: function( e ) {
         let $input = $( e.target )
+        $input.parent().find('.error-message').remove()
 
-        // debounce(function () {
-            let youtube_id = $input.val()
+        let youtube_id = $input.val()
 
-            AlbumAPIService.searchYoutubeID( youtube_id ).then(video => {
+        AlbumAPIService.searchYoutubeID( youtube_id ).then(
+            video => {
                 $input.closest('.song-item').find('input[name=song-name]').val( video.title )
                 $input.closest('.song-item').find('input[name=song-time]').val( video.duration )
+            },
+            error => {
+                let html = AlbumFormTemplates.validateInput( error.responseJSON.error )
+                $input.parent().prepend( html )
             })
-        // }, 300)
     },
 
     validateField: function ( e ) {
@@ -170,11 +183,11 @@ const AlbumForm = {
     },
 
     bindEvents: function() {
-        $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
+        $('#add-new-album').on('submit', $.proxy( this.saveAlbum, this ))
         $('#add-another-song').on('click', this.addSong)
         $('#image-url').on('blur', $.proxy( this.changeCoverImage, this ))
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
-        $('input[name=youtube-url]').on('keyup', $.proxy( this.searchYoutubeVideo, this ))
+        $('input[name=youtube-url]').on('keyup', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 1000) )
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
     },
 

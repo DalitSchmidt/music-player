@@ -14,7 +14,8 @@ const Validator = {
         'album-artist': 'The name of album artist must begin with a big letter',
         'album-image': 'The image of album cover must be a URL that ends with .JPG, .JPEG, .GIF or .PNG',
         'album-year': 'The year of album must be 4 characters',
-        'album-description': 'The description of album must begin with a big letter'
+        'album-description': 'The description of album must begin with a big letter',
+        'songs_youtube_id': 'The album must contain at least 5 songs'
     },
 
     validateField: function ( input ) {
@@ -33,6 +34,14 @@ const Validator = {
         }
 
         return true
+    },
+
+    validateInputs: function ( inputs_arr, min_length, error_key, error_container ) {
+        error_container.find('.error-message').remove()
+        if ( inputs_arr.length < min_length ) {
+            let html = AlbumFormTemplates.validateInput( this.error_messages[ error_key ] )
+            error_container.prepend( html )
+        }
     }
 }
 

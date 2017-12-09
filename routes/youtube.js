@@ -17,14 +17,14 @@ router.get('/:youtube_id', ( req, res ) => {
                 let data = JSON.parse( body )
                 video.title = data.title
 
-                request(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${youtube_id}&key=${YOUTUBE_API_KEY}`, function( error, response, body ) {
+                    request(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${youtube_id}&key=${YOUTUBE_API_KEY}`, function( error, response, body ) {
                     data = JSON.parse( body )
                     video.duration = data.items[0].contentDetails.duration.split('PT')[1]
 
                     res.json( video )
                 })
             } else {
-                res.status(404).json({error: 'Not Found'})
+                res.status(404).json({ error: 'Youtube code is incorrect' })
             }
         })
     }
