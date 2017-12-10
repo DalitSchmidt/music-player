@@ -1,4 +1,22 @@
-// $(function($) {
+// $(function() {
+//     var tags = [
+//         { id: 42, toString: function() { return 'jQuery'; } },
+//         { id: 31, toString: function() { return 'Python'; } },
+//         { id: 25, toString: function() { return 'HTML'; } },
+//         { id: 83, toString: function() { return 'PHP'; } },
+//         { id: 40, toString: function() { return 'ASP.NET MVC'; } },
+//         { id: 25, toString: function() { return 'CSS'; } },
+//         { id: 66, toString: function() { return 'JavaScript'; } },
+//         { id: 87, toString: function() { return 'C#'; } },
+//         { id: 28, toString: function() { return 'D'; } },
+//         { id: 91, toString: function() { return 'Java'; } },
+//         { id: 10, toString: function() { return 'Ruby'; } },
+//     ]
+//
+//     $('#tags').tagSelector(tags, 'tags')
+
+
+// (function($) {
     $.fn.tagSelector = function(source, name) {
         return this.each(function() {
             var selector = $(this),
@@ -40,5 +58,6 @@
             };
         });
     };
+// })
 
-// })//(jQuery);
+// })(jQuery);

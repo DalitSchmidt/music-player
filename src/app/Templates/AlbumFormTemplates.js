@@ -1,21 +1,21 @@
 import $ from 'jquery'
 
 const AlbumFormTemplates = {
-    // genres: function (genres) {
-    //     let html = ''
-    //     $.each(genres, (i, genre) => {
-    //         if (i > 3)
-    //             return
-    //
-    //         html += `
-    //         <label for="genre-${genre.genre_id}">
-    //             <input type="checkbox" id="genre-${genre.genre_id}" name="${genre.genre_name}" value="${genre.genre_id}" title="${genre.genre_name}"> ${genre.genre_name}
-    //         </label>
-    //         `
-    //     })
-    //
-    //     return html
-    // },
+    genres: function (genres) {
+        let html = ''
+        $.each(genres, (i, genre) => {
+            if (i > 3)
+                return
+
+            html += `
+            <label for="genre-${genre.genre_id}">
+                <input type="checkbox" id="genre-${genre.genre_id}" name="${genre.genre_name}" value="${genre.genre_id}" title="${genre.genre_name}"> ${genre.genre_name}
+            </label>
+            `
+        })
+
+        return html
+    },
 
     songItem: function () {
         let html = `

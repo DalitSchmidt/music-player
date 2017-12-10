@@ -149,12 +149,12 @@ const AlbumForm = {
             this.setCoverImage( img )
     },
 
-    // setGenres: function() {
-    //     AlbumAPIService.getGenres().then(genres => {
-    //         let html = AlbumFormTemplates.genres( genres )
-    //         $('#album-genres div').html( html )
-    //     })
-    // },
+    setGenres: function() {
+        AlbumAPIService.getGenres().then(genres => {
+            let html = AlbumFormTemplates.genres( genres )
+            $('#album-genres div').html( html )
+        })
+    },
 
     searchYoutubeVideo: function( e ) {
         let $input = $( e.target )
@@ -194,8 +194,7 @@ const AlbumForm = {
     init: function( getAlbum = false ) {
         this.addSongsInputs()
         this.bindEvents()
-        // this.setGenres()
-        // this.genresBootstrap()
+        this.setGenres()
     }
 }
 
