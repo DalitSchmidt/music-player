@@ -93,13 +93,13 @@ const AlbumForm = {
         let album = this.collectValues()
 
         if ( !album ) {
-            this.scrollTop( $('#add-new-album') )
+            this.scrollTop( $('#main-container') )
             return
         }
 
         let songs = this.collectSongs()
         if( !songs ) {
-            this.scrollTop( $('#add-album-playlist-title') )
+            this.scrollTop( $('#add-album-playlist-details') )
             return
         }
 

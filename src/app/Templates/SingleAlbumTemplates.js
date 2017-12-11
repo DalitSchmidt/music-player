@@ -32,6 +32,11 @@ const SingleAlbumTemplates = {
 
         $.each(playlist, ( index, song ) => {
             html += `<li data-code="${song.song_youtube}">${song.song_name} <span data-duration="${song.song_time}">(${Utils.calculateTime( song.song_time )})</span></li>`
+
+            // html += `<li data-code="${song.song_youtube}">
+            //             <span>${song.song_name}</span>
+            //             <span data-duration="${song.song_time}">(${Utils.calculateTime( song.song_time )})</span>
+            //          </li>`
         })
 
         return html

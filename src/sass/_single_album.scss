@@ -533,13 +533,36 @@
                         &.playing {
                             font-weight: bold;
                             list-style: none;
+                            position: relative;
 
                             &:before {
                                 font-family: FontAwesome;
                                 content: "\f04b";
+                                left: -18px;
+                                position: absolute;
                             }
                         }
                     }
+
+                    //li {
+                    //    cursor: pointer;
+                    //    //padding-left: 5px;
+                    //
+                    //    span:first-child {
+                    //        padding-left: 4px;
+                    //    }
+                    //
+                    //    &.playing {
+                    //        font-weight: bold;
+                    //        list-style: none;
+                    //        margin-left: -18px;
+                    //
+                    //        &:before {
+                    //            font-family: FontAwesome;
+                    //            content: "\f04b";
+                    //        }
+                    //    }
+                    //}
                 }
             }
         }
