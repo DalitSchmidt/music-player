@@ -4,6 +4,7 @@ import AlbumFormTemplates from './Templates/AlbumFormTemplates'
 // האובייקט Validator מכיל את כל הפונקציות הקשורות לביצוע התיקוף לנתונים המצויים בשדות של הטופס הוספת אלבום
 // הגדרת האובייקט Validator כקבוע
 const Validator = {
+    // הפרופרטיס regexes מכיל פרופרטיס שונים המבצעים ולידציה לשדות ה- inputים של האלבום
     regexes: {
         'album-name': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
         'album-artist': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
@@ -52,11 +53,11 @@ const Validator = {
 
     // באמצעות הפונקציה validateInputs המקבלת את המשתנים inputs_arr, min_length, error_key ו- error_container אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו'
     validateInputs: function ( inputs_arr, min_length, error_key, error_container ) {
-        //המשתנה error_container מוצא אלמנטים שיש להם class בשם error-message ומסיר אותם מה- DOM
+        // המשתנה error_container מוצא אלמנטים שיש להם class בשם error-message ומסיר אותם מה- DOM
         error_container.find('.error-message').remove()
         // נבצע בדיקה אם אורך המערך של inputs_arr הוא קטן מהנתונים המצויים במשתנה min_length
         if ( inputs_arr.length < min_length ) {
-            // המשתנה html מפעיל את הפונקציה validateInput המקבלת את הפרופטי error_message במקום של המשתנה error_key במערך ומצויה תחת האובייקט AlbumFormTemplates ושבאמצעותה האנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה
+            // המשתנה html מפעיל את הפונקציה validateInput המקבלת את הפרופטי error_message במקום של המשתנה error_key במערך ומצויה תחת האובייקט AlbumFormTemplates ושבאמצעותה אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה
             let html = AlbumFormTemplates.validateInput( this.error_messages[ error_key ] )
             // המשתנה error_container מכניס לתחילת האלמנט את המשתנה html
             error_container.prepend( html )

@@ -27,7 +27,11 @@ const Utils = {
     },
 
     isInArrayOfObjects: function ( arr_to_check, key_to_check, value_to_check ) {
+        if ( arr_to_check.length === 0 )
+            return false
+
         let new_arr = arr_to_check.filter( item => item[ key_to_check ] === value_to_check )
+
         return new_arr.length > 0
     }
 }

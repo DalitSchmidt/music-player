@@ -3,9 +3,9 @@ const router = express.Router()
 const models = require('../models')
 const AlbumModel = models.Album
 
-router.get('/', function (req, res) {
+router.get('/', function ( req, res ) {
     AlbumModel.findAll({ attributes: { exclude: ['album_description'] } }).then(results => {
-        if (results.length === 0)
+        if ( results.length === 0 )
             res.status(204).send()
         else
             res.json( results )
@@ -46,14 +46,14 @@ router.get('/suggestions/:term', function( req, res ) {
     })
 })
 
-router.get('/:album_id', function (req, res) {
+router.get('/:album_id', function ( req, res ) {
     let album_id = req.params.album_id
 
     models.sequelize.Promise.join(
         models.sequelize.query(`SELECT * FROM albums WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.SELECT}),
         models.sequelize.query(`SELECT * FROM songs WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.SELECT}),
         models.sequelize.query(`SELECT * FROM genres WHERE genre_id IN (SELECT genre_id FROM albums_to_genres WHERE album_id = ${album_id})`, {type: models.sequelize.QueryTypes.SELECT})
-    ).spread((album, songs, genres) => {
+    ).spread(( album, songs, genres ) => {
         let results = album[0]
         results.songs = songs
         results.genres = genres
@@ -61,7 +61,7 @@ router.get('/:album_id', function (req, res) {
     })
 })
 
-router.post('/', function (req, res) {
+router.post('/', function ( req, res ) {
     let album = req.body
 
     AlbumModel.create( album ).then(result => {
@@ -74,13 +74,14 @@ router.post('/', function (req, res) {
 
         let query = []
 
-        genres.forEach(id => query.push(`(${album_id}, ${id})`))
+        genres.forEach( id => query.push(`(${album_id}, ${id})`) )
         models.sequelize.query('INSERT INTO albums_to_genres (album_id, genre_id) VALUES ' + query.join(', '))
 
         // Create the songs in the DB and link theme to the album
 
-        res.status(201).json({album_id})
-    }).catch(err => {
+        res.status(201).json({ album_id })
+    }).catch( err => {
+        res.status(422).json({ err })
         let errors = err.errors[0]
 
         res.status(422).json({
@@ -93,15 +94,15 @@ router.post('/', function (req, res) {
     })
 })
 
-router.delete('/:album_id', (req, res) => {
+router.delete('/:album_id', ( req, res ) => {
     let album_id = req.params.album_id
 
     models.sequelize.Promise.join(
         models.sequelize.query(`DELETE * FROM albums WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.DELETE}),
         models.sequelize.query(`DELETE * FROM songs WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.DELETE}),
         models.sequelize.query(`DELETE * FROM albums_to_genres WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.DELETE})
-    ).spread(affected_rows => {
-        if (affected_rows === 0)
+    ).spread( affected_rows => {
+        if ( affected_rows === 0 )
             res.json( {message: `Album id ${album_id} not found`} )
         else
             res.json( {album_id} )

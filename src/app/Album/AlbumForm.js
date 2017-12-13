@@ -32,7 +32,7 @@ const AlbumForm = {
             input_name = input.attr('name')
             input_value = input.val()
 
-            if( !Validator.validateField( input ) )
+            if ( !Validator.validateField( input ) )
                 // If there is an error with the regex, set errors to be true, mean we have errors in the validation
                 errors = true
 
@@ -55,25 +55,35 @@ const AlbumForm = {
     },
 
     collectSongs: function() {
-        let songs = [], song, name, duration, id
+        let has_duplications = false, songs = [], song, name, duration, id
 
         $.each( $('.song-item'), ( index, item ) => {
             song = $( item )
-
             name = song.find('input[name=song-name]').val()
             duration = song.find('input[name=song-time]').val()
             id = song.find('input[name=youtube-url]').val()
 
             if ( name !== '' && duration !== '' && id !== '' ) {
+                if ( songs.length === 0 ) {
+                    songs.push({ name, id, duration })
+                    return
+                }
 
-                let isIdExists = Utils.isInArrayOfObjects( songs, 'id', id )
-                songs.push({ name, id, duration })
-                console.log( songs )
+                has_duplications = Validator.validateDuplications(songs, 'id', id, 'duplicate_song', $( item ) )
+
+                if ( !has_duplications ) {
+                    songs.push({ name, id, duration })
+                }
             }
         })
 
         Validator.validateInputs( songs, 5, 'songs_youtube_id', $('#add-album-playlist-form') )
-        return songs.length ? songs : false
+
+        if ( songs.length && !has_duplications ) {
+            return songs
+        } else {
+            return false
+        }
     },
     
     collectGenres: function () {
@@ -98,17 +108,17 @@ const AlbumForm = {
         }
 
         let songs = this.collectSongs()
-        if( !songs ) {
+        if ( !songs ) {
             this.scrollTop( $('#add-album-playlist-details') )
             return
         }
 
         album.genres = this.collectGenres()
 
-
         album.songs = songs
         // Temporary!!!
         album.genres = ['Pop']
+        console.log( JSON.stringify(album) )
         AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
     },
 
@@ -176,7 +186,7 @@ const AlbumForm = {
     validateField: function ( e ) {
         let $input = $( e.target )
         console.log( $input )
-        if( Validator.validateField( $input ) ){
+        if ( Validator.validateField( $input ) ){
             $input.removeClass('error')
             $input.siblings('.error-message').remove()
         }

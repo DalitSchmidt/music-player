@@ -1,4 +1,5 @@
 import AlbumFormTemplates from './Templates/AlbumFormTemplates'
+import Utils from './Utils'
 
 const Validator = {
     regexes: {
@@ -15,7 +16,8 @@ const Validator = {
         'album-image': 'The image of album cover must be a URL that ends with .JPG, .JPEG, .GIF or .PNG',
         'album-year': 'The year of album must be 4 characters',
         'album-description': 'The description of album must begin with a big letter',
-        'songs_youtube_id': 'The album must contain at least 5 songs'
+        'songs_youtube_id': 'The album must contain at least 5 songs',
+        'duplicate_song': 'Song is already in list'
     },
 
     validateField: function ( input ) {
@@ -27,8 +29,8 @@ const Validator = {
         if ( !this.regexes[ input_name ].test( input_value ) ) {
             // Add class of error
             input.addClass('error')
-            let errorMessage = this.error_messages[ input_name ]
-            let html = AlbumFormTemplates.validateInput( errorMessage )
+            let error_message = this.error_messages[ input_name ]
+            let html = AlbumFormTemplates.validateInput( error_message )
             input.parent('.form-group').prepend( html )
             return false
         }
@@ -37,11 +39,24 @@ const Validator = {
     },
 
     validateInputs: function ( inputs_arr, min_length, error_key, error_container ) {
-        error_container.find('.error-message').remove()
+        error_container.find('>.error-message:first-of-type').remove()
+
         if ( inputs_arr.length < min_length ) {
             let html = AlbumFormTemplates.validateInput( this.error_messages[ error_key ] )
             error_container.prepend( html )
         }
+    },
+
+    validateDuplications: function ( arr_to_check, key_to_check, value_to_check, error_key, error_container ) {
+        error_container.find('.error-message').remove()
+        let has_duplications = Utils.isInArrayOfObjects( arr_to_check, key_to_check, value_to_check)
+
+        if ( has_duplications ) {
+            let html = AlbumFormTemplates.validateInput( this.error_messages[ error_key ] )
+            error_container.prepend( html )
+        }
+
+        return has_duplications
     }
 }
 
