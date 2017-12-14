@@ -629,17 +629,17 @@ img {
         color: red; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input.error {
         border-color: red; }
-      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[name="album-artist"] {
+      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-artist {
         margin-left: 53px; }
-      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[name="album-image"] {
+      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-image {
         margin-left: 20px; }
-      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[name="album-year"] {
+      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-year {
         margin-left: 59px; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[type="checkbox"] {
         margin-left: 3px; }
         #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[type="checkbox"]:first-of-type {
           margin-left: 45px; }
-      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group textarea[name="album-description"] {
+      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-description {
         margin-left: 0;
         margin-top: 0;
         height: 250px;
@@ -668,7 +668,7 @@ img {
         position: absolute;
         top: 8px;
         left: 385px; }
-      #add-new-album #add-album-playlist-details #add-album-playlist-form input[name="song-name"] {
+      #add-new-album #add-album-playlist-details #add-album-playlist-form .song-name {
         position: absolute;
         top: 0;
         left: 470px;
@@ -677,7 +677,7 @@ img {
       #add-new-album #add-album-playlist-details #add-album-playlist-form .youtube-url-label {
         position: absolute;
         top: 8px; }
-      #add-new-album #add-album-playlist-details #add-album-playlist-form input[name="youtube-url"] {
+      #add-new-album #add-album-playlist-details #add-album-playlist-form .song-youtube {
         position: absolute;
         top: 0;
         left: 100px;
@@ -688,7 +688,7 @@ img {
         position: absolute;
         top: 8px;
         left: 755px; }
-      #add-new-album #add-album-playlist-details #add-album-playlist-form input[name="song-time"] {
+      #add-new-album #add-album-playlist-details #add-album-playlist-form .song-time {
         width: 70px;
         position: absolute;
         top: 0;
