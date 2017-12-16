@@ -55,24 +55,24 @@ const AlbumForm = {
     },
 
     collectSongs: function() {
-        let has_duplications = false, songs = [], song, id, name, duration
+        let has_duplications = false, songs = [], song, song_youtube, song_name, song_time
 
         $.each( $('.song-item'), ( index, item ) => {
             song = $( item )
-            id = song.find('input[name=song_youtube]').val()
-            name = song.find('input[name=song_name]').val()
-            duration = song.find('input[name=song_time]').val()
+            song_youtube = song.find('input[name=song_youtube]').val()
+            song_name = song.find('input[name=song_name]').val()
+            song_time = song.find('input[name=song_time]').val()
 
-            if ( id !== '' && name !== '' && duration !== '' ) {
+            if ( song_youtube !== '' && song_name !== '' && song_time !== '' ) {
                 if ( songs.length === 0 ) {
-                    songs.push({ id, name, duration })
+                    songs.push({ song_youtube, song_name, song_time })
                     return
                 }
 
-                has_duplications = Validator.validateDuplications(songs, 'id', id, 'duplicate_song', $( item ) )
+                has_duplications = Validator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
 
                 if ( !has_duplications ) {
-                    songs.push({ id, name, duration })
+                    songs.push({ song_youtube, song_name, song_time })
                 }
             }
         })
@@ -101,13 +101,13 @@ const AlbumForm = {
         e.preventDefault()
 
         let album = this.collectValues()
+        let songs = this.collectSongs()
 
         if ( !album ) {
             this.scrollTop( $('#main-container') )
             return
         }
 
-        let songs = this.collectSongs()
         if ( !songs ) {
             this.scrollTop( $('#add-album-playlist-details') )
             return
@@ -176,6 +176,7 @@ const AlbumForm = {
             video => {
                 $input.closest('.song-item').find('input[name=song_name]').val( video.title )
                 $input.closest('.song-item').find('input[name=song_time]').val( video.duration )
+                $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
             },
             error => {
                 let html = AlbumFormTemplates.validateInput( error.responseJSON.error )
@@ -197,7 +198,7 @@ const AlbumForm = {
         $('#add-another-song').on('click', this.addSong)
         $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
-        $('input[name=song_youtube]').on('keyup', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 1000) )
+        $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 1000) )
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
     },
 

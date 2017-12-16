@@ -30,7 +30,8 @@ const AlbumFormTemplates = {
                 </div>
                 <div class="form-group song">
                     <label class="song-time-label control-label">Song Time:</label>
-                    <input type="text" class="song-time form-control" name="song_time" placeholder="01:23" title="Song Time" required>
+                    <span class="song-time form-control"></span>
+                    <input type="hidden" name="song_time" title="Song Time" required>
                 </div>
                 <a href="#" class="remove-icon" data-album-id="">
                     <i class="fa fa-remove"></i>

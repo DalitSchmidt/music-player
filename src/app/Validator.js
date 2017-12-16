@@ -3,19 +3,19 @@ import Utils from './Utils'
 
 const Validator = {
     regexes: {
-        'album-name': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-        'album-artist': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-        'album-image': new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$"),
-        'album-year': new RegExp("^[0-9]{4}$"),
-        'album-description': new RegExp("^[A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
+        'album_name': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
+        'album_artist': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
+        'album_image': new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$"),
+        'album_year': new RegExp("^[0-9]{4}$"),
+        'album_description': new RegExp("^[A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
     },
 
     error_messages: {
-        'album-name': 'The name of album must begin with a big letter',
-        'album-artist': 'The name of album artist must begin with a big letter',
-        'album-image': 'The image of album cover must be a URL that ends with .JPG, .JPEG, .GIF or .PNG',
-        'album-year': 'The year of album must be 4 characters',
-        'album-description': 'The description of album must begin with a big letter',
+        'album_name': 'The name of album must begin with a big letter',
+        'album_artist': 'The name of album artist must begin with a big letter',
+        'album_image': 'The image of album cover must be a URL that ends with .JPG, .JPEG, .GIF or .PNG',
+        'album_year': 'The year of album must be 4 characters',
+        'album_description': 'The description of album must begin with a big letter',
         'song_youtube_id': 'The album must contain at least 5 songs',
         'duplicate_song': 'Song is already in list'
     },

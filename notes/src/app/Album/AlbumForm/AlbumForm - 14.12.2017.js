@@ -91,41 +91,41 @@ const AlbumForm = {
     // באמצעות הפונקציה collectSongs אנו מביאים את כל הערכים המצויים ב- inputים הקשורים לשדות של השירים
     collectSongs: function() {
         // הצהרה על המשתנים שאנו הולכים לבצע בהם שימוש בפונקציה
-        let has_duplications = false, songs = [], song, name, duration, id
+        let has_duplications = false, songs = [], song, song_youtube, song_name, song_time
 
         // הלולאת each עוברת איבר-איבר על אלמנט div שיש לו class בשם song-item (שלמעשה מכיל מערך של כל האלמנטים מסוג div שיש להם class בשם song-item) ומוציאה ממנו את ה- index ואת ה- item
         $.each( $('.song-item'), ( index, item ) => {
             // המשתנה song מכיל באמצעות שימוש ב- jQuery את ה- item שמצוי במערך של song-item
             song = $( item )
-            // המשתנה name מכיל את הערך המצוי בתיבת ה- input של שם השיר, באמצעות מציאת הנתונים המצויים במשתנה song (המכיל את ה- item שמצוי במערך של song-item) את ה- input שיש לו attribute מסוג name בשם song-name ומביא את הערך שמצוי ב- input
-            name = song.find('input[name=song-name]').val()
-            // המשתנה duration מכיל את הערך המצוי בתיבת ה- input של זמן השיר, באמצעות מציאת הנתונים המצויים במשתנה song (המכיל את ה- item שמצוי במערך של song-item) את ה- input שיש לו attribute מסוג name בשם song-time ומביא את הערך שמצוי ב- input
-            duration = song.find('input[name=song-time]').val()
-            // המשתנה id מכיל את הערך המצוי בתיבת ה- input של המזהה הייחודי של YouTube, באמצעות מציאת הנתונים המצויים במשתנה song (המכיל את ה- item שמצוי במערך של song-item) את ה- input שיש לו attribute מסוג name בשם youtube-url ומביא את הערך שמצוי ב- input
-            id = song.find('input[name=youtube-url]').val()
+            // המשתנה song_youtube מכיל את הערך המצוי בתיבת ה- input של המזהה הייחודי של YouTube, באמצעות מציאת הנתונים המצויים במשתנה song (המכיל את ה- item שמצוי במערך של song-item) את ה- input שיש לו attribute מסוג name בשם song_youtube ומביא את הערך שמצוי ב- input
+            song_youtube = song.find('input[name=song_youtube]').val()
+            // המשתנה song_name מכיל את הערך המצוי בתיבת ה- input של שם השיר, באמצעות מציאת הנתונים המצויים במשתנה song (המכיל את ה- item שמצוי במערך של song-item) את ה- input שיש לו attribute מסוג name בשם song_name ומביא את הערך שמצוי ב- input
+            song_name = song.find('input[name=song_name]').val()
+            // המשתנה song_time מכיל את הערך המצוי בתיבת ה- input של זמן השיר, באמצעות מציאת הנתונים המצויים במשתנה song (המכיל את ה- item שמצוי במערך של song-item) את ה- input שיש לו attribute מסוג name בשם song_time ומביא את הערך שמצוי ב- input
+            song_time = song.find('input[name=song_time]').val()
 
-            // אם יש ערכים במשתנים name, duration ו- id, כלומר שהם לא ריקים מתוכן
-            if ( name !== '' && duration !== '' && id !== '' ) {
+            // נבדוק אם יש ערכים במשתנים song_name, song_youtube ו- song_time, כלומר שהם לא ריקים מתוכן
+            if ( song_youtube !== '' && song_name !== '' && song_time !== '' ) {
                 // אם אורך המערך המצוי במשתנה songs הוא 0
                 if ( songs.length === 0 ) {
-                    // נכניס לתוך המערך של songs אובייקט המכיל את הפרופרטיס name, id ו- duration
-                    songs.push({ name, id, duration })
+                    // נכניס לתוך המערך של songs אובייקט המכיל את הפרופרטיס song_name, song_youtube ו- song_time
+                    songs.push({ song_youtube, song_name, song_time })
                     return
                 }
 
-                // המשתנה has_duplications מפעיל את הפונקציה isInArrayOfObjects המצויה תחת האובייקט Utils ושבאמצעותה אנו בודקים אם המערך הוא מערך של אובייקטים ולצורך כך היא מקבלת את המשתנים songs, 'id', id, 'duplicate_song' ו- $( item )
-                has_duplications = Validator.validateDuplications(songs, 'id', id, 'duplicate_song', $( item ) )
+                // המשתנה has_duplications מפעיל את הפונקציה isInArrayOfObjects המצויה תחת האובייקט Utils ושבאמצעותה אנו בודקים אם המערך הוא מערך של אובייקטים ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item )
+                has_duplications = Validator.validateDuplications(songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
 
-                // נבדוק אם המשתנה has_duplications שמפעיל את הפונקציה isInArrayOfObjects המצויה תחת האובייקט Utils ושבאמצעותה אנו בודקים אם המערך הוא מערך של אובייקטים ולצורך כך היא מקבלת את המשתנים songs, 'id', id, 'duplicate_song' ו- $( item ) לא מכיל נתונים כפולים
+                // נבדוק אם המשתנה has_duplications שמפעיל את הפונקציה isInArrayOfObjects המצויה תחת האובייקט Utils ושבאמצעותה אנו בודקים אם המערך הוא מערך של אובייקטים ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item ) לא מכיל נתונים כפולים
                 if ( !has_duplications ) {
-                    // נכניס לתוך המערך של songs אובייקט המכיל את הפרופרטיס name, id ו- duration
-                    songs.push({ name, id, duration })
+                    // נכניס לתוך המערך של songs אובייקט המכיל את הפרופרטיס song_name, song_youtube ו- song_time
+                    songs.push({ song_youtube, song_name, song_time })
                 }
             }
         })
 
-        // הפעלת הפונקציה validateInputs המצויה תחת האובייקט Validator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 5, 'songs_youtube_id' ואת האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form
-        Validator.validateInputs( songs, 5, 'songs_youtube_id', $('#add-album-playlist-form') )
+        // הפעלת הפונקציה validateInputs המצויה תחת האובייקט Validator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 5, 'song_youtube_id' ואת האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form
+        Validator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
 
         // נבדוק אם יש נתונים במשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכו הפרופרטיס youtube, name ו- duration וגם שהמשתנה has_duplications לא מכיל נתונים כפולים
         if ( songs.length && !has_duplications ) {
@@ -161,6 +161,8 @@ const AlbumForm = {
 
         // המשתנה album מכיל את הפונקציה collectValues שלמעשה היא מכילה את כל הערכים המצויים ב- inputים הקשורים לשדות של האלבום ומפעיל אותה
         let album = this.collectValues()
+        // המשתנה songs מכיל את הפונקציה collectSongs שלמעשה היא מכילה את כל הערכים המצויים ב- inputים הקשורים לשדות של השירים ומפעיל אותה
+        let songs = this.collectSongs()
 
         // אם יש שגיאה בשדות המצויים במשתנה album שלמעשה מכיל את כל הערכים המצויים ב- inputים הקשורים לשדות של האלבום
         if ( !album ) {
@@ -169,8 +171,6 @@ const AlbumForm = {
             return
         }
 
-        // המשתנה songs מכיל את הפונקציה collectSongs שלמעשה היא מכילה את כל הערכים המצויים ב- inputים הקשורים לשדות של השירים ומפעיל אותה
-        let songs = this.collectSongs()
         // אם יש שגיאה בשדות של המשתנה songs שלמעשה הוא מכיל את הפונקציה collectSongs המכילה את כל הערכים המצויים ב- inputים הקשורים לשדות של השירים
         if ( !songs ) {
             // הפעלה של הפונקציה scrollTop המבצעת גלילה של העמוד חזרה למעלה עד לתחילת האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-details
@@ -231,8 +231,8 @@ const AlbumForm = {
 
     // באמצעות הפונקציה changeCoverImage מתאפשר להחליף את התצוגה של התמונה המוצגת בתמונת Cover של האלבום
     changeCoverImage: function() {
-        // המשתנה img מכיל את הערך המצוי בשדה ה- input שיש לו מזהה ייחודי בשם image-url
-        let img = $('#image-url').val()
+        // המשתנה img מכיל את הערך המצוי בשדה ה- input שיש לו מזהה ייחודי בשם album-image
+        let img = $('#album-image').val()
         // המשתנה regex יוצר אינסטנס חדש של תבנית המבצעת תיקוף לנתונים המצויים בשדה ה- input
         let regex = new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$")
 
@@ -273,10 +273,12 @@ const AlbumForm = {
         AlbumAPIService.searchYoutubeID( youtube_id ).then(
             // המשתנה video מכיל אובייקט עם פרופרטיס שונים עם נתונים הקשורים לסרטון
             video => {
-                // המשתנה input מכיל את האלמנט הקרוב ביותר שיש לו class בשם song-item ומוצא בתוך האלמנט את ה- input שיש לו attribute מסוג name בשם song-name ומביא את הערך של title המצוי באובייקט video
-                $input.closest('.song-item').find('input[name=song-name]').val( video.title )
-                // המשתנה input מכיל את האלמנט הקרוב ביותר שיש לו class בשם song-item ומוצא בתוך האלמנט את ה- input שיש לו attribute מסוג name בשם song-time ומביא את הערך של duration המצוי באובייקט video
-                $input.closest('.song-item').find('input[name=song-time]').val( video.duration )
+                // המשתנה input מכיל את האלמנט הקרוב ביותר שיש לו class בשם song-item ומוצא בתוך האלמנט את ה- input שיש לו attribute מסוג name בשם song_name ומביא את הערך של title המצוי באובייקט video
+                $input.closest('.song-item').find('input[name=song_name]').val( video.title )
+                // המשתנה input מכיל את האלמנט הקרוב ביותר שיש לו class בשם song-item ומוצא בתוך האלמנט את ה- input שיש לו attribute מסוג name בשם song_time ומביא את הערך של duration המצוי באובייקט video
+                $input.closest('.song-item').find('input[name=song_time]').val( video.duration )
+                // המשתנה input מכיל את האלמנט הקרוב ביותר שיש לו class בשם song-item ומוצא בתוך האלמנט את האלמנט שיש לו class בשם song-time ומציג את הנתונים המצויים בפרופרטי duration המצוי באובייקט video ב- DOM באמצעות ההפעלה של הפונקציה calculateTime המצויה תחת האובייקט Utils ושבאמצעותה אנו מבצעים חישוב של זמן השיר
+                $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
             },
             // המשתנה error מכיל את השגיאות האפשריות
             error => {
@@ -308,12 +310,12 @@ const AlbumForm = {
         $('#add-new-album').on('submit', $.proxy( this.saveAlbum, this ))
         // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם add-another-song תופעל הפונקציה addSong
         $('#add-another-song').on('click', this.addSong)
-        // כאשר מבוצעת יציאה מהאלמנט על-ידי המשתמש (במקרה זה מתיבת ה- input המכילה מזהה ייחודי בשם image-url), ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם changeCoverImage יתייחס לאלמנט עצמו (במקרה זה לאלמנט input המכיל מזהה ייחודי בשם image-url), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה changeCoverImage יתייחס בכל מקרה לאובייקט AlbumForm
-        $('#image-url').on('blur', $.proxy( this.changeCoverImage, this ))
+        // כאשר מבוצעת יציאה מהאלמנט על-ידי המשתמש (במקרה זה מתיבת ה- input שיש לה מזהה ייחודי בשם album-image), ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם changeCoverImage יתייחס לאלמנט עצמו (במקרה זה לאלמנט input שיש לו מזהה ייחודי בשם album-image), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה changeCoverImage יתייחס בכל מקרה לאובייקט AlbumForm
+        $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
         // כאשר לוחצים על הכתפור שיש לו class בשם remove-icon שמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form נפעיל את הפונקציה removeSongItem המאפשרת למחוק שורה המכילה את השדות להוספת שיר לאלבום
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
-        // כאשר מתבצעת הקלדה באלמנט input שיש לו את ה- attribute מסוג name בשם youtube_url נפעיל את הפונקציה debounce שמצויה תחת האובייקט Utils ושבאמצעותה אנו מבצעים השהיה של הפעלת הפונקציה שאנו מעוניינים להפעיל, במקרה זה מדובר בפונקציה searchYoutubeVideo המאפשרת לחפש את הסרטון וידאו של YouTube ונשהה את הפעולה שלה למשך שנייה, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchYouTubeVideo יתייחס לאלמנט עצמו (במקרה זה לאלמנט input שיש לו את ה- attribute מסוג name בשם youtube-url) נשתמש ב- proxy, כדי שההקשר של this בתוך הפונקציה searchYouTubeVideo יתייחס בכל מקרה לאובייקט AlbumForm
-        $('input[name=youtube-url]').on('keyup', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 1000) )
+        // כאשר מתבצעת הקלדה באלמנט input שיש לו את ה- attribute מסוג name בשם song_youtube שמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form, נפעיל את הפונקציה debounce שמצויה תחת האובייקט Utils ושבאמצעותה אנו מבצעים השהיה של הפעלת הפונקציה שאנו מעוניינים להפעיל, במקרה זה מדובר בפונקציה searchYoutubeVideo המאפשרת לחפש את הסרטון וידאו של YouTube ונשהה את הפעולה שלה למשך שנייה, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchYouTubeVideo יתייחס לאלמנט עצמו (במקרה זה לאלמנט input שיש לו את ה- attribute מסוג name בשם song_youtube) נשתמש ב- proxy, כדי שההקשר של this בתוך הפונקציה searchYouTubeVideo יתייחס בכל מקרה לאובייקט AlbumForm
+        $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 1000) )
         // כאשר מתבצעת הקלדה בתיבת ה- input שיש לה את ה- attribute המאפשרת מסוג name בשם youtube-url נפעיל את הפונקציה searchYoutubeVideo המאפשרת לחפש את הסרטון וידאו של YouTube, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchYoutubeVideo יתייחס לאלמנט עצמו (הקלדה בתיבת ה- input) ולא לאובייקט AlbumForm, לכן אנו משתמשים ב- proxy כדי שההקשר של this בתוך הפונקציה searchYoutubeVideo יתייחס בכל מקרה לאובייקט AlbumForm
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
     },

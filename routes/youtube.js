@@ -19,9 +19,14 @@ router.get('/:youtube_id', ( req, res ) => {
 
                     request(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${youtube_id}&key=${YOUTUBE_API_KEY}`, function( error, response, body ) {
                     data = JSON.parse( body )
-                    video.duration = data.items[0].contentDetails.duration.split('PT')[1]
+                    // video.duration = data.items[0].contentDetails.duration.split('PT')[1]
+                    //  video.duration = /(?<=PT)(.*)(?=M)/.exec(data.items[0].contentDetails.duration)
 
-                    res.json( video )
+                    const minutes =  parseInt(/\d+(?=M)/.exec( data.items[0].contentDetails.duration)[0] ) * 60
+                    const seconds = parseInt(/\d+(?=S)/.exec( data.items[0].contentDetails.duration)[0] )
+
+                    video.duration = minutes + seconds
+                        res.json( video )
                 })
             } else {
                 res.status(404).json({ error: 'Youtube code is incorrect' })

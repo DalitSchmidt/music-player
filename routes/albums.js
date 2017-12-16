@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const models = require('../models')
 const AlbumModel = models.Album
+const SongModel = models.Song
 
 router.get('/', function ( req, res ) {
     AlbumModel.findAll({ attributes: { exclude: ['album_description'] } }).then(results => {
@@ -63,23 +64,39 @@ router.get('/:album_id', function ( req, res ) {
 
 router.post('/', function ( req, res ) {
     let album = req.body
+    let songs = album.songs
+
+    if ( !Array.isArray( songs ) ) {
+        res.status(422).json({ err: 'No Songs!' })
+    }
 
     AlbumModel.create( album ).then(result => {
         let album_id = result.album_id
         let genres = album.genres
-        let songs = album.songs
+        songs = songs.map( song => {
+            song.album_id = album_id
+            return song
+        })
+        // songs.forEach( song => {
+        //     SongModel.build( song )
+        // })
 
-        // if ( !Array.isArray( songs ) || !Array.isArray( songs ) )
-        //     throw error()
+        // Create the songs in the DB and link theme to the album
+        SongModel.bulkCreate( songs ).then( () => {
+            res.status(201).json({ album_id })
+        })
+        // SongModel.save().then( () => {
 
         let query = []
 
         genres.forEach( id => query.push(`(${album_id}, ${id})`) )
         models.sequelize.query('INSERT INTO albums_to_genres (album_id, genre_id) VALUES ' + query.join(', '))
 
-        // Create the songs in the DB and link theme to the album
-
-        res.status(201).json({ album_id })
+        //     res.status(201).json({ album_id })
+        //
+        // }).catch(err => {
+        //     throw new Error( err )
+        // })
     }).catch( err => {
         res.status(422).json({ err })
         let errors = err.errors[0]
