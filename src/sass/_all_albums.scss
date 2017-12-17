@@ -22,6 +22,7 @@
 
             &:hover {
                 opacity: 1;
+                transition: opacity .5s;
             }
 
             &:before {
@@ -98,6 +99,7 @@
         .record:hover .remove-icon,
         .record:hover .edit-icon {
             opacity: 1;
+            transition: opacity .5s;
         }
     }
 }

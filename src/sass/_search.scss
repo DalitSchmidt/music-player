@@ -31,9 +31,11 @@
                     position: relative;
                     display: block;
                     opacity: 0.75;
+                    transition: opacity .5s;
 
                     &:hover {
                         opacity: 1;
+                        transition: opacity .5s;
                     }
 
                     &:before {
@@ -101,6 +103,7 @@
                 .search-results-record:hover .edit-icon,
                 .search-results-record:hover .play-icon {
                     opacity: 1;
+                    transition: opacity .5s;
                 }
             }
 
