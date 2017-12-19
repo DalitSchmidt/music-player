@@ -12,8 +12,7 @@ const Validator = {
         'album_artist': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
         'album_image': new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$"),
         'album_year': new RegExp("^[0-9]{4}$"),
-        'album_description': new RegExp//("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
-        // 'album_description': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
+        'album_description': new RegExp("^[A-Z][A-Za-z\s?:\s[A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
     },
 
     // הפרופרטיס error_messages מכיל הודעות שגיאה האפשריות להיות מוצגות ככל ויש שגיאה בנתונים המצויים באלמנט input
@@ -84,7 +83,7 @@ const Validator = {
             error_container.prepend( html )
         }
 
-        // הפונקציה מחזירה את המשתנה has_duplications שמפעיל את הפונקציה isInArrayOfObjects המקבלת את המשתנים arr_to_check, key_to_check ו- value_to_check המצויה תחת האובייקט Utils ושבאמצעותה מתאפשר לבדוק אם המערך הוא מערך של אובייקטים
+        //הפונקציה מחזירה את המשתנה has_duplications שמפעיל את הפונקציה isInArrayOfObjects המקבלת את המשתנים arr_to_check, key_to_check ו- value_to_check המצויה תחת האובייקט Utils ושבאמצעותה מתאפשר לבדוק אם המערך הוא מערך של אובייקטים
         return has_duplications
     }
 }

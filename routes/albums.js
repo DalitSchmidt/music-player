@@ -5,7 +5,12 @@ const AlbumModel = models.Album
 const SongModel = models.Song
 
 router.get('/', function ( req, res ) {
-    AlbumModel.findAll({ attributes: { exclude: ['album_description'] } }).then(results => {
+    AlbumModel.findAll({
+        attributes: { exclude: ['album_description'] },
+        order: [
+            ['album_id']
+        ]
+    }).then(results => {
         if ( results.length === 0 )
             res.status(204).send()
         else
@@ -16,7 +21,13 @@ router.get('/', function ( req, res ) {
 router.get('/search/:term', function( req, res ) {
     let term = req.params.term
 
-    AlbumModel.findAndCountAll({ where: { album_name: { $like: `%${term}%` } } }).then(results => {
+    AlbumModel.findAndCountAll({
+        where: {
+            album_name: {
+                $like: `%${term}%`
+            }
+        }
+    }).then(results => {
         if ( !results.count )
             res.sendStatus(204)
         else
@@ -52,7 +63,7 @@ router.get('/:album_id', function ( req, res ) {
 
     models.sequelize.Promise.join(
         models.sequelize.query(`SELECT * FROM albums WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.SELECT}),
-        models.sequelize.query(`SELECT * FROM songs WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.SELECT}),
+        models.sequelize.query(`SELECT * FROM songs WHERE album_id = ${album_id} ORDER BY song_id`, {type: models.sequelize.QueryTypes.SELECT}),
         models.sequelize.query(`SELECT * FROM genres WHERE genre_id IN (SELECT genre_id FROM albums_to_genres WHERE album_id = ${album_id})`, {type: models.sequelize.QueryTypes.SELECT})
     ).spread(( album, songs, genres ) => {
         let results = album[0]
@@ -69,46 +80,74 @@ router.post('/', function ( req, res ) {
     if ( !Array.isArray( songs ) ) {
         res.status(422).json({ err: 'No Songs!' })
     }
+    // Create the songs in the DB and link theme to the album
+    return models.sequelize.transaction(function (t) {
+        return AlbumModel.create(album, {transaction: t})
+            .then(function (result) {
+                let album_id = result.album_id
+                let genres = album.genres
+                songs = songs.map(song => {
+                    song.album_id = album_id
+                    return song
+                })
 
-    AlbumModel.create( album ).then(result => {
-        let album_id = result.album_id
-        let genres = album.genres
-        songs = songs.map( song => {
-            song.album_id = album_id
-            return song
+                return SongModel.bulkCreate(songs, {transaction: t})
+            })
+        }).then(function ( result ) {
+            res.status(201).json({ result })
+        }).catch(function ( err ) {
+            let errors = err.errors[0]
+
+            res.status(422).json({
+                error: 'Unable to create album',
+                reason: {
+                    message: errors.message,
+                    error: `${errors.path} '${errors.value}' already exists`
+                }
+            })
+
+            throw new Error()
         })
-        // songs.forEach( song => {
-        //     SongModel.build( song )
-        // })
 
-        // Create the songs in the DB and link theme to the album
-        SongModel.bulkCreate( songs ).then( () => {
-            res.status(201).json({ album_id })
-        })
-        // SongModel.save().then( () => {
-
-        let query = []
-
-        genres.forEach( id => query.push(`(${album_id}, ${id})`) )
-        models.sequelize.query('INSERT INTO albums_to_genres (album_id, genre_id) VALUES ' + query.join(', '))
-
-        //     res.status(201).json({ album_id })
-        //
-        // }).catch(err => {
-        //     throw new Error( err )
-        // })
-    }).catch( err => {
-        res.status(422).json({ err })
-        let errors = err.errors[0]
-
-        res.status(422).json({
-            error: 'Unable to create album',
-            reason: {
-                message: errors.message,
-                error: `${errors.path} '${errors.value}' already exists`
-            }
-        })
-    })
+    //
+    // AlbumModel.create( album ).then(result => {
+    //     let album_id = result.album_id
+    //     let genres = album.genres
+    //     songs = songs.map( song => {
+    //         song.album_id = album_id
+    //         return song
+    //     })
+    //
+    //     // Create the songs in the DB and link theme to the album
+    //     SongModel.bulkCreate( songs ).then( () => {
+    //         res.status(201).json({ album_id })
+    //     }).catch(err => {
+    //         res.status(422).json({ err })
+    //     })
+    //     // SongModel.save().then( () => {
+    //
+    //     // let query = []
+    //     //
+    //     // genres.forEach( id => query.push(`(${album_id}, ${id})`) )
+    //     // models.sequelize.query('INSERT INTO albums_to_genres (album_id, genre_id) VALUES ' + query.join(', '))
+    //
+    //     //     res.status(201).json({ album_id })
+    //     //
+    //     // }).catch(err => {
+    //     //     throw new Error( err )
+    //     // })
+    // }).catch( err => {
+    //     res.status(422).json({ err })
+    //     let errors = err.errors[0]
+    //
+    //     res.status(422).json({
+    //         error: 'Unable to create album',
+    //         reason: {
+    //             message: errors.message,
+    //             error: `${errors.path} '${errors.value}' already exists`
+    //         }
+    //     })
+    // })
 })
 
 router.delete('/:album_id', ( req, res ) => {
