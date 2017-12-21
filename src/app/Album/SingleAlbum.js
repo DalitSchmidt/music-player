@@ -32,6 +32,11 @@ const AlbumPlayer = {
         $('#album-info').html( html )
     },
 
+    setAlbumInfoControls: function ( album_id ) {
+        let html = SingleAlbumTemplates.albumInfoControls( album_id )
+        $('#album-info-controls').html( html )
+    },
+
     setAlbumImage: function( img ) {
         let html = SingleAlbumTemplates.albumImage( img )
         $('#album-info-image').html( html )
@@ -53,6 +58,7 @@ const AlbumPlayer = {
         AlbumAPIService.getAlbumById( id ).then( album => {
             this.setAlbumPlaylist( album.songs )
             this.setAlbumInfo( album )
+            this.setAlbumInfoControls( album.album_id )
             this.setAlbumImage( album.album_image )
             this.setNowPlayingSong()
             this.setAlbumControls()

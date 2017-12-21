@@ -13,6 +13,17 @@ const SingleAlbumTemplates = {
         `
     },
 
+    albumInfoControls: function ( album_id ) {
+        return `
+            <a class="remove-icon" data-album-id="${album_id}" data-toggle="modal" data-target="#modal">
+                <i class="fa fa-remove"></i>
+            </a>
+            <a href="#" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum" data-album-id="${album_id}">
+                <i class="fa fa-pencil"></i>
+            </a>
+        `
+    },
+
     albumImage: function( img ) {
         return `<img src="${img}" class="img-circle">`
     },

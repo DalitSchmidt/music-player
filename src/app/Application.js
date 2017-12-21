@@ -2,6 +2,7 @@ import $ from 'jquery'
 import AlbumForm from './Album/AlbumForm'
 import SingleAlbum from './Album/SingleAlbum'
 import AlbumsBoard from './Album/AlbumsBoard'
+import DeleteAlbum from './Album/DeleteAlbum'
 import Router from './Router'
 import Search from './Search/Search'
 import SearchBar from './Search/SearchBar'
@@ -35,6 +36,7 @@ const App = {
         }).init()
 
         SearchBar.init()
+        DeleteAlbum.init()
     }
 }
 

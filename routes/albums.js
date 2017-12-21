@@ -80,8 +80,8 @@ router.post('/', function ( req, res ) {
     if ( !Array.isArray( songs ) ) {
         res.status(422).json({ err: 'No Songs!' })
     }
-    // Create the songs in the DB and link theme to the album
     return models.sequelize.transaction(function (t) {
+        // Create the songs in the DB and link theme to the album
         return AlbumModel.create(album, {transaction: t})
             .then(function (result) {
                 let album_id = result.album_id
@@ -154,9 +154,9 @@ router.delete('/:album_id', ( req, res ) => {
     let album_id = req.params.album_id
 
     models.sequelize.Promise.join(
-        models.sequelize.query(`DELETE * FROM albums WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.DELETE}),
-        models.sequelize.query(`DELETE * FROM songs WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.DELETE}),
-        models.sequelize.query(`DELETE * FROM albums_to_genres WHERE album_id = ${album_id}`, {type: models.sequelize.QueryTypes.DELETE})
+        models.sequelize.query(`DELETE FROM albums WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE}),
+        models.sequelize.query(`DELETE FROM songs WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE}),
+        models.sequelize.query(`DELETE FROM albums_to_genres WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE})
     ).spread( affected_rows => {
         if ( affected_rows === 0 )
             res.json( {message: `Album id ${album_id} not found`} )

@@ -1,5 +1,9 @@
+// האובייקט AlbumTemplates המתפקד "כמעין" מחלקת שירות מכיל את כל הפונקציות המאפשרות לנו להציג מידע ב- DOM
+// הגדרת האובייקט בשם AlbumTemplates כקבוע
 const AlbumTemplates = {
+    // באמצעות הפונקציה album המקבלת את הפרמטר album, אנו יוצרים תבנית html של האלבום להצגה ב- DOM
     album: function( album ) {
+        // המשתנה html מכיל תבנית html של האלבום להצגה ב- DOM
         let html =
             `
             <div class="col-md-3">
@@ -21,10 +25,13 @@ const AlbumTemplates = {
             </div>
             `
 
+        // הפונקציה מחזירה את המשתנה html המכיל תבנית html של האלבום להצגה ב- DOM
         return html
     },
 
+    // באמצעות הפונקציה deleteDialog המקבלת את המשתנה album אנו יוצרים תבנית html המציגה ב- DOM הודעה מתאימה בדבר מחיקת האלבום הרלוונטי
     deleteDialog: function ( album ) {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM הודעה מתאימה בדבר מחיקת האלבום הרלוונטי
         return `
             <div class="modal-content">
                 <div class="modal-body">
@@ -37,7 +44,9 @@ const AlbumTemplates = {
         </div>`
     },
 
+    // באמצעות הפונקציה deleteSuccessDialog אנו יוצרים תבנית html המציגה ב- DOM הודעה המאשרת שהאלבום נמחק
     deleteSuccessDialog: function () {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM הודעה המאשרת שהאלבום נמחק
         return `
             <div class="modal-content">
                 <div class="modal-body">
@@ -50,4 +59,5 @@ const AlbumTemplates = {
     }
 }
 
+// ייצוא היכולות של האובייקט AlbumTemplates החוצה
 export default AlbumTemplates
