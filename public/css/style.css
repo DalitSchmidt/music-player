@@ -115,7 +115,8 @@ img {
       font-size: 24px;
       -moz-transition: all 0.3s ease-in-out;
       -webkit-transition: all 0.3s ease-in-out;
-      color: #000000; }
+      color: #000000;
+      cursor: pointer; }
     #single-album #aside-left #album-info-controls .edit-icon {
       position: absolute;
       border-radius: 50%;
@@ -125,7 +126,8 @@ img {
       font-size: 24px;
       -moz-transition: all 0.3s ease-in-out;
       -webkit-transition: all 0.3s ease-in-out;
-      color: #000000; }
+      color: #000000;
+      cursor: pointer; }
   #single-album #aside-left #album-info-image {
     height: 250px;
     width: 250px;
@@ -582,7 +584,8 @@ img {
         -moz-transition: all 0.3s ease-in-out;
         -webkit-transition: all 0.3s ease-in-out;
         left: 115px;
-        color: #000000; }
+        color: #000000;
+        cursor: pointer; }
       #album-list .col-md-3 .record .edit-icon {
         position: absolute;
         border-radius: 50%;
@@ -594,12 +597,96 @@ img {
         -moz-transition: all 0.3s ease-in-out;
         -webkit-transition: all 0.3s ease-in-out;
         left: 145px;
-        color: #000000; }
+        color: #000000;
+        cursor: pointer; }
     #album-list .col-md-3 .record:hover .play-icon,
     #album-list .col-md-3 .record:hover .remove-icon,
     #album-list .col-md-3 .record:hover .edit-icon {
       opacity: 1;
       transition: opacity .5s; }
+
+/* The Modal (background) */
+.modal {
+  /*display: none; */
+  /* position: fixed; */
+  /* z-index: 1; */
+  /* left: 0; */
+  /* top: 0; */
+  width: 100%;
+  height: 100%;
+  /* overflow: auto; */
+  /* background-color: black; */
+  background-color: rgba(0, 0, 0, 0.4); }
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+  width: 80%;
+  /* Could be more or less, depending on screen size */ }
+
+.modal-header {
+  padding: 0;
+  margin: 0;
+  /* color: black; */
+  border-bottom: none; }
+
+.modal-body {
+  padding: 10px; }
+  .modal-body h4 {
+    font-weight: bold;
+    line-height: normal; }
+
+.modal-footer {
+  border-top: none;
+  padding: 10px; }
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold; }
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer; }
+
+#cancel-button {
+  background-color: black;
+  display: block;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  width: 200px;
+  box-sizing: border-box; }
+  #cancel-button:hover {
+    background-color: #0F70A1;
+    color: white; }
+
+#approve-delete, #close-button {
+  background-color: black;
+  display: block;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  width: 200px;
+  box-sizing: border-box; }
+  #approve-delete:hover, #close-button:hover {
+    background-color: #0F70A1;
+    color: white; }
 
 #add-new-album {
   /*Add New Album*/
@@ -639,6 +726,8 @@ img {
         margin-bottom: 10px; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input.error, #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group textarea.error {
         border-color: red; }
+      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input.success, #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group textarea.success {
+        border-color: green; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-artist {
         margin-left: 53px; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-image {
@@ -676,6 +765,8 @@ img {
         margin-left: 15px; }
       #add-new-album #add-album-playlist-details #add-album-playlist-form input.error {
         border-color: red; }
+      #add-new-album #add-album-playlist-details #add-album-playlist-form input.success {
+        border-color: green; }
       #add-new-album #add-album-playlist-details #add-album-playlist-form .song-item {
         margin: 20px 0 20px 0; }
         #add-new-album #add-album-playlist-details #add-album-playlist-form .song-item .error-message {
@@ -731,7 +822,8 @@ img {
         -moz-transition: all 0.3s ease-in-out;
         -webkit-transition: all 0.3s ease-in-out;
         left: 920px;
-        color: #000000; }
+        color: #000000;
+        cursor: pointer; }
       #add-new-album #add-album-playlist-details #add-album-playlist-form .row {
         margin: 10px; }
     #add-new-album #add-album-playlist-details #add-another-song {
@@ -958,7 +1050,8 @@ input[type=password], .tagSelector {
             -moz-transition: all 0.3s ease-in-out;
             -webkit-transition: all 0.3s ease-in-out;
             left: 115px;
-            color: #000000; }
+            color: #000000;
+            cursor: pointer; }
           #search-results .col-md-12 .row .col-md-3 .search-results-record .edit-icon {
             position: absolute;
             border-radius: 50%;
@@ -970,7 +1063,8 @@ input[type=password], .tagSelector {
             -moz-transition: all 0.3s ease-in-out;
             -webkit-transition: all 0.3s ease-in-out;
             left: 145px;
-            color: #000000; }
+            color: #000000;
+            cursor: pointer; }
         #search-results .col-md-12 .row .col-md-3 .search-results-record:hover .remove-icon,
         #search-results .col-md-12 .row .col-md-3 .search-results-record:hover .edit-icon,
         #search-results .col-md-12 .row .col-md-3 .search-results-record:hover .play-icon {
