@@ -4,7 +4,7 @@ import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import Validator from '../Validator'
 import Utils from '../Utils'
 import Router from '../Router'
-import Player from "../Player"
+import Player from '../Player'
 import AlbumForm from './AlbumForm'
 
 const EditAlbum = {
@@ -28,8 +28,7 @@ const EditAlbum = {
     saveChanges: function ( e ) {
         e.preventDefault()
         const album = AlbumForm.validateAlbum()
-        console.log( album )
-        // AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessage )
+        AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessage )
     },
 
     setSuccessMessage: function() {
@@ -41,23 +40,24 @@ const EditAlbum = {
     },
 
     getAlbum: function () {
-
-        AlbumAPIService.getAlbumById( this.album_id ).then( album => {
-            console.log(album)
-            this.setValues( album )
-        }, error => {
-            Router.redirect()
-            return
-        })
+        AlbumAPIService.getAlbumById( this.album_id ).then(
+            album => {
+                console.log( album )
+                this.setValues( album )
+            }, error => {
+                Router.redirect()
+                return
+            })
     },
-
 
     init: function () {
         this.album_id = this.getAlbumID()
+
         if ( !this.album_id ) {
             Router.redirect()
             return
         }
+
         this.getAlbum()
         this.bindEvents()
     }

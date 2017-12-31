@@ -57,13 +57,12 @@ const DeleteAlbum = {
         $('#main-container').on('click', '#album-info-controls .remove-icon, .record .remove-icon, .search-results-record .remove-icon', $.proxy( this.deleteMessage, this ))
         $('.modal-dialog').on('click', '#approve-delete', $.proxy( this.confirmAlbumDelete, this ))
         $('.modal-dialog').on('click', '.cancel', $.proxy( this.cancelDelete, this ))
-        $('.modal-dialog').on('click', '[data-action=handle-delete]', $.proxy( this.handleDelete, this *))
+        $('.modal-dialog').on('click', '[data-action=handle-delete]', $.proxy( this.handleDelete, this ))
     },
 
     init: function () {
         this.bindEvents()
         this.updateCurrentPage()
-
     }
 }
 

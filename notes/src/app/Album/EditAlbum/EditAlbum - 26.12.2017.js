@@ -51,10 +51,8 @@ const EditAlbum = {
         e.preventDefault()
         // המשתנה album מכיל את הפונקציה validateAlbum המצויה תחת האובייקט AlbumForm ושבאמצעותה מתאפשר לבצע בדיקת ולידציה לשדות הנתונים של האלבום
         const album = AlbumForm.validateAlbum()
-        // הצגת המשתנה album בחלון ה- console
-        console.log( album )
-        // הפעלה של הפונקציה updateAlbum המקבלת את המשתנה this.album_id המכיל את המספר id של האלבום ואת המשתנה album המכיל את הפרטים של האלבום שמצוי תחת האובייקט AlbumAPIService ושבאמצעותה מתאפשר לעדכן נתונים באלבום לפי המספר id שלו, ולאחר מכן נפעיל את promise המפעיל את הפונקציה setSuccessMessage המציגה הודעת הצלחה עם עדכון הנתונים של האלבום
-        // AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessage )
+        // הפעלה של הפונקציה updateAlbum המקבלת את המשתנה this.album_id המכיל את המספר id של האלבום ואת המשתנה album המכיל את הפרטים של האלבום שמצוי תחת האובייקט AlbumAPIService ושבאמצעותה מתאפשר לעדכן נתונים באלבום לפי המספר id שלו, ולאחר מכן נפעיל promise המפעיל את הפונקציה setSuccessMessage המציגה הודעת הצלחה עם עדכון הנתונים של האלבום
+        AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessage )
     },
 
     // באמצעות הפונקציה setSuccessMessage אנו מציגים הודעת הצלחה עם עדכון הנתונים של האלבום
@@ -70,33 +68,34 @@ const EditAlbum = {
 
     // באמצעות הפונקציה getAlbum מתאפשר לקבל אלבום ספציפי לפי המספר id שלו
     getAlbum: function () {
-
         // הפעלה של הפונקציה getAlbumById המקבלת את המשתנה id שמצויה תחת האובייקט AlbumAPIService ושבאמצעותה אנו מבצעים בקשת get לנתיב 'http://localhost:3000/api/albums/' + album_id, ובכך מתאפשר למעשה לקבל אלבום ספציפי לפי המספר id שלו, ולאחר מכן נפעיל promise שפונקציית ה- callback שלה (המסומנת כפונקציית חץ) מקבלת 2 משתנים
-        // המשתנה album מפעיל פונקציות שונות הקשורות להבאת הערכים של השדות לעריכת אלבום
-        AlbumAPIService.getAlbumById( this.album_id ).then( album => {
-            // הצגת המשתנה album בחלון ה- console
-            console.log(album)
-            // הפעלה של הפונקציה setValues המקבלת את המשתנה album שבאמצעותה מתאפשר לשים את הערכים הרלוונטיים בשדות של הטופס עריכת אלבום
-            this.setValues( album )
-        // המשתנה error מכיל את השגיאות האפשריות
-        }, error => {
-            // הפעלה של הפונקציה redirect המצויה תחת האובייקט Router ושבאמצעותה אנו מבצעים הפניה מחדש לנתיב
-            Router.redirect()
-            return
-        })
+        AlbumAPIService.getAlbumById( this.album_id ).then(
+            // המשתנה album מפעיל פונקציות שונות הקשורות להבאת הערכים של השדות לעריכת אלבום
+            album => {
+                // הצגת המשתנה album בחלון ה- console
+                console.log( album )
+                // הפעלה של הפונקציה setValues המקבלת את המשתנה album שבאמצעותה מתאפשר לשים את הערכים הרלוונטיים בשדות של הטופס עריכת אלבום
+                this.setValues( album )
+            // המשתנה error מכיל את השגיאות האפשריות
+            }, error => {
+                // הפעלה של הפונקציה redirect המצויה תחת האובייקט Router ושבאמצעותה אנו מבצעים הפניה מחדש לנתיב
+                Router.redirect()
+                return
+            })
     },
-
 
     // הפונקציה init מכילה את כל הפעולות שאנו מעוניינים שיבוצעו עם הפעלתו של האובייקט EditAlbum
     init: function () {
         // הפרופקטי album_id מפעיל את הפונקציה getAlbumID המאפשרת לקבל את המספר id של האלבום המצוי ב- URL
         this.album_id = this.getAlbumID()
+
         // נבדוק אם המספר id של האלבום לא קיים
         if ( !this.album_id ) {
             // אז נפעיל את הפונקציה redirect המצויה תחת האובייקט Router ושבאמצעותה אנו מבצעים הפניה מחדש לנתיב
             Router.redirect()
             return
         }
+
         // הפעלה של הפונקציה getAlbum שבאמצעותה מתאפשר לקבל אלבום ספציפי לפי המספר id שלו
         this.getAlbum()
         // הפעלה של הפונקציה bindEvents המכילה את כל ה- eventים המצויים בטופס עריכת אלבום

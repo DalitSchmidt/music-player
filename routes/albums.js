@@ -66,7 +66,7 @@ router.get('/:album_id', function ( req, res ) {
         models.sequelize.query(`SELECT * FROM songs WHERE album_id = ${album_id} ORDER BY song_id`, {type: models.sequelize.QueryTypes.SELECT}),
         models.sequelize.query(`SELECT * FROM genres WHERE genre_id IN (SELECT genre_id FROM albums_to_genres WHERE album_id = ${album_id})`, {type: models.sequelize.QueryTypes.SELECT})
     ).spread(( album, songs, genres ) => {
-        if(album.length) {
+        if ( album.length ) {
             let results = album[0]
             results.songs = songs
             results.genres = genres
@@ -155,7 +155,28 @@ router.post('/', function ( req, res ) {
 })
 
 router.put('/:album_id', ( req, res ) => {
+    let album = req.body
+    let album_id = req.params.album_id
 
+    AlbumModel.update( album, {
+        where: { album_id: album_id }
+    }).then( () => {
+        SongModel.destroy({
+            where: {
+                album_id: album_id
+            }
+        }).then( () => {
+            let songs = album.songs.map(song => {
+                song.album_id = album_id
+                return song
+            })
+            SongModel.bulkCreate( songs ).then(
+                results => {
+                    res.json( results )
+                }
+            )
+        })
+    })
 })
 
 router.delete('/:album_id', ( req, res ) => {

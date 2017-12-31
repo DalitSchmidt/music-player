@@ -10,6 +10,7 @@ import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import Validator from '../Validator'
 import Utils from '../Utils'
 import EditAlbum from './EditAlbum'
+import AlbumGenres from './AlbumGenres'
 
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
@@ -132,8 +133,7 @@ const AlbumForm = {
         if ( e )
             e.preventDefault()
 
-        let html = AlbumFormTemplates.songItem(song)
-
+        let html = AlbumFormTemplates.songItem( song )
         $('#add-album-playlist-form').append( html )
     },
 
@@ -145,7 +145,7 @@ const AlbumForm = {
     
     addSongsInputs: function ( items = 5, songs = [] ) {
         for ( let i = 0; i < items; i++ ) {
-            this.addSong(false, songs[i])
+            this.addSong( false, songs[ i ] )
         }
     },
 
@@ -221,26 +221,7 @@ const AlbumForm = {
         } else {
             this.addSongsInputs()
         }
-
-        var states = [
-            'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-            'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
-            'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
-            'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
-            'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-            'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-            'New Jersey', 'New Mexico', 'New York', 'North Carolina',
-            'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-            'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-            'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-            'West Virginia', 'Wisconsin', 'Wyoming'
-        ];
-
-        $(function() {
-            $("#search-genres").autocomplete({
-                source:[states]
-            });
-        });
+        AlbumGenres.init()
     }
 }
 

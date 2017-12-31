@@ -74,7 +74,7 @@ router.get('/suggestions/:term', function( req, res ) {
 
 // ביצוע בקשת get לפי המספר id של האלבום, ובכך למעשה מתאפשר להביא את כל הנתונים הקשורים לאלבום ספציפי לפי המספר id שלו
 router.get('/:album_id', function ( req, res ) {
-    // המשתנה album_id מכיל את המספר id של האלבום
+    // ביצוע בקשת get לפי המספר id של האלבום, ובכך למעשה מתאפשר להביא את כל הנתונים הקשורים לאלבום ספציפי לפי המספר id שלו
     let album_id = req.params.album_id
 
     // מאחר ואנו רוצים להביא את כל הנתונים הקשורים לאלבום ספציפי הכוללים פרטים על האלבום, על השירים ועל הז'אנרים שלו, אנו צריכים לחבר מספר שאילתות המביאות את כל הנתונים הקשורים לאלבום ומצויים בטבלאות השונות
@@ -89,7 +89,7 @@ router.get('/:album_id', function ( req, res ) {
     // מאחר ואנו משתמשים ב- sequelize שזהו מודול המבוסס על promise, נפעיל promise המאחד את כל השאילתות ומכיל את כל הנתונים הקשורים לאלבום שהבאנו
     ).spread(( album, songs, genres ) => {
         // נבדוק אם יש נתונים במשתנה album, אם כן, אז נכניס את הנתונים למערך ונציג את התוצאות
-        if(album.length) {
+        if ( album.length ) {
             // המשתנה results מכיל את המשתנה album שהאינדקס שלו במערך הוא 0
             let results = album[0]
             // המשתנה songs שמצוי תחת המשתנה results מכיל את השירים של האלבום
@@ -107,7 +107,7 @@ router.get('/:album_id', function ( req, res ) {
 
 // ביצוע בקשת post המאפשרת ליצור אלבום חדש
 router.post('/', function ( req, res ) {
-    // המשתנה album_id מכיל את המספר id של האלבום שנוצר המצוי תחת המשתנה result
+    // המשתנה album מכיל את הגוף של הבקשה
     let album = req.body
     // המשתנה songs מכיל את השירים של האלבום שנוצר המצויים תחת המשתנה album
     let songs = album.songs
@@ -203,7 +203,31 @@ router.post('/', function ( req, res ) {
 
 // ביצוע בקשת put לפי המספר id של האלבום, ובכך למעשה מתאפשר לעדכן את כל הנתונים הקשורים לאלבום ספציפי לפי המספר id שלו
 router.put('/:album_id', ( req, res ) => {
+    // המשתנה album מכיל את הגוף של הבקשה
+    let album = req.body
+    // המשתנה album_id מכיל את המספר id של האלבום
+    let album_id = req.params.album_id
 
+    // בבקשה אנחנו מעדכנים את כל המידע הקיים במשתנה AlbumModel (המכיל את המודל של Album המצוי תחת המשתנה models) בהתאם למספר id של האלבום, ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise המוחק את הנתונים המצויים במשתנה SongModel (המכיל את המודל של Song המצוי תחת המשתנה models) בהתאם למספר id של האלבום ולאחר מכן, נפעיל promise שבו המשתנה songs מפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת כל שיר לאלבום שלו לפי המספר id של האלבום ומחזירה את השיר, ולאחר מכן, נפעיל promise נוסף בו המשתנה SongModel מפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של songs, כך שלמעשה היא מוסיפה את כל השירים לתוך האלבום שמבוצע לגביו עדכון של הנתונים ונשלח תשובת json עם כל התוצאות
+    AlbumModel.update( album, {
+        where: { album_id: album_id }
+    }).then( () => {
+        SongModel.destroy({
+            where: {
+                album_id: album_id
+            }
+        }).then( () => {
+            let songs = album.songs.map(song => {
+                song.album_id = album_id
+                return song
+            })
+            SongModel.bulkCreate( songs ).then(
+                results => {
+                    res.json( results )
+                }
+            )
+        })
+    })
 })
 
 // ביצוע בקשת delete לפי המספר id של האלבום, ובכך למעשה מתאפשר למחוק את כל הנתונים הקשורים לאלבום ספציפי לפי המספר id שלו

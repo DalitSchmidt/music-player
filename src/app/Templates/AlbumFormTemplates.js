@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import Utils from "../Utils"
+import Utils from '../Utils'
 
 const AlbumFormTemplates = {
     genres: function ( genres ) {
@@ -32,7 +32,7 @@ const AlbumFormTemplates = {
                 <div class="form-group song">
                     <label class="song-time-label control-label">Song Time:</label>
                     <span class="song-time form-control">${ song ? Utils.calculateTime( song.song_time ) : '' }</span>
-                    <input type="hidden" name="song_time" title="Song Time" required>
+                    <input type="hidden" name="song_time" title="Song Time" required value="${ song ? song.song_time : '' }">
                 </div>
                 <a href="#" class="remove-icon" data-album-id="">
                     <i class="fa fa-remove"></i>

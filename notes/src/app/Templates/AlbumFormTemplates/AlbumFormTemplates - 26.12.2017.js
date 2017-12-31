@@ -1,5 +1,7 @@
 // ייבוא היכולות של jQuery על-מנת שהאובייקט AlbumFormTemplates יוכל להשתמש בהן
 import $ from 'jquery'
+// ייבוא היכולות של האובייקט על-מנת שהאובייקט AlbumFormTemplates יוכל להשתמש בהן
+import Utils from '../Utils'
 
 // האובייקט בשם AlbumFormTemplates המתפקד כ"מעין" מחלקת שירות מכל את כל הפונקציות המאפשרות לנו להציג מידע ב- DOM וקשורות לטופס הוספת אלבום חדש
 // הגדרת האובייקט AlbumFormTemplates כקבוע
@@ -22,27 +24,27 @@ const AlbumFormTemplates = {
             `
         })
 
-        // הפונקציה מחזירהר את המשתנה html המכיל תבנית html המכילה נתונים של הז'אנרים לצורך הצגתם ב- DOM
+        // הפונקציה מחזירה את המשתנה html המכיל תבנית html המכילה נתונים של הז'אנרים לצורך הצגתם ב- DOM
         return html
     },
 
-    // באמצעות הפונקציה songItem, אנו יוצרים תבנית html של השדות להוספת שיר לאלבום
-    songItem: function () {
+    // באמצעות הפונקציה songItem המקבלת את המשתנה song המוגדר כברירת מחדל עם הערך הבוליאני false, אנו יוצרים תבנית html של השדות להוספת שיר לאלבום
+    songItem: function ( song = false ) {
         // המשתנה html מכיל תבנית html של השדות להוספת שיר לאלבום
         let html = `
             <div class="col-md-12 song-item">
                 <div class="form-group song">
                     <label class="youtube-url-label control-label">YouTube ID:</label>
-                    <input type="text" class="song-youtube form-control" name="song_youtube" placeholder="JT6UCvR7kgU" title="YouTube ID" required>
+                    <input type="text" class="song-youtube form-control" name="song_youtube" placeholder="JT6UCvR7kgU" title="YouTube ID" value="${ song ? song.song_youtube : '' }" required>
                 </div>
                 <div class="form-group song">
                     <label class="song-name-label control-label">Song Name:</label>
-                    <input type="text" class="song-name form-control" name="song_name" placeholder="The Power of Equality" title="Song Name" required>
+                    <input type="text" class="song-name form-control" name="song_name" placeholder="The Power of Equality" title="Song Name" value="${ song ? song.song_name : '' }" required>
                 </div>
                 <div class="form-group song">
                     <label class="song-time-label control-label">Song Time:</label>
-                    <span class="song-time form-control"></span>
-                    <input type="hidden" name="song_time" title="Song Time" required>
+                    <span class="song-time form-control">${ song ? Utils.calculateTime( song.song_time ) : '' }</span>
+                    <input type="hidden" name="song_time" title="Song Time" required value="${ song ? song.song_time : '' }">
                 </div>
                 <a href="#" class="remove-icon" data-album-id="">
                     <i class="fa fa-remove"></i>

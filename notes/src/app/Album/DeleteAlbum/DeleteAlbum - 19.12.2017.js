@@ -10,7 +10,7 @@ import AlbumTemplates from './../Templates/AlbumTemplates'
 const DeleteAlbum = {
     // באמצעות הפונקציה deleteMessage המקבלת את המשתנה e (המסמל event) מתאפשר להציג הודעת מחיקה כאשר אנו מעוניינים למחוק אלבום
     deleteMessage: function ( e ) {
-        // המשתנה album_id מכייל את האלמנט הקרוב ביותר שיש לו את ה- attribute בשם data-album-id ושמכיל את ה- data בשם album-id, כך שלמעשה המשתנה album_id מכיל את האלמנט עם המספר id של האלבום
+        // המשתנה album_id מכיל את האלמנט הקרוב ביותר שיש לו את ה- attribute בשם data-album-id ושמכיל את ה- data בשם album-id, כך שלמעשה המשתנה album_id מכיל את האלמנט עם המספר id של האלבום
         const album_id = $( e.target ).closest('[data-album-id]').data('album-id')
         // הפעלה של הפונקציה getAlbumById (המבצעת בקשת getJSON לנתיב 'http://localhost:3000/api/albums' + album_id, ובכך מתאפשר למעשה לקבל אלבום ספיציפי לפי המספר id שלו) ושמצויה תחת האובייקט בשם AlbumAPIService אשר מקבלת את המשתנה album_id המכיל את האלמנט עם המספר id של האלבום, ולאחר מכן נפעיל promise המקבל את המשתנה album
         AlbumAPIService.getAlbumById( album_id ).then(album => {

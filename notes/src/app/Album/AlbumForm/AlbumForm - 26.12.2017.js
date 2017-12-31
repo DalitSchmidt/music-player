@@ -20,6 +20,10 @@ import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import Validator from '../Validator'
 // ייבוא היכולות של האובייקט Utils על-מנת שהאובייקט AlbumForm יוכל להשתמש בהן
 import Utils from '../Utils'
+// ייבוא היכולות של האובייקט EditAlbum על-מנת שהאובייקט AlbumForm יוכל להשתמש בהן
+import EditAlbum from './EditAlbum'
+// ייבוא היכולות של האובייקט AlbumGenres על-מנת שהאובייקט AlbumForm יוכל להשתמש בהן
+import AlbumGenres from './AlbumGenres'
 
 // המשתנה PREVIEW_IMG מכיל כתובת URL קבועה של תמונת התצוגה
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
@@ -154,11 +158,8 @@ const AlbumForm = {
         return ids
     },
 
-    // באמצעות הפונקציה saveAlbum המקבלת את הפרמטר e (המסמל event) אנו שומרים ומציגים ב- DOM את האלבום עם השירים שיצרנו
-    saveAlbum: function( e ) {
-        // מניעת פעולת ברירת המחדל של ה- event, במקרה זה ה- event מתייחס לכפתור save
-        e.preventDefault()
-
+    // באמצעות הפונקציה validateAlbum אנו מבצעים בדיקת ולידציה לערכים המצויים בשדות ה- input לפני יצירת האלבום במסד הנתונים והצגתו ב- DOM
+    validateAlbum: function () {
         // המשתנה album מכיל את הפונקציה collectValues שלמעשה היא מכילה את כל הערכים המצויים ב- inputים הקשורים לשדות של האלבום ומפעיל אותה
         let album = this.collectValues()
         // המשתנה songs מכיל את הפונקציה collectSongs שלמעשה היא מכילה את כל הערכים המצויים ב- inputים הקשורים לשדות של השירים ומפעיל אותה
@@ -188,18 +189,29 @@ const AlbumForm = {
         album.genres = ['Pop']
         // הצגת המשתנה album בחלון ה- console וביצוע JSON.stringify לנתונים המתקבלים
         console.log( JSON.stringify(album) )
+
+        // הפונקציה מחזירה את המשתנה album המכיל את כל הערכים המצויים בשדות ה- input של האלבום
+        return album
+    },
+
+    // באמצעות הפונקציה saveAlbum המקבלת את הפרמטר e (המסמל event) אנו שומרים את האלבום שנוצר במסד הנתונים ומציגים אותו ב- DOM
+    saveAlbum: function( e ) {
+        // מניעת פעולת ברירת המחדל של ה- event, במקרה זה ל- event מסוג submit של אלמנט form שיש לו מזהה ייחודי בשם add-new-album
+        e.preventDefault()
+        // המשתנה album מפעיל את הפונקציה validateAlbum שבאמצעות אנו מבצעים בדיקת ולידציה לערכים המצויים בשדות ה- input לפני יצירת האלבום במסד הנתונים והצגתו ב- DOM
+        const album = this.validateAlbum()
         // הפעלה של הפונקציה saveAlbum המקבלת את המשתנה album ומצויה תחת האובייקט AlbumAPIService שבאמצעותה מתאפשר לשמור אלבום במסד הנתונים, ולאחר מכן נפעיל promise המפעיל את הפונקציה setSuccessMessage המציגה הודעת הצלחה עם יצירת האלבום
         AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
     },
 
-    // באמצעות הפונקציה addSong המקבלת את הפרמטר e (המסמל event) מתאפשר להוסיף שדות להוספת שיר בטופס כאשר לוחצים על הכפתור הוספת שיר
-    addSong: function( e ) {
+    // באמצעות הפונקציה addSong המקבלת את המשתנה e (המסמל event) ואת המשתנה song המכיל את הערך הבוליאני false מתאפשר להוסיף שדות להוספת שיר בטופס הוספת אלבום חדש כאשר לוחצים על הכפתור הוספת שיר
+    addSong: function( e, song = false ) {
         // נמנע את פעולת ברירת המחדל של ה- event רק אם אין אפשרות לקרוא את המאפיין preventDefault של undefined
         if ( e )
             e.preventDefault()
-        // המשתנה html מפעיל את הפונקציה songItem המצויה תחת האובייקט AlbumFormTemplates שבאמצעותה אנו יוצרים תבנית html של השדות להוספת שיר לאלבום, כך שלמעשה הוא מכיל את התבנית html של השדות להוספת שיר לאלבום
-        let html = AlbumFormTemplates.songItem()
 
+        // המשתנה html מפעיל את הפונקציה songItem המקבלת את המשתנה song שמצויה תחת האובייקט AlbumFormTemplates ושבאמצעותה אנו יוצרים תבנית html של השדות להוספת שיר לאלבום, כך שלמעשה הוא מכיל את התבנית html של השדות להוספת שיר לאלבום
+        let html = AlbumFormTemplates.songItem( song )
         // הכנסת המשתנה html (המכיל את התבנית html של השדות להוספת שיר לאלבום באמצעות הפעלת הפונקציה songItem המצויה תחת האובייקט AlbumFormTemplates) לתוך האלמנט div המצוי ב- DOM שיש לו מזהה ייחודי בשם add-album-playlist-form, ובכך אנו מאפשרים למשתמש להוסיף שירים לאלבום במידת הצורך
         $('#add-album-playlist-form').append( html )
     },
@@ -214,12 +226,12 @@ const AlbumForm = {
         item.fadeOut('slow', () => item.remove())
     },
 
-    // באמצעות הפונקציה addSongsInputs המקבלת את המשתנה items מתאפשר להוסיף 5 שורות ל- DOM עם השדות להוספת שירים
-    addSongsInputs: function ( items = 5 ) {
+    // באמצעות הפונקציה addSongsInputs המקבלת את המשתנה items ואת המשתנה songs המכיל מערך ריק מתאפשר להוסיף שורות ל- DOM עם השדות להוספת שירים
+    addSongsInputs: function ( items = 5, songs = [] ) {
         // הלולאת for עוברת על המשתנה items מקסימום 5 פעמים
-        for ( let i = 1; i <= items; i++ ) {
-            // הפעלה של הפונקציה addSong המאפשרת להוסיף את התבנית html של השדות להוספת שיר לאלבום
-            this.addSong()
+        for ( let i = 0; i < items; i++ ) {
+            // הפעלה של הפונקציה addSong המקבלת את הערך הבוליאני false ואת המערך של השירים ושבאמצעותה מתאפשר להוסיף שדות להוספת שיר בטופס הוספת אלבום חדש
+            this.addSong( false, songs[ i ] )
         }
     },
 
@@ -306,13 +318,19 @@ const AlbumForm = {
 
     // הפונקציה bindEvents מכילה את כל ה- eventים המצויים בטופס הוספת אלבום
     bindEvents: function() {
-        // כאשר מתבצעת שליחה של הטופס שיש לו מזהה ייחודי בשם add-new-album, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם saveAlbum יתייחס לאלמנט עצמו (במקרה זה לאלמנט form שיש לו מזהה ייחודי בשם add-new-album), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה saveAlbum יתייחס בכל מקרה לאובייקט AlbumForm
-        $('#add-new-album').on('submit', $.proxy( this.saveAlbum, this ))
+        // נבדוק אם הערך של הפרופרטי hasAlbum לא קיים, אם הוא אכן לא קיים, אז נבצע את הפעולה של שמירת האלבום
+        if ( !this.hasAlbum ) {
+            // הצגת הפרופרטי hasAlbum בחלון ה- console
+            console.log( this.hasAlbum )
+            // כאשר מתבצעת שליחה של הטופס שיש לו מזהה ייחודי בשם add-new-album, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם saveAlbum יתייחס לאלמנט עצמו (במקרה זה לאלמנט form שיש לו מזהה ייחודי בשם add-new-album), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה saveAlbum יתייחס בכל מקרה לאובייקט AlbumForm
+            $('#add-new-album').on('submit', $.proxy( this.saveAlbum, this ))
+        }
+
         // כאשר לוחצים על הכפתור שיש לו מזהה ייחודי בשם add-another-song תופעל הפונקציה addSong
         $('#add-another-song').on('click', this.addSong)
         // כאשר מבוצעת יציאה מהאלמנט על-ידי המשתמש (במקרה זה מתיבת ה- input שיש לה מזהה ייחודי בשם album-image), ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם changeCoverImage יתייחס לאלמנט עצמו (במקרה זה לאלמנט input שיש לו מזהה ייחודי בשם album-image), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה changeCoverImage יתייחס בכל מקרה לאובייקט AlbumForm
         $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
-        // כאשר לוחצים על הכתפור שיש לו class בשם remove-icon שמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form נפעיל את הפונקציה removeSongItem המאפשרת למחוק שורה המכילה את השדות להוספת שיר לאלבום וכאשר מתבצעת הקלדה באלמנט input שיש לו את ה- attribute מסוג name בשם song_youtube שמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form, נפעיל את הפונקציה debounce שמצויה תחת האובייקט Utils ושבאמצעותה אנו מבצעים השהיה של הפעלת הפונקציה שאנו מעוניינים להפעיל, במקרה זה מדובר בפונקציה searchYoutubeVideo המאפשרת לחפש את הסרטון וידאו של YouTube ונשהה את הפעולה שלה למשך שנייה, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchYouTubeVideo יתייחס לאלמנט עצמו (במקרה זה לאלמנט input שיש לו את ה- attribute מסוג name בשם song_youtube) נשתמש ב- proxy, כדי שההקשר של this בתוך הפונקציה searchYouTubeVideo יתייחס בכל מקרה לאובייקט AlbumForm
+        // כאשר לוחצים על הכפתור שיש לו class בשם remove-icon שמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form נפעיל את הפונקציה removeSongItem המאפשרת למחוק שורה המכילה את השדות להוספת שיר לאלבום וכאשר מתבצעת הקלדה באלמנט input שיש לו את ה- attribute מסוג name בשם song_youtube שמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form, נפעיל את הפונקציה debounce שמצויה תחת האובייקט Utils ושבאמצעותה אנו מבצעים השהיה של הפעלת הפונקציה שאנו מעוניינים להפעיל, במקרה זה מדובר בפונקציה searchYoutubeVideo המאפשרת לחפש את הסרטון וידאו של YouTube ונשהה את הפעולה שלה למשך שנייה, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchYouTubeVideo יתייחס לאלמנט עצמו (במקרה זה לאלמנט input שיש לו את ה- attribute מסוג name בשם song_youtube) נשתמש ב- proxy, כדי שההקשר של this בתוך הפונקציה searchYouTubeVideo יתייחס בכל מקרה לאובייקט AlbumForm
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem).on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 1000) )
         // כאשר מתבצעת הקלדה בתיבת ה- input שיש לה את ה- attribute המאפשרת מסוג name בשם youtube-url נפעיל את הפונקציה searchYoutubeVideo המאפשרת לחפש את הסרטון וידאו של YouTube, ומאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם searchYoutubeVideo יתייחס לאלמנט עצמו (הקלדה בתיבת ה- input) ולא לאובייקט AlbumForm, לכן אנו משתמשים ב- proxy כדי שההקשר של this בתוך הפונקציה searchYoutubeVideo יתייחס בכל מקרה לאובייקט AlbumForm
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
@@ -320,32 +338,22 @@ const AlbumForm = {
 
     // הפונקציה init שמקבלת את המשתנה getAlbum המכיל את הערך בוליאני false, מכילה את כל הפעולות שאנו מעוניינים שיבוצעו עם הפעלתו של האובייקט AlbumForm
     init: function( getAlbum = false ) {
-        // הפעלה של הפונקציה addSongsInputs המאפשרת להוסיף 5 שורות ל- DOM עם השדות להוספת שירים
-        this.addSongsInputs()
+        // הפרופרטי hasAlbum מכיל את המשתנה getAlbum
+        this.hasAlbum = getAlbum
         // הפעלה של הפונקציה bindEvents המכילה את כל ה- eventים הקורים באובייקט AlbumForm
         this.bindEvents()
         // הפעלה של הפונקציה setGenres המאפשרת להציג ב- DOM את הז'אנרים המצויים במסד הנתונים
         this.setGenres()
-
-        var states = [
-            'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-            'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
-            'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
-            'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland',
-            'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-            'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-            'New Jersey', 'New Mexico', 'New York', 'North Carolina',
-            'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-            'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-            'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-            'West Virginia', 'Wisconsin', 'Wyoming'
-        ];
-
-        $(function() {
-            $("#search-genres").autocomplete({
-                source:[states]
-            });
-        });
+        // נבדוק אם הערך של הפרופרטי hasAlbum כבר קיים
+        if ( this.hasAlbum ) {
+            // אם הוא קיים, אז נפעיל את הפונקציה init שמצויה התחת האובייקט EditAlbum ושבאמצעותה מתאפשר לבצע את כל הפעולות שאנו מעוניינים שיבוצעו עם הפעלתו של האובייקט EditAlbum
+            EditAlbum.init()
+        } else {
+            // אחרת, כלומר הערך של הפרופרטי hasAlbum לא קיים, אז נפעיל את הפונקציה addSongsInputs שבאמצעותה מתאפשר להוסיף שורות ל- DOM עם השדות להוספת שירים
+            this.addSongsInputs()
+        }
+        // הפעלה של הפונקציה init שמצויה תחת האובייקט AlbumGenres ושבאמצעותה מתאפשר לבצע את כל הפעולות שאנו מעוניינים שיבוצעו עם הפעלתו של האובייקט AlbumGenres
+        AlbumGenres.init()
     }
 }
 
