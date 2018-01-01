@@ -1,16 +1,13 @@
 import $ from 'jquery'
+import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 
 const AlbumGenres = {
-    removeTag: function ( e ) {
+    removeGenreTag: function ( e ) {
         $( e.target ).parents('.tag').remove()
     },
 
-    addTag: function ( tagName ) {
-        let html = `<span class="tag">  
-                        ${tagName}<a>×</a>
-                        <input name="tags" type="hidden" value="${tagName}">
-                    </span>`
-
+    addGenreTag: function ( tagName ) {
+        let html = AlbumFormTemplates.GenreTag( tagName )
         $('.tags-container').append( html )
         $('#search-genres').val('')
     },
@@ -23,7 +20,7 @@ const AlbumGenres = {
         let $input_value = $( e.target ).val()
 
         if ( e.keyCode == 13 ) {
-            this.addTag( $input_value )
+            this.addGenreTag( $input_value )
             return
         }
 
@@ -35,7 +32,7 @@ const AlbumGenres = {
     },
 
     bindEvents: function () {
-        $('#tags').on('click', '.tag a', $.proxy( this.removeTag, this ))
+        $('#tags').on('click', '.tag a', $.proxy( this.removeGenreTag, this ))
         $('#search-genres').on('keyup', $.proxy( this.detectEvent, this ))
         $('#genres-results').on('click', 'li' ,$.proxy( this.setGenreValue, this ))
     },

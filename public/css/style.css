@@ -826,7 +826,7 @@ img {
         cursor: pointer; }
       #add-new-album #add-album-playlist-details #add-album-playlist-form .row {
         margin: 10px; }
-    #add-new-album #add-album-playlist-details #add-another-song {
+    #add-new-album #add-album-playlist-details #add-another-song-button {
       background-color: transparent;
       display: block;
       cursor: pointer;
@@ -842,7 +842,7 @@ img {
       margin-top: 20px;
       margin-bottom: 20px;
       margin-right: 8px; }
-      #add-new-album #add-album-playlist-details .pull-right #reset-album {
+      #add-new-album #add-album-playlist-details .pull-right #reset-album-button {
         background-color: black;
         display: block;
         cursor: pointer;
@@ -854,7 +854,7 @@ img {
         width: 250px;
         box-sizing: border-box;
         margin-right: 10px; }
-        #add-new-album #add-album-playlist-details .pull-right #reset-album:hover {
+        #add-new-album #add-album-playlist-details .pull-right #reset-album-button:hover {
           background-color: #0F70A1;
           color: white; }
       #add-new-album #add-album-playlist-details .pull-right #finish-and-save-button {

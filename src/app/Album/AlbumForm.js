@@ -1,10 +1,4 @@
 import $ from 'jquery'
-// import 'jquery-ui/themes/base/core.css'
-// import 'jquery-ui/themes/base/theme.css'
-// import 'jquery-ui/themes/base/selectable.css'
-// import 'jquery-ui/ui/core'
-// import * as ui from 'jquery-ui/ui/widgets/autocomplete'
-import ui from 'jquery-ui-browserify'
 import AlbumAPIService from './../APIServices/AlbumAPIService'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import Validator from '../Validator'
@@ -52,8 +46,22 @@ const AlbumForm = {
         $('html, body').animate({ scrollTop: $el.offset().top }, 800)
     },
 
+    setTitleAddNewAlbum: function () {
+        let html = AlbumFormTemplates.titleAddNewAlbum()
+        $('#add-new-album-title').html( html )
+    },
+
+    setTitleAddAlbumPlaylist: function () {
+        let html = AlbumFormTemplates.titleAddAlbumPlaylist()
+        $('#add-album-playlist-title').html( html )
+    },
+
     setSuccessMessage: function() {
-        alert('Album has been created :)')
+        // alert('Album has been created :)')
+        let html = AlbumFormTemplates.successMessage()
+        $('.modal-dialog').html( html )
+        $('body').addClass('modal-open').css('padding-right', '17px')
+        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
     },
 
     collectSongs: function() {
@@ -155,7 +163,7 @@ const AlbumForm = {
 
     changeCoverImage: function() {
         let img = $('#album-image').val()
-        let regex = new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$")
+        let regex = new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png|bmp|tif?f)$")
 
         if ( img === '' ) {
             this.setCoverImage( PREVIEW_IMG )
@@ -194,7 +202,7 @@ const AlbumForm = {
     validateField: function ( e ) {
         let $input = $( e.target )
         console.log( $input )
-        if ( Validator.validateField( $input ) ){
+        if ( Validator.validateField( $input ) ) {
             $input.removeClass('error').addClass('success')
             $input.siblings('.error-message').remove()
         }
@@ -206,15 +214,17 @@ const AlbumForm = {
             $('#add-new-album').on('submit', $.proxy( this.saveAlbum, this ))
         }
 
-        $('#add-another-song').on('click', this.addSong)
+        $('#add-another-song-button').on('click', this.addSong)
         $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
-        $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem).on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 1000) )
+        $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem).on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
     },
 
     init: function( getAlbum = false ) {
         this.hasAlbum = getAlbum
         this.bindEvents()
+        this.setTitleAddNewAlbum()
+        this.setTitleAddAlbumPlaylist()
         this.setGenres()
         if ( this.hasAlbum ) {
             EditAlbum.init()

@@ -2,6 +2,22 @@ import $ from 'jquery'
 import Utils from '../Utils'
 
 const AlbumFormTemplates = {
+    titleAddNewAlbum: function () {
+        return `<h1 class="text-center">Add New Album</h1>`
+    },
+
+    titleAddAlbumPlaylist: function () {
+        return `<h1 class="text-center">Add Album Playlist</h1>`
+    },
+
+    titleEditAlbum: function () {
+        return `<h1 class="text-center">Edit Album</h1>`
+    },
+
+    titleEditAlbumPlaylist: function () {
+        return `<h1 class="text-center">Edit Album Playlist</h1>`
+    },
+
     genres: function ( genres ) {
         let html = ''
         $.each(genres, ( i, genre ) => {
@@ -17,6 +33,14 @@ const AlbumFormTemplates = {
 
         return html
     },
+
+    GenreTag: function ( tagName ) {
+        return `<span class="tag">
+                    ${tagName}<a>×</a>
+                    <input name="tags" type="hidden" value="${tagName}">
+                </span>`
+    },
+
 
     songItem: function ( song = false ) {
         let html = `
@@ -43,16 +67,71 @@ const AlbumFormTemplates = {
         return html
     },
 
-    errorMessage: function ( error ) {
+    errorMessage: function ( errorMessage ) {
         return `<div class="error-message">
                     <span class="error exclamation-triangle">
                         <strong>
                             <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                            ${error}
+                            ${errorMessage}
                         </strong>
                     </span>
                 </div>
                 `
+    },
+
+    successMessage: function ( current_page, album_id ) {
+        return `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true" data-action="handle-delete" data-page="${current_page}" data-album-id="${album_id}">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center">The album was created successfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-button" class="pull-right" data-action="handle-delete" data-page="${current_page}" data-album-id="${album_id}">Close</button>
+                </div>
+            </div>
+        `
+    },
+
+    deleteDialogSong: function ( album ) {
+        return `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close cancel" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-justify">Are you sure you want to delete the song ${album.song_name} by ${album.album_artist}?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancel-button" class="pull-left cancel" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="approve-delete" class="pull-right" data-album-id="${album.album_id}">Yes, I'm sure</button>
+                </div>
+            </div>
+        `
+    },
+
+    deleteSuccessDialogSong: function ( current_page, album_id ) {
+        return `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true" data-action="handle-delete" data-page="${current_page}" data-album-id="${album_id}">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center">The song was deleted successfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-button" class="pull-right" data-action="handle-delete" data-page="${ current_page }" data-album-id="${album_id}">Close</button>
+                </div>
+            </div>
+        `
     }
 }
 

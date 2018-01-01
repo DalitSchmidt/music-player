@@ -18,9 +18,16 @@ const SingleAlbumTemplates = {
             <a class="remove-icon" data-album-id="${album_id}" data-toggle="modal" data-target="#modal">
                 <i class="fa fa-remove"></i>
             </a>
-            <a href="#" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum" data-album-id="${album_id}">
+            <a href="#single-album/${album_id}" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum" data-album-id="${album_id}">
                 <i class="fa fa-pencil"></i>
             </a>
+        `
+    },
+
+    albumInfoMenu: function () {
+        return `
+            <div class="album-info-links">Description</div>
+            <div class="album-info-links active">Playlist</div>
         `
     },
 

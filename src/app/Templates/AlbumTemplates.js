@@ -14,7 +14,7 @@ const AlbumTemplates = {
                     <a class="remove-icon" data-album-id="${album.album_id}"> 
                         <i class="fa fa-remove"></i>
                     </a>
-                    <a href="#" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum" data-album-id="${album.album_id}">
+                    <a href="#single-album/${album.album_id}" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum" data-album-id="${album.album_id}">
                         <i class="fa fa-pencil"></i>
                     </a>
                 </div>

@@ -15,7 +15,7 @@ const AlbumPlayer = {
     },
 
     bindEvents: function() {
-        $('#album-info-menu .album-info-links').on('click', $.proxy( this.switchDetails, this ))
+        $('#album-info-menu').on('click', '.album-info-links', $.proxy( this.switchDetails, this ))
     },
 
     getAlbumID: function () {
@@ -38,6 +38,11 @@ const AlbumPlayer = {
         $('#album-info-controls').html( html )
     },
 
+    setAlbumInfoMenu: function () {
+        let html = SingleAlbumTemplates.albumInfoMenu()
+        $('#album-info-menu').html( html )
+    },
+
     setAlbumImage: function( img ) {
         let html = SingleAlbumTemplates.albumImage( img )
         $('#album-info-image').html( html )
@@ -54,17 +59,19 @@ const AlbumPlayer = {
     },
 
     getAlbum: function ( id ) {
-        AlbumAPIService.getAlbumById( id ).then( album => {
-            this.setAlbumPlaylist( album.songs )
-            this.setAlbumInfo( album )
-            this.setAlbumInfoControls( album.album_id )
-            this.setAlbumImage( album.album_image )
-            this.setNowPlayingSong()
-            this.setAlbumControls()
-            Player.setSong( $('#player-playlist li').first() )
-        }, error => {
-            Router.redirect('all-albums')
-        })
+        AlbumAPIService.getAlbumById(id).then(
+            album => {
+                this.setAlbumPlaylist(album.songs)
+                this.setAlbumInfo(album)
+                this.setAlbumInfoControls(album.album_id)
+                this.setAlbumInfoMenu()
+                this.setAlbumImage(album.album_image)
+                this.setNowPlayingSong()
+                this.setAlbumControls()
+                Player.setSong($('#player-playlist li').first())
+            }, error => {
+                Router.redirect('all-albums')
+            })
     },
 
     init: function () {

@@ -6,9 +6,21 @@ import Utils from '../Utils'
 import Router from '../Router'
 import Player from '../Player'
 import AlbumForm from './AlbumForm'
+import DeleteAlbum from './DeleteAlbum'
+import AlbumTemplates from "../Templates/AlbumTemplates"
 
 const EditAlbum = {
     album_id: null,
+
+    setTitleEditAlbum: function () {
+        let html = AlbumFormTemplates.titleEditAlbum()
+        $('#add-new-album-title').html( html )
+    },
+
+    setTitleEditAlbumPlaylist: function () {
+        let html = AlbumFormTemplates.titleEditAlbumPlaylist()
+        $('#add-album-playlist-title').html( html )
+    },
 
     getAlbumID: function () {
         let id = location.hash.substring(1).split('/')[1]
@@ -27,9 +39,29 @@ const EditAlbum = {
 
     saveChanges: function ( e ) {
         e.preventDefault()
-        const album = AlbumForm.validateAlbum()
+        let album = AlbumForm.validateAlbum()
         AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessage )
     },
+
+    // deleteMessageSong: function ( e ) {
+    //     let album_id = $( e.target ).closest('[data-album-id]').data('album-id')
+    //     AlbumAPIService.getAlbumById( album_id ).then(album => {
+    //         let html = AlbumTemplates.deleteDialog( album )
+    //         $('.modal-dialog').html( html )
+    //         $('body').addClass('modal-open').css('padding-right', '17px')
+    //         $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
+    //     })
+    // },
+    //
+    // confirmAlbumDeleteSong: function ( e ) {
+    //     let album_id = $( e.target ).data('album-id')
+    //     AlbumAPIService.deleteAlbum( album_id ).then( album => {
+    //         $('.modal-dialog').fadeOut('slow', () => {
+    //             let html = AlbumTemplates.deleteSuccessDialog( this.currentPage, album_id )
+    //             $('.modal-dialog').html( html ).fadeIn('slow')
+    //         })
+    //     })
+    // },
 
     setSuccessMessage: function() {
         alert('Album has been updated :)')
@@ -37,6 +69,11 @@ const EditAlbum = {
 
     bindEvents: function () {
         $('#add-new-album').on('submit', $.proxy( this.saveChanges, this ))
+        // $('.modal-dialog').on('click', '#approve-delete', $.proxy( this.confirmAlbumDeleteSong, this ))
+        // $('.modal-dialog').on('click', '.cancel', $.proxy( DeleteAlbum.cancelDelete, this ))
+        // $('.modal-dialog').on('click', '[data-action=handle-delete]', $.proxy( DeleteAlbum.handleDelete, this ))
+        // $('#add-album-playlist-form').on('click', '.remove-icon', $.proxy ( this.deleteMessageSong, this ))
+        // $('#add-album-playlist-form').on('click', '.remove-icon', AlbumForm.removeSongItem)
     },
 
     getAlbum: function () {
@@ -59,6 +96,8 @@ const EditAlbum = {
         }
 
         this.getAlbum()
+        this.setTitleEditAlbum()
+        this.setTitleEditAlbumPlaylist()
         this.bindEvents()
     }
 }

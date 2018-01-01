@@ -7,7 +7,7 @@ const DeleteAlbum = {
     currentPage: false,
 
     deleteMessage: function ( e ) {
-        const album_id = $( e.target ).closest('[data-album-id]').data('album-id')
+        let album_id = $( e.target ).closest('[data-album-id]').data('album-id')
         AlbumAPIService.getAlbumById( album_id ).then(album => {
             let html = AlbumTemplates.deleteDialog( album )
             $('.modal-dialog').html( html )
@@ -17,7 +17,7 @@ const DeleteAlbum = {
     },
 
     confirmAlbumDelete: function ( e ) {
-        const album_id = $( e.target ).data('album-id')
+        let album_id = $( e.target ).data('album-id')
         AlbumAPIService.deleteAlbum( album_id ).then( album => {
             $('.modal-dialog').fadeOut('slow', () => {
                 let html = AlbumTemplates.deleteSuccessDialog( this.currentPage, album_id )

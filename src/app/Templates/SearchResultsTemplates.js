@@ -14,7 +14,7 @@ const SearchResultsTemplates = {
                                 <a class="remove-icon" data-album-id="${album.album_id}" data-toggle="modal" data-target="#modal">
                                     <i class="fa fa-remove"></i>
                                 </a>
-                                <a href="#" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum">
+                                <a href="#edit-album/${album.album_id}" class="edit-icon" data-toggle="modal" data-target="#addNewAlbum">
                                     <i class="fa fa-pencil"></i>
                                 </a>
                             </div>
