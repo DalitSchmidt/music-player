@@ -1,28 +1,19 @@
 import $ from 'jquery'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
-import Utils from '../Utils'
-import SearchAPIService from '../APIServices/SearchAPIService'
 
 const AlbumGenres = {
     removeGenreTag: function ( e ) {
         $( e.target ).parents('.tag').remove()
     },
 
-    addGenreTag: function ( tagName, genre_id = false ) {
-        let html = AlbumFormTemplates.genreTag( tagName, genre_id )
+    addGenreTag: function ( tagName ) {
+        let html = AlbumFormTemplates.GenreTag( tagName )
         $('.tags-container').append( html )
         $('#search-genres').val('')
     },
 
     searchGenre: function ( term ) {
-        SearchAPIService.searchGenres( term ).then(results => {
-            if ( results ) {
-                let html = AlbumFormTemplates.genreSuggestions( results.results )
-                $('#genres-results').html( html )
-            } else {
-                $('#genres-results').html('')
-            }
-        })
+
     },
 
     detectEvent: function ( e ) {
@@ -33,17 +24,11 @@ const AlbumGenres = {
             return
         }
 
-        if ( ( e.which <= 90 && e.which >= 48 ) && $input_value.length > 0 ) {
-            Utils.debounce( this.searchGenre, 500 )( $input_value )
-        }
+        this.searchGenre( $input_value )
     },
 
     setGenreValue: function( e ) {
-        let genre_id = $( e.target ).data('genre-id')
-        let genre_name = $( e.target ).text()
-
-        this.addGenreTag( genre_name, genre_id )
-        $('#genres-results').html('')
+        $('#search-genres').val( $( e.target ).text() )
     },
 
     bindEvents: function () {

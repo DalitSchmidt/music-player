@@ -8,7 +8,6 @@ import Player from '../Player'
 import AlbumForm from './AlbumForm'
 import DeleteAlbum from './DeleteAlbum'
 import AlbumTemplates from "../Templates/AlbumTemplates"
-import AlbumGenres from './AlbumGenres'
 
 const EditAlbum = {
     album_id: null,
@@ -32,20 +31,15 @@ const EditAlbum = {
         let inputs = $('#add-new-album-form input[required], #add-new-album-form textarea[required]')
 
         $.each(inputs, ( index, input ) => {
-           input.value = album [ input.name ]
+            input.value = album [ input.name ]
         })
         AlbumForm.changeCoverImage()
         AlbumForm.addSongsInputs( album.songs.length, album.songs )
-
-        $.each(album.genres, ( index, genre  ) => {
-            AlbumGenres.addGenreTag( genre.genre_name, genre.genre_id )
-        })
     },
 
     saveChanges: function ( e ) {
         e.preventDefault()
         let album = AlbumForm.validateAlbum()
-        console.log( album )
         AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessage )
     },
 

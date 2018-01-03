@@ -29,7 +29,7 @@ const AlbumForm = {
             input_value = input.val()
 
             if ( !Validator.validateField( input ) )
-                // If there is an error with the regex, set errors to be true, mean we have errors in the validation
+            // If there is an error with the regex, set errors to be true, mean we have errors in the validation
                 errors = true
 
             // Add the property of the input name inside the album object
@@ -97,13 +97,14 @@ const AlbumForm = {
     },
 
     collectGenres: function () {
-        let inputs = $('#tags input[type=hidden]')
-        let genres = []
+        let inputs = $('#album-genres div input[type=checkbox]:checked')
+        let ids = []
+
         $.each(inputs, ( i, input ) => {
-            genres.push( $( input ).val() )
+            ids.push( $( input ).val() )
         })
 
-        return genres
+        return ids
     },
 
     validateAlbum: function () {
@@ -123,6 +124,8 @@ const AlbumForm = {
         album.genres = this.collectGenres()
 
         album.songs = songs
+        // Temporary!!!
+        album.genres = ['Pop']
         console.log( JSON.stringify(album) )
 
         return album
@@ -171,6 +174,13 @@ const AlbumForm = {
             this.setCoverImage( img )
     },
 
+    setGenres: function() {
+        AlbumAPIService.getGenres().then(genres => {
+            let html = AlbumFormTemplates.genres( genres )
+            $('#album-genres div').html( html )
+        })
+    },
+
     searchYoutubeVideo: function( e ) {
         let $input = $( e.target )
         $input.parent().find('.error-message').remove()
@@ -215,6 +225,7 @@ const AlbumForm = {
         this.bindEvents()
         this.setTitleAddNewAlbum()
         this.setTitleAddAlbumPlaylist()
+        this.setGenres()
         if ( this.hasAlbum ) {
             EditAlbum.init()
         } else {
