@@ -61,6 +61,10 @@ const Router = {
         }
 
         this.getTemplate( config.template ).then((html => {
+            if ( route !== 'single-album' ) {
+               $('title').html('Music Player')
+            }
+
             $('#main-container').html( html )
 
             if ( typeof config.callback === 'function' )

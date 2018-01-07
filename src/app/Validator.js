@@ -53,7 +53,7 @@ const Validator = {
 
         if ( has_duplications ) {
             let html = AlbumFormTemplates.errorMessage( this.error_messages[ error_key ] )
-            error_container.prepend( html )
+            error_container.removeClass('success').addClass('error').prepend( html )
         }
 
         return has_duplications

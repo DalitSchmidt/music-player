@@ -1,23 +1,36 @@
+// ייבוא היכולות של jQuery על-מנת שהאובייקט AlbumFormTemplates יוכל להשתמש בהן
 import $ from 'jquery'
+// ייבוא היכולות של האובייקט על-מנת שהאובייקט AlbumFormTemplates יוכל להשתמש בהן
 import Utils from '../Utils'
 
+// האובייקט בשם AlbumFormTemplates המתפקד כ"מעין" מחלקת שירות מכל את כל הפונקציות המאפשרות לנו להציג מידע ב- DOM וקשורות לטופס הוספת אלבום חדש
+// הגדרת האובייקט AlbumFormTemplates כקבוע
 const AlbumFormTemplates = {
+    // באמצעות הפונקציה titleAddNewAlbum מתאפשר להציג ב- DOM תבנית html המכילה כותרת של העמוד בו אנו נמצאים
     titleAddNewAlbum: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנט h1 המציג ב- DOM את הכותרת של העמוד בו אנו נמצאים
         return `<h1 class="text-center">Add New Album</h1>`
     },
 
+    // באמצעות הפונקציה titleAddAlbumPlaylist מתאפשר להציג ב- DOM תבנית html המכילה כותרת של החלק בו אנו נמצאים בעמוד
     titleAddAlbumPlaylist: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנט h1 המציג ב- DOM את הכותרת של החלק בו אנו נמצאים בעמוד
         return `<h1 class="text-center">Add Album Playlist</h1>`
     },
 
+    // באמצעות הפונקציה titleEditAlbum מתאפשר להציג ב- DOM תבנית html המכילה כותרת של העמוד בו אנו נמצאים
     titleEditAlbum: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנט h1 המציג ב- DOM את הכותרת של העמוד בו אנו נמצאים
         return `<h1 class="text-center">Edit Album</h1>`
     },
 
+    // באמצעות הפונקציה titleEditAlbumPlaylist מתאפשר להציג ב- DOM תבנית html המגילה כותרת של החלק בו אנו נמצאים בעמוד
     titleEditAlbumPlaylist: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנט h1 המציג ב- DOM את הכותרת של החלק בו אנו נמצאים בעמוד
         return `<h1 class="text-center">Edit Album Playlist</h1>`
     },
 
+    // באמצעות בפונקציה genreTag המקבלת את המשתנים tagName ו- genre_id המוגדר כברירת מחדל בערך הבוליאני false אנו יוצרים תבנית html המציגה ב- DOM את הז'אנרים של האלבום
     genreTag: function ( tagName, genre_id = false ) {
         return `<span class="tag">
                     ${tagName}<a>×</a>
@@ -25,19 +38,26 @@ const AlbumFormTemplates = {
                 </span>`
     },
 
+    // באמצעות הפונקציה genreSuggestions המקבלת את המשתנה suggestions אנו יוצרים תבנית html המאפשרת להציג ב- DOM את ההצעות האפשריות של הז'אנרים הקיימים במסד הנתונים
     genreSuggestions: function ( suggestions ) {
+        // המשתנה html מכיל את האלמנט ul שאליו נשרשר נתונים שיאפשרו להציג ב- DOM את ההצעות האפשריות של הז'אנרים הקיימים במסד הנתונים
         let html = '<ul>'
 
+        // הלולאת each עוברת איבר-איבר על הנתונים המצויים במשתנה suggestions (המכיל מערך עם הנתונים של ההצעות האפשריות לתוצאות החיפוש) ומוציאה ממנו את ה- index והפרטים של הז'אנר הרלוונטי להצעות האפשריות של הז'אנרים הקיימים במסד הנתונים, ולאחר מכן תופעל פונקציית callback (המסומנת כפונקציית חץ) שבה המשתנה html משרשר אליו את האלמנט li שיש בו את ההצעות האפשריות של הז'אנרים הקיימים במסד הנתונים
         $.each(suggestions, ( index, genre ) => {
             html += `<li data-genre-id="${genre.genre_id}">${genre.genre_name}</li>`
         })
 
+        // המשתנה html משרשר אליו את האלמנט הסוגר של האלמנט ul
         html += '</ul>'
 
+        // הפונקציה מחזירה את המשתנה html המכיל תבנית html המאפשרת להציג ב- DOM את ההצעות האפשריות של הז'אנרים הקיימים במסד הנתונים
         return html
     },
 
+    // באמצעות הפונקציה songItem המקבלת את המשתנה song המוגדר כברירת מחדל עם הערך הבוליאני false, אנו יוצרים תבנית html של השדות להוספת שיר לאלבום
     songItem: function ( song = false ) {
+        // המשתנה html מכיל תבנית html של השדות להוספת שיר לאלבום
         let html = `
             <div class="col-md-12 song-item">
                 <div class="form-group song">
@@ -59,10 +79,13 @@ const AlbumFormTemplates = {
             </div>
         `
 
+        // הפונקציה מחזירה את המשתנה html המכיל תבנית html של השדות להוספת שיר לאלבום
         return html
     },
 
+    // באמצעות הפונקציה errorMessage המקבלת את המשתנה errorMessage אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה
     errorMessage: function ( errorMessage ) {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM את הודעת השגיאה הרלוונטית
         return `<div class="error-message">
                     <span class="error exclamation-triangle">
                         <strong>
@@ -74,7 +97,9 @@ const AlbumFormTemplates = {
                 `
     },
 
+    // באמצעות הפונקציה successMessage המקבלת את המשתנים current_page ו- album_id אנו יוצרים תבנית html המציגה ב- DOM הודעת הצלחה עם יצירת האלבום
     successMessage: function ( current_page, album_id ) {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM את הודעת ההצלחה עם יצירת האלבום
         return `
             <div class="modal-content">
                 <div class="modal-header">
@@ -92,7 +117,9 @@ const AlbumFormTemplates = {
         `
     },
 
+    // באמצעות הפונקציה deleteDialogSong המקבלת את המשתנה album אנו יוצרים תבנית html המציגה ב- DOM הודעה מתאימה בדבר מחיקת השיר מהאלבום הרלוונטי
     deleteDialogSong: function ( album ) {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM הודעה מתאימה בדבר מחיקת השיר מהאלבום הרלוונטי
         return `
             <div class="modal-content">
                 <div class="modal-header">
@@ -111,7 +138,9 @@ const AlbumFormTemplates = {
         `
     },
 
+    // באמצעות הפונקציה deleteSuccessDialogSong המקבלת את המשתנים current_page ו- album_id אנו יוצרים תבנית html המציגה ב- DOM הודעה המאשרת שהשיר נמחק מהאלבום
     deleteSuccessDialogSong: function ( current_page, album_id ) {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM הודעה המאשרת שהשיר נמחק מהאלבום
         return `
             <div class="modal-content">
                 <div class="modal-header">
@@ -130,4 +159,5 @@ const AlbumFormTemplates = {
     }
 }
 
+// ייצוא היכולות של האובייקט AlbumFormTemplates החוצה
 export default AlbumFormTemplates

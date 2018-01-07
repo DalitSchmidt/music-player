@@ -154,6 +154,17 @@
                         border-color: red;
                     }
                 }
+
+                &.error {
+                    .form-group.song input, span {
+                        border-color: red;
+                    }
+                }
+                &.success {
+                    .form-group.song input, span {
+                        border-color: green;
+                    }
+                }
             }
 
             .form-control {

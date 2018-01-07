@@ -84,7 +84,7 @@ const AlbumPlayer = {
 
         this.getAlbum( id )
         this.bindEvents()
-        Player.init()
+        Player.initYoutube()
     }
 }
 

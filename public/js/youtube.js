@@ -1,8 +1,8 @@
-var youtubeplayer
-let tag = document.createElement('script')
-tag.src = 'https://www.youtube.com/iframe_api'
-let firstScriptTag = document.getElementsByTagName('script')[0]
-firstScriptTag.parentNode.insertBefore( tag, firstScriptTag )
+// var youtubeplayer
+// let tag = document.createElement('script')
+// tag.src = 'https://www.youtube.com/iframe_api'
+// let firstScriptTag = document.getElementsByTagName('script')[0]
+// firstScriptTag.parentNode.insertBefore( tag, firstScriptTag )
 
 function onYouTubeIframeAPIReady() {
     youtubeplayer = new YT.Player('song-youtube', {
@@ -29,4 +29,5 @@ function onYouTubeIframeAPIReady() {
 
 function onPlayerReady( event ) {
     Player.init()
+    window.isPlayerInit = true
 }

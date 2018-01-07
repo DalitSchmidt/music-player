@@ -436,6 +436,7 @@ img {
         /* margin-top: 4px; */
         cursor: pointer; }
       #single-album #album-info-player #album-info-text #player-controls #controls #volume-controls #volume {
+        display: none;
         position: absolute;
         margin-left: 325px;
         width: 100px;
@@ -518,6 +519,15 @@ img {
           list-style: none;
           position: relative; }
           #single-album #album-info-player #album-info-text #player-controls #player-playlist li.playing:before {
+            font-family: FontAwesome;
+            content: "\f04c";
+            left: -18px;
+            position: absolute; }
+        #single-album #album-info-player #album-info-text #player-controls #player-playlist li.pause {
+          font-weight: bold;
+          list-style: none;
+          position: relative; }
+          #single-album #album-info-player #album-info-text #player-controls #player-playlist li.pause:before {
             font-family: FontAwesome;
             content: "\f04b";
             left: -18px;
@@ -778,6 +788,10 @@ img {
           margin-bottom: 30px; }
         #add-new-album #add-album-playlist-details #add-album-playlist-form .song-item input.error {
           border-color: red; }
+        #add-new-album #add-album-playlist-details #add-album-playlist-form .song-item.error .form-group.song input, #add-new-album #add-album-playlist-details #add-album-playlist-form .song-item.error span {
+          border-color: red; }
+        #add-new-album #add-album-playlist-details #add-album-playlist-form .song-item.success .form-group.song input, #add-new-album #add-album-playlist-details #add-album-playlist-form .song-item.success span {
+          border-color: green; }
       #add-new-album #add-album-playlist-details #add-album-playlist-form .form-control {
         border: 3px double black;
         color: black; }

@@ -66,7 +66,7 @@ const AlbumForm = {
 
     collectSongs: function() {
         let has_duplications = false, songs = [], song, song_youtube, song_name, song_time
-
+        $('.song-item').removeClass('error')
         $.each( $('.song-item'), ( index, item ) => {
             song = $( item )
             song_youtube = song.find('input[name=song_youtube]').val()
@@ -89,9 +89,17 @@ const AlbumForm = {
 
         Validator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
 
-        if ( songs.length && !has_duplications ) {
+        if ( songs.length >= 5 && !has_duplications ) {
             return songs
         } else {
+                if ( songs.length < 5 ) {
+
+                $.each( $('.song-item'), ( index, item ) => {
+                    if ( $( item ).find('input[name=song_youtube]').val() == '') {
+                        $( item ).addClass('error')
+                    }
+                })
+            }
             return false
         }
     },
@@ -174,6 +182,7 @@ const AlbumForm = {
     searchYoutubeVideo: function( e ) {
         let $input = $( e.target )
         $input.parent().find('.error-message').remove()
+        $input.parents('.song-item').removeClass('error')
 
         let youtube_id = $input.val()
 
@@ -191,7 +200,7 @@ const AlbumForm = {
 
     validateField: function ( e ) {
         let $input = $( e.target )
-        console.log( $input )
+        $input.siblings('.error-message').remove()
         if ( Validator.validateField( $input ) ) {
             $input.removeClass('error').addClass('success')
             $input.siblings('.error-message').remove()

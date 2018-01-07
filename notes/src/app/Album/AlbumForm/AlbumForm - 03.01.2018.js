@@ -108,7 +108,8 @@ const AlbumForm = {
     collectSongs: function() {
         // הצהרה על המשתנים שאנו הולכים לבצע בהם שימוש בפונקציה
         let has_duplications = false, songs = [], song, song_youtube, song_name, song_time
-
+        // הסרת ה- class בשם error מאלמנט שיש לו class בשם song-item
+        $('.song-item').removeClass('error')
         // הלולאת each עוברת איבר-איבר על אלמנט div שיש לו class בשם song-item (שלמעשה מכיל מערך של כל האלמנטים מסוג div שיש להם class בשם song-item) ומוציאה ממנו את ה- index ואת ה- item
         $.each( $('.song-item'), ( index, item ) => {
             // המשתנה song מכיל באמצעות שימוש ב- jQuery את ה- item שמצוי במערך של song-item
@@ -129,7 +130,7 @@ const AlbumForm = {
                     return
                 }
 
-                // המשתנה has_duplications מפעיל את הפונקציה isInArrayOfObjects המצויה תחת האובייקט Utils ושבאמצעותה אנו בודקים אם המערך הוא מערך של אובייקטים ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item )
+                // הפעלת הפונקציה validateInputs המצויה תחת האובייקט Validator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 5, 'song_youtube_id' ואת האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form
                 has_duplications = Validator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
 
                 // נבדוק אם המשתנה has_duplications שמפעיל את הפונקציה isInArrayOfObjects המצויה תחת האובייקט Utils ושבאמצעותה אנו בודקים אם המערך הוא מערך של אובייקטים ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item ) לא מכיל נתונים כפולים
@@ -143,11 +144,23 @@ const AlbumForm = {
         // הפעלת הפונקציה validateInputs המצויה תחת האובייקט Validator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 5, 'song_youtube_id' ואת האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form
         Validator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
 
-        // נבדוק אם יש נתונים במשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכו הפרופרטיס youtube, name ו- duration וגם שהמשתנה has_duplications לא מכיל נתונים כפולים
-        if ( songs.length && !has_duplications ) {
+        // נבדוק אם יש עד 5 נתונים במשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכו הפרופרטיס youtube, name ו- duration וגם שהמשתנה has_duplications לא מכיל נתונים כפולים
+        if ( songs.length >= 5 && !has_duplications ) {
             // אז נחזיר את המשתנה songs המכיל מערך עם האובייקטים של השירים
             return songs
         } else {
+            // אחרת, נבדוק אם אורך המשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכו הפרופרטיס name, youtube ו- duration גדול מ- 5
+            if ( songs.length < 5 ) {
+
+                // אז נעבור באמצעות לולאת each העוברת איבר-איבר על אלמנט שיש לו class בשם song-item (שלמעשה מכיל מערך של כל האלמנטים שיש להם class בשם song-item) ומוציאה ממנו את ה- index ואת ה- item
+                $.each( $('.song-item'), ( index, item ) => {
+                    // אם ה- item שמצוי במערך של song-item מצא אלמנט מסוג input שיש לו attribute מסוג name בשם song_youtube שהוא ריק מערכים
+                    if ( $( item ).find('input[name=song_youtube]').val() == '') {
+                        // אז נוסיף ל- item שנמצא המצוי במערך של song-item את ה- class בשם error
+                        $( item ).addClass('error')
+                    }
+                })
+            }
             // אחרת, כלומר אין נתונים במשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכו הפרופרטיס youtube, name ו- duration וגם שהמשתנה has_duplications מכיל נתונים כפולים, אז הפונקציה מחזירה את הערך הבוליאני false
             return false
         }
@@ -268,12 +281,14 @@ const AlbumForm = {
             this.setCoverImage( img )
     },
 
-    // באמצעות הפונקציה searchYoutubeVideo המקבלת את המשתנה e (המסמל event) מתאפשר לחפש את הסרטון וידאו של YouTube
+    // המשתנה input מאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
     searchYoutubeVideo: function( e ) {
         // המשתנה input מאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
         let $input = $( e.target )
         // המשתנה $input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event מוצא את ההורה של האלמנט שיש לו class בשם error-messsage ומסיר אותו מה- DOM
         $input.parent().find('.error-message').remove()
+        // המשתנה $input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event מוצא את האבות של כל אלמנט שיש לו class בשם song-item ומסיר ממנו את ה- class בשם error
+        $input.parents('.song-item').removeClass('error')
 
         // המשתנה youtube_id מכיל את הערך המצוי במשתנה input (המאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event)
         let youtube_id = $input.val()
@@ -302,13 +317,13 @@ const AlbumForm = {
     validateField: function ( e ) {
         // המשתנה input מאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
         let $input = $( e.target )
-        // הצגה בחלון ה- console של הנתונים המצויים במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
-        console.log( $input )
+        // הסרת האלמנט מה- DOM שיש לו class בשם error-message המצוי באחים של האלמנט המצוי במשתנה $input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
+        $input.siblings('.error-message').remove()
         // נבדוק אם בפונקציה validateField המצויה תחת האובייקט Validator ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לשדות, יש ערך שמצוי במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event ושעבר בהצלחה את בדיקת התיקוף, ואם אכן אין שגיאות נבצע מספר פעולות נוספות
         if ( Validator.validateField( $input ) ) {
             // הסרה של ה- class בשם error מהאלמנט המצוי במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event והוספה של ה- class בשם success לאותו אלמנט שהסרנו ממנו את ה- class בשם error
             $input.removeClass('error').addClass('success')
-            // הסרה של ה- class בשם error-message מהאחים של האלמנט המצוי במשתנה input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
+            // הסרת האלמנט מה- DOM שיש לו class בשם error-message המצוי באחים של האלמנט המצוי במשתנה $input שמאפשר לנו לבצע פעולות על האלמנט שהפעיל את ה- event
             $input.siblings('.error-message').remove()
         }
     },

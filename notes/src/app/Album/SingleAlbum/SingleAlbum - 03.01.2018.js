@@ -142,8 +142,8 @@ const AlbumPlayer = {
         this.getAlbum( id )
         // הפעלה של הפונקציה bindEvents המכילה את כל ה- eventים הקורים באובייקט AlbumPlayer
         this.bindEvents()
-        // הפעלת הפונקציה init שמצויה תחת האובייקט Player
-        Player.init()
+        // הפעלה של הפונקציה initYouTube המצויה תחת האובייקט Player ושבאמצעותה מתאפשר לאתחל את הטעינה של נגן ה- Youtube עם הטעינה על הדף
+        Player.initYoutube()
     }
 }
 

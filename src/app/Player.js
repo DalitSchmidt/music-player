@@ -1,4 +1,5 @@
 import Utils from './Utils'
+import Router from './Router'
 
 const Player = {
     playing: true,
@@ -7,8 +8,8 @@ const Player = {
     interval: false,
 
     setSong: function( el ) {
-        $('#player-playlist li.playing').removeClass('playing')
-        el.addClass('playing')
+        $('#player-playlist li').removeClass('playing pause')
+        el.addClass('pause')
         let youtube_id = el.data('code') // el.attr('data-code')
         let song_name = el.clone().find('>*').remove().end().text()
         $('#now-playing-song #song-name').text( song_name )
@@ -61,19 +62,19 @@ const Player = {
     },
 
     changeVolume: function ( e ) {
-        const volume = $( e.target ).val()
+        let volume = $( e.target ).val()
+        let $volume = $('#volume-up i')
         youtubeplayer.setVolume( volume )
 
-        // this.player.volume = $('.audio-player input[name="volume"]').val()
-        // if ($('.audio-player input[name="volume"]').val() == 0) {
-        //     $('.audio-player span:last-of-type i').attr('class', "fa fa-volume-off")
-        // }
-        // else if ($('.audio-player input[name="volume"]').val() <= .5) {
-        //     $('.audio-player span:last-of-type i').attr('class', 'fa fa-volume-down')
-        // }
-        // else if ($('.audio-player input[name="volume"]').val() > .5) {
-        //     $('.audio-player span:last-of-type i').attr('class', 'fa fa-volume-up')
-        // }
+        if ( volume == 0 ) {
+            $volume.attr('class', "fa fa-volume-off")
+        }
+        else if ( volume <= 50 ) {
+            $volume.attr('class', 'fa fa-volume-down')
+        }
+        else if ( volume > 50 ) {
+            $volume.attr('class', 'fa fa-volume-up')
+        }
     },
 
     stopPlaylist: function () {
@@ -97,8 +98,10 @@ const Player = {
     toggleControls: function () {
         if ( youtubeplayer.getPlayerState() === 1 ) {
             $('#play i').removeClass('fa-play').addClass('fa-pause')
+            $('#player-playlist li.pause').removeClass('pause').addClass('playing')
         } else if ( youtubeplayer.getPlayerState() === 2 ) {
             $('#play i').removeClass('fa-pause').addClass('fa-play')
+            $('#player-playlist li.playing').removeClass('playing').addClass('pause')
         }
     },
 
@@ -117,6 +120,7 @@ const Player = {
     },
 
     executePlaying: function ( e ) {
+        this.stopSong()
         let el = $( e.target )
         this.setSong( el )
         this.playSong()
@@ -172,15 +176,33 @@ const Player = {
         this.timer = current_time
     },
 
+    toggleVolumeBar: function () {
+        $('#volume').animate({ width:'toggle' }, 350)
+    },
+
     bindEvents: function() {
-        $('#player-playlist li').on('click', $.proxy( this.executePlaying, this ))
-        $('#play').on('click', $.proxy( this.togglePlaying, this ))
+        $('#player-playlist').on('click', 'li:not(.pause, .playing)', $.proxy( this.executePlaying, this ))
+        $('#player-controls').on('click', '#play, #player-playlist li.playing, #player-playlist li.pause', $.proxy( this.togglePlaying, this ))
         $('#stop').on('click', $.proxy( this.stopSong, this ))
         $('#step-backward').on('click', $.proxy( this.playPreviousSong, this ))
         $('#step-forward').on('click', $.proxy( this.playNextSong, this ))
         $('#volume').on('change', $.proxy( this.changeVolume, this ))
         $('#song-duration').on('change', $.proxy( this.changeCurrentTime, this ))
+        $('#volume-up').on('click', $.proxy( this.toggleVolumeBar, this ))
         youtubeplayer.addEventListener('onStateChange', $.proxy( this.updateTimer, this ))
+    },
+
+    initYoutube: function () {
+        let youtubeplayer
+        let tag = document.createElement('script')
+        tag.src = 'https://www.youtube.com/iframe_api'
+        let firstScriptTag = document.getElementsByTagName('script')[0]
+        firstScriptTag.parentNode.insertBefore( tag, firstScriptTag )
+        window.onhashchange = Router.setPage.bind( Router )
+
+        if ( isPlayerInit ) {
+            onYouTubeIframeAPIReady()
+        }
     },
 
     init: function () {

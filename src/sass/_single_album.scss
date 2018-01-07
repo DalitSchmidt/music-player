@@ -441,6 +441,7 @@
                         }
 
                         #volume {
+                            display: none;
                             position: absolute;
                             margin-left: 325px;
                             width: 100px;
@@ -556,6 +557,19 @@
                         padding-left: 5px;
 
                         &.playing {
+                            font-weight: bold;
+                            list-style: none;
+                            position: relative;
+
+                            &:before {
+                                font-family: FontAwesome;
+                                content: "\f04c";
+                                left: -18px;
+                                position: absolute;
+                            }
+                        }
+
+                        &.pause {
                             font-weight: bold;
                             list-style: none;
                             position: relative;

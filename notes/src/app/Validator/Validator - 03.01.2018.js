@@ -79,8 +79,8 @@ const Validator = {
         if ( has_duplications ) {
             // המשתנה html מפעיל את הפונקציה errorMessage המקבלת את הפרופטי error_message במקום של המשתנה error_key במערך ומצויה תחת האובייקט AlbumFormTemplates ושבאמצעותה אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה, כך שלמעשה המשתנה html מאפשר להציג ב- DOM את הודעת השגיאה הרלוונטית
             let html = AlbumFormTemplates.errorMessage( this.error_messages[ error_key ] )
-            // הכנסת המשתנה html לתחילת האלמנט המצוי במשתנה error_container, כך שלמעשה מתאפשר להציג ב- DOM את הודעת השגיאה הרלוונטית
-            error_container.prepend( html )
+            // הכנסת המשתנה html לתחילת האלמנט המצוי במשתנה error_container והסרת ה- class בשם success מהאלמנט והוספת ה- class בשם error לאותו אלמנט
+            error_container.removeClass('success').addClass('error').prepend( html )
         }
 
         //הפונקציה מחזירה את המשתנה has_duplications שמפעיל את הפונקציה isInArrayOfObjects המקבלת את המשתנים arr_to_check, key_to_check ו- value_to_check המצויה תחת האובייקט Utils ושבאמצעותה מתאפשר לבדוק אם המערך הוא מערך של אובייקטים
