@@ -62,7 +62,7 @@ const Router = {
 
         this.getTemplate( config.template ).then((html => {
             if ( route !== 'single-album' ) {
-               $('title').html('Music Player')
+               $('title').text('Music Player')
             }
 
             $('#main-container').html( html )

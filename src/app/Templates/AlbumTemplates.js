@@ -25,7 +25,7 @@ const AlbumTemplates = {
     },
 
     noAlbums: function () {
-        return '<h2 class="col-md-12 text-center">There are no albums!<br/>Click the \'Add New Album\' button</h2>'
+        return '<h2 class="col-md-12 text-center">There are no albums!<br/><br/>Click the \'Add New Album\' button</h2>'
     },
 
     deleteDialog: function ( album ) {

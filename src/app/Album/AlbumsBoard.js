@@ -20,9 +20,23 @@ const AlbumsBoard = {
         return AlbumAPIService.getAllAlbums()
     },
 
+    noAlbums: function () {
+        let html = AlbumTemplates.noAlbums()
+
+        $('#album-list').fadeTo('slow', 1.5, function()  {
+            $('#album-list').removeClass('loading')
+        }).delay( 1000, function() {
+            $('#album-list').html( html )
+        })
+    },
+
     applyAlbums: function() {
-        this.getAllAlbums().then( albums => {
-            this.appendAlbums( albums )
+        this.getAllAlbums().then(albums => {
+            if ( typeof albums === 'undefined' ) {
+                this.noAlbums()
+            } else {
+                this.appendAlbums( albums )
+            }
         })
     },
 

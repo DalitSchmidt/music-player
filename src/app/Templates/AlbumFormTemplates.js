@@ -127,7 +127,25 @@ const AlbumFormTemplates = {
                 </div>
             </div>
         `
-    }
+    },
+
+    successMessageEditAlbum: function ( current_page, album_id ) {
+        return `
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true" data-action="handle-delete" data-page="${current_page}" data-album-id="${album_id}">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="text-center">The album has been updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="close-button" class="pull-right" data-action="handle-delete" data-page="${current_page}" data-album-id="${album_id}">Close</button>
+                </div>
+            </div>
+        `
+    },
 }
 
 export default AlbumFormTemplates

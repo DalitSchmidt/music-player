@@ -6,7 +6,7 @@ const SingleAlbumTemplates = {
         let genresHTML = this.albumGenres( album.genres )
 
         return `
-            <h1 id="album-info-name">${album.album_name} - ${album.album_artist}</h1>
+            <h1 id="album-info-name" data-name="${album.album_artist}">${album.album_name} - ${album.album_artist}</h1>
             <h4 id="album-info-year">${album.album_year}</h4>
             <ul id="album-info-genres">${genresHTML}</ul>
             <p id="album-info-description">${album.album_description}</p>

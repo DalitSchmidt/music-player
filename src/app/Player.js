@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import Utils from './Utils'
 import Router from './Router'
 
@@ -12,13 +13,16 @@ const Player = {
         el.addClass('pause')
         let youtube_id = el.data('code') // el.attr('data-code')
         let song_name = el.clone().find('>*').remove().end().text()
+        // let album_artist = el.find('#album-info-name').data('name')
         $('#now-playing-song #song-name').text( song_name )
-        $('title').text( song_name )
+        $('title').text('Now Playing - ' + song_name)
+        // $('title').text('Now Playing - ' + song_name + 'by ' + album_artist)
         youtubeplayer.cueVideoById( youtube_id )
         this.timer = 0
         clearInterval( this.interval )
         this.interval = false
-        $('#timer').text( Utils.calculateTime( this.timer ) )
+        let $time = $('#timer')
+        $time.text( Utils.calculateTime( this.timer ) )
         let song_time = el.find('span').data('duration')
         $('#song-duration').val(0).attr('max', song_time)
     },
@@ -106,7 +110,7 @@ const Player = {
     },
 
     detectStateChange: function () {
-        const player_state = youtubeplayer.getPlayerState()
+        let player_state = youtubeplayer.getPlayerState()
 
         switch ( player_state ) {
             case 0:
@@ -127,7 +131,7 @@ const Player = {
     },
 
     togglePlaying: function() {
-        const current_player_state = youtubeplayer.getPlayerState()
+        let current_player_state = youtubeplayer.getPlayerState()
         console.log(current_player_state)
         switch ( current_player_state ) {
             case 0:
@@ -171,13 +175,14 @@ const Player = {
     },
 
     changeCurrentTime: function ( e ) {
-        const current_time = $( e.target ).val()
+        let current_time = $( e.target ).val()
         youtubeplayer.seekTo( current_time, true )
         this.timer = current_time
     },
 
     toggleVolumeBar: function () {
         $('#volume').animate({ width:'toggle' }, 350)
+        $('#controls').css('width', '430px')
     },
 
     bindEvents: function() {
@@ -198,7 +203,8 @@ const Player = {
         tag.src = 'https://www.youtube.com/iframe_api'
         let firstScriptTag = document.getElementsByTagName('script')[0]
         firstScriptTag.parentNode.insertBefore( tag, firstScriptTag )
-        window.onhashchange = Router.setPage.bind( Router )
+        // window.onhashchange = Router.setPage.bind( Router )
+        Router.bindEvents()
 
         if ( isPlayerInit ) {
             onYouTubeIframeAPIReady()

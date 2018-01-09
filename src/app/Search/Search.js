@@ -22,7 +22,9 @@ const Search = {
     searchAlbum: function() {
         let term = Router.getParams()[0]
 
-        SearchAPIService.searchAlbums( term ).then(( results, statusText, xhr ) => this.displayResults( term, results, xhr.status ))
+        SearchAPIService.searchAlbums( term ).then(( results, statusText, xhr ) => {
+            this.displayResults( term, results, xhr.status )
+        })
     },
 
     init: function() {

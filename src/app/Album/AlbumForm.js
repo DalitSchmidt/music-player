@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import AlbumAPIService from './../APIServices/AlbumAPIService'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
-import Validator from '../Validator'
+import AlbumValidator from './AlbumValidator'
 import Utils from '../Utils'
 import EditAlbum from './EditAlbum'
 import AlbumGenres from './AlbumGenres'
@@ -28,7 +28,7 @@ const AlbumForm = {
             input_name = input.attr('name')
             input_value = input.val()
 
-            if ( !Validator.validateField( input ) )
+            if ( !AlbumValidator.validateField( input ) )
                 // If there is an error with the regex, set errors to be true, mean we have errors in the validation
                 errors = true
 
@@ -79,7 +79,7 @@ const AlbumForm = {
                     return
                 }
 
-                has_duplications = Validator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
+                has_duplications = AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
 
                 if ( !has_duplications ) {
                     songs.push({ song_youtube, song_name, song_time })
@@ -87,7 +87,7 @@ const AlbumForm = {
             }
         })
 
-        Validator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
+        AlbumValidator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
 
         if ( songs.length >= 5 && !has_duplications ) {
             return songs
@@ -105,9 +105,9 @@ const AlbumForm = {
     },
 
     collectGenres: function () {
-        let inputs = $('#tags input[type=hidden]')
+        let input = $('#tags input[type=hidden]')
         let genres = []
-        $.each(inputs, ( i, input ) => {
+        $.each(input, ( i, input ) => {
             genres.push( $( input ).val() )
         })
 
@@ -138,7 +138,7 @@ const AlbumForm = {
 
     saveAlbum: function( e ) {
         e.preventDefault()
-        const album = this.validateAlbum()
+        let album = this.validateAlbum()
         AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
     },
 
@@ -201,10 +201,14 @@ const AlbumForm = {
     validateField: function ( e ) {
         let $input = $( e.target )
         $input.siblings('.error-message').remove()
-        if ( Validator.validateField( $input ) ) {
+        if ( AlbumValidator.validateField( $input ) ) {
             $input.removeClass('error').addClass('success')
             $input.siblings('.error-message').remove()
         }
+    },
+
+    resetValues: function () {
+        $('.form-group span').text('')
     },
 
     bindEvents: function() {
@@ -214,8 +218,10 @@ const AlbumForm = {
         }
 
         $('#add-another-song-button').on('click', this.addSong)
+        $('#reset-album-button').on('click', $.proxy( this.resetValues, this ))
         $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
-        $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem).on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
+        $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
+        $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
     },
 

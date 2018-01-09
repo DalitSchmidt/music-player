@@ -5,12 +5,13 @@ import SearchAPIService from '../APIServices/SearchAPIService'
 
 const AlbumGenres = {
     removeGenreTag: function ( e ) {
-        $( e.target ).parents('.tag').remove()
+        let $input = $( e.target )
+        $input.parents('.tag').remove()
     },
 
     addGenreTag: function ( tagName, genre_id = false ) {
         let html = AlbumFormTemplates.genreTag( tagName, genre_id )
-        $('.tags-container').append( html )
+        $('#tags-container').append( html )
         $('#search-genres').val('')
     },
 
@@ -26,7 +27,8 @@ const AlbumGenres = {
     },
 
     detectEvent: function ( e ) {
-        let $input_value = $( e.target ).val()
+        let $input = $( e.target )
+        let $input_value = $input.val()
 
         if ( e.keyCode == 13 ) {
             this.addGenreTag( $input_value )

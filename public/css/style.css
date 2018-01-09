@@ -219,7 +219,7 @@ img {
       margin-top: 10px;
       margin-left: 20px;
       background: #dadada;
-      width: 430px;
+      width: 325px;
       height: 35px; }
       #single-album #album-info-player #album-info-text #player-controls #controls #step-backward {
         position: absolute;
@@ -541,6 +541,9 @@ img {
   margin-right: 50px; }
   #album-list.loading {
     background: url(../images/loader.gif) no-repeat center center; }
+  #album-list h2 {
+    font-weight: bold;
+    top: 50px; }
   #album-list .col-md-3 {
     padding-right: 0;
     padding-left: 0;
@@ -725,6 +728,8 @@ img {
       top: calc(50% - 145px); }
     #add-new-album #add-new-album-details #add-new-album-form .col-md-8 {
       margin: 20px; }
+      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group:last-of-type {
+        margin-top: 15px; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group .form-control {
         width: 85%;
         display: inline-block;
@@ -744,10 +749,6 @@ img {
         margin-left: 20px; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-year {
         margin-left: 59px; }
-      #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[type="checkbox"] {
-        margin-left: 3px; }
-        #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group input[type="checkbox"]:first-of-type {
-          margin-left: 45px; }
       #add-new-album #add-new-album-details #add-new-album-form .col-md-8 .form-group #album-description {
         margin-left: 0;
         margin-top: 0;
@@ -966,6 +967,26 @@ dd {
   height: 34px;
   margin-left: 95px;
   margin-bottom: 10px; }
+
+#genres-results {
+  margin-top: -15px;
+  margin-left: 95px; }
+  #genres-results ul {
+    padding: 0;
+    list-style-type: none; }
+    #genres-results ul li {
+      padding: 0 5px;
+      line-height: 30px;
+      text-align: justify;
+      border: 4px double black;
+      list-style-type: none;
+      font-weight: bold;
+      width: 180px;
+      cursor: pointer;
+      /* display: inline-block; */
+      /* overflow: hidden; */
+      /* padding: 3px 6px; */
+      vertical-align: baseline; }
 
 input[type=text], .tagSelector {
   /*-moz-border-radius: 3px;*/

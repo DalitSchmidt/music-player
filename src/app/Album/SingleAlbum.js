@@ -4,7 +4,7 @@ import SingleAlbumTemplates from '../Templates/SingleAlbumTemplates'
 import Player from '../Player'
 import Router from '../Router'
 
-const AlbumPlayer = {
+const SingleAlbum = {
     switchDetails: function( e ) {
         let el = $( e.target )
         $('#album-info-menu .active').removeClass('active')
@@ -19,8 +19,7 @@ const AlbumPlayer = {
     },
 
     getAlbumID: function () {
-        let id = location.hash.substring(1).split('/')[1]
-        return id
+        return location.hash.substring(1).split('/')[1]
     },
 
     setAlbumPlaylist: function( playlist ) {
@@ -59,16 +58,16 @@ const AlbumPlayer = {
     },
 
     getAlbum: function ( id ) {
-        AlbumAPIService.getAlbumById(id).then(
+        AlbumAPIService.getAlbumById( id ).then(
             album => {
-                this.setAlbumPlaylist(album.songs)
-                this.setAlbumInfo(album)
-                this.setAlbumInfoControls(album.album_id)
+                this.setAlbumPlaylist( album.songs )
+                this.setAlbumInfo( album )
+                this.setAlbumInfoControls( album.album_id )
                 this.setAlbumInfoMenu()
-                this.setAlbumImage(album.album_image)
+                this.setAlbumImage( album.album_image )
                 this.setNowPlayingSong()
                 this.setAlbumControls()
-                Player.setSong($('#player-playlist li').first())
+                Player.setSong( $('#player-playlist li').first() )
             }, error => {
                 Router.redirect('all-albums')
             })
@@ -88,4 +87,4 @@ const AlbumPlayer = {
     }
 }
 
-export default AlbumPlayer
+export default SingleAlbum

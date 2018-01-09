@@ -38,6 +38,10 @@
                 margin: 20px;
 
                 .form-group {
+                    &:last-of-type {
+                        margin-top: 15px;
+                    }
+
                     .form-control {
                         width: 85%;
                         display: inline-block;
@@ -71,14 +75,6 @@
 
                     #album-year {
                         margin-left: 59px;
-                    }
-
-                    input[type="checkbox"] {
-                        margin-left: 3px;
-
-                        &:first-of-type {
-                            margin-left: 45px;
-                        }
                     }
 
                     #album-description {
@@ -160,6 +156,7 @@
                         border-color: red;
                     }
                 }
+
                 &.success {
                     .form-group.song input, span {
                         border-color: green;
@@ -396,6 +393,31 @@ dd { margin-bottom: 1em }
     height: 34px;
     margin-left: 95px;
     margin-bottom: 10px;
+}
+
+#genres-results {
+    margin-top: -15px;
+    margin-left: 95px;
+
+    ul {
+        padding: 0;
+        list-style-type: none;
+
+        li {
+            padding: 0 5px;
+            line-height: 30px;
+            text-align: justify;
+            border: 4px double black;
+            list-style-type: none;
+            font-weight: bold;
+            width: 180px;
+            cursor: pointer;
+            /* display: inline-block; */
+            /* overflow: hidden; */
+            /* padding: 3px 6px; */
+            vertical-align: baseline;
+        }
+    }
 }
 
 input[type=text], .tagSelector {

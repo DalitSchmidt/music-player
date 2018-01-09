@@ -7,7 +7,7 @@ import Router from './Router'
 import Search from './Search/Search'
 import SearchBar from './Search/SearchBar'
 
-const App = {
+const Application = {
     init: function() {
         Router.when({
             path: '/all-albums',
@@ -40,4 +40,4 @@ const App = {
     }
 }
 
-$( document ).ready( App.init )
+$( document ).ready( Application.init )

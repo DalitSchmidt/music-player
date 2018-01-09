@@ -9,7 +9,7 @@ const SearchAPIService = {
         return $.getJSON('http://localhost:3000/api/albums/suggestions/' + term)
     },
 
-    searchGenres: function(term) {
+    searchGenres: function( term ) {
         return $.getJSON('http://localhost:3000/api/genres/suggestions/' + term)
     },
 }

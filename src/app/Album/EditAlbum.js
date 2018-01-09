@@ -1,13 +1,8 @@
 import $ from 'jquery'
 import AlbumAPIService from './../APIServices/AlbumAPIService'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
-import Validator from '../Validator'
-import Utils from '../Utils'
 import Router from '../Router'
-import Player from '../Player'
 import AlbumForm from './AlbumForm'
-import DeleteAlbum from './DeleteAlbum'
-import AlbumTemplates from "../Templates/AlbumTemplates"
 import AlbumGenres from './AlbumGenres'
 
 const EditAlbum = {
@@ -46,7 +41,7 @@ const EditAlbum = {
         e.preventDefault()
         let album = AlbumForm.validateAlbum()
         console.log( album )
-        AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessage )
+        AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessageEditAlbum )
     },
 
     // deleteMessageSong: function ( e ) {
@@ -69,8 +64,12 @@ const EditAlbum = {
     //     })
     // },
 
-    setSuccessMessage: function() {
-        alert('Album has been updated :)')
+    setSuccessMessageEditAlbum: function() {
+        // alert('Album has been updated :)')
+        let html = AlbumFormTemplates.successMessageEditAlbum()
+        $('.modal-dialog').html( html )
+        $('body').addClass('modal-open').css('padding-right', '17px')
+        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
     },
 
     bindEvents: function () {
