@@ -170,6 +170,11 @@
                     background: #dadada;
                     width: 325px;
                     height: 35px;
+                    transition: width 0.25s;
+
+                    &.volume-width {
+                        width: 430px;
+                    }
 
                     #step-backward {
                         position: absolute;

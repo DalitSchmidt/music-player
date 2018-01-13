@@ -50,6 +50,7 @@ const SearchBar = {
         $('#search-form').on('submit', $.proxy( this.searchAlbum, this ))
         $('#search-term').on('keyup', Utils.debounce( $.proxy( this.getSuggestions, this ), 500) )
         $('header').on('mouseleave', '.pull-right.has-suggestions', $.proxy( this.clearResults ))
+        $('header').on('click', '.pull-right.has-suggestions li', $.proxy( this.clearResults ))
     },
 
     init: function() {

@@ -11,7 +11,7 @@ const AlbumsBoard = {
 
         $('#album-list').fadeTo('slow', 1.5, function()  {
             $('#album-list').removeClass('loading')
-        }).delay( 1000, function() {
+        }).delay(1000, function() {
             $('#album-list').html( html )
         })
     },
@@ -25,14 +25,14 @@ const AlbumsBoard = {
 
         $('#album-list').fadeTo('slow', 1.5, function()  {
             $('#album-list').removeClass('loading')
-        }).delay( 1000, function() {
+        }).delay(1000, function() {
             $('#album-list').html( html )
         })
     },
 
     applyAlbums: function() {
-        this.getAllAlbums().then(albums => {
-            if ( typeof albums === 'undefined' ) {
+        this.getAllAlbums().then(( albums, status, xhr ) => {
+            if ( xhr.status === 204 || typeof albums === 'undefined' ) {
                 this.noAlbums()
             } else {
                 this.appendAlbums( albums )

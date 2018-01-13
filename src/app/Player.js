@@ -9,14 +9,14 @@ const Player = {
     interval: false,
 
     setSong: function( el ) {
+        el = el.closest('li')
         $('#player-playlist li').removeClass('playing pause')
         el.addClass('pause')
         let youtube_id = el.data('code') // el.attr('data-code')
         let song_name = el.clone().find('>*').remove().end().text()
-        // let album_artist = el.find('#album-info-name').data('name')
+        let album_artist = $('#album-info-name').data('name')
         $('#now-playing-song #song-name').text( song_name )
-        $('title').text('Now Playing - ' + song_name)
-        // $('title').text('Now Playing - ' + song_name + 'by ' + album_artist)
+        $('title').text('Now Playing - ' + song_name + 'by ' + album_artist)
         youtubeplayer.cueVideoById( youtube_id )
         this.timer = 0
         clearInterval( this.interval )
@@ -40,7 +40,7 @@ const Player = {
     },
 
     playPreviousSong: function () {
-        let previous_song = $('li.playing').prev('li')
+        let previous_song = $('li.playing, li.pause').prev('li')
 
         if ( previous_song.length === 0 )
             this.stopPlaylist()
@@ -51,7 +51,7 @@ const Player = {
     },
 
     playNextSong: function () {
-        let next_song = $('li.playing').next('li')
+        let next_song = $('li.playing, li.pause').next('li')
 
         if ( next_song.length !== 0 ) {
             this.setSong( next_song )
@@ -132,10 +132,8 @@ const Player = {
 
     togglePlaying: function() {
         let current_player_state = youtubeplayer.getPlayerState()
-        console.log(current_player_state)
         switch ( current_player_state ) {
             case 0:
-                console.log('ended')
                 this.playNextSong()
                 break
             case 1:
@@ -182,7 +180,7 @@ const Player = {
 
     toggleVolumeBar: function () {
         $('#volume').animate({ width:'toggle' }, 350)
-        $('#controls').css('width', '430px')
+        $('#controls').toggleClass('volume-width')
     },
 
     bindEvents: function() {

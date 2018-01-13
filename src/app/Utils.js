@@ -21,9 +21,12 @@ const Utils = {
     },
 
     calculateTime: function( seconds ) {
-        // if ( ( seconds < 10 ? "0" : "" ) + seconds )
+        let minutes = Math.floor( seconds / 60 )
+        let seconds_to_display = seconds % 60
 
-        return Math.floor( seconds / 60 ) + ':' + seconds % 60
+        minutes = minutes < 10 ? '0' + minutes : minutes
+        seconds_to_display = seconds_to_display < 10 ? '0' + seconds_to_display : seconds_to_display
+        return  minutes + ':' + seconds_to_display
     },
 
     isInArrayOfObjects: function ( arr_to_check, key_to_check, value_to_check ) {

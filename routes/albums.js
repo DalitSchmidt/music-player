@@ -87,31 +87,45 @@ router.post('/', function ( req, res ) {
     if ( !Array.isArray( songs ) ) {
         res.status(422).json({ err: 'No Songs!' })
     }
-    return models.sequelize.transaction(function (t) {
+
+    let new_genres = GenresController.getNewGenres( album.genres )
+    let old_genres_ids = GenresController.getExistingGenresIds( album.genres )
+
         // Create the songs in the DB and link theme to the album
-        return AlbumModel.create(album, {transaction: t})
-            .then(function (result) {
+        AlbumModel.create( album )
+            .then(function ( result ) {
                 let album_id = result.album_id
-                let genres = album.genres
-                songs = songs.map(song => {
-                    song.album_id = album_id
-                    return song
+
+                GenreModel.bulkCreate( new_genres,  { returning: true } ).then(
+                    results => {
+                        let new_genres_ids = results.map( genre => genre.genre_id )
+                        let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map( genre_id => {
+                            return { genre_id, album_id }
+                        })
+                        AlbumsToGenresModel.bulkCreate( album_genres_ids ).then(
+                            () => {
+                                songs = songs.map(song => {
+                                    song.album_id = album_id
+                                    return song
+                                })
+
+                                SongModel.bulkCreate( songs ).then(
+                                    res.status(201).json({ result })
+                                )
+                            }
+                        )
+                    }
+                )
+            }).catch(function ( err ) {
+                let errors = err.errors[0]
+
+                res.status(422).json({
+                    error: 'Unable to create album',
+                    reason: {
+                        message: errors.message,
+                        error: `${errors.path} '${errors.value}' already exists`
+                    }
                 })
-
-                return SongModel.bulkCreate(songs, {transaction: t})
-            })
-        }).then(function ( result ) {
-            res.status(201).json({ result })
-        }).catch(function ( err ) {
-            let errors = err.errors[0]
-
-            res.status(422).json({
-                error: 'Unable to create album',
-                reason: {
-                    message: errors.message,
-                    error: `${errors.path} '${errors.value}' already exists`
-                }
-            })
 
             throw new Error()
         })

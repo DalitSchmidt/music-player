@@ -220,7 +220,10 @@ img {
       margin-left: 20px;
       background: #dadada;
       width: 325px;
-      height: 35px; }
+      height: 35px;
+      transition: width 0.25s; }
+      #single-album #album-info-player #album-info-text #player-controls #controls.volume-width {
+        width: 430px; }
       #single-album #album-info-player #album-info-text #player-controls #controls #step-backward {
         position: absolute;
         /* top: 295px; */
