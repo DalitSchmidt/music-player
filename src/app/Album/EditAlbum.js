@@ -19,8 +19,7 @@ const EditAlbum = {
     },
 
     getAlbumID: function () {
-        let id = location.hash.substring(1).split('/')[1]
-        return id
+        return location.hash.substring(1).split('/')[1]
     },
 
     setValues: function ( album ) {
@@ -29,6 +28,7 @@ const EditAlbum = {
         $.each(inputs, ( index, input ) => {
            input.value = album [ input.name ]
         })
+
         AlbumForm.changeCoverImage()
         AlbumForm.addSongsInputs( album.songs.length, album.songs )
 
@@ -39,8 +39,12 @@ const EditAlbum = {
 
     saveChanges: function ( e ) {
         e.preventDefault()
+
         let album = AlbumForm.validateAlbum()
-        console.log( album )
+
+        if ( !album )
+            return
+
         AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessageEditAlbum )
     },
 
@@ -73,7 +77,7 @@ const EditAlbum = {
     },
 
     bindEvents: function () {
-        $('#add-new-album').on('submit', $.proxy( this.saveChanges, this ))
+        $('#finish-and-save-button').on('click', $.proxy( this.saveChanges, this ))
         // $('.modal-dialog').on('click', '#approve-delete', $.proxy( this.confirmAlbumDeleteSong, this ))
         // $('.modal-dialog').on('click', '.cancel', $.proxy( DeleteAlbum.cancelDelete, this ))
         // $('.modal-dialog').on('click', '[data-action=handle-delete]', $.proxy( DeleteAlbum.handleDelete, this ))

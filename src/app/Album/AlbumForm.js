@@ -28,12 +28,20 @@ const AlbumForm = {
             input_name = input.attr('name')
             input_value = input.val()
 
-            if ( !AlbumValidator.validateField( input ) )
+            if ( !AlbumValidator.validateField( input ) ) {
                 // If there is an error with the regex, set errors to be true, mean we have errors in the validation
                 errors = true
+            }
 
             // Add the property of the input name inside the album object
             album[ input_name ] = input_value
+        }
+
+        album.genres = this.collectGenres()
+
+        if ( !AlbumValidator.validateInputs( album.genres, 1, 'genres', $('#album-genres') ) ) {
+            $('#tags').addClass('error')
+            errors = true
         }
 
         if ( errors )
@@ -65,41 +73,48 @@ const AlbumForm = {
     },
 
     collectSongs: function() {
-        let has_duplications = false, songs = [], song, song_youtube, song_name, song_time
+        let has_duplications = false, has_errors = false, songs = [], song, song_youtube, song_name, song_time
+
         $('.song-item').removeClass('error')
+
         $.each( $('.song-item'), ( index, item ) => {
             song = $( item )
             song_youtube = song.find('input[name=song_youtube]').val()
             song_name = song.find('input[name=song_name]').val()
             song_time = song.find('input[name=song_time]').val()
 
-            if ( song_youtube !== '' && song_name !== '' && song_time !== '' ) {
-                if ( songs.length === 0 ) {
+            if ( song_youtube !== '' && song_time !== '' ) {
+                if ( songs.length === 0 && AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
                     songs.push({ song_youtube, song_name, song_time })
                     return
                 }
 
-                has_duplications = AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
+                if ( !AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
+                    has_errors = true
+                    return
+                }
 
-                if ( !has_duplications ) {
+                if ( !AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) ) ) {
                     songs.push({ song_youtube, song_name, song_time })
+                } else {
+                    has_duplications = true
                 }
             }
         })
 
         AlbumValidator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
 
-        if ( songs.length >= 5 && !has_duplications ) {
+        if ( songs.length >= 5 && !has_duplications && !has_errors ) {
             return songs
         } else {
-                if ( songs.length < 5 ) {
-
+            if ( songs.length < 5 ) {
                 $.each( $('.song-item'), ( index, item ) => {
                     if ( $( item ).find('input[name=song_youtube]').val() == '') {
                         $( item ).addClass('error')
                     }
                 })
             }
+
             return false
         }
     },
@@ -120,15 +135,13 @@ const AlbumForm = {
 
         if ( !album ) {
             this.scrollTop( $('#main-container') )
-            return
+            return false
         }
 
         if ( !songs ) {
             this.scrollTop( $('#add-album-playlist-details') )
-            return
+            return false
         }
-
-        album.genres = this.collectGenres()
 
         album.songs = songs
         console.log( JSON.stringify(album) )
@@ -139,6 +152,10 @@ const AlbumForm = {
     saveAlbum: function( e ) {
         e.preventDefault()
         let album = this.validateAlbum()
+
+        if ( !album )
+            return
+
         AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
     },
 
@@ -188,7 +205,6 @@ const AlbumForm = {
 
         AlbumAPIService.searchYoutubeID( youtube_id ).then(
             video => {
-                $input.closest('.song-item').find('input[name=song_name]').val( video.title )
                 $input.closest('.song-item').find('input[name=song_time]').val( video.duration )
                 $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
             },
@@ -200,10 +216,23 @@ const AlbumForm = {
 
     validateField: function ( e ) {
         let $input = $( e.target )
+
         $input.siblings('.error-message').remove()
+
         if ( AlbumValidator.validateField( $input ) ) {
             $input.removeClass('error').addClass('success')
             $input.siblings('.error-message').remove()
+        }
+    },
+
+    validateGenres: function ( e ) {
+        let $input = $('#album-genres')
+
+        $input.find('.error-message').remove()
+
+        if ( AlbumValidator.validateInputs( this.collectGenres(), 1, 'genres', $input ) ) {
+            $input.find('.error-message').remove()
+            $input.find('#tags').removeClass('error').addClass('success')
         }
     },
 
@@ -213,16 +242,16 @@ const AlbumForm = {
 
     bindEvents: function() {
         if ( !this.hasAlbum ) {
-            console.log( this.hasAlbum )
-            $('#add-new-album').on('submit', $.proxy( this.saveAlbum, this ))
+            $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
         }
 
-        $('#add-another-song-button').on('click', this.addSong)
+        $('#add-another-song-button').on('click', $.proxy( this.addSong, this ))
         $('#reset-album-button').on('click', $.proxy( this.resetValues, this ))
         $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
         $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
+        $('#add-new-album-form .form-group').on('blur', '#tags.error', $.proxy( this.validateGenres, this ))
     },
 
     init: function( getAlbum = false ) {
@@ -230,11 +259,13 @@ const AlbumForm = {
         this.bindEvents()
         this.setTitleAddNewAlbum()
         this.setTitleAddAlbumPlaylist()
+
         if ( this.hasAlbum ) {
             EditAlbum.init()
         } else {
             this.addSongsInputs()
         }
+
         AlbumGenres.init()
     }
 }

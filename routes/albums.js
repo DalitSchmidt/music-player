@@ -88,6 +88,10 @@ router.post('/', function ( req, res ) {
         res.status(422).json({ err: 'No Songs!' })
     }
 
+    if ( !album.genres.length ) {
+        res.status(422).json({err: 'No Genres!'})
+    }
+
     let new_genres = GenresController.getNewGenres( album.genres )
     let old_genres_ids = GenresController.getExistingGenresIds( album.genres )
 
@@ -174,6 +178,14 @@ router.post('/', function ( req, res ) {
 router.put('/:album_id', ( req, res ) => {
     let album = req.body
     let album_id = req.params.album_id
+
+    if ( !Array.isArray( album.songs ) ) {
+        res.status(422).json({ err: 'No Songs!' })
+    }
+
+    if ( !album.genres.length ) {
+        res.status(422).json({err: 'No Genres!'})
+    }
 
     let new_genres = GenresController.getNewGenres( album.genres )
     let old_genres_ids = GenresController.getExistingGenresIds( album.genres )

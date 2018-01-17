@@ -10,6 +10,9 @@ const AlbumGenres = {
     },
 
     addGenreTag: function ( tagName, genre_id = false ) {
+        if ( !tagName )
+            return
+
         let html = AlbumFormTemplates.genreTag( tagName, genre_id )
         $('#tags-container').append( html )
         $('#search-genres').val('')
