@@ -6,45 +6,45 @@
         <div class="col-md-12">
             <div id="add-new-album-form">
                 <div id="image-cover-preview">
-                    <img src="../../images/preview.png" class="img-responsive img-circle pull-right" alt="Album Cover">
+                    <img src="../../images/preview.png" alt="Album Cover">
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
                         <label class="control-label">Album Name:</label>
-                        <input type="text" value="Lorem Ipsum" class="form-control" id="album-name" name="album_name" placeholder="e.g. Blood Sugar Sex Magic" title="Album Name" required>
+                        <input type="text" name="album_name" id="album-name" class="form-control" placeholder="e.g. Blood Sugar Sex Magic" title="Album Name" value="Lorem Ipsum" required>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Artist:</label>
-                        <input type="text" value="Lorem Ipsum" class="form-control" id="album-artist" name="album_artist" placeholder="e.g. Red Hot Chilli Peppers" title="Artist" required>
+                        <input type="text" name="album_artist" id="album-artist" class="form-control" placeholder="e.g. Red Hot Chilli Peppers" title="Artist" value="Lorem Ipsum" required>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Image URL:</label>
-                        <input type="text" value="http://www.billboard.com/files/styles/900_wide/public/media/Funkadelic-Maggot-Brain-album-covers-billboard-1000x1000.jpg" class="form-control" id="album-image" name="album_image" placeholder="http://" title="Image URL" required>
+                        <input type="text" name="album_image" id="album-image" class="form-control" placeholder="http://" title="Image URL" value="http://www.billboard.com/files/styles/900_wide/public/media/Funkadelic-Maggot-Brain-album-covers-billboard-1000x1000.jpg" required>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Year:</label>
-                        <input type="text" value="2017" class="form-control" id="album-year" name="album_year" placeholder="Year" title="Year" required>
+                        <input type="text" name="album_year" id="album-year" class="form-control" placeholder="Year" title="Year" value="2017" required>
                     </div>
 
                     <div id="album-genres" class="form-group">
                         <label class="control-label">Genres:</label>
-                        <!--<div></div>-->
-                    </div>
-
-                    <div id="tags" class="tagSelector">
-                        <div id="tags-container">
+                        <div id="tags">
+                            <div class="tag-selector" title="Genres">
+                                <div id="tags-container">
+                                </div>
+                                <input type="text" name="search_genres" id="search-genres">
+                            </div>
                         </div>
-                        <input type="text" id="search-genres">
-                    </div>
-                    <div id="genres-results">
+                        <div id="genres-results">
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Description:</label>
-                        <textarea class="form-control" id="album-description" name="album_description" placeholder="Description" title="Description" required></textarea>
+                        <textarea name="album_description" id="album-description" class="form-control" placeholder="Description of album" title="Description" required></textarea>
                     </div>
                 </div>
             </div>
@@ -59,13 +59,13 @@
             <div id="add-album-playlist-form">
             </div>
             <div id="add-new-album-controls" class="col-md-12">
-                <button type="button" id="add-another-song-button" class="pull-left">
+                <button type="button" id="add-another-song-button" title="Add another song">
                     <i class="fa fa-plus-square" aria-hidden="true"></i> Add another song
                 </button>
 
                 <div class="pull-right">
-                    <button type="reset" id="reset-album-button" class="pull-left">RESET ALBUM</button>
-                    <button type="button" id="finish-and-save-button">FINISH & SAVE</button>
+                    <button type="reset" id="reset-album-button" title="RESET ALBUM">RESET ALBUM</button>
+                    <button type="button" id="finish-and-save-button" title="FINISH & SAVE">FINISH & SAVE</button>
                 </div>
             </div>
         </div>

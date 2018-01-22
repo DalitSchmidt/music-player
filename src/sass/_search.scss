@@ -2,7 +2,7 @@
     margin-left: 50px;
     margin-right: 50px;
 
-    /*Search results - header*/
+    /* Search results - header */
     #search-results-title {
         border-bottom: 4px double #dadada;
 
@@ -14,7 +14,7 @@
         }
     }
 
-    /*Search results - Body*/
+    /* Search results - Body */
     .col-md-12 {
         padding-top: 10px;
 
@@ -48,6 +48,13 @@
                         z-index: 1;
                         left: calc(50% - 25px);
                         top: calc(50% - 25px);
+                    }
+
+                    img {
+                        border-radius: 50%;
+                        display: block;
+                        margin-right: auto;
+                        margin-left: auto;
                     }
 
                     .play-icon {
@@ -136,6 +143,7 @@
                     width: 250px;
                     box-sizing: border-box;
                     text-align: center;
+                    float: right;
 
                     &:hover {
                         background-color: #0F70A1;

@@ -27,97 +27,88 @@ img {
     box-sizing: border-box;
 }
 
-#container-full {
-    .row {
-        .col-md-12 {
-            /*Header*/
-            header {
-                position: relative;
-                display: block;
-                background: #0F70A1;
-                height: 80px;
-                //max-width: 100%;
-                box-sizing: border-box;
+/* Header */
+header {
+    position: relative;
+    display: block;
+    background: #0F70A1;
+    height: 80px;
+    box-sizing: border-box;
 
-                .pull-left {
-                    a {
-                        color: #ffffff;
-                        text-decoration: none;
-                        cursor: pointer;
-                        font-size: 20px;
+    .pull-left {
+        a {
+            color: #ffffff;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 20px;
 
-                        .fa-plus-circle {
-                            color: #ffffff;
-                            font-size: 20px;
-                            cursor: pointer;
-                            margin-top: 30px;
-                            margin-left: 20px;
-                        }
-                    }
-                }
-
-                /*Search window*/
-                #search-area {
-                    input[type=search] {
-                        width: 200px;
-                        padding: 5px;
-                        font-size: 16px;
-                        border-radius: 5px;
-                        border: 3px double;
-                        background-color: #ffffff;
-                        margin-top: 22px;
-                        resize: none;
-                        box-sizing: border-box;
-                        margin-right: 10px;
-                    }
-
-                    #search {
-                        color: #ffffff;
-                        font-size: 20px;
-                        cursor: pointer;
-                        margin-right: 20px;
-                        background: transparent;
-                        border: none;
-
-                        .fa-search {
-                            right: 20px;
-                            top: 30px;
-                            position: absolute;
-                        }
-                    }
-                }
-
-                #results-list {
-                    background: white;
-                    width: 190px;
-                    margin-left: 5px;
-
-                    ul {
-                        padding: 0;
-
-                        li {
-                            padding: 0 5px;
-                            line-height: 30px;
-                            text-align: justify;
-                            border-bottom: 4px double #dadada;
-                            list-style-type: none;
-                            font-weight: bold;
-                            width: 190px;
-
-                            a {
-                                text-decoration: none;
-                                color: black;
-                            }
-                        }
-                    }
-                }
+            .fa-plus-circle {
+                color: #ffffff;
+                font-size: 20px;
+                cursor: pointer;
+                margin-top: 30px;
+                margin-left: 20px;
             }
         }
     }
 
-    #main-container {
-        padding: 35px 0;
+    /* Search window */
+    #search-term {
+        width: 200px;
+        padding: 5px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 3px double;
+        background-color: #ffffff;
+        margin-top: 22px;
+        resize: none;
         box-sizing: border-box;
-        min-height: 400px;
+        margin-right: 10px;
     }
+
+    #search-button {
+        color: #ffffff;
+        font-size: 20px;
+        cursor: pointer;
+        margin-right: 20px;
+        background: transparent;
+        border: none;
+
+        .fa-search {
+            right: 20px;
+            top: 30px;
+            position: absolute;
+        }
+    }
+
+    #results-list {
+        background: white;
+        width: 190px;
+        margin-left: 5px;
+
+        ul {
+            padding: 0;
+
+            li {
+                padding: 0 5px;
+                line-height: 30px;
+                text-align: justify;
+                border-bottom: 4px double #dadada;
+                list-style-type: none;
+                font-weight: bold;
+                width: 190px;
+
+                a {
+                    text-decoration: none;
+                    color: black;
+                }
+            }
+        }
+    }
+}
+
+#main-container {
+    padding: 35px 0;
+    box-sizing: border-box;
+    min-height: 400px;
 }
