@@ -9,8 +9,10 @@ const models = require('../models')
 const AlbumModel = models.Album
 // המשתנה SongModel מכיל את המודל של Song המצוי תחת המשתנה models (המכיל את כל היכולות המצויות בקבצים שמצויים בתיקיית models)
 const SongModel = models.Song
-// המשתנה GenresController מכיל את כל היכולות בקובץ GenresController באמצעות חיבור הקובץ
+// המשתנה GenresController מכיל את כל היכולות המצויות בקובץ GenresController באמצעות חיבור הקובץ
 const GenresController = require('../controllers/GenresController')
+// המשתנה AlbumsController מכיל את כל היכולות המצויות בקובץ AlbumsController באמצעות חיבור הקובץ
+const AlbumsController = require('../controllers/AlbumsController')
 // המשתנה GenreModel מכיל את המודל של Genre המצוי תחת המשתנה models (המכיל את כל היכולות המצויות בקבצים שמצויים בתיקיית models)
 const GenreModel = models.Genre
 // המשתנה AlbumsToGenresModel מכיל את המודל של AkbumsToGenres המצוי תחת המשתנה models (המכיל את כל היכולות המצויות בקבצים שמצויים בתיקיית models)
@@ -122,67 +124,104 @@ router.post('/', function ( req, res ) {
     // נבדוק אם לפרופרטי genres המצוי במשתנה album יש ערכים, למעשה אנו בודקים אם יש פריטים במערך של הז'אנרים
     if ( !album.genres.length )
         // אם לא, אז נשלח הודעת שגיאה מתאימה עם הסטטוס קוד 422 (Unprocessable Entity) האומרת שהשרת מבין את סוג התוכן של יישות הבקשה, אך לא הצליח לעבד את ההוראות הכלולות בו מאחר ואין ז'אנרים במערך
-        res.status(422).json({err: 'No Genres!'})
+        res.status(422).json({ err: 'No Genres!' })
 
     // המשתנה new_genres מכיל את הפונקציה getNewGenres שמקבלת את המשתנה album.genres המכיל את המערך של הז'אנרים המצויים באלבום ומצויה תחת האובייקט GenresController ושבאמצעותה מתאפשר לבצע בקרה על קבלת ז'אנרים חדשים
     let new_genres = GenresController.getNewGenres( album.genres )
     // המשתנה old_genres_ids מכיל את הפונקציה getExistingGenresIds שמקבלת את המשתנה album.genres המכיל את המערך של הז'אנרים המצויים באלבום ומצויה תחת האובייקט GenresController ושבאמצעותה מתאפשר לקבל את המספר הייחודי של הז'אנרים הקיימים
     let old_genres_ids = GenresController.getExistingGenresIds( album.genres )
+    // המשתנה album_id מכיל את הערך הבוליאני false
+    let album_id = false
 
-        // Create the songs in the DB and link theme to the album
-        // בבקשה אנחנו יוצרים אלבום חדש לפי הסכימה של האלבום המצוי במשתנה AlbumModel (המכיל את המודל של Album שמצוי תחת המשתנה models)
-        AlbumModel.create( album )
-            // ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס של promise, נפעיל promise על התוצאה שקיבלנו
-            .then(function ( result ) {
-                // המשתנה album_id מכיל את המספר id של האלבום שנוצר המצוי תחת המשתנה result
-                let album_id = result.album_id
+    // Create the songs in the DB and link theme to the album
+    // בבקשה אנחנו יוצרים אלבום חדש לפי הסכימה של האלבום המצוי במשתנה AlbumModel (המכיל את המודל של Album שמצוי תחת המשתנה models)
+    AlbumModel.create( album )
+        // ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise שפונקציית ה- callback שלו (המסומנת כפונקציית חץ) מקבלת את המשתנה result המכיל את התוצאה שקיבלנו
+        .then(result  => {
+            // המשתנה album_id מכיל את המספר id של האלבום שנוצר המצוי תחת המשתנה result
+            album_id = result.album_id
 
-                // ואז מאחר ואנו משתתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise בו המשתנה GenreModel מפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של new_genres, ולאחר מכן נפעיל promise נוסף על התוצאות שמתקבלות
-                GenreModel.bulkCreate( new_genres,  { returning: true } ).then(
-                    results => {
-                        // המשתנה new_genres_ids מכיל את המשתנה results שמפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת את ה- genre_id
-                        let new_genres_ids = results.map( genre => genre.genre_id )
-                        // המשתנה album_genres_ids מכיל את המערך המאוחד של הנתונים המצויים במשתנה old_genres_ids ומפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת את ה- genre_id ו- album_id
-                        let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map( genre_id => {
-                            return { genre_id, album_id }
-                        })
-                        // המשתנה AlbumsToGenresModel מפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של album_genres_ids, כך שלמעשה היא מוסיפה את המזהה הייחודי של הז'אנרים שלגביהם מבוצע עדכון של הנתונים, ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise שבו פונקציית ה- callback שלו מבצעת מספר פעולות
-                        AlbumsToGenresModel.bulkCreate( album_genres_ids ).then(
-                            () => {
-                                // המשתנה songs מפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת כל שיר לאלבום שלו לפי המספר id של האלבום ומחזירה את השיר
-                                songs = songs.map(song => {
-                                    song.album_id = album_id
-                                    return song
-                                })
+            // הפונקציה מחזירה את המשתנה album_id המכיל את המספר id של האלבום שנוצר המצוי תחת המשתנה result
+            return album_id
+        })
+        // ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise שפונקציית ה- callback שלו (המסומנת כפונקציית חץ) מקבלת את המשתנה album_id המכיל את המספר id של האלבום שנוצר
+        .then(album_id => {
+            // המשתנה songs מפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת כל שיר לאלבום שלו לפי המספר id של האלבום ומחזירה את השיר
+            songs = songs.map(song => {
+                song.album_id = album_id
 
-                                // המשתנה SongModel מפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של songs, כך שלמעשה היא מוסיפה את כל השירים לתוך האלבום שיווצר, ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise על יצירת האלבום
-                                SongModel.bulkCreate( songs ).then(
-                                    // שליחת הודעת סטטוס עם הקוד 201 (Created) האומרת שהמידע המבוקש נוצר עם תשובת json המכילה את המספר id של האלבום שנוצר
-                                    res.status(201).json({ result })
-                                )
-                            }
-                        )
-                    }
-                )
-            // נתפוס את השגיאות במידה וקיבלנו הודעת שגיאה המכילה את הסטטוס קוד 422 (Unprocessable Entity) האומרת שהשרת מבין את סוג התוכן של יישות הבקשה, אך לא הצליח לעבד את ההוראות הכלולות בו מאחר והמספר id של האלבום כבר קיים תוצג הודעת שגיאה מתאימה
-            }).catch(function ( err ) {
-                let errors = err.errors[0]
+                // הפונקציה מחזירה את המשתנה song המכיל את הפרטים של השיר
+                return song
+            })
 
-                res.status(422).json({
-                    error: 'Unable to create album',
-                    reason: {
-                        message: errors.message,
-                        error: `${errors.path} '${errors.value}' already exists`
-                    }
+            // הפונקציה מחזירה את המשתנה SongModel המפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של songs, כך שלמעשה היא מוסיפה את כל השירים לתוך האלבום שנוצר
+            return SongModel.bulkCreate( songs )
+        })
+        // ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise נפעיל promise שפונקציית ה- callback שלו מבצעת מספר פעולות
+        .then( () => {
+            // הפונקציה מחזירה את המשתנה GenreModel המפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של new_genres
+            return GenreModel.bulkCreate( new_genres,  { returning: true } )
+        })
+        // ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise נפעיל promise שפונקציית ה- callback שלו מבצעת מספר פעולות
+        .then( () => {
+            // המשתנה new_genres_ids מכיל את המשתנה results שמפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת את ה- genre_id
+            let new_genres_ids = results.map( genre => genre.genre_id )
+            // המשתנה album_genres_ids מכיל את המערך המאוחד של הנתונים המצויים במשתנה old_genres_ids ומפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת את ה- genre_id ו- album_id
+            let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map( genre_id => {
+                // הפונקציה מחזירה אובייקט המכיל את המשתנים genre_id ו- album_id
+                return { genre_id, album_id }
+            })
+
+            // הפונקציה מחזירה את המשתנה AlbumsToGenresModel מפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של album_genres_ids, כך שלמעשה היא מוסיפה את המזהה הייחודי של הז'אנרים שלגביהם מבוצע עדכון של הנתונים
+            return  AlbumsToGenresModel.bulkCreate( album_genres_ids )
+        })
+        // ואז מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise נפעיל promise שפונקציית ה- callback שלו מבצעת מספר פעולות
+        .then( () => {
+            // שליחת הודעת סטטוס עם הקוד 201 (Created) האומרת שהמידע המבוקש נוצר עם תשובת json המכילה את התוצאה של האלבום שנוצר
+            res.status(201).json({ result })
+        })
+        // במידה ויש שגיאות המונעות מאיתנו לשמור את האלבום נפעיל promise התופס את השגיאות ושפונקציית ה- callback שלו (המסומנת כפונקציית חץ) מקבלת את המשתנה err
+        .catch(err => {
+            // נבדוק אם יש שגיאה בנתונים המצויים במשתנה album_id
+            if ( album_id ) {
+                // אז נפעיל את הפונקציה deleteAlbum המקבלת את המשתנה album_id המצויה תחת האובייקט AlbumsController ושבאמצעותה מתאפשר לבצע בקרה על מחיקת האלבום ומאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise המחבר את כל השאילתות המצויות בפונקציה deleteAlbum ושפונקציית ה- callback שלו (המסומנת כפונקציית חץ) מבצעת מספר פעולות
+                AlbumsController.deleteAlbum( album_id ).spread( () => {
+                    // המשתנה errors מכיל את השגיאה שקיבלנו
+                    let errors = err.errors[0]
+
+                    // במידה וקיבלנו הודעת שגיאה המכילה את הסטטוס קוד 422 (Unprocessable Entity) האומרת שהשרת מבין את סוג התוכן של יישות הבקשה, אך לא הצליח לעבד את ההוראות הכלולות בו מאחר ולא ניתן ליצור את האלבום ונשלח json המפרט את הודעת השגיאה שקיבלנו
+                    res.status(422).json({
+                        error: 'Unable to create album',
+                        reason: {
+                            message: errors.message,
+                            error: `${errors.path} '${errors.value}' already exists`
+                        }
+                    })
                 })
 
-            throw new Error()
-        })
+                return
+            }
+
+            // המשתנה errors מכיל את השגיאה שקיבלנו
+            let errors = err.errors[0]
+
+            // במידה וקיבלנו הודעת שגיאה המכילה את הסטטוס קוד 422 (Unprocessable Entity) האומרת שהשרת מבין את סוג התוכן של יישות הבקשה, אך לא הצליח לעבד את ההוראות הכלולות בו מאחר ולא ניתן ליצור את האלבום ונשלח json המפרט את הודעת השגיאה שקיבלנו
+            res.status(422).json({
+                error: 'Unable to create album',
+                reason: {
+                    message: errors.message,
+                    error: `${errors.path} '${errors.value}' already exists`
+                }
+            })
+
+        // אם הגענו עד לכאן, נזרוק הודעת שגיאה חדשה
+        throw new Error()
+    })
 
     //
     // AlbumModel.create( album ).then(result => {
-    //     let album_id = result.album_id
            // המשתנה genres מכיל את הז'אנרים של האלבום שנוצר המצויים תחת המשתנה album
+    //     let album_id = result.album_id
     //     let genres = album.genres
     //     songs = songs.map( song => {
     //         song.album_id = album_id
@@ -239,7 +278,7 @@ router.put('/:album_id', ( req, res ) => {
     // נבדוק אם לפרופרטי genres המצוי במשתנה album יש ערכים, למעשה אנו בודקים אם יש פריטים במערך של הז'אנרים
     if ( !album.genres.length )
         // אם לא, אז נשלח הודעת שגיאה מתאימה עם הסטטוס קוד 422 (Unprocessable Entity) האומרת שהשרת מבין את סוג התוכן של יישות הבקשה, אך לא הצליח לעבד את ההוראות הכלולות בו מאחר ואין ז'אנרים במערך
-        res.status(422).json({err: 'No Genres!'})
+        res.status(422).json({ err: 'No Genres!' })
 
     // המשתנה new_genres מכיל את הפונקציה getNewGenres שמקבלת את המשתנה album.genres המכיל את המערך של הז'אנרים המצויים באלבום ומצויה תחת האובייקט GenresController ושבאמצעותה מתאפשר לבצע בקרה על קבלת ז'אנרים חדשים
     let new_genres = GenresController.getNewGenres( album.genres )
@@ -299,22 +338,14 @@ router.delete('/:album_id', ( req, res ) => {
     // המשתנה album_id מכיל את המספר id של האלבום
     let album_id = req.params.album_id
 
-    // מאחר ואנו רוצים למחוק את כל הנתונים הקשורים לאלבום ספציפי הכוללים פרטים על האלבום, על השירים ועל הז'אנרים שלו, אנו צריכים לחבר מספר שאילתות המוחקות את כל הנתונים הקשורים לאלבום ומצויים בטבלאות השונות
-    models.sequelize.Promise.join(
-        // השאילתא מוחקת את כל הנתונים המצויים בטבלה של האלבומים בהתאם למספר id של האלבום והגדרת הסוג של השאילתא שאנו מבצעים, במקרה זה מאחר ואנו בנתיב של בקשת delete המאפשרת למחוק את כל הנתונים הקשורים לאלבום ספציפי לפי המספר id שלו, השאילתא שאנו מבצעים היא מסוג DELETE
-        models.sequelize.query(`DELETE FROM albums WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE}),
-        // השאילתא מוחקת את כל הנתונים המצויים בטבלה של השירים בהתאם למספר id של האלבום והגדרת הסוג של השאילתא שאנו מבצעים, במקרה זה מאחר ואנו בנתיב של בקשת delete המאפשרת למחוק את כל הנתונים הקשורים לאלבום ספציפי לפי המספר id שלו, השאילתא שאנו מבצעים היא מסוג DELETE
-        models.sequelize.query(`DELETE FROM songs WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE}),
-        // השאילתא מוחקת את כל הנתונים המצויים בטבלה של 'albums_to_genres' בהתאם למספר id של האלבום והגדרת הסוג של השאילתא שאנו מבצעים, במקרה זה מאחר ואנו בנתיב של בקשת delete המאפשרת למחוק את כל הנתונים הקשורים לאלבום ספציפי לפי המספר id שלו, השאילתא שאנו מבצעים היא מסוג DELETE
-        models.sequelize.query(`DELETE FROM albums_to_genres WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE})
-    // מאחר ואנו משתמשים ב- sequelize שזהו מודול המבוסס על promise, נפעיל promise המאחד את כל השאילתות ובו נבדוק כמה שורות הושפעו מפעולת המחיקה שבוצעה
-    ).spread( affected_rows => {
+    // הפעלה של הפונקציה deleteAlbum המקבלת את המשתנה album_id המצויה תחת האובייקט AlbumsController ושבאמצעותה מתאפשר לבצע בקרה על מחיקת האלבום ומאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise המחבר את כל השאילתות המצויות בפונקציה deleteAlbum ושפונקציית ה- callback שלו (המסומנת כפונקציית חץ) מקבלת את המשתנה affected_rows
+    AlbumsController.deleteAlbum( album_id ).spread( affected_rows => {
         // אם התוצאה שקיבלנו היא 0, זאת אומרת שלא הושפעו שורות ונשלח תשובת json המכילה הודעה האומרת שהאלבום עם המספר id שביקשנו למחוק לא קיים
         if ( affected_rows === 0 )
-            res.json( {message: `Album id ${album_id} not found`} )
+            res.json({ message: `Album id ${album_id} not found` })
         else
             // אם התוצאה היא אחרת, כלומר 1, כי זה המספר המקסימלי של השורות שיכולות להיות מושפעות מאחר ואנו מבקשים למחוק אלבום ספציפי לפי המספר id שלו ויכול להיות רק אלבום אחד שמכיל את אותו מספר id, אז נשלח תשובת json עם המספר id של האלבום הספציפי שנמחק
-            res.json( {album_id} )
+            res.json({ album_id })
     })
 })
 

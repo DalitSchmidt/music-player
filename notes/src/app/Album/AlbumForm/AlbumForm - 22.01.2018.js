@@ -32,6 +32,8 @@ const AlbumForm = {
 
         // ככל ויש שגיאות ולידציה בנתונים שמכיל המשתנה inputs נמחק מהם את ה- class בשם error לפני ביצוע הלולאה
         inputs.removeClass('error')
+        // הסרת האלמנט שיש לו class בשם error-message ושמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-new-album-form מה- DOM
+        $('#add-new-album-form .error-message').remove()
         // הסרת האלמנט span שיש לו class בשם error ושמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-new-album-form מה- DOM
         $('#add-new-album-form span.error').remove()
 
@@ -50,8 +52,8 @@ const AlbumForm = {
             // המשתנה input_value מכיל את כל הערכים המצויים במשתנה input
             input_value = input.val()
 
-            // If there is an error with the regex, set errors to be true, mean we have errors in the validation
             // המשתנה errors מכיל את הערך הבוליאני true, כך שלמעשה הוא מכיל שגיאות כלשהן שלא עמדו בולידאציות המוגדרות
+            // If there is an error with the regex, set errors to be true, mean we have errors in the validation
             if ( !AlbumValidator.validateField( input ) )
                 errors = true
 
@@ -117,13 +119,18 @@ const AlbumForm = {
     // באמצעות הפונקציה collectSongs אנו מביאים את כל הערכים המצויים ב- inputים הקשורים לשדות של השירים
     collectSongs: function() {
         // הצהרה על המשתנים שאנו הולכים לבצע בהם שימוש בפונקציה
-        let has_duplications = false, has_errors = false, songs = [], song, song_youtube, song_name, song_time
+        let has_duplications = false, has_errors = false, songs = []
 
-        // הסרת ה- class בשם error מאלמנט שיש לו class בשם song-item
-        $('.song-item').removeClass('error')
+        // הסרת ה- class בשם error מאלמנט שיש לו class בשם song-item ומכל אלמנט שיש לו את ה- class בשם error ומצוי בתוך אלמנט שיש לו class בשם song-item
+        $('.song-item, .song-item *').removeClass('error')
+        // הסרת האלמנט שיש לו class בשם error-message ושמצוי בתוך האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form מה- DOM
+        $('#add-album-playlist-form .error-message').remove()
 
         // הלולאת each עוברת איבר-איבר על אלמנט div שיש לו class בשם song-item (שלמעשה מכיל מערך של כל האלמנטים מסוג div שיש להם class בשם song-item) ומוציאה ממנו את ה- index ואת ה- item
         $.each( $('.song-item'), ( index, item ) => {
+            // הצהרה על המשתנים שאנו הולכים לבצע בהם שימוש בלולאה
+            let song, song_youtube, song_name, song_time
+
             // המשתנה song מכיל באמצעות שימוש ב- jQuery את ה- item שמצוי במערך של song-item
             song = $( item )
             // המשתנה song_youtube מכיל את הערך המצוי בתיבת ה- input של המזהה הייחודי של YouTube, באמצעות מציאת הנתונים המצויים במשתנה song (המכיל את ה- item שמצוי במערך של song-item) את ה- input שיש לו attribute מסוג name בשם song_youtube ומביא את הערך שמצוי ב- input
@@ -135,52 +142,37 @@ const AlbumForm = {
 
             // נבדוק אם יש ערכים במשתנים song_youtube ו- song_time, כלומר שהם לא ריקים מתוכן
             if ( song_youtube !== '' && song_time !== '' ) {
-                // נבדוק אם אורך המערך המצוי במשתנה songs הוא לא 0 ושגם הפונקציה validateField המקבלת את המשתנה input המכיל את ה- input שיש לו את ה- attribute מסוג name בשם song_name שאותו מצא המשתנה song המצויה תחת האובייקט AlbumValidator ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לשדות, כך שלמעשה אנו בודקים שאין שגיאה בשדה ה- input שיש לו את ה- attribute מסוג name בשם song_name
-                if ( songs.length === 0 && AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
-                    // נכניס לתוך המערך של songs אובייקט המכיל את הפרופרטיס song_name, song_youtube ו- song_time
-                    songs.push({ song_youtube, song_name, song_time })
+                // נבדוק אם אורך המערך המצוי במשתנה songs הוא לא 0
+                if ( songs.length === 0 ) {
+                    // נבדוק אם הפונקציה validateField המקבלת את המשתנה input המכיל את ה- input שיש לו את ה- attribute מסוג name בשם song_name שאותו מצא המשתנה song המצויה תחת האובייקט AlbumValidator ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לשדות אינה מכילה שגיאות, כך שלמעשה אנו בודקים שאין שגיאה בשדה ה- input שיש לו את ה- attribute מסוג name בשם song_name
+                    if ( AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
+                        // נכניס לתוך המערך של songs אובייקט המכיל את הפרופרטיס song_name, song_youtube ו- song_time
+                        songs.push({ song_youtube, song_name, song_time })
+                    }
+
                     return
                 }
 
-                // נבדוק אם הפונקציה validateField המקבלת את המשתנה input המכיל את ה- input שיש לו את ה- attribute מסוג name בשם song_name שאותו מצא המשתנה song המצויה תחת האובייקט AlbumValidator ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לשדות מכילה שגיאות, כך שלמעשה אנו בודקים אם יש שגיאה בשדה ה- input שיש לו את ה- attribute מסוג name בשם song_name
-                if ( !AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
-                    // המשתנה has_errors מכיל את הערך הבוליאני true, כך שלמעשה הוא מכיל שגיאות כלשהן שלא עמדו בוולידאציות המוגדרות
-                    has_errors = true
-                    return
-                }
+                // המשתנה has_duplications מפעיל את הפונקציה validateInputs המצויה תחת האובייקט AlbumValidator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item ) לא מכילה נתונים כפולים
+                has_duplications = AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
 
-                // נבדוק אם הפונקציה validateInputs המצויה תחת האובייקט AlbumValidator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item ) לא מכילה נתונים כפולים
-                if ( !AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) ) )
+                // נבדוק אם המשתנה has_duplications מפעיל את הפונקציה validateInputs המצויה תחת האובייקט AlbumValidator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item ) לא מכילה נתונים כפולים וגם אם הפונקציה validateField המקבלת את המשתנה input המכיל את ה- input שיש לו את ה- attribute מסוג name בשם song_name שאותו מצא המשתנה song המצויה תחת האובייקט AlbumValidator ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לשדות אינה מכילה שגיאות, כך שלמעשה אנו בודקים שאין שגיאה בשדה ה- input שיש לו את ה- attribute מסוג name בשם song_name
+                if ( !has_duplications && AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
                     // נכניס לתוך המערך של songs אובייקט המכיל את הפרופרטיס song_name, song_youtube ו- song_time
                     songs.push({ song_youtube, song_name, song_time })
-                else
-                    // אחרת, כלור יש שגיאות המשתנה has_duplications מכיל את הערך הבוליאני true, כך שלמעשה הוא מכיל את הנתונים הכפולים
-                    has_duplications = true
+
+                    return
+                }
             }
         })
 
-        // הפעלת הפונקציה validateInputs המצויה תחת האובייקט AlbumValidator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 5, 'song_youtube_id' ואת האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form
-        AlbumValidator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
-
-        // נבדוק אם יש לפחות 5 נתונים במשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכם הפרופרטיס song_youtube, song_name ו- song_time וגם שהמשתנה has_duplications לא מכיל נתונים כפולים וגם שהמשתנה has_errors לא מכיל שגיאות
-        if ( songs.length >= 5 && !has_duplications && !has_errors )
-            // אז נחזיר את המשתנה songs המכיל מערך עם האובייקטים של השירים
-            return songs
-        else {
-            // אחרת, נבדוק אם אורך המשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכו הפרופרטיס name, youtube ו- duration גדול מ- 5
-            if ( songs.length < 5 ) {
-                // אז נעבור באמצעות לולאת each העוברת איבר-איבר על אלמנט שיש לו class בשם song-item (שלמעשה מכיל מערך של כל האלמנטים שיש להם class בשם song-item) ומוציאה ממנו את ה- index ואת ה- item
-                $.each( $('.song-item'), ( index, item ) => {
-                    // אם ה- item שמצוי במערך של song-item מצא אלמנט מסוג input שיש לו attribute מסוג name בשם song_youtube שהוא ריק מערכים
-                    if ( $( item ).find('input[name=song_youtube]').val() == '')
-                        // אז נוסיף ל- item שנמצא המצוי במערך של song-item את ה- class בשם error
-                        $( item ).addClass('error')
-                })
-            }
-
-            // אחרת, כלומר אין נתונים במשתנה songs המכיל מערך עם אובייקטים של השירים שבתוכם הפרופרטיס song_youtube, song_name ו- song_time וגם שהמשתנה has_duplications מכיל נתונים כפולים וגם שהמשתנה has_errors מכיל שגיאות, אז הפונקציה מחזירה את הערך הבוליאני false
+        // נבדוק אם המשתנה has_duplications מפעיל את הפונקציה validateInputs המצויה תחת האובייקט AlbumValidator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 'song_youtube', song_youtube, 'duplicate_song' ו- $( item ) לא מכילה נתונים כפולים או שהפונקציה validateInputs המצויה תחת האובייקט AlbumValidator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים songs, 5, 'song_youtube_id' ואת האלמנט div שיש לו מזהה ייחודי בשם add-album-playlist-form
+        if ( has_duplications || !AlbumValidator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') ) )
+            // אז נחזיר את הערך הבוליאני false
             return false
-        }
+
+        // אז נחזיר את המשתנה songs המכיל מערך עם האובייקטים של השירים
+        return songs
     },
 
     // באמצעות הפונקציה collectGenres אנו מביאים את כל הערכים המצויים ב- input הקשור לשדה של הז'אנרים
@@ -241,8 +233,58 @@ const AlbumForm = {
         if ( !album )
             return
 
-        // הפעלה של הפונקציה saveAlbum המקבלת את המשתנה album ומצויה תחת האובייקט AlbumAPIService שבאמצעותה מתאפשר לשמור אלבום במסד הנתונים, ולאחר מכן נפעיל promise המפעיל את הפונקציה setSuccessMessage המציגה הודעת הצלחה עם יצירת האלבום
-        AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
+        // הפעלה של הפונקציה saveAlbum המקבלת את המשתנה album ומצויה תחת האובייקט AlbumAPIService שבאמצעותה מתאפשר לשמור אלבום במסד הנתונים, ולאחר מכן נפעיל promise
+        AlbumAPIService.saveAlbum( album ).then(
+            // המפעיל את הפונקציה setSuccessMessage המציגה הודעת הצלחה עם יצירת האלבום
+            this.setSuccessMessage,
+            // ושפונקציית ה- calbback שלו (המסומנת כפונקציית חץ) מקבלת את המשתנה error ומבצעת מספר פעולות ככל ויש שגיאות המונעות מאיתנו לשמור את האלבום
+            ( error ) => {
+                // הצהרה על המשתנים שאנו הולכים לבצע בהם שימוש בפונקציה
+                let input, error_message, html
+                // המשתנה input_name מכיל את ה- attribute מסוג name של האלמנט input שיש לו את הודעת השגיאה שקיבלנו לאחר שפיצלנו את התוצאה שקיבלנו למערך ולקחנו את התוצאה הראשונה (מאחר והאינדקס שלה במערך הוא 0)
+                let input_name = error.responseJSON.reason.message.split(" ")[0]
+
+                // נבצע בדיקה בה נבדוק מה מכיל המשתנה input_name המכיל את ה- attribute מסוג name של האלמנט input שיש לו את הודעת השגיאה שקיבלנו לאחר שפיצלנו את התוצאה שקיבלנו למערך ולקחנו את התוצאה הראשונה (מאחר והאינדקס שלה במערך הוא 0)
+                switch ( input_name ) {
+                    // אם המשתנה input_name מכיל את ה- input שיש לו attribute מסוג name בשם 'song_youtube' נבצע מספר פעולות
+                    case 'song_youtube':
+                        // המשתנה youtube_code מכיל את השגיאה המפורטת שקיבלנו ומפצל אותה למערך שממנו אנו לוקחים את התוצאה השנייה (מאחר והאינדקס שלה במערך הוא 1) ונסיר מהתשובה שקיבלנו את הסימן '\'
+                        let youtube_code = error.responseJSON.reason.error.split(" ")[1].replace(/['\']+/g, '')
+                        // הצגת המשתנה youtube_code בחלון ה- console
+                        console.log( youtube_code )
+
+                        // המשתנה input מכיל את האלמנט input שיש לו attribute מסוג name בשם song_youtube ומבצע סינון באמצעות השוואה של הערך המצוי ב- input לבין הערך המצוי במשתנה youtube_code
+                        input = $('input[name=song_youtube]').filter(function () {
+                            return this.value === youtube_code
+                        })
+
+                        // הוספת ה- class בשם error לאלמנט המצוי במשתנה input המכיל את האלמנט input שיש לו attribute מסוג name בשם song_youtube ומבצע סינון באמצעות השוואה של הערך המצוי ב- input לבין הערך המצוי במשתנה youtube_code
+                        input.addClass('error')
+                        // המשתנה error_message מכיל את הודעת השגיאה שתוצג
+                        error_message = 'Song already exist in app'
+                        // המשתנה html מפעיל את הפונקציה errorMessage שמקבלת את המשתנה error_message המכיל את הודעת השגיאה המצויה תחת האובייקט AlbumFormTemplates ושבאמצעותה אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה, וכך למעשה מתאפשר להציג ב- DOM את הודעת השגיאה
+                        html = AlbumFormTemplates.errorMessage( error_message )
+                        // המשתנה input המכיל את האלמנט input שיש לו attribute מסוג name בשם song_youtube ומבצע סינון באמצעות השוואה של הערך המצוי ב- input לבין הערך המצוי במשתנה youtube_code מכניס את המשתנה html לפני ההורה של האלמנט שיש לו class בשם form-group
+                        input.parent('.form-group').prepend( html )
+                        break
+
+                    // מצב של ברירת מחדל, כלומר שהמשתנה input_name המכיל את ה- attribute מסוג name של האלמנט input שיש לו את הודעת השגיאה שקיבלנו שקיבלנו לאחר שפיצלנו את התוצאה שקיבלנו למערך ולקחנו את התוצאה הראשונה (מאחר והאינדקס של במערך הוא 0), אכן מכיל שגיאה הקשורה לנתונים המצויים בשדה של האלבום, אז נבצע מספר פעולות במצב זה
+                    default:
+                        // המשתנה input מכיל את האלמנט input שיש לו את ה- attribute מסוג name של האלמנט input שיש לו את הודעת השגיאה שקיבלנו לאחר שפיצלנו את התוצאה שקיבלנו למערך ולקחנו את התוצאה הראשונה (מאחר והאינדקס שלה במערך הוא 0)
+                        input = $(`input[name=${ input_name }`)
+
+                        // הוספת ה- class בשם error לאלמנט המצוי במשתנה input המכיל את האלמנט input שיש לו את ה- attribute מסוג name של האלמנט input שיש לו את הודעת השגיאה שקיבלנו לאחר שפיצלנו את התוצאה שקיבלנו למערך ולקחנו את התוצאה הראשונה (מאחר והאינדקס שלה במערך הוא 0)
+                        input.addClass('error')
+                        // המשתנה error_message מכיל את הודעת השגיאה שתוצג כאשר נהפוך את האות הראשונה של הערך המצוי במשתנה input_name לאות גדולה ונחליף את הסימן '_' לסימן ' ', כך שלמעשה נציג את השם של השדה בהודעת השגיאה
+                        error_message = `${ Utils.capitalize( input_name.replace('_', ' ') ) } must be unique`
+                        // המשתנה html מפעיל את הפונקציה errorMessage שמקבלת את המשתנה error_message המכיל את הודעת השגיאה המצויה תחת האובייקט AlbumFormTemplates ושבאמצעותה אנו יוצרים תבנית html המציגה ב- DOM את הודעת השגיאה, וכך למעשה מתאפשר להציג ב- DOM את הודעת השגיאה
+                        html = AlbumFormTemplates.errorMessage( error_message )
+                        // המשתנה input המכיל את האלמנט input שיש לו את ה- attribute מסוג name של האלמנט input שיש לו את הודעת השגיאה שקיבלנו לאחר שפיצלנו את התוצאה שקיבלנו למערך ולקחנו את התוצאה הראשונה (מאחר והאינדקס שלה במערך הוא 0) מכניס את המשתנה html לפני ההורה של האלמנט שיש לו class בשם form-group
+                        input.parent('.form-group').prepend( html )
+                        break
+                }
+            }
+        )
     },
 
     // באמצעות הפונקציה addSong המקבלת את המשתנה e (המסמל event) ואת המשתנה song המכיל את הערך הבוליאני false מתאפשר להוסיף שדות להוספת שיר בטופס הוספת אלבום חדש כאשר לוחצים על הכפתור הוספת שיר
@@ -353,9 +395,6 @@ const AlbumForm = {
         // המשתנה $input מכיל את האלמנט div שיש לו מזהה ייחודי בשם album-genres
         let $input = $('#album-genres')
 
-        // המשתנה $input המכיל את האלמנט div שיש לו מזהה ייחודי בשם album-genres מוצא בתוכו אלמנט שיש לו class בשם error-message ומסיר אותו
-        $input.find('.error-message').remove()
-
         // נבדוק אם אין שגיאות בשדה של הז'אנרים באמצעות הפעלה של הפונקציה validateInputs המצויה תחת האובייקט AlbumValidator ושבאמצעותה אנו מבצעים בדיקת ולידציה לנתונים ב- inputים שהם למעשה מערך כגון שירים, ז'אנרים וכו' ולצורך כך היא מקבלת את המשתנים this.collectGenres, 1, 'genres' ואת המשתנה $input המכיל את האלמנט div שיש לו מזהה ייחודי בשם album-genres
         if ( AlbumValidator.validateInputs( this.collectGenres(), 1, 'genres', $input ) ) {
             // המשתנה $input המכיל את האלמנט div שיש לו מזהה ייחודי בשם album-genres מוצא בתוכו אלמנט div שיש לו מזהה ייחודי בשם tags ומסיר ממנו את ה- class בשם error ומוסיף לו את ה- class בשם success
@@ -393,8 +432,6 @@ const AlbumForm = {
         $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
         // כאשר מתבצעת יציאה של המשתמש מהאלמנט input שיש לו class בשם error ו/או מהאלמנט textarea שיש לו class בשם error ושהוא מצוי בתוך אלמנט שיש לו class בשם form-group שאלמנט האב שלו הוא form שיש לו מזהה ייחודי בשם add-new-album-form, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם validateField יתייחס לאלמנט עצמו (במקרה זה לאלמנט input שיש לו class בשם error ו/או מהאלמנט textarea שיש לו class בשם error), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה validateField יתייחס בכל מקרה לאובייקט AlbumForm
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
-        // כאשר מתבצעת יציאה של המשתמש מהאלמנט div שיש לו מזהה ייחודי בשם tags שיש לו class בשם error ושהוא מצוי בתוך אלמנט שיש לו class בשם form-group שאלמנט האב שלו הוא form שיש לו מזהה ייחודי בשם add-new-album-form, מאחר ואנו רוצים שההקשר של this בתוך פונקציית ה- callback בשם validateGenres יתייחס לאלמנט עצמו (במקרה זה לאלמנט div שיש לו מזהה ייחודי בשם tags שיש לו class בשם error), לכן נשתמש ב- proxy כדי שההקשר של this בתוך הפונקציה validateGenres יתייחס בכל מקרה לאובייקט AlbumForm
-        $('#add-new-album-form .form-group').on('blur', '#tags.error', $.proxy( this.validateGenres, this ))
     },
 
     // הפונקציה init שמקבלת את המשתנה getAlbum המכיל את הערך בוליאני false, מכילה את כל הפעולות שאנו מעוניינים שיבוצעו עם הפעלתו של האובייקט AlbumForm

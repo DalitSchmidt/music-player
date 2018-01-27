@@ -4,6 +4,7 @@ const models = require('../models')
 const AlbumModel = models.Album
 const SongModel = models.Song
 const GenresController = require('../controllers/GenresController')
+const AlbumsController = require('../controllers/AlbumsController')
 const GenreModel = models.Genre
 const AlbumsToGenresModel = models.AlbumToGenres
 
@@ -84,49 +85,71 @@ router.post('/', function ( req, res ) {
         res.status(422).json({ err: 'No Songs!' })
 
     if ( !album.genres.length )
-        res.status(422).json({err: 'No Genres!'})
+        res.status(422).json({ err: 'No Genres!' })
 
     let new_genres = GenresController.getNewGenres( album.genres )
     let old_genres_ids = GenresController.getExistingGenresIds( album.genres )
+    let album_id = false
 
-        // Create the songs in the DB and link theme to the album
-        AlbumModel.create( album )
-            .then(function ( result ) {
-                let album_id = result.album_id
+    // Create the songs in the DB and link theme to the album
+    AlbumModel.create( album )
+        .then(result  => {
+            album_id = result.album_id
 
-                GenreModel.bulkCreate( new_genres,  { returning: true } ).then(
-                    results => {
-                        let new_genres_ids = results.map( genre => genre.genre_id )
-                        let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map( genre_id => {
-                            return { genre_id, album_id }
-                        })
-                        AlbumsToGenresModel.bulkCreate( album_genres_ids ).then(
-                            () => {
-                                songs = songs.map(song => {
-                                    song.album_id = album_id
-                                    return song
-                                })
+            return album_id
+        })
+        .then(album_id => {
+            songs = songs.map(song => {
+                song.album_id = album_id
 
-                                SongModel.bulkCreate( songs ).then(
-                                    res.status(201).json({ result })
-                                )
-                            }
-                        )
-                    }
-                )
-            }).catch(function ( err ) {
-                let errors = err.errors[0]
+                return song
+            })
 
-                res.status(422).json({
-                    error: 'Unable to create album',
-                    reason: {
-                        message: errors.message,
-                        error: `${errors.path} '${errors.value}' already exists`
-                    }
+            return SongModel.bulkCreate( songs )
+        })
+        .then( () => {
+            return GenreModel.bulkCreate( new_genres,  { returning: true } )
+        })
+        .then( () => {
+            let new_genres_ids = results.map( genre => genre.genre_id )
+            let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map( genre_id => {
+                return { genre_id, album_id }
+            })
+
+            return  AlbumsToGenresModel.bulkCreate( album_genres_ids )
+        })
+        .then( () => {
+            res.status(201).json({ result })
+        })
+        .catch(err => {
+            if ( album_id ) {
+                AlbumsController.deleteAlbum( album_id ).spread( () => {
+                    let errors = err.errors[0]
+
+                    res.status(422).json({
+                        error: 'Unable to create album',
+                        reason: {
+                            message: errors.message,
+                            error: `${errors.path} '${errors.value}' already exists`
+                        }
+                    })
                 })
 
-            throw new Error()
-        })
+                return
+            }
+
+            let errors = err.errors[0]
+
+            res.status(422).json({
+                error: 'Unable to create album',
+                reason: {
+                    message: errors.message,
+                    error: `${errors.path} '${errors.value}' already exists`
+                }
+            })
+
+        throw new Error()
+    })
 
     //
     // AlbumModel.create( album ).then(result => {
@@ -177,7 +200,7 @@ router.put('/:album_id', ( req, res ) => {
         res.status(422).json({ err: 'No Songs!' })
 
     if ( !album.genres.length )
-        res.status(422).json({err: 'No Genres!'})
+        res.status(422).json({ err: 'No Genres!' })
 
     let new_genres = GenresController.getNewGenres( album.genres )
     let old_genres_ids = GenresController.getExistingGenresIds( album.genres )
@@ -224,15 +247,11 @@ router.put('/:album_id', ( req, res ) => {
 router.delete('/:album_id', ( req, res ) => {
     let album_id = req.params.album_id
 
-    models.sequelize.Promise.join(
-        models.sequelize.query(`DELETE FROM albums WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE}),
-        models.sequelize.query(`DELETE FROM songs WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE}),
-        models.sequelize.query(`DELETE FROM albums_to_genres WHERE album_id = "${album_id}"`, {type: models.sequelize.QueryTypes.DELETE})
-    ).spread( affected_rows => {
+    AlbumsController.deleteAlbum( album_id ).spread( affected_rows => {
         if ( affected_rows === 0 )
-            res.json( {message: `Album id ${album_id} not found`} )
+            res.json({ message: `Album id ${album_id} not found` })
         else
-            res.json( {album_id} )
+            res.json({ album_id })
     })
 })
 

@@ -1,5 +1,5 @@
 const GenresController = {
-    getNewGenres: function ( genres ) {
+    getNewGenres: ( genres ) => {
         return genres.filter(genre => isNaN( parseInt( genre ) )).map(genre => {
             return {
                 genre_name: genre,
@@ -8,7 +8,7 @@ const GenresController = {
         })
     },
 
-    getExistingGenresIds: function ( genres ) {
+    getExistingGenresIds: ( genres ) => {
         return genres.filter(genre => !isNaN( parseInt( genre ) )).map(genre => parseInt( genre ))
     }
 }

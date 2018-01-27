@@ -80,10 +80,12 @@ const SingleAlbumTemplates = {
             </a>
             <input type="range" name="song-duration" id="song-duration">
             <time id="timer"></time>
-            <a id="volume-up" title="Volume">
-                <i class="fa fa-volume-up" aria-hidden="true"</i>
-            </a>
-            <input type="range" name="volume" id="volume" min="0" max="100" value="100">
+            <div id="volume-controls">
+                <a id="volume-up" title="Volume">
+                    <i class="fa fa-volume-up" aria-hidden="true"</i>
+                </a>
+                <input type="range" name="volume" id="volume" min="0" max="100" value="100">
+            </div>
         `
     }
 }

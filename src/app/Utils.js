@@ -26,6 +26,7 @@ const Utils = {
 
         minutes = minutes < 10 ? '0' + minutes : minutes
         seconds_to_display = seconds_to_display < 10 ? '0' + seconds_to_display : seconds_to_display
+
         return  minutes + ':' + seconds_to_display
     },
 
@@ -36,6 +37,10 @@ const Utils = {
         let new_arr = arr_to_check.filter( item => item[ key_to_check ] === value_to_check )
 
         return new_arr.length > 0
+    },
+
+    capitalize: function ( s ) {
+        return s && s[0].toUpperCase() + s.slice(1)
     }
 }
 

@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
+import AlbumForm from './AlbumForm'
 import Utils from '../Utils'
 import SearchAPIService from '../APIServices/SearchAPIService'
 
@@ -14,8 +15,12 @@ const AlbumGenres = {
             return
 
         let html = AlbumFormTemplates.genreTag( tagName, genre_id )
+
         $('#tags-container').append( html )
         $('#search-genres').val('')
+
+        if ( $('#tags.error').length )
+            AlbumForm.validateGenres()
     },
 
     searchGenre: function ( term ) {

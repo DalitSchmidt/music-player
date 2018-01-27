@@ -44,11 +44,15 @@ const AlbumValidator = {
 
     validateInputs: function ( inputs_arr, min_length, error_key, error_container ) {
         error_container.find('>.error-message:first-of-type').remove()
+        console.log( inputs_arr.length < min_length )
 
         if ( inputs_arr.length < min_length ) {
             let html = AlbumFormTemplates.errorMessage( this.error_messages[ error_key ] )
             error_container.prepend( html )
+            return false
         }
+
+        return true
     },
 
     validateDuplications: function ( arr_to_check, key_to_check, value_to_check, error_key, error_container ) {

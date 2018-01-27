@@ -52,7 +52,6 @@ const AlbumsBoard = {
     // באמצעות הפונקציה applyAlbums מתאפשר להביא את כל האלבומים שמצויים בשרת ולהציג אותם ב- DOM
     applyAlbums: function() {
         // הפעלה של הפונקציה getAllAlbums המאפשרת לקבל את האלבומים על-ידי ביצוע בקשת get לנתיב 'http://localhost:3000/api/albums', ולאחר מכן נפעיל promise שפונקציית ה- callback שלו מקבלת את המשתנה albums, status_text ו- xhr
-        //
         this.getAllAlbums().then(( albums, status, xhr ) => {
             // נבדוק אם הפרופרטי status המצוי במשתנה xhr הוא 204 או אם המשתנה albums הוא undefined, אם כן, אז נפעיל את הפונקציה noAlbums שבאמצעותה מתאפשר להציג הודעה מתאימה ב- DOM כאשר אלבומים שמורים במסד הנתונים
             if ( xhr.status === 204 || typeof albums === 'undefined' ) {

@@ -16,6 +16,7 @@ const AlbumForm = {
         let i, input, input_name, input_value
 
         inputs.removeClass('error')
+        $('#add-new-album-form .error-message').remove()
         $('#add-new-album-form span.error').remove()
 
         for ( i = 0; i < inputs.length; i++ ) {
@@ -72,48 +73,42 @@ const AlbumForm = {
     },
 
     collectSongs: function() {
-        let has_duplications = false, has_errors = false, songs = [], song, song_youtube, song_name, song_time
+        let has_duplications = false, has_errors = false, songs = []
 
-        $('.song-item').removeClass('error')
+        $('.song-item, .song-item *').removeClass('error')
+        $('#add-album-playlist-form .error-message').remove()
 
         $.each( $('.song-item'), ( index, item ) => {
+            let song, song_youtube, song_name, song_time
+
             song = $( item )
             song_youtube = song.find('input[name=song_youtube]').val()
             song_name = song.find('input[name=song_name]').val()
             song_time = song.find('input[name=song_time]').val()
 
             if ( song_youtube !== '' && song_time !== '' ) {
-                if ( songs.length === 0 && AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
-                    songs.push({ song_youtube, song_name, song_time })
+                if ( songs.length === 0 ) {
+                    if ( AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
+                        songs.push({ song_youtube, song_name, song_time })
+                    }
+
                     return
                 }
 
-                if ( !AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
-                    has_errors = true
+                has_duplications = AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
+
+                if ( !has_duplications && AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
+                    songs.push({ song_youtube, song_name, song_time })
+
                     return
                 }
-
-                if ( !AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) ) )
-                    songs.push({ song_youtube, song_name, song_time })
-                else
-                    has_duplications = true
             }
         })
 
-        AlbumValidator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') )
-
-        if ( songs.length >= 5 && !has_duplications && !has_errors )
-            return songs
-        else {
-            if ( songs.length < 5 ) {
-                $.each( $('.song-item'), ( index, item ) => {
-                    if ( $( item ).find('input[name=song_youtube]').val() == '')
-                        $( item ).addClass('error')
-                })
-            }
-
+        if ( has_duplications || !AlbumValidator.validateInputs( songs, 5, 'song_youtube_id', $('#add-album-playlist-form') ) )
             return false
-        }
+
+        return songs
     },
 
     collectGenres: function () {
@@ -154,7 +149,38 @@ const AlbumForm = {
         if ( !album )
             return
 
-        AlbumAPIService.saveAlbum( album ).then( this.setSuccessMessage )
+        AlbumAPIService.saveAlbum( album ).then(
+            this.setSuccessMessage,
+            ( error ) => {
+                let input, error_message, html
+                let input_name = error.responseJSON.reason.message.split(" ")[0]
+
+                switch ( input_name ) {
+                    case 'song_youtube':
+                        let youtube_code = error.responseJSON.reason.error.split(" ")[1].replace(/['\']+/g, '')
+                        console.log( youtube_code )
+
+                        input = $('input[name=song_youtube]').filter(function () {
+                            return this.value === youtube_code
+                        })
+
+                        input.addClass('error')
+                        error_message = 'Song already exist in app'
+                        html = AlbumFormTemplates.errorMessage( error_message )
+                        input.parent('.form-group').prepend( html )
+                        break
+
+                    default:
+                        input = $(`input[name=${ input_name }`)
+
+                        input.addClass('error')
+                        error_message = `${ Utils.capitalize( input_name.replace('_', ' ') ) } must be unique`
+                        html = AlbumFormTemplates.errorMessage( error_message )
+                        input.parent('.form-group').prepend( html )
+                        break
+                }
+            }
+        )
     },
 
     addSong: function( e, song = false ) {
@@ -226,8 +252,6 @@ const AlbumForm = {
     validateGenres: function ( e ) {
         let $input = $('#album-genres')
 
-        $input.find('.error-message').remove()
-
         if ( AlbumValidator.validateInputs( this.collectGenres(), 1, 'genres', $input ) ) {
             $input.find('#tags').removeClass('error').addClass('success')
             $input.find('.error-message').remove()
@@ -250,7 +274,6 @@ const AlbumForm = {
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
         $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
-        $('#add-new-album-form .form-group').on('blur', '#tags.error', $.proxy( this.validateGenres, this ))
     },
 
     init: function( getAlbum = false ) {

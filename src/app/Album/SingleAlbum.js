@@ -55,6 +55,8 @@ const SingleAlbum = {
     setAlbumControls: function () {
         let html = SingleAlbumTemplates.albumControls()
         $('#controls').html( html )
+        $('#controls').find('>i.fa-volume-up').remove()
+        $('#volume-controls').find('>i.fa-volume-up').removeClass()
     },
 
     getAlbum: function ( id ) {

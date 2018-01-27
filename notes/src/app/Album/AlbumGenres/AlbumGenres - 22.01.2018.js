@@ -2,6 +2,8 @@
 import $ from 'jquery'
 // ייבוא היכולות של האובייקט AlbumFormTemplates על-מנת שהאובייקט AlbumGenres יוכל להשתמש בהן
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
+// ייבוא היכולות של האובייקט AlbumForm על-מנת שהאובייקט AlbumGenres יוכל להשתמש בהן
+import AlbumForm from './AlbumForm'
 // ייבוא היכולות של האובייקט Utils על-מנת שהאובייקט AlbumGenres יוכל להשתמש בהן
 import Utils from '../Utils'
 // ייבוא היכולות של האובייקט SearchAPIService על-מנת שהאובייקט AlbumGenres יוכל להשתמש בהן
@@ -26,10 +28,16 @@ const AlbumGenres = {
 
         // המשתנה html מכיל את התבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM את הז'אנרים של האלבום באמצעות הפעלה של הפונקציה GenreTag המקבלת את המשתנים tagName ו- genre_id ומצויה תחת האובייקט AlbumFormTemplates שבאמצעותה אנו יוצרים תבנית html המציגה ב- DOM את הז'אנרים של האלבום
         let html = AlbumFormTemplates.genreTag( tagName, genre_id )
+
         // הכנסת המשתנה html המכיל את האלמנטים המאפשרים להציג ב- DOM את התג עם השם של הז'אנר של האלבום לתוך אלמנט div שיש לו מזהה ייחודי בשם tags-container, ובכך אנו מאפשרים למעשה למשתמש להוסיף תג עם שם של ז'אנר ל- DOM
         $('#tags-container').append( html )
         // הכנסת נתונים ריקים לאלמנט ה- input שיש לו מזהה ייחודי בשם search-genres
         $('#search-genres').val('')
+
+        // נבדוק אם בתוך האלמנט div שיש לו מזהה ייחודי בשם tags יש אלמנטים שיש להם את ה- class בשם error
+        if ( $('#tags.error').length )
+            // אם כן, אז נפעיל את הפונקציה validateGenres המצויה תחת האובייקט AlbumForm ושבאמצעותה מתאפשר לבצע בדיקת תיקוף לנתונים המצויים בשדה של הז'אנרים
+            AlbumForm.validateGenres()
     },
 
     // באמצעות הפונקציה searchGenre המקבלת את המשתנה term מתאפשר לבצע חיפוש של ז'אנרים הקיימים במסד הנתונים
