@@ -4,6 +4,10 @@ import SearchResultsTemplates from '../Templates/SearchResultsTemplates'
 import Utils from '../Utils'
 
 const SearchBar = {
+    getTerm: function () {
+        return $('#search-term').val()
+    },
+
     searchAlbum: function ( e ) {
         e.preventDefault()
         let term = this.getTerm()
@@ -11,19 +15,6 @@ const SearchBar = {
         this.clearResults()
 
         return false
-    },
-
-    getTerm: function () {
-        return $('#search-term').val()
-    },
-
-    clearResults: function() {
-        $('#results-list').hide(300, function() {
-            $(this).html('')
-            $('#search-term').val('')
-            $('.pull-right').removeClass('has-suggestions')
-            $(this).css('display', 'block')
-        })
     },
 
     getSuggestions: function() {
@@ -43,6 +34,15 @@ const SearchBar = {
                 html = SearchResultsTemplates.suggestions( response.results )
 
             $('#results-list').html( html ).closest('.pull-right').addClass('has-suggestions')
+        })
+    },
+
+    clearResults: function() {
+        $('#results-list').hide(300, function() {
+            $(this).html('')
+            $('#search-term').val('')
+            $('.pull-right').removeClass('has-suggestions')
+            $(this).css('display', 'block')
         })
     },
 

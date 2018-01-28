@@ -1,6 +1,32 @@
 import $ from 'jquery'
 
 const SearchResultsTemplates = {
+    suggestions: function ( suggestions ) {
+        let html = '<ul>'
+
+        $.each(suggestions, ( index, album ) => {
+            html += `<li title="${album.album_name}"><a href="#single-album/${album.album_id}">${album.album_name}</a></li>`
+        })
+
+        html += '</ul>'
+
+        return html
+    },
+
+    noSuggestions: function () {
+        return `<ul>
+                    <li title="No Suggestions">No Suggestions</li>
+                </ul>`
+    },
+
+    title: function ( term, count ) {
+        return `<h1 class="text-center">Found ${count} results for "${term}"</h1>`
+    },
+
+    emptyResults: function ( term ) {
+        return `<h1 class="text-center">No results for term "${term}"</h1>`
+    },
+
     result: function ( album ) {
         return `
             <div class="col-md-12">
@@ -37,32 +63,6 @@ const SearchResultsTemplates = {
             html += this.result( album ))
 
         return html
-    },
-
-    title: function ( term, count ) {
-        return `<h1 class="text-center">Found ${count} results for "${term}"</h1>`
-    },
-
-    emptyResults: function ( term ) {
-        return `<h1 class="text-center">No results for term "${term}"</h1>`
-    },
-
-    suggestions: function ( suggestions ) {
-        let html = '<ul>'
-
-        $.each(suggestions, ( index, album ) => {
-            html += `<li title="${album.album_name}"><a href="#single-album/${album.album_id}">${album.album_name}</a></li>`
-        })
-
-        html += '</ul>'
-
-        return html
-    },
-
-    noSuggestions: function () {
-        return `<ul>
-                    <li title="No Suggestions">No Suggestions</li>
-                </ul>`
     }
 }
 

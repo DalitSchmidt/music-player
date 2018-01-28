@@ -5,6 +5,25 @@ import Player from '../Player'
 import Router from '../Router'
 
 const SingleAlbum = {
+    getAlbumID: function () {
+        return location.hash.substring(1).split('/')[1]
+    },
+
+    setAlbumInfoMenu: function () {
+        let html = SingleAlbumTemplates.albumInfoMenu()
+        $('#album-info-menu').html( html )
+    },
+
+    setAlbumInfoControls: function ( album_id ) {
+        let html = SingleAlbumTemplates.albumInfoControls( album_id )
+        $('#album-info-controls').html( html )
+    },
+
+    setAlbumImage: function( img ) {
+        let html = SingleAlbumTemplates.albumImage( img )
+        $('#album-info-image').html( html )
+    },
+
     switchDetails: function( e ) {
         let el = $( e.target )
         $('#album-info-menu .active').removeClass('active')
@@ -14,37 +33,9 @@ const SingleAlbum = {
         $('#song-youtube, #album-info-image img').toggle()
     },
 
-    bindEvents: function() {
-        $('#album-info-menu').on('click', '.album-info-links', $.proxy( this.switchDetails, this ))
-    },
-
-    getAlbumID: function () {
-        return location.hash.substring(1).split('/')[1]
-    },
-
-    setAlbumPlaylist: function( playlist ) {
-        let html = SingleAlbumTemplates.albumPlaylist( playlist )
-        $('#player-playlist').html( html )
-    },
-
     setAlbumInfo: function ( album ) {
         let html = SingleAlbumTemplates.albumInfo( album )
         $('#album-info').html( html )
-    },
-
-    setAlbumInfoControls: function ( album_id ) {
-        let html = SingleAlbumTemplates.albumInfoControls( album_id )
-        $('#album-info-controls').html( html )
-    },
-
-    setAlbumInfoMenu: function () {
-        let html = SingleAlbumTemplates.albumInfoMenu()
-        $('#album-info-menu').html( html )
-    },
-
-    setAlbumImage: function( img ) {
-        let html = SingleAlbumTemplates.albumImage( img )
-        $('#album-info-image').html( html )
     },
 
     setNowPlayingSong: function () {
@@ -57,6 +48,11 @@ const SingleAlbum = {
         $('#controls').html( html )
         $('#controls').find('>i.fa-volume-up').remove()
         $('#volume-controls').find('>i.fa-volume-up').removeClass()
+    },
+
+    setAlbumPlaylist: function( playlist ) {
+        let html = SingleAlbumTemplates.albumPlaylist( playlist )
+        $('#player-playlist').html( html )
     },
 
     getAlbum: function ( id ) {
@@ -73,6 +69,10 @@ const SingleAlbum = {
             }, error => {
                 Router.redirect('all-albums')
             })
+    },
+
+    bindEvents: function() {
+        $('#album-info-menu').on('click', '.album-info-links', $.proxy( this.switchDetails, this ))
     },
 
     init: function () {

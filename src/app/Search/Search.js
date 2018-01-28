@@ -4,6 +4,14 @@ import SearchResultsTemplates from '../Templates/SearchResultsTemplates'
 import Router from '../Router'
 
 const Search = {
+    searchAlbum: function() {
+        let term = Router.getParams()[0]
+
+        SearchAPIService.searchAlbums( term ).then(( results, statusText, xhr ) => {
+            this.displayResults( term, results, xhr.status )
+        })
+    },
+
     displayResults: function( term, results, status ) {
         let title
 
@@ -17,14 +25,6 @@ const Search = {
             $('#search-results-title').html( title )
             $('#results').html( html )
         }
-    },
-
-    searchAlbum: function() {
-        let term = Router.getParams()[0]
-
-        SearchAPIService.searchAlbums( term ).then(( results, statusText, xhr ) => {
-            this.displayResults( term, results, xhr.status )
-        })
     },
 
     init: function() {

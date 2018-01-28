@@ -9,6 +9,77 @@ import AlbumGenres from './AlbumGenres'
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
 const AlbumForm = {
+    setTitleAddNewAlbum: function () {
+        let html = AlbumFormTemplates.titleAddNewAlbum()
+        $('#add-new-album-title').html( html )
+    },
+
+    setTitleAddAlbumPlaylist: function () {
+        let html = AlbumFormTemplates.titleAddAlbumPlaylist()
+        $('#add-album-playlist-title').html( html )
+    },
+
+    setCoverImage: function( img ) {
+        $('#image-cover-preview img').attr('src', img)
+    },
+
+    changeCoverImage: function() {
+        let img = $('#album-image').val()
+        let regex = new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png|bmp|tif?f)$")
+
+        if ( img === '' ) {
+            this.setCoverImage( PREVIEW_IMG )
+            return
+        }
+
+        if ( regex.test( img ) )
+            this.setCoverImage( img )
+    },
+
+    addSong: function( e, song = false ) {
+        if ( e )
+            e.preventDefault()
+
+        let html = AlbumFormTemplates.songItem( song )
+        $('#add-album-playlist-form').append( html )
+    },
+
+    addSongsInputs: function ( items = 5, songs = [] ) {
+        for ( let i = 0; i < items; i++ ) {
+            this.addSong( false, songs[ i ] )
+        }
+    },
+
+    removeSongItem: function( e ) {
+        e.preventDefault()
+        let item = $(this).closest('.song-item')
+        item.fadeOut('slow', () => item.remove())
+    },
+
+    searchYoutubeVideo: function( e ) {
+        let $input = $( e.target )
+        $input.parent().find('.error-message').remove()
+        $input.parents('.song-item').removeClass('error')
+
+        let youtube_id = $input.val()
+
+        AlbumAPIService.searchYoutubeID( youtube_id ).then(
+            video => {
+                $input.closest('.song-item').find('input[name=song_time]').val( video.duration )
+                $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
+            },
+            error => {
+                let html = AlbumFormTemplates.errorMessage( error.responseJSON.error )
+                $input.parent().prepend( html )
+            })
+    },
+
+    resetValues: function () {
+        $('.form-group span').text('')
+
+        return this.scrollTop( $('#main-container') )
+    },
+
     collectValues: function() {
         let errors = false
         let inputs = $('#add-new-album-form input[required], #add-new-album-form textarea[required]')
@@ -50,26 +121,15 @@ const AlbumForm = {
         return album
     },
 
-    scrollTop: function ( $el ) {
-        $('html, body').animate({ scrollTop: $el.offset().top }, 800)
-    },
+    collectGenres: function () {
+        let input = $('#tags input[type=hidden]')
+        let genres = []
 
-    setTitleAddNewAlbum: function () {
-        let html = AlbumFormTemplates.titleAddNewAlbum()
-        $('#add-new-album-title').html( html )
-    },
+        $.each(input, ( i, input ) => {
+            genres.push( $( input ).val() )
+        })
 
-    setTitleAddAlbumPlaylist: function () {
-        let html = AlbumFormTemplates.titleAddAlbumPlaylist()
-        $('#add-album-playlist-title').html( html )
-    },
-
-    setSuccessMessage: function() {
-        // alert('Album has been created :)')
-        let html = AlbumFormTemplates.successMessage()
-        $('.modal-dialog').html( html )
-        $('body').addClass('modal-open').css('padding-right', '17px')
-        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
+        return genres
     },
 
     collectSongs: function() {
@@ -111,15 +171,8 @@ const AlbumForm = {
         return songs
     },
 
-    collectGenres: function () {
-        let input = $('#tags input[type=hidden]')
-        let genres = []
-
-        $.each(input, ( i, input ) => {
-            genres.push( $( input ).val() )
-        })
-
-        return genres
+    scrollTop: function ( $el ) {
+        $('html, body').animate({ scrollTop: $el.offset().top }, 800)
     },
 
     validateAlbum: function () {
@@ -140,6 +193,34 @@ const AlbumForm = {
         console.log( JSON.stringify(album) )
 
         return album
+    },
+
+    validateField: function ( e ) {
+        let $input = $( e.target )
+
+        $input.siblings('.error-message').remove()
+
+        if ( AlbumValidator.validateField( $input ) ) {
+            $input.removeClass('error').addClass('success')
+            $input.siblings('.error-message').remove()
+        }
+    },
+
+    validateGenres: function ( e ) {
+        let $input = $('#album-genres')
+
+        if ( AlbumValidator.validateInputs( this.collectGenres(), 1, 'genres', $input ) ) {
+            $input.find('#tags').removeClass('error').addClass('success')
+            $input.find('.error-message').remove()
+        }
+    },
+
+    setSuccessMessage: function() {
+        // alert('Album has been created :)')
+        let html = AlbumFormTemplates.successMessage()
+        $('.modal-dialog').html( html )
+        $('body').addClass('modal-open').css('padding-right', '17px')
+        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
     },
 
     saveAlbum: function( e ) {
@@ -181,87 +262,6 @@ const AlbumForm = {
                 }
             }
         )
-    },
-
-    addSong: function( e, song = false ) {
-        if ( e )
-            e.preventDefault()
-
-        let html = AlbumFormTemplates.songItem( song )
-        $('#add-album-playlist-form').append( html )
-    },
-
-    removeSongItem: function( e ) {
-        e.preventDefault()
-        let item = $(this).closest('.song-item')
-        item.fadeOut('slow', () => item.remove())
-    },
-
-    addSongsInputs: function ( items = 5, songs = [] ) {
-        for ( let i = 0; i < items; i++ ) {
-            this.addSong( false, songs[ i ] )
-        }
-    },
-
-    setCoverImage: function( img ) {
-        $('#image-cover-preview img').attr('src', img)
-    },
-
-    changeCoverImage: function() {
-        let img = $('#album-image').val()
-        let regex = new RegExp("^https|http|ftp?:\/\/(?:[a-z0-9\-]+\.)+[a-z0-9]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png|bmp|tif?f)$")
-
-        if ( img === '' ) {
-            this.setCoverImage( PREVIEW_IMG )
-            return
-        }
-
-        if ( regex.test( img ) )
-            this.setCoverImage( img )
-    },
-
-    searchYoutubeVideo: function( e ) {
-        let $input = $( e.target )
-        $input.parent().find('.error-message').remove()
-        $input.parents('.song-item').removeClass('error')
-
-        let youtube_id = $input.val()
-
-        AlbumAPIService.searchYoutubeID( youtube_id ).then(
-            video => {
-                $input.closest('.song-item').find('input[name=song_time]').val( video.duration )
-                $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
-            },
-            error => {
-                let html = AlbumFormTemplates.errorMessage( error.responseJSON.error )
-                $input.parent().prepend( html )
-            })
-    },
-
-    validateField: function ( e ) {
-        let $input = $( e.target )
-
-        $input.siblings('.error-message').remove()
-
-        if ( AlbumValidator.validateField( $input ) ) {
-            $input.removeClass('error').addClass('success')
-            $input.siblings('.error-message').remove()
-        }
-    },
-
-    validateGenres: function ( e ) {
-        let $input = $('#album-genres')
-
-        if ( AlbumValidator.validateInputs( this.collectGenres(), 1, 'genres', $input ) ) {
-            $input.find('#tags').removeClass('error').addClass('success')
-            $input.find('.error-message').remove()
-        }
-    },
-
-    resetValues: function () {
-        $('.form-group span').text('')
-
-        return this.scrollTop( $('#main-container') )
     },
 
     bindEvents: function() {

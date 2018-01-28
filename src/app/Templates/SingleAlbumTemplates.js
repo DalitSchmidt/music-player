@@ -2,14 +2,10 @@ import $ from 'jquery'
 import Utils from '../Utils'
 
 const SingleAlbumTemplates = {
-    albumInfo: function( album ) {
-        let genresHTML = this.albumGenres( album.genres )
-
+    albumInfoMenu: function () {
         return `
-            <h1 id="album-info-name" data-name="${album.album_artist}">${album.album_name} - ${album.album_artist}</h1>
-            <h4 id="album-info-year">${album.album_year}</h4>
-            <ul id="album-info-genres">${genresHTML}</ul>
-            <p id="album-info-description">${album.album_description}</p>
+            <div class="album-info-links" title="Description">Description</div>
+            <div class="album-info-links active" title="Playlist">Playlist</div>
         `
     },
 
@@ -24,15 +20,19 @@ const SingleAlbumTemplates = {
         `
     },
 
-    albumInfoMenu: function () {
-        return `
-            <div class="album-info-links" title="Description">Description</div>
-            <div class="album-info-links active" title="Playlist">Playlist</div>
-        `
-    },
-
     albumImage: function( img ) {
         return `<img src="${img}">`
+    },
+
+    albumInfo: function( album ) {
+        let genresHTML = this.albumGenres( album.genres )
+
+        return `
+            <h1 id="album-info-name" data-name="${album.album_artist}">${album.album_name} - ${album.album_artist}</h1>
+            <h4 id="album-info-year">${album.album_year}</h4>
+            <ul id="album-info-genres">${genresHTML}</ul>
+            <p id="album-info-description">${album.album_description}</p>
+        `
     },
 
     albumGenres: function( genres ) {
@@ -42,18 +42,6 @@ const SingleAlbumTemplates = {
             html += `<li>${genres[ i ].genre_name}</li>`
 
         html += '<li></li>'
-        return html
-    },
-
-    albumPlaylist: function( playlist ) {
-        let html = ''
-
-        $.each(playlist, ( index, song ) => {
-            html += `<li data-code="${song.song_youtube}" title="${song.song_name} ${Utils.calculateTime( song.song_time )}">${song.song_name}
-                        <span data-duration="${song.song_time}">(${Utils.calculateTime( song.song_time )})</span>
-                     </li>`
-        })
-
         return html
     },
 
@@ -87,6 +75,18 @@ const SingleAlbumTemplates = {
                 <input type="range" name="volume" id="volume" min="0" max="100" value="100">
             </div>
         `
+    },
+
+    albumPlaylist: function( playlist ) {
+        let html = ''
+
+        $.each(playlist, ( index, song ) => {
+            html += `<li data-code="${song.song_youtube}" title="${song.song_name} ${Utils.calculateTime( song.song_time )}">${song.song_name}
+                        <span data-duration="${song.song_time}">(${Utils.calculateTime( song.song_time )})</span>
+                     </li>`
+        })
+
+        return html
     }
 }
 

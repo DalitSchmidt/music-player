@@ -8,6 +8,10 @@ import AlbumGenres from './AlbumGenres'
 const EditAlbum = {
     album_id: null,
 
+    getAlbumID: function () {
+        return location.hash.substring(1).split('/')[1]
+    },
+
     setTitleEditAlbum: function () {
         let html = AlbumFormTemplates.titleEditAlbum()
         $('#add-new-album-title').html( html )
@@ -16,10 +20,6 @@ const EditAlbum = {
     setTitleEditAlbumPlaylist: function () {
         let html = AlbumFormTemplates.titleEditAlbumPlaylist()
         $('#add-album-playlist-title').html( html )
-    },
-
-    getAlbumID: function () {
-        return location.hash.substring(1).split('/')[1]
     },
 
     setValues: function ( album ) {
@@ -37,15 +37,15 @@ const EditAlbum = {
         })
     },
 
-    saveChanges: function ( e ) {
-        e.preventDefault()
-
-        let album = AlbumForm.validateAlbum()
-
-        if ( !album )
-            return
-
-        AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessageEditAlbum )
+    getAlbum: function () {
+        AlbumAPIService.getAlbumById( this.album_id ).then(
+            album => {
+                console.log( album )
+                this.setValues( album )
+            }, error => {
+                Router.redirect()
+                return
+            })
     },
 
     // deleteMessageSong: function ( e ) {
@@ -76,6 +76,17 @@ const EditAlbum = {
         $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
     },
 
+    saveChanges: function ( e ) {
+        e.preventDefault()
+
+        let album = AlbumForm.validateAlbum()
+
+        if ( !album )
+            return
+
+        AlbumAPIService.updateAlbum( this.album_id, album ).then( this.setSuccessMessageEditAlbum )
+    },
+
     bindEvents: function () {
         $('#finish-and-save-button').on('click', $.proxy( this.saveChanges, this ))
         // $('.modal-dialog').on('click', '#approve-delete', $.proxy( this.confirmAlbumDeleteSong, this ))
@@ -83,17 +94,6 @@ const EditAlbum = {
         // $('.modal-dialog').on('click', '[data-action=handle-delete]', $.proxy( DeleteAlbum.handleDelete, this ))
         // $('#add-album-playlist-form').on('click', '.remove-icon', $.proxy ( this.deleteMessageSong, this ))
         // $('#add-album-playlist-form').on('click', '.remove-icon', AlbumForm.removeSongItem)
-    },
-
-    getAlbum: function () {
-        AlbumAPIService.getAlbumById( this.album_id ).then(
-            album => {
-                console.log( album )
-                this.setValues( album )
-            }, error => {
-                Router.redirect()
-                return
-            })
     },
 
     init: function () {

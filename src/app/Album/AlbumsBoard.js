@@ -3,6 +3,10 @@ import AlbumAPIService from './../APIServices/AlbumAPIService'
 import AlbumTemplates from '../Templates/AlbumTemplates'
 
 const AlbumsBoard = {
+    getAllAlbums: function() {
+        return AlbumAPIService.getAllAlbums()
+    },
+
     appendAlbums: function( albums ) {
         let html = ''
 
@@ -14,10 +18,6 @@ const AlbumsBoard = {
         }).delay(1500, () => {
             $('#album-list').html( html )
         })
-    },
-
-    getAllAlbums: function() {
-        return AlbumAPIService.getAllAlbums()
     },
 
     noAlbums: function () {

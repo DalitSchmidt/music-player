@@ -5,11 +5,6 @@ import Utils from '../Utils'
 import SearchAPIService from '../APIServices/SearchAPIService'
 
 const AlbumGenres = {
-    removeGenreTag: function ( e ) {
-        let $input = $( e.target )
-        $input.parents('.tag').remove()
-    },
-
     addGenreTag: function ( tagName, genre_id = false ) {
         if ( !tagName )
             return
@@ -52,6 +47,11 @@ const AlbumGenres = {
 
         this.addGenreTag( genre_name, genre_id )
         $('#genres-results').html('')
+    },
+
+    removeGenreTag: function ( e ) {
+        let $input = $( e.target )
+        $input.parents('.tag').remove()
     },
 
     bindEvents: function () {
