@@ -21,8 +21,7 @@ const SearchBar = {
         let term = this.getTerm()
 
         if ( term.length < 2 ) {
-            // this.clearResults()
-            Utils.debounce( this.clearResults(), 1000 )
+            this.clearResults()
             return
         }
 
@@ -34,7 +33,7 @@ const SearchBar = {
             else
                 html = SearchResultsTemplates.suggestions( response.results )
 
-            $('#results-list').html( html ).closest('#search-area').addClass('has-suggestions')
+            $('#results-list').html( html ).closest('.pull-right').addClass('has-suggestions')
         })
     },
 
@@ -42,7 +41,7 @@ const SearchBar = {
         $('#results-list').hide(300, function() {
             $(this).html('')
             $('#search-term').val('')
-            $('#search-area').removeClass('has-suggestions')
+            $('.pull-right').removeClass('has-suggestions')
             $(this).css('display', 'block')
         })
     },
@@ -50,8 +49,8 @@ const SearchBar = {
     bindEvents: function() {
         $('#search-form').on('submit', $.proxy( this.searchAlbum, this ))
         $('#search-term').on('keyup', Utils.debounce( $.proxy( this.getSuggestions, this ), 500) )
-        $('header').on('mouseleave', '#search-area.has-suggestions', $.proxy( this.clearResults, this ))
-        $('header').on('click', '#search-area.has-suggestions li', $.proxy( this.clearResults, this ))
+        $('header').on('mouseleave', '.pull-right.has-suggestions', $.proxy( this.clearResults, this ))
+        $('header').on('click', '.pull-right.has-suggestions li', $.proxy( this.clearResults, this ))
     },
 
     init: function() {

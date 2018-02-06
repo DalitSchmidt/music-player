@@ -5,8 +5,6 @@ import AlbumValidator from './AlbumValidator'
 import Utils from '../Utils'
 import EditAlbum from './EditAlbum'
 import AlbumGenres from './AlbumGenres'
-import SearchAPIService from "../APIServices/SearchAPIService"
-import SearchResultsTemplates from "../Templates/SearchResultsTemplates"
 
 const PREVIEW_IMG = 'http://localhost:3000/images/preview.png'
 
@@ -19,29 +17,6 @@ const AlbumForm = {
     setTitleAddAlbumPlaylist: function () {
         let html = AlbumFormTemplates.titleAddAlbumPlaylist()
         $('#add-album-playlist-title').html( html )
-    },
-
-    searchArtist: function () {
-        let term = $('#album-artist').val()
-
-        if ( term.length < 2 ) {
-            return
-        }
-
-        SearchAPIService.searchArtist( term ).then(( results, text_status, xhr ) => {
-            let html
-
-            if ( xhr.status === 204 )
-                html = AlbumFormTemplates.noSuggestions()
-            else
-                html = AlbumFormTemplates.artistSuggestions( results.album_artist )
-
-            $('#artist-results').html( html )
-        })
-    },
-
-    clearArtistResult: function () {
-        $('#artist-results').find('ul, li').remove()
     },
 
     setCoverImage: function( img ) {
@@ -99,13 +74,8 @@ const AlbumForm = {
             })
     },
 
-    resetFields: function () {
+    resetValues: function () {
         $('.form-group span').text('')
-        this.setCoverImage( PREVIEW_IMG )
-        $('#tags-container').find('.tag').remove()
-        $('input.error, div.error, textarea.error, span.error').removeClass('error')
-        $('input.success, div.success, textarea.success, span.success').removeClass('success')
-        $('#add-new-album-form, #add-album-playlist-form').find('.error-message').remove()
 
         return this.scrollTop( $('#main-container') )
     },
@@ -250,7 +220,7 @@ const AlbumForm = {
         let html = AlbumFormTemplates.successMessage()
         $('.modal-dialog').html( html )
         $('body').addClass('modal-open').css('padding-right', '17px')
-        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px', 'overflow-y': 'scroll'} )
+        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
     },
 
     saveAlbum: function( e ) {
@@ -279,7 +249,6 @@ const AlbumForm = {
                         error_message = 'Song already exist in app'
                         html = AlbumFormTemplates.errorMessage( error_message )
                         input.parent('.form-group').prepend( html )
-                        this.scrollTop( $('#add-album-playlist-details') )
                         break
 
                     default:
@@ -289,7 +258,6 @@ const AlbumForm = {
                         error_message = `${ Utils.capitalize( input_name.replace('_', ' ') ) } must be unique`
                         html = AlbumFormTemplates.errorMessage( error_message )
                         input.parent('.form-group').prepend( html )
-                        this.scrollTop( $('#main-container') )
                         break
                 }
             }
@@ -301,14 +269,11 @@ const AlbumForm = {
             $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
 
         $('#add-another-song-button').on('click', $.proxy( this.addSong, this ))
-        $('#reset-fields-button').on('click', $.proxy( this.resetFields, this ))
-        $('#album-artist').on('keyup', Utils.debounce( $.proxy( this.searchArtist, this ), 500) )
-        $('#album-artist').on('blur', $.proxy( this.clearArtistResult, this ))
+        $('#reset-album-button').on('click', $.proxy( this.resetValues, this ))
         $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
         $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
         $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
-        $('#add-album-playlist-form .form-group').on('blur', 'input.error, span.error', $.proxy( this.validateField, this ))
     },
 
     init: function( getAlbum = false ) {

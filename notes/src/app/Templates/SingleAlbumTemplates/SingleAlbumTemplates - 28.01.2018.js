@@ -20,8 +20,8 @@ const SingleAlbumTemplates = {
         `
     },
 
-    albumImage: function( albumImage ) {
-        return `<img src="${albumImage}">`
+    albumImage: function( img ) {
+        return `<img src="${img}">`
     },
 
     albumInfo: function( album ) {
@@ -81,7 +81,7 @@ const SingleAlbumTemplates = {
         let html = ''
 
         $.each(playlist, ( index, song ) => {
-            html += `<li title="${song.song_name} ${Utils.calculateTime( song.song_time )}" data-code="${song.song_youtube}">${song.song_name}
+            html += `<li data-code="${song.song_youtube}" title="${song.song_name} ${Utils.calculateTime( song.song_time )}">${song.song_name}
                         <span data-duration="${song.song_time}">(${Utils.calculateTime( song.song_time )})</span>
                      </li>`
         })

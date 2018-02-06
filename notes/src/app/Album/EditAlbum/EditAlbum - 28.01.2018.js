@@ -73,7 +73,7 @@ const EditAlbum = {
         let html = AlbumFormTemplates.successMessageEditAlbum()
         $('.modal-dialog').html( html )
         $('body').addClass('modal-open').css('padding-right', '17px')
-        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px', 'overflow-y': 'scroll'} )
+        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
     },
 
     saveChanges: function ( e ) {

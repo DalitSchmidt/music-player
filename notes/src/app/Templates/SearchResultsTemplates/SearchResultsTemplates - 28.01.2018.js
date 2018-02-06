@@ -20,11 +20,11 @@ const SearchResultsTemplates = {
     },
 
     title: function ( term, count ) {
-        return `<h1>Found ${count} results for "${term}"</h1>`
+        return `<h1 class="text-center">Found ${count} results for "${term}"</h1>`
     },
 
     emptyResults: function ( term ) {
-        return `<h1>No results for term "${term}"</h1>`
+        return `<h1 class="text-center">No results for term "${term}"</h1>`
     },
 
     result: function ( album ) {
@@ -35,7 +35,7 @@ const SearchResultsTemplates = {
                             <div class="search-results-record">
                                 <img src="${album.album_image}" alt="${album.album_name}">
                                 <a href="#single-album/${album.album_id}" class="play-icon" data-album-id="${album.album_id}">
-                                    <i class="fa fa-play" title="Play" aria-hidden="true"></i>
+                                    <i class="fa fa-play" aria-hidden="true" title="Play"></i>
                                 </a>
                                 <a class="remove-icon" title="Remove Album" data-album-id="${album.album_id}">
                                     <i class="fa fa-remove" aria-hidden="true"></i>

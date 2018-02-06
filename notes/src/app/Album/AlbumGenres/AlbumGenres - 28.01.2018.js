@@ -3,7 +3,6 @@ import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import AlbumForm from './AlbumForm'
 import Utils from '../Utils'
 import SearchAPIService from '../APIServices/SearchAPIService'
-import AlbumAPIService from "../APIServices/AlbumAPIService"
 
 const AlbumGenres = {
     addGenreTag: function ( tagName, genre_id = false ) {
@@ -43,19 +42,11 @@ const AlbumGenres = {
     },
 
     setGenreValue: function( e ) {
-        // let genre_name = $( e.target ).text()
-        // let genre_id = $( e.target ).data('genre-id')
-        //
-        // this.addGenreTag( genre_name, genre_id )
-        // $('#genres-results').html('')
-
-        let genre_name = $( e.target ).text()
         let genre_id = $( e.target ).data('genre-id')
+        let genre_name = $( e.target ).text()
 
-        AlbumAPIService.getGenres().then( () => {
-            this.addGenreTag( genre_name, genre_id )
-            $('#genres-results').html('')
-        })
+        this.addGenreTag( genre_name, genre_id )
+        $('#genres-results').html('')
     },
 
     removeGenreTag: function ( e ) {

@@ -11,7 +11,7 @@
     <link rel="icon" href="images/music-icon.png" type="image/png">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body style="overflow-x: hidden">
+<body>
     <div id="modal" class="modal" aria-hidden="true" aria-labelledby="modalLabel" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
         </div>
@@ -22,21 +22,17 @@
             <div class="col-md-12">
                 <!--header-->
                 <header>
-                    <!--Add new album button-->
-                    <div class="pull-left">
-                        <a href="#add-new-album" title="Add New Album">
-                            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Album
-                        </a>
-                        <a href="#all-albums" title="All Albums">
-                            <i class="fa fa-plus-circle" aria-hidden="true"></i> All Albums
-                        </a>
+                    <!--Add New Album button + All Albums button-->
+                    <div id="header-controls">
+                        <a href="#add-new-album" title="Add New Album"><i class="fa fa-plus-circle" aria-hidden="true"></i>Add New Album</a>
+                        <a href="#all-albums" title="All Albums"><i class="fa fa-plus-circle" aria-hidden="true"></i>All Albums</a>
                     </div>
 
-                    <div id="search-area" class="pull-right">
+                    <div id="search-area">
                         <form id="search-form">
                             <input type="search" name="search" id="search-term" placeholder="Search albums..." title="Search albums...">
                             <button type="submit" id="search-button" title="Search albums...">
-                                <i class="fa fa-search pull-right" aria-hidden="true"></i>
+                                <i class="fa fa-search" aria-hidden="true"></i>
                             </button>
                         </form>
 

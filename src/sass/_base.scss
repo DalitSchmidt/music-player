@@ -1,6 +1,7 @@
-html, body {
+body {
+    color: #000000;
     font-family: 'Heebo', sans-serif;
-    color: black;
+    overflow-x: hidden;
 }
 
 /* hebrew */
@@ -21,86 +22,86 @@ html, body {
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
-img {
-    height: 250px;
-    width: 250px;
+* {
     box-sizing: border-box;
 }
 
 /* Header */
 header {
-    position: relative;
-    display: block;
-    background: #0F70A1;
+    background: #0f70a1;
     height: 80px;
-    box-sizing: border-box;
+    position: relative;
 
-    .pull-left {
+    #header-controls {
+        float: left;
+
         a {
             color: #ffffff;
             text-decoration: none;
-            cursor: pointer;
             font-size: 20px;
 
             .fa-plus-circle {
-                color: #ffffff;
-                font-size: 20px;
-                cursor: pointer;
-                margin-top: 30px;
-                margin-left: 20px;
+                margin: 30px 5px 0 20px;
             }
         }
     }
 
     /* Search window */
-    #search-term {
-        width: 200px;
-        padding: 5px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: 3px double;
-        background-color: #ffffff;
-        margin-top: 22px;
-        resize: none;
-        box-sizing: border-box;
-        margin-right: 10px;
-    }
+    #search-area {
+        float: right;
 
-    #search-button {
-        color: #ffffff;
-        font-size: 20px;
-        cursor: pointer;
-        margin-right: 20px;
-        background: transparent;
-        border: none;
-
-        .fa-search {
-            right: 20px;
-            top: 30px;
-            position: absolute;
+        #search-term {
+            width: 200px;
+            border: 3px double;
+            border-radius: 5px;
+            margin: 22px 10px 0 0;
+            padding: 5px;
+            font-size: 16px;
         }
-    }
 
-    #results-list {
-        background: white;
-        width: 190px;
-        margin-left: 5px;
+        #search-button {
+            background: transparent;
+            border: none;
+            margin-right: 20px;
+            color: #ffffff;
+            font-size: 20px;
 
-        ul {
-            padding: 0;
+            .fa-search {
+                top: 30px;
+                right: 20px;
+                position: absolute;
+            }
+        }
 
-            li {
-                padding: 0 5px;
-                line-height: 30px;
-                text-align: justify;
-                border-bottom: 4px double #dadada;
-                list-style-type: none;
-                font-weight: bold;
-                width: 190px;
+        #results-list {
+            background: #ffffff;
+            width: 190px;
+            margin-left: 5px;
 
-                a {
-                    text-decoration: none;
-                    color: black;
+            ul {
+                padding: 0;
+
+                li {
+                    border-bottom: 2px solid #dadada;
+                    padding: 0 5px;
+                    text-align: justify;
+                    line-height: 30px;
+                    vertical-align: baseline;
+                    font-weight: bold;
+                    list-style-type: none;
+
+                    a {
+                        color: #000000;
+                        text-decoration: none;
+                    }
+
+                    &:nth-of-type(1):not(last-of-type) {
+                        border-bottom: 2px solid #dadada;
+                    }
+
+                    &:last-of-type {
+                        border-bottom: none;
+                    }
                 }
             }
         }
@@ -108,7 +109,52 @@ header {
 }
 
 #main-container {
-    padding: 35px 0;
-    box-sizing: border-box;
     min-height: 400px;
+    padding: 35px 0;
+}
+
+img, iframe {
+    height: 250px;
+    width: 250px;
+}
+
+img {
+    border-radius: 50%;
+}
+
+.play-icon {
+    width: 100%;
+    color: #000000;
+    text-align: center;
+    font-size: 30px;
+    position: absolute;
+    opacity: 0;
+    cursor: default;
+
+    .fa-play {
+        cursor: pointer;
+    }
+
+    &:hover {
+        color: #000000;
+    }
+}
+
+.remove-icon, .edit-icon {
+    background: #dadada;
+    border-radius: 50%;
+    color: #000000;
+    position: absolute;
+    cursor: pointer;
+
+    &:hover {
+        color: #000000;
+    }
+}
+
+h1 {
+    margin: 0;
+    padding: 15px 0;
+    text-align: center;
+    font-weight: bold;
 }
