@@ -1,4 +1,4 @@
-module.exports = function( sequelize, DataTypes ) {
+module.exports = function ( sequelize, DataTypes ) {
     const AlbumToGenres = sequelize.define('AlbumToGenres', {
             album_id: {
                 type: DataTypes.INTEGER(7).UNSIGNED,
@@ -18,7 +18,9 @@ module.exports = function( sequelize, DataTypes ) {
         {
             classMethods: {
                 associate: function ( models ) {
+                    /** @namespace albumToGenre */
                     albumToGenre.hasOne( models.Album, {foreignKey: 'album_id'} )
+                    /** @namespace models.Genre*/
                     albumToGenre.hasOne( models.Genre, {foreignKey: 'genre_id'} )
                 }
             }

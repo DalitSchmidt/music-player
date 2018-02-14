@@ -8,11 +8,27 @@
     position: relative;
     float: left;
 
+    #album-info-menu {
+        margin-top: 175px;
+        padding: 0;
+        font-size: 20px;
+
+        .album-info-links {
+            margin-left: 10px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .active {
+            font-weight: bold;
+        }
+    }
+
     #album-info-controls {
         height: 75px;
         width: 35px;
         margin: 10px;
-        padding: 0;
+        position: absolute;
 
         .remove-icon, .edit-icon {
             width: inherit;
@@ -34,11 +50,11 @@
         top: 70px;
         position: absolute;
 
-        img {
+        img, span {
             display: none;
         }
 
-        &::before {
+        #album-info-image-circle {
             background: #ffffff;
             height: 50px;
             width: 50px;
@@ -47,21 +63,6 @@
             left: 100px;
             position: absolute;
             content: ' ';
-        }
-    }
-
-    #album-info-menu {
-        margin-top: 175px;
-        font-size: 20px;
-
-        .album-info-links {
-            margin-left: 10px;
-            color: #ffffff;
-            cursor: pointer;
-        }
-
-        .active {
-            font-weight: bold;
         }
     }
 }

@@ -87,13 +87,14 @@
                     float: left;
 
                     a {
-                        margin-left: 5px;
+                        margin-left: 2px;
                         color: #ffffff;
                         cursor: pointer;
 
                         &:hover {
-                            color: #0f70a1;
+                            color: #aaaaaa;
                             text-decoration: none;
+                            opacity: 1;
                         }
                     }
                 }

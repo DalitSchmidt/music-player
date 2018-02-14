@@ -125,11 +125,21 @@ h1 {
   top: 50px;
   position: relative;
   float: left; }
+  #aside-menu #album-info-menu {
+    margin-top: 175px;
+    padding: 0;
+    font-size: 20px; }
+    #aside-menu #album-info-menu .album-info-links {
+      margin-left: 10px;
+      color: #ffffff;
+      cursor: pointer; }
+    #aside-menu #album-info-menu .active {
+      font-weight: bold; }
   #aside-menu #album-info-controls {
     height: 75px;
     width: 35px;
     margin: 10px;
-    padding: 0; }
+    position: absolute; }
     #aside-menu #album-info-controls .remove-icon, #aside-menu #album-info-controls .edit-icon {
       width: inherit;
       padding: 0 7px;
@@ -142,9 +152,9 @@ h1 {
     left: 125px;
     top: 70px;
     position: absolute; }
-    #aside-menu #album-info-image img {
+    #aside-menu #album-info-image img, #aside-menu #album-info-image span {
       display: none; }
-    #aside-menu #album-info-image::before {
+    #aside-menu #album-info-image #album-info-image-circle {
       background: #ffffff;
       height: 50px;
       width: 50px;
@@ -153,15 +163,6 @@ h1 {
       left: 100px;
       position: absolute;
       content: ' '; }
-  #aside-menu #album-info-menu {
-    margin-top: 175px;
-    font-size: 20px; }
-    #aside-menu #album-info-menu .album-info-links {
-      margin-left: 10px;
-      color: #ffffff;
-      cursor: pointer; }
-    #aside-menu #album-info-menu .active {
-      font-weight: bold; }
 
 #album-info-player {
   width: 850px;
@@ -366,8 +367,7 @@ h1 {
 /* The Close Button */
 .close {
   color: #aaaaaa;
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 18px;
   opacity: 1; }
 
 .close:hover,
@@ -375,23 +375,23 @@ h1 {
   color: #000000;
   opacity: 1; }
 
-#cancel-button, #approve-delete, #close-button {
+#cancel-button, #approve-delete, #close-button, #edit-album-cancel-button, #edit-album-approve-delete, #edit-album-close-button {
   background: #000000;
   width: 200px;
   border: none;
   padding: 8px 16px;
   color: #ffffff;
   font-size: 20px; }
-  #cancel-button:hover, #approve-delete:hover, #close-button:hover {
+  #cancel-button:hover, #approve-delete:hover, #close-button:hover, #edit-album-cancel-button:hover, #edit-album-approve-delete:hover, #edit-album-close-button:hover {
     background: #0f70a1; }
 
-#approve-delete, #close-button {
+#approve-delete, #close-button, #edit-album-approve-delete, #edit-album-close-button {
   float: right; }
 
-#cancel-button {
+#cancel-button, #edit-album-cancel-button {
   float: left; }
 
-#close-button {
+#close-button, #edit-album-close-button {
   text-align: center;
   text-decoration: none; }
 
@@ -459,12 +459,13 @@ h1 {
           vertical-align: baseline;
           float: left; }
           #add-new-album-details .col-md-8 #album-genres #tags .tag a {
-            margin-left: 5px;
+            margin-left: 2px;
             color: #ffffff;
             cursor: pointer; }
             #add-new-album-details .col-md-8 #album-genres #tags .tag a:hover {
-              color: #0f70a1;
-              text-decoration: none; }
+              color: #aaaaaa;
+              text-decoration: none;
+              opacity: 1; }
     #add-new-album-details .col-md-8 #artist-results {
       background: #ffffff;
       width: 250px;
