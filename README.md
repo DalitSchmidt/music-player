@@ -16,7 +16,7 @@ Has an attachment detailing the routes used for Server and the SQL file where al
 
 **Backend** is written in **NodeJS** and **Sequelize** as an ORM.
 
-**Fronted** is written in **JavaScript (es6)**, **jQuery** and all the design of the project is using **SASS**.
+**Fronted** is written in **JavaScript (es6)**, **jQuery** and all the design of the project is using **SASS** and **Bootstrap**.
 _______________
 
 ### Details of the structure of the project
@@ -42,20 +42,6 @@ It is also possible to play a specific song by clicking it in the playlist and y
 By clicking on the left menu 'Description', displays the description of the album with the album cover image and clicking the 'Playlist', found the full playlist will be displayed (on this option is set by default).
 
 Also from this page, you can delete an album (if it is deleted from this page when user deletion finishes moves to the default displays all albums saved in DB) and edit the data of the album.
-_______________
-
-#### Search Album -
-Album search window it is possible to perform a search of albums saved in DB.
-
-When you enter data in the search window is displayed to the user suggestions for relevant search results, when you click specific offer delivered to the specific album page and when you press enter or click the search button is moved to the page that displays the search results from which to delete, edit and play the album which was carried out search operation.
-_______________
-
-#### Edit Album -
-This page allows you to edit the data of saved in DB.
-
-When the user wants to edit a specific album is going to edit the page containing the form of edit album it will display all of the data saved in DB and relevant to that album.
-
-At the end of editing and saving in the album's success with the updated data (after validation checks), you will be notified that passes the user to a page that displays the details of the specific album to be updated.
 _______________
 
 #### Search Album -

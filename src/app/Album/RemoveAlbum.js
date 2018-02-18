@@ -3,14 +3,14 @@ import AlbumAPIService from './../APIServices/AlbumAPIService'
 import AlbumTemplates from './../Templates/AlbumTemplates'
 import Router from '../Router'
 
-const DeleteAlbum = {
+const RemoveAlbum = {
     currentPage: false,
 
-    deleteMessage: function ( e ) {
+    removeMessage: function ( e ) {
         let album_id = $( e.target ).closest('[data-album-id]').data('album-id')
 
         AlbumAPIService.getAlbumById( album_id ).then(album => {
-            let html = AlbumTemplates.deleteDialog( album )
+            let html = AlbumTemplates.removeDialog( album )
 
             $('.modal-dialog').html( html )
             $('body').addClass('modal-open').css('padding-right', '17px')
@@ -18,18 +18,18 @@ const DeleteAlbum = {
         })
     },
 
-    confirmAlbumDelete: function ( e ) {
+    confirmRemoveAlbum: function ( e ) {
         let album_id = $( e.target ).data('album-id')
 
         AlbumAPIService.deleteAlbum( album_id ).then(() => {
             $('.modal-dialog').fadeOut('slow', () => {
-                let html = AlbumTemplates.deleteSuccessDialog( this.currentPage, album_id )
+                let html = AlbumTemplates.removeSuccessDialog( this.currentPage, album_id )
                 $('.modal-dialog').html( html ).fadeIn('slow')
             })
         })
     },
 
-    cancelDelete: function () {
+    cancelRemove: function () {
         $('body').removeClass('modal-open').css('padding-right', '0')
         $('#modal').removeClass('in').css( {'display': 'none', 'padding-right': '0'} )
     },
@@ -38,16 +38,16 @@ const DeleteAlbum = {
         this.currentPage = Router.getRoute()
     },
 
-    handleDelete: function () {
+    handleRemove: function () {
         location.reload()
     },
 
     bindEvents: function () {
         $(window).bind('hashchange',$.proxy( this.updateCurrentPage, this ))
-        $('#main-container').on('click', '#album-info-controls .remove-icon, .record .remove-icon, .search-results-record .remove-icon', $.proxy( this.deleteMessage, this ))
-        $('.modal-dialog').on('click', '#approve-delete', $.proxy( this.confirmAlbumDelete, this ))
-        $('.modal-dialog').on('click', '.cancel', $.proxy( this.cancelDelete, this ))
-        $('.modal-dialog').on('click', '[data-action=handle-delete]', $.proxy( this.handleDelete, this ))
+        $('#main-container').on('click', '#album-info-controls .remove-icon, .record .remove-icon, .search-results-record .remove-icon', $.proxy( this.removeMessage, this ))
+        $('.modal-dialog').on('click', '#approve-remove', $.proxy( this.confirmRemoveAlbum, this ))
+        $('.modal-dialog').on('click', '.cancel', $.proxy( this.cancelRemove, this ))
+        $('.modal-dialog').on('click', '[data-action=handle-remove]', $.proxy( this.handleRemove, this ))
     },
 
     init: function () {
@@ -56,4 +56,4 @@ const DeleteAlbum = {
     }
 }
 
-export default DeleteAlbum
+export default RemoveAlbum
