@@ -41,7 +41,7 @@ module.exports = function ( sequelize, DataTypes ) {
     {
         classMethods: {
             associate: function ( models ) {
-                /** @namespace models.Album */
+                // /** @namespace models.Album */
                 Song.hasOne( models.Album, { foreignKey: 'album_id' } )
             }
         },

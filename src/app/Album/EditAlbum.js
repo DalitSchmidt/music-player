@@ -2,7 +2,6 @@ import $ from 'jquery'
 import AlbumForm from './AlbumForm'
 import AlbumGenres from './AlbumGenres'
 import AlbumAPIService from './../APIServices/AlbumAPIService'
-import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import EditAlbumTemplates from '../Templates/EditAlbumTemplates'
 import Router from '../Router'
 import Utils from '../Utils'
@@ -15,12 +14,12 @@ const EditAlbum = {
     },
 
     setTitleEditAlbum: function () {
-        let html = AlbumFormTemplates.titleEditAlbum()
+        let html = EditAlbumTemplates.titleEditAlbum()
         $('#add-new-album-title').html( html )
     },
 
     setTitleEditAlbumPlaylist: function () {
-        let html = AlbumFormTemplates.titleEditAlbumPlaylist()
+        let html = EditAlbumTemplates.titleEditAlbumPlaylist()
         $('#add-album-playlist-title').html( html )
     },
 
@@ -57,7 +56,7 @@ const EditAlbum = {
 
             $('.modal-dialog').html( html )
             $('body').addClass('modal-open').css('padding-right', '17px')
-            $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px'} )
+            $('#modal').addClass('in').css({'display': 'block', 'padding-right': '0'})
         // })
     },
 
@@ -66,7 +65,7 @@ const EditAlbum = {
 
         // AlbumAPIService.deleteAlbum( song_id ).then(album => {
             $('.modal-dialog').fadeOut('slow', () => {
-                let html = EditAlbumTemplates.removeSuccessDialog( song_id )
+                let html = EditAlbumTemplates.removeSongSuccessDialog( song_id )
                 $('.modal-dialog').html( html ).fadeIn('slow')
             })
         // })
@@ -74,7 +73,7 @@ const EditAlbum = {
 
     cancelRemove: function () {
         $('body').removeClass('modal-open').css('padding-right', '0')
-        $('#modal').removeClass('in').css( {'display': 'none', 'padding-right': '0'} )
+        $('#modal').removeClass('in').css({'display': 'none', 'padding-right': '0'})
     },
 
     setSuccessMessageEditAlbum: function () {
@@ -82,7 +81,7 @@ const EditAlbum = {
 
         $('.modal-dialog').html( html )
         $('body').addClass('modal-open').css('padding-right', '17px')
-        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px', 'overflow-y': 'scroll'} )
+        $('#modal').addClass('in').css({'display': 'block', 'padding-right': '0', 'overflow-y': 'scroll'})
     },
 
     saveChanges: function ( e ) {

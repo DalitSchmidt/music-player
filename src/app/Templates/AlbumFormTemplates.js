@@ -10,19 +10,11 @@ const AlbumFormTemplates = {
         return `<h1>Add Album Playlist</h1>`
     },
 
-    titleEditAlbum: function () {
-        return `<h1>Edit Album</h1>`
-    },
-
-    titleEditAlbumPlaylist: function () {
-        return `<h1>Edit Album Playlist</h1>`
-    },
-
     artistSuggestions: function ( suggestions ) {
         let html = '<ul>'
 
-        $.each(suggestions, ( index, album ) => {
-            html += `<li title="${album.album_artist}">${album.album_artist}</li>`
+        $.each(suggestions, ( index, artist ) => {
+            html += `<li title="${artist}">${artist}</li>`
         })
 
         html += '</ul>'

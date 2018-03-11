@@ -10,6 +10,11 @@ const Search = {
         SearchAPIService.searchAlbums( term ).then(( results, status_text, xhr ) => {
             this.displayResults( term, results, xhr.status )
         })
+
+        if ( window.location.href = 'http://localhost:8080/#search/' ) {
+            let title = SearchResultsTemplates.emptyResults( term )
+            $('#search-results-title').html( title )
+        }
     },
 
     displayResults: function ( term, results, status ) {

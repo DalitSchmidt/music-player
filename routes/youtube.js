@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const request = require('request')
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY
 require('dotenv').config()
 
 router.get('/:youtube_id', function ( req, res ) {
@@ -17,7 +16,7 @@ router.get('/:youtube_id', function ( req, res ) {
                 let data = JSON.parse( body )
                 video.title = data.title
 
-                    request(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${youtube_id}&key=${YOUTUBE_API_KEY}`, ( error, response, body ) => {
+                    request(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=${youtube_id}&key=${process.env.YOUTUBE_API_KEY}`, ( error, response, body ) => {
                     data = JSON.parse( body )
                     // video.duration = data.items[0].contentDetails.duration.split('PT')[1]
                     //  video.duration = /(?<=PT)(.*)(?=M)/.exec(data.items[0].contentDetails.duration)

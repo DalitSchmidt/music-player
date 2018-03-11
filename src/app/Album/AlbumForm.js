@@ -23,9 +23,8 @@ const AlbumForm = {
     searchArtist: function () {
         let term = $('#album-artist').val()
 
-        if ( term.length < 2 ) {
+        if ( term.length < 2 )
             return
-        }
 
         SearchAPIService.searchArtist( term ).then(( results, text_status, xhr ) => {
             let html
@@ -33,14 +32,21 @@ const AlbumForm = {
             if ( xhr.status === 204 )
                 html = AlbumFormTemplates.noSuggestions()
             else
-                html = AlbumFormTemplates.artistSuggestions( results.album_artist )
+                html = AlbumFormTemplates.artistSuggestions( results.results )
 
             $('#artist-results').html( html )
         })
     },
 
     clearArtistResult: function () {
-        $('#artist-results').find('ul, li').remove()
+        setTimeout(() => {
+            $('#artist-results').find('ul, li').remove()
+        }, 500 )
+    },
+
+    setValueArtistResult: function ( e ) {
+        let selected_artist = $( e.target ).text()
+        $('#album-artist').val( selected_artist )
     },
 
     setCoverImage: function ( img ) {
@@ -50,7 +56,7 @@ const AlbumForm = {
 
     changeCoverImage: function () {
         let img = $('#album-image').val()
-        let regex = new RegExp("(^http)?s?:?(\\/\\/[^\"']*\\.(?:jpg|jpeg|gif|png|bmp|tif|tiff|svg))$")
+        let regex = new RegExp(/^http?s?:?(\/\/[^"']*\.(?:jpg|jpeg|gif|png|bmp|tif|tiff|svg))$/)
 
         if ( img === '' ) {
             this.setCoverImage( PREVIEW_IMG )
@@ -189,6 +195,9 @@ const AlbumForm = {
 
                     return
                 }
+            } else {
+                AlbumValidator.validateField( song.find('input[name=song_youtube]') )
+                AlbumValidator.validateField( song.find('input[name=song_name]') )
             }
         })
 
@@ -225,6 +234,7 @@ const AlbumForm = {
         let $input = $( e.target )
 
         $input.siblings('.error-message').remove()
+        $input.removeClass('error')
 
         if ( AlbumValidator.validateField( $input ) ) {
             $input.removeClass('error').addClass('success')
@@ -246,7 +256,7 @@ const AlbumForm = {
 
         $('.modal-dialog').html( html )
         $('body').addClass('modal-open').css('padding-right', '17px')
-        $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px', 'overflow-y': 'scroll'} )
+        $('#modal').addClass('in').css({'display': 'block', 'padding-right': '0', 'overflow-y': 'scroll'})
     },
 
     resetFields: function () {
@@ -261,6 +271,15 @@ const AlbumForm = {
         return this.scrollTop( $('#main-container') )
     },
 
+    emptyValues: function ( item ) {
+        let song = $( item )
+        let song_youtube = song.find('input[name=song_youtube]')
+
+        if ( song_youtube.val('') ) {
+            $('.form-group span').text('')
+        }
+    },
+
     saveAlbum: function ( e ) {
         e.preventDefault()
 
@@ -269,18 +288,22 @@ const AlbumForm = {
         if ( !album )
             return
 
+        let $input = $( e.target )
+
+        $input.siblings('.error-message').remove()
+        $input.removeClass('error')
+
         AlbumAPIService.saveAlbum( album ).then(
             this.setSuccessMessage,
             ( error ) => {
                 let input, error_message, html
-                let input_name = error.responseJSON.reason.message.split(' ')[0]
+                let input_name = error.responseJSON.reason.message.split(" ")[0]
 
                 switch ( input_name ) {
                     case 'song_youtube':
-                        let youtube_code = error.responseJSON.reason.error.split(' ')[1].replace(/['\']+/g, '')
+                        let youtube_code = error.responseJSON.reason.error.split(" ")[1].replace(/['\']+/g, '')
 
-                        // input = $('input[name=song_youtube]').filter(function () {
-                        input = $('input[name=song_youtube]').filter(() => {
+                        input = $('input[name=song_youtube]').filter(function () {
                             return this.value === youtube_code
                         })
 
@@ -308,17 +331,19 @@ const AlbumForm = {
     bindEvents: function () {
         $('#album-artist').on('keyup', Utils.debounce( $.proxy( this.searchArtist, this ), 500) )
         $('#album-artist').on('blur', $.proxy( this.clearArtistResult, this ))
+        $('#artist-results').on('click', 'li', $.proxy( this.setValueArtistResult, this ))
         $('#album-image').on('blur', $.proxy( this.changeCoverImage, this ))
         $('#add-album-playlist-form').on('keyup', 'input[name=song_youtube]', Utils.debounce( $.proxy( this.searchYoutubeVideo, this ), 500) )
         $('#add-album-playlist-form').on('click', '.remove-icon', this.removeSongItem)
         $('#add-another-song-button').on('click', $.proxy( this.addSong, this ))
         $('#reset-fields-button').on('click', $.proxy( this.resetFields, this ))
+        $('#add-album-playlist-form').on('blur', 'input[name=song_youtube]', $.proxy( this.emptyValues, this ))
 
         if ( !this.hasAlbum )
             $('#finish-and-save-button').on('click', $.proxy( this.saveAlbum, this ))
 
-        $('#add-new-album-form .form-group').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
-        $('#add-album-playlist-form .form-group').on('blur', 'input.error, span.error', $.proxy( this.validateField, this ))
+        $('#add-new-album-form').on('blur', 'input.error, textarea.error', $.proxy( this.validateField, this ))
+        $('#add-album-playlist-form').on('blur', 'input.error, span.error, .song-item.error', $.proxy( this.validateField, this ))
     },
 
     init: function ( getAlbum = false ) {

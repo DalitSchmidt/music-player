@@ -1,0 +1,211 @@
+$mobile-small: 320px;
+$mobile-medium: 375px;
+$mobile-large: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$laptop-large: 1440px;
+$desktop: 2560px;
+
+//noinspection ALL
+#search-results {
+    @media screen and ( min-width: $mobile-small ) {
+        width: 260px;
+        margin: 0 20px;
+    }
+
+    @media screen and ( min-width: $mobile-medium ) {
+        width: 310px;
+        margin: 0 25px;
+    }
+
+    @media screen and ( min-width: $mobile-large ) {
+        width: 350px;
+        margin: 0 30px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        width: 680px;
+        margin: 0 40px;
+    }
+
+    @media screen and ( min-width: $laptop ) {
+        width: -webkit-fill-available;
+        margin: 0 50px;
+    }
+
+    #search-results-title {
+        h1 {
+            @media screen and ( min-width: $mobile-small ) {
+                font-size: 30px;
+            }
+        }
+
+        h1 {
+            @media screen and ( min-width: $mobile-large ) {
+                font-size: 32px;
+            }
+        }
+
+        h1 {
+            @media screen and ( min-width: $tablet ) {
+                font-size: 36px;
+            }
+        }
+    }
+
+    .col-md-12 {
+        .row {
+            @media screen and ( min-width: $tablet ) {
+                display: inline-flex;
+            }
+
+            .col-md-3 {
+                @media screen and ( min-width: $tablet ) {
+                    margin-right: 15px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: auto;
+                }
+
+                .search-results-record {
+                    @media screen and ( min-width: $mobile-small ) {
+                        margin-left: -25px;
+                        padding: 0 15px;
+                    }
+
+                    @media screen and ( min-width: $mobile-medium ) {
+                        margin-left: 0;
+                    }
+
+                    &::before {
+                        @media screen and ( min-width: $tablet ) {
+                            top: 100px;
+                        }
+                    }
+
+                    .remove-icon {
+                        @media screen and ( min-width: $mobile-small ) {
+                            left: 90px;
+                        }
+
+                        @media screen and ( min-width: $mobile-medium ) {
+                            left: 115px;
+                        }
+
+                        @media screen and ( min-width: $mobile-large ) {
+                            left: 135px;
+                        }
+
+                        @media screen and ( min-width: $tablet ) {
+                            left: 115px;
+                        }
+                    }
+
+                    .edit-icon {
+                        @media screen and ( min-width: $mobile-small ) {
+                            left: 120px;
+                        }
+
+                        @media screen and ( min-width: $mobile-medium ) {
+                            left: 145px;
+                        }
+
+                        @media screen and ( min-width: $mobile-large ) {
+                            left: 165px;
+                        }
+
+                        @media screen and ( min-width: $tablet ) {
+                            left: 145px;
+                        }
+                    }
+                }
+            }
+
+            .col-md-9 {
+                @media screen and ( min-width: $mobile-small ) {
+                    border-left: none;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    margin: inherit;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    border-left: 1px dotted #dadada;
+                    margin-right: 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: auto;
+                }
+
+                .search-results-album-name {
+                    @media screen and ( min-width: $mobile-small ) {
+                        width: max-content;
+                        margin: 15px 10px 15px -30px;
+                        font-size: 20px;
+                    }
+
+                    @media screen and ( min-width: $mobile-medium ) {
+                        margin: 20px 10px 10px -15px;
+                    }
+
+                    @media screen and ( min-width: $mobile-large ) {
+                        font-size: 22px;
+                    }
+
+                    @media screen and ( min-width: $tablet ) {
+                        margin: 0 0 10px;
+                    }
+
+                    @media screen and ( min-width: $laptop ) {
+                        font-size: 24px;
+                    }
+                }
+
+                .search-results-album-description {
+                    @media screen and ( min-width: $mobile-small ) {
+                        margin: 0 -30px;
+                    }
+
+                    @media screen and ( min-width: $mobile-medium ) {
+                        margin: 0 -15px;
+                    }
+
+                    @media screen and ( min-width: $tablet ) {
+                        margin-left: 0;
+                    }
+
+                    @media screen and ( min-width: $laptop ) {
+                        margin: 0;
+                    }
+                }
+
+                .search-results-full-album-button {
+                    @media screen and ( min-width: $mobile-small ) {
+                        margin: 10px 0 0 -25px;
+                        float: left;
+                    }
+
+                    @media screen and ( min-width: $mobile-medium ) {
+                        margin-right: 15px;
+                        float: right;
+                    }
+
+                    @media screen and ( min-width: $mobile-large ) {
+                        margin: 10px 35px 0 35px;
+                    }
+
+                    @media screen and ( min-width: $tablet ) {
+                        margin: 10px -15px 0 0;
+                    }
+
+                    @media screen and ( min-width: $laptop ) {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

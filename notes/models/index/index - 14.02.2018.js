@@ -6,7 +6,7 @@ const env       = process.env.NODE_ENV || 'development'
 const config    = require('./../config/config.json')[env]
 const db        = {}
 
-/** @namespace config.use_env_variable */
+// /** @namespace config.use_env_variable */
 let sequelize
 if ( config.use_env_variable )
     sequelize = new Sequelize( process.env[ config.use_env_variable ] )

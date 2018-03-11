@@ -271,8 +271,12 @@ h1 {
           border-radius: 3px;
           padding: 3px;
           vertical-align: baseline;
-          overflow: hidden;
-          cursor: text; }
+          display: flex;
+          cursor: text;
+          flex-wrap: wrap; }
+          #add-new-album-details .col-md-8 #album-genres #tags .tag-selector #tags-container {
+            height: 34px;
+            width: auto; }
           #add-new-album-details .col-md-8 #album-genres #tags .tag-selector #search-genres {
             height: 22px;
             width: auto;
@@ -280,19 +284,34 @@ h1 {
             border: none;
             padding: 6px;
             white-space: nowrap;
-            float: left; }
+            float: left;
+            flex: 1 1 0%; }
         #add-new-album-details .col-md-8 #album-genres #tags #genres-results {
           background: #ffffff;
           width: 160px;
-          margin-left: 5px; }
+          /* Scrollbar styles */ }
+          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ul {
+            max-height: 150px;
+            overflow-y: scroll;
+            width: 100%; }
+          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px; }
+          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ::-webkit-scrollbar-track {
+            background: #dadada; }
+          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ::-webkit-scrollbar-thumb {
+            background: black; }
         #add-new-album-details .col-md-8 #album-genres #tags .tag {
           background: #000000;
           height: 20px;
           border-radius: 3px;
-          margin: auto 0.3em 0.3em 0;
+          margin-right: 0.3em;
+          margin-bottom: 0.3em;
           padding: 0.1em 0.4em 1.5em;
           color: #ffffff;
           vertical-align: baseline;
+          visibility: visible;
+          position: relative;
           float: left; }
           #add-new-album-details .col-md-8 #album-genres #tags .tag a {
             margin-left: 2px;
@@ -307,7 +326,13 @@ h1 {
       width: 250px;
       margin-left: 5px; }
       #add-new-album-details .col-md-8 #artist-results ul > li {
-        margin: -15px 0 0 90px; }
+        margin-left: 90px; }
+        #add-new-album-details .col-md-8 #artist-results ul > li:nth-of-type(1):not(last-of-type) {
+          border-bottom: 2px solid #dadada;
+          margin-top: -10px; }
+        #add-new-album-details .col-md-8 #artist-results ul > li:last-of-type {
+          border-bottom: none;
+          margin-bottom: -5px; }
     #add-new-album-details .col-md-8 .form-group .form-control {
       width: 85%;
       border: 3px double #000000;
@@ -363,13 +388,15 @@ h1 {
         border-color: #008000; }
       #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12.song-item {
         height: 34px;
-        margin-top: 40px;
+        margin-top: 50px;
         padding: 0; }
         #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12.song-item .error-message {
           margin: -30px 0 30px 15px; }
       #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12 .form-group.song > .error-message {
-        top: 0;
-        position: absolute; }
+        top: -20px;
+        position: relative; }
+        #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12 .form-group.song > .error-message:first-of-type {
+          top: -15px; }
       #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12 input.error, #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12 span.error {
         border-color: #ff0000; }
       #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12 input.success, #add-album-playlist-details .col-md-12 #add-album-playlist-form .col-md-12 span.success {
@@ -517,9 +544,13 @@ h1 {
       padding: 0;
       line-height: 2;
       font-size: 18px;
-      display: flex; }
+      display: flex;
+      position: relative;
+      flex-wrap: wrap; }
       #album-info-player #album-info-text #album-info-genres li {
-        margin-right: 25px; }
+        margin-right: 25px;
+        flex: inherit;
+        flex-direction: row; }
       #album-info-player #album-info-text #album-info-genres li:last-child {
         margin-right: 0; }
     #album-info-player #album-info-text #album-info-description {
@@ -534,8 +565,8 @@ h1 {
       font-weight: bold; }
     #album-info-player #album-info-text #controls {
       background: #dadada;
-      width: 325px;
       height: 35px;
+      width: 325px;
       margin: 10px 0 0 20px;
       transition: width 0.50s; }
       #album-info-player #album-info-text #controls.volume-width {
@@ -675,3 +706,916 @@ h1 {
           float: right; }
           #search-results .col-md-12 .row .col-md-9 .search-results-full-album-button:hover {
             background: #0f70a1; }
+
+@media screen and (min-width: 320px) {
+  header {
+    height: 100px; } }
+
+@media screen and (min-width: 768px) {
+  header {
+    height: 80px; } }
+
+@media screen and (min-width: 768px) {
+  header #header-controls {
+    margin: 0; } }
+
+@media screen and (min-width: 320px) {
+  header #header-controls a .fa-plus-circle {
+    margin: 5px; } }
+
+@media screen and (min-width: 768px) {
+  header #header-controls a .fa-plus-circle {
+    margin: 20px 5px 0 20px; } }
+
+@media screen and (min-width: 320px) {
+  header #header-controls a {
+    padding: 1px; } }
+
+@media screen and (min-width: 375px) {
+  header #header-controls a:last-of-type {
+    margin-left: 15px; } }
+
+@media screen and (min-width: 320px) {
+  header #header-controls {
+    margin-top: 5px; } }
+
+@media screen and (min-width: 375px) {
+  header #header-controls {
+    margin: 10px; } }
+
+@media screen and (min-width: 320px) {
+  header #search-area {
+    margin: 10px 25px 0 0; } }
+
+@media screen and (min-width: 375px) {
+  header #search-area {
+    margin: 0; } }
+
+@media screen and (min-width: 320px) {
+  header #search-area #search-term {
+    margin: 0 auto; } }
+
+@media screen and (min-width: 768px) {
+  header #search-area #search-term {
+    margin: 22px 10px 0 0; } }
+
+@media screen and (min-width: 320px) {
+  header #search-area #search-button .fa-search {
+    top: 53px;
+    right: 33px; } }
+
+@media screen and (min-width: 375px) {
+  header #search-area #search-button .fa-search {
+    top: 59px;
+    right: 10px; } }
+
+@media screen and (min-width: 768px) {
+  header #search-area #search-button .fa-search {
+    top: 30px;
+    right: 20px; } }
+
+@media screen and (min-width: 768px) {
+  #album-list {
+    display: flex;
+    flex-wrap: wrap; } }
+
+@media screen and (min-width: 768px) {
+  #album-list .col-md-3 {
+    width: 250px;
+    margin: 10px 10px 50px 10px;
+    flex: 1 1 0; } }
+
+@media screen and (min-width: 320px) {
+  #album-list .col-md-3 .record {
+    width: 320px;
+    margin: 20px -50px; } }
+
+@media screen and (min-width: 375px) {
+  #album-list .col-md-3 .record {
+    margin-left: -28px; } }
+
+@media screen and (min-width: 425px) {
+  #album-list .col-md-3 .record {
+    margin: 0; } }
+
+@media screen and (min-width: 1024px) {
+  #album-list .col-md-3 .record {
+    width: 300px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-list .col-md-3 .record .play-icon {
+    top: 145px; } }
+
+@media screen and (min-width: 320px) {
+  #album-list .col-md-3 .record .remove-icon {
+    left: 135px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-list .col-md-3 .record .remove-icon {
+    left: 125px; } }
+
+@media screen and (min-width: 320px) {
+  #album-list .col-md-3 .record .edit-icon {
+    left: 165px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-list .col-md-3 .record .edit-icon {
+    left: 155px; } }
+
+@media screen and (min-width: 320px) {
+  .modal-content {
+    width: 80%; } }
+
+@media screen and (min-width: 768px) {
+  .modal-content {
+    width: 75%; } }
+
+@media screen and (min-width: 320px) {
+  .modal-footer {
+    padding: 4px; } }
+
+@media screen and (min-width: 768px) {
+  .modal-footer {
+    padding: 10px; } }
+
+@media screen and (min-width: 320px) {
+  #cancel-button, #edit-album-cancel-button {
+    margin-bottom: 10px;
+    float: right; } }
+
+@media screen and (min-width: 375px) {
+  #cancel-button, #edit-album-cancel-button {
+    margin: 0 20px 10px;
+    float: left; } }
+
+@media screen and (min-width: 425px) {
+  #cancel-button, #edit-album-cancel-button {
+    margin: 0 40px 10px; } }
+
+@media screen and (min-width: 768px) {
+  #cancel-button, #edit-album-cancel-button {
+    margin: 0; } }
+
+@media screen and (min-width: 375px) {
+  #approve-remove, #close-button, #edit-album-approve-remove, #edit-album-close-button {
+    margin: 0 20px;
+    float: left; } }
+
+@media screen and (min-width: 425px) {
+  #approve-remove, #close-button, #edit-album-approve-remove, #edit-album-close-button {
+    margin: 0 40px; } }
+
+@media screen and (min-width: 768px) {
+  #approve-remove, #close-button, #edit-album-approve-remove, #edit-album-close-button {
+    margin: 0;
+    float: right; } }
+
+@media screen and (min-width: 320px) {
+  #aside-menu {
+    margin: 0 30px; } }
+
+@media screen and (min-width: 375px) {
+  #aside-menu {
+    margin: 0 60px; } }
+
+@media screen and (min-width: 425px) {
+  #aside-menu {
+    margin: 0 80px; } }
+
+@media screen and (min-width: 768px) {
+  #aside-menu {
+    margin: 0 0 0 40px; } }
+
+@media screen and (min-width: 1024px) {
+  #aside-menu {
+    margin: 0 0 75px 100px; } }
+
+@media screen and (min-width: 320px) {
+  #aside-menu #album-info-menu {
+    margin-top: 20px;
+    position: absolute; } }
+
+@media screen and (min-width: 1024px) {
+  #aside-menu #album-info-menu {
+    margin-top: 175px;
+    position: relative; } }
+
+@media screen and (min-width: 320px) {
+  #aside-menu #album-info-controls {
+    position: relative;
+    float: right; } }
+
+@media screen and (min-width: 1024px) {
+  #aside-menu #album-info-controls {
+    position: absolute;
+    float: none; } }
+
+@media screen and (min-width: 320px) {
+  #aside-menu #album-info-image {
+    left: 0;
+    top: 120px; } }
+
+@media screen and (min-width: 1024px) {
+  #aside-menu #album-info-image {
+    left: 125px;
+    top: 70px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player {
+    margin-top: 60px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player {
+    width: 420px;
+    margin: 50px 40px 0 0; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player {
+    width: 600px;
+    margin: 50px 50px 0 0; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player {
+    margin: 50px 100px 75px 0; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player {
+    width: auto;
+    margin: 50px 100px 75px 0;
+    font-size: 14px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #player-wrapper iframe {
+    top: 120px;
+    left: -70px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #player-wrapper iframe {
+    top: 140px;
+    left: -40px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #player-wrapper iframe {
+    left: -20px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #player-wrapper iframe {
+    top: 120px;
+    left: -60px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #player-wrapper iframe {
+    top: 70px;
+    left: 125px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text {
+    margin-left: 10px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text {
+    width: auto;
+    margin-left: 125px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #album-info-name {
+    width: 250px;
+    margin-bottom: 0;
+    text-align: center;
+    font-size: 22px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #album-info-name {
+    width: 350px;
+    margin: 0 10px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #album-info-name {
+    width: 380px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #album-info-name {
+    width: auto;
+    margin: 0 0 0 10px;
+    text-align: justify;
+    font-size: 24px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #album-info-name {
+    width: auto;
+    min-width: 500px;
+    margin: 0 0 10px 20px;
+    font-size: 30px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #album-info-name {
+    font-size: 36px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #album-info-year {
+    width: auto;
+    margin: 0 20px;
+    font-size: 14px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #album-info-year {
+    margin: 0 10px;
+    font-size: 16px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #album-info-year {
+    margin: 0 0 0 10px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #album-info-year {
+    margin: 0 0 10px 20px;
+    font-size: 18px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #album-info-year {
+    font-size: 20px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #album-info-year {
+    font-size: 24px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #album-info-genres {
+    margin: -28px 0 0 73px;
+    font-size: 14px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #album-info-genres {
+    margin: -32px 0 0 68px;
+    font-size: 16px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #album-info-genres {
+    width: auto;
+    margin: -32px 0 0 70px;
+    font-size: 16px;
+    display: -webkit-box;
+    position: relative;
+    flex-direction: row; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #album-info-genres {
+    height: auto;
+    margin: -46px 0 0 86px;
+    font-size: 18px;
+    display: flex;
+    position: absolute;
+    flex-direction: row; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #album-info-genres {
+    margin: -50px 0 0 90px;
+    font-size: 20px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #album-info-genres {
+    margin: -58px 0 0 108px;
+    font-size: 24px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #album-info-genres li {
+    margin-right: 20px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #album-info-genres li {
+    margin-right: 25px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #album-info-genres li {
+    margin-right: 30px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #album-info-description {
+    width: 250px;
+    margin-top: 5px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #album-info-description {
+    width: 320px;
+    margin: 5px 0 0 10px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #album-info-description {
+    width: 370px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #album-info-description {
+    width: 400px;
+    margin: 0 0 0 10px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #album-info-description {
+    width: auto;
+    margin: 0 0 10px 20px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #album-info-description {
+    font-size: 14px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #now-playing-song {
+    margin: 0 20px;
+    font-size: 15px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #now-playing-song {
+    margin: 0 10px;
+    font-size: 16px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #now-playing-song {
+    margin: 5px 10px;
+    font-size: 18px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #now-playing-song {
+    margin: 0 0 0 10px;
+    font-size: 20px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #now-playing-song {
+    width: auto;
+    min-width: 520px;
+    margin-left: 20px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #now-playing-song {
+    min-width: 580px;
+    font-size: 22px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #now-playing-song {
+    font-size: 24px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls {
+    height: 28px;
+    width: 210px;
+    margin: 5px 20px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls {
+    height: 32px;
+    width: 255px;
+    margin: 5px 10px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #controls {
+    height: 34px;
+    width: 270px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls {
+    height: 35px;
+    width: 295px;
+    margin: 10px 0 0 10px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #controls {
+    width: 325px;
+    margin: 10px 0 0 20px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #controls {
+    height: 40px;
+    width: 350px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls.volume-width {
+    width: 255px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls.volume-width {
+    width: 335px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #controls.volume-width {
+    width: 370px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls.volume-width {
+    width: 400px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #controls.volume-width {
+    width: 430px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #controls.volume-width {
+    width: 450px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #step-backward, #album-info-player #album-info-text #controls #play, #album-info-player #album-info-text #controls #stop, #album-info-player #album-info-text #controls #step-forward, #album-info-player #album-info-text #controls #volume-up {
+    font-size: 20px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #step-backward, #album-info-player #album-info-text #controls #play, #album-info-player #album-info-text #controls #stop, #album-info-player #album-info-text #controls #step-forward, #album-info-player #album-info-text #controls #volume-up {
+    font-size: 24px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #controls #step-backward, #album-info-player #album-info-text #controls #play, #album-info-player #album-info-text #controls #stop, #album-info-player #album-info-text #controls #step-forward, #album-info-player #album-info-text #controls #volume-up {
+    font-size: 25px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #step-backward, #album-info-player #album-info-text #controls #play, #album-info-player #album-info-text #controls #stop, #album-info-player #album-info-text #controls #step-forward, #album-info-player #album-info-text #controls #volume-up {
+    font-size: 25px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #controls #step-backward, #album-info-player #album-info-text #controls #play, #album-info-player #album-info-text #controls #stop, #album-info-player #album-info-text #controls #step-forward, #album-info-player #album-info-text #controls #volume-up {
+    margin-top: 1px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #controls #step-backward, #album-info-player #album-info-text #controls #play, #album-info-player #album-info-text #controls #stop, #album-info-player #album-info-text #controls #step-forward, #album-info-player #album-info-text #controls #volume-up {
+    font-size: 30px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #step-backward {
+    margin-left: 0; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #step-backward {
+    margin-left: 5px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #play {
+    margin-left: 17px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #play {
+    margin-left: 20px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #play {
+    margin-left: 30px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #stop {
+    margin-left: 39px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #stop {
+    margin-left: 45px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #stop {
+    margin-left: 60px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #step-forward {
+    margin-left: 60px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #step-forward {
+    margin-left: 70px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #step-forward {
+    margin-left: 90px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #song-duration {
+    width: 60px;
+    margin: 11px 0 0 77px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #song-duration {
+    width: 85px;
+    margin: 13px 0 0 88px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #controls #song-duration {
+    width: 100px;
+    margin: 14px 0 0 88px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #song-duration {
+    margin: 14px 0 0 115px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #controls #song-duration {
+    width: 130px;
+    margin: 15px 0 0 115px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #controls #song-duration {
+    margin: 14px 0 0 115px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #controls #song-duration {
+    margin: 18px 0 0 115px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #timer {
+    margin: 3px 0 0 140px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #timer {
+    margin: 5px 0 0 180px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #controls #timer {
+    margin: 6px 0 0 192px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #timer {
+    margin: 6px 0 0 220px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #controls #timer {
+    margin: 7px 0 0 250px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #controls #timer {
+    margin: 6px 0 0 250px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #controls #timer {
+    margin: 9px 0 0 250px;
+    font-size: 18px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #volume-up {
+    margin-left: 185px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #volume-up {
+    margin-left: 225px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #controls #volume-up {
+    margin-left: 238px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #volume-up {
+    margin-left: 265px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #controls #volume-up {
+    margin-left: 295px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #controls #volume-up {
+    margin-left: 305px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #controls #volume {
+    width: 45px;
+    margin: 11px 0 0 207px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #controls #volume {
+    width: 80px;
+    margin: 13px 0 0 250px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #controls #volume {
+    width: 100px;
+    margin: 14px 0 0 265px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #controls #volume {
+    margin: 14px 0 0 295px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #controls #volume {
+    margin: 15px 0 0 325px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #controls #volume {
+    margin: 14px 0 0 325px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #controls #volume {
+    margin: 18px 0 0 340px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #player-playlist {
+    width: 225px;
+    margin: 10px 38px;
+    font-size: 14px; } }
+
+@media screen and (min-width: 375px) {
+  #album-info-player #album-info-text #player-playlist {
+    width: 310px;
+    margin: 10px 28px;
+    font-size: 16px; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #player-playlist {
+    width: 360px;
+    font-size: 18px; } }
+
+@media screen and (min-width: 768px) {
+  #album-info-player #album-info-text #player-playlist {
+    width: 380px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #player-playlist {
+    width: auto;
+    margin: 15px 0 0 40px; } }
+
+@media screen and (min-width: 1440px) {
+  #album-info-player #album-info-text #player-playlist {
+    margin: 10px 0 0 40px;
+    font-size: 20px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #player-playlist {
+    margin: 15px 0 0 50px;
+    font-size: 26px; } }
+
+@media screen and (min-width: 320px) {
+  #album-info-player #album-info-text #player-playlist li {
+    padding-left: 0; } }
+
+@media screen and (min-width: 425px) {
+  #album-info-player #album-info-text #player-playlist li {
+    padding-left: 4px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #player-playlist li {
+    padding-left: 5px; } }
+
+@media screen and (min-width: 1024px) {
+  #album-info-player #album-info-text #player-playlist li.playing::before, #album-info-player #album-info-text #player-playlist li.pause::before {
+    left: -20px; } }
+
+@media screen and (min-width: 2560px) {
+  #album-info-player #album-info-text #player-playlist li.playing::before, #album-info-player #album-info-text #player-playlist li.pause::before {
+    left: -25px; } }
+
+@media screen and (min-width: 320px) {
+  #search-results {
+    width: 260px;
+    margin: 0 20px; } }
+
+@media screen and (min-width: 375px) {
+  #search-results {
+    width: 310px;
+    margin: 0 25px; } }
+
+@media screen and (min-width: 425px) {
+  #search-results {
+    width: 350px;
+    margin: 0 30px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results {
+    width: 680px;
+    margin: 0 40px; } }
+
+@media screen and (min-width: 1024px) {
+  #search-results {
+    width: -webkit-fill-available;
+    margin: 0 50px; } }
+
+@media screen and (min-width: 320px) {
+  #search-results #search-results-title h1 {
+    font-size: 30px; } }
+
+@media screen and (min-width: 425px) {
+  #search-results #search-results-title h1 {
+    font-size: 32px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results #search-results-title h1 {
+    font-size: 36px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row {
+    display: inline-flex; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-3 {
+    margin-right: 15px; } }
+
+@media screen and (min-width: 1024px) {
+  #search-results .col-md-12 .row .col-md-3 {
+    width: auto; } }
+
+@media screen and (min-width: 320px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record {
+    margin-left: -25px;
+    padding: 0 15px; } }
+
+@media screen and (min-width: 375px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record {
+    margin-left: 0; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record::before {
+    top: 100px; } }
+
+@media screen and (min-width: 320px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .remove-icon {
+    left: 90px; } }
+
+@media screen and (min-width: 375px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .remove-icon {
+    left: 115px; } }
+
+@media screen and (min-width: 425px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .remove-icon {
+    left: 135px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .remove-icon {
+    left: 115px; } }
+
+@media screen and (min-width: 320px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .edit-icon {
+    left: 120px; } }
+
+@media screen and (min-width: 375px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .edit-icon {
+    left: 145px; } }
+
+@media screen and (min-width: 425px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .edit-icon {
+    left: 165px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-3 .search-results-record .edit-icon {
+    left: 145px; } }
+
+@media screen and (min-width: 320px) {
+  #search-results .col-md-12 .row .col-md-9 {
+    border-left: none; } }
+
+@media screen and (min-width: 375px) {
+  #search-results .col-md-12 .row .col-md-9 {
+    margin: inherit; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-9 {
+    border-left: 1px dotted #dadada;
+    margin-right: 0; } }
+
+@media screen and (min-width: 1024px) {
+  #search-results .col-md-12 .row .col-md-9 {
+    width: auto; } }
+
+@media screen and (min-width: 320px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-name {
+    width: max-content;
+    margin: 15px 10px 15px -30px;
+    font-size: 20px; } }
+
+@media screen and (min-width: 375px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-name {
+    margin: 20px 10px 10px -15px; } }
+
+@media screen and (min-width: 425px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-name {
+    font-size: 22px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-name {
+    margin: 0 0 10px; } }
+
+@media screen and (min-width: 1024px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-name {
+    font-size: 24px; } }
+
+@media screen and (min-width: 320px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-description {
+    margin: 0 -30px; } }
+
+@media screen and (min-width: 375px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-description {
+    margin: 0 -15px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-description {
+    margin-left: 0; } }
+
+@media screen and (min-width: 1024px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-album-description {
+    margin: 0; } }
+
+@media screen and (min-width: 320px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-full-album-button {
+    margin: 10px 0 0 -25px;
+    float: left; } }
+
+@media screen and (min-width: 375px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-full-album-button {
+    margin-right: 15px;
+    float: right; } }
+
+@media screen and (min-width: 425px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-full-album-button {
+    margin: 10px 35px 0 35px; } }
+
+@media screen and (min-width: 768px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-full-album-button {
+    margin: 10px -15px 0 0; } }
+
+@media screen and (min-width: 1024px) {
+  #search-results .col-md-12 .row .col-md-9 .search-results-full-album-button {
+    margin-right: 0; } }

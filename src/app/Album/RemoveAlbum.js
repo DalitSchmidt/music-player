@@ -14,7 +14,7 @@ const RemoveAlbum = {
 
             $('.modal-dialog').html( html )
             $('body').addClass('modal-open').css('padding-right', '17px')
-            $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px', 'overflow-y': 'scroll'} )
+            $('#modal').addClass('in').css({'display': 'block', 'padding-right': '0', 'overflow-y': 'scroll'})
         })
     },
 
@@ -31,7 +31,7 @@ const RemoveAlbum = {
 
     cancelRemove: function () {
         $('body').removeClass('modal-open').css('padding-right', '0')
-        $('#modal').removeClass('in').css( {'display': 'none', 'padding-right': '0'} )
+        $('#modal').removeClass('in').css({'display': 'none', 'padding-right': '0'})
     },
 
     updateCurrentPage: function () {

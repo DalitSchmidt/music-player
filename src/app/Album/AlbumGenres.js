@@ -1,13 +1,12 @@
 import $ from 'jquery'
 import AlbumForm from './AlbumForm'
-import AlbumAPIService from '../APIServices/AlbumAPIService'
 import SearchAPIService from '../APIServices/SearchAPIService'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import Utils from '../Utils'
 
 const AlbumGenres = {
     addGenreTag: function ( tag_name, genre_id = false ) {
-        if ( !tag_name )
+        if ( !tag_name || !this.validateGenres( tag_name ) )
             return
 
         let html = AlbumFormTemplates.genreTag( tag_name, genre_id )
@@ -20,12 +19,15 @@ const AlbumGenres = {
     },
 
     searchGenre: function ( term ) {
+        let html
+
         SearchAPIService.searchGenres( term ).then(results => {
             if ( results ) {
-                let html = AlbumFormTemplates.genreSuggestions( results.results )
+                html = AlbumFormTemplates.genreSuggestions( results.results )
                 $('#genres-results').html( html )
             } else
-                $('#genres-results').html('')
+                html = AlbumFormTemplates.noSuggestions()
+                $('#genres-results').html( html )
         })
     },
 
@@ -36,6 +38,7 @@ const AlbumGenres = {
         if ( e.keyCode == 13 ) {
             this.addGenreTag( $input_value )
             $('#genres-results').html('')
+
             return
         }
 
@@ -47,25 +50,44 @@ const AlbumGenres = {
     },
 
     setGenreValue: function ( e ) {
-        // let genre_name = $( e.target ).text()
-        // let genre_id = $( e.target ).data('genre-id')
-        //
-        // this.addGenreTag( genre_name, genre_id )
-        // $('#genres-results').html('')
-
         let genre_name = $( e.target ).text()
         let genre_id = $( e.target ).data('genre-id')
 
-        AlbumAPIService.getGenres().then(() => {
-            this.addGenreTag( genre_name, genre_id )
-            $('#genres-results').html('')
-        })
+        $('#genres-results').html('')
+
+        this.addGenreTag( genre_name, genre_id )
     },
 
     removeGenreTag: function ( e ) {
         let $input = $( e.target )
 
         $input.parents('.tag').remove()
+    },
+
+    validateGenres: function ( tag_name ) {
+        $('#album-genres .error-message').remove()
+
+        let tag_names = []
+
+        $.each( $('.tag'), function ( index, item ) {
+            tag_names.push( $( item ).attr('title') )
+        })
+
+        if ( tag_names.indexOf( tag_name ) !== -1 ) {
+            let html = AlbumFormTemplates.errorMessage('The genre is already in list')
+            $('#album-genres').prepend( html )
+
+            return false
+        }
+
+        if ( $('.tag').length === 5 ) {
+            let html = AlbumFormTemplates.errorMessage('The album can contain a maximum of 5 genres')
+            $('#album-genres').prepend( html )
+
+            return
+        }
+
+        return true
     },
 
     bindEvents: function () {

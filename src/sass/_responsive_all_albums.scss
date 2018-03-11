@@ -1,0 +1,123 @@
+$mobile-small: 320px;
+$mobile-medium: 375px;
+$mobile-large: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$laptop-large: 1440px;
+$desktop: 2560px;
+
+#album-list {
+    @media screen and ( min-width: $tablet ) {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-md-3 {
+        @media screen and ( min-width: $tablet ) {
+            width: 250px;
+            margin: 10px 10px 50px 10px;
+            flex: 1 1 0;
+        }
+
+        .record {
+            @media screen and ( min-width: $mobile-small ) {
+                width: 320px;
+                margin: 20px -50px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                margin-left: -28px;
+            }
+
+            @media screen and ( min-width: $mobile-large ) {
+                margin: 0;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                width: 300px;
+            }
+
+            .play-icon {
+                @media screen and ( min-width: $laptop ) {
+                    top: 145px;
+                }
+            }
+
+            .remove-icon {
+                @media screen and ( min-width: $mobile-small ) {
+                    left: 135px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 125px;
+                }
+            }
+
+            .edit-icon {
+                @media screen and ( min-width: $mobile-small ) {
+                    left: 165px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 155px;
+                }
+            }
+        }
+    }
+}
+
+.modal-content {
+    @media screen and ( min-width: $mobile-small ) {
+        width: 80%;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        width: 75%;
+    }
+}
+
+.modal-footer {
+    @media screen and ( min-width: $mobile-small ) {
+        padding: 4px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        padding: 10px;
+    }
+}
+
+#cancel-button, #edit-album-cancel-button {
+    @media screen and ( min-width: $mobile-small ) {
+        margin-bottom: 10px;
+        float: right;
+    }
+
+    @media screen and ( min-width: $mobile-medium ) {
+        margin: 0 20px 10px;
+        float: left;
+    }
+
+    @media screen and ( min-width: $mobile-large ) {
+        margin: 0 40px 10px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        margin: 0;
+    }
+}
+
+#approve-remove, #close-button, #edit-album-approve-remove, #edit-album-close-button {
+    @media screen and ( min-width: $mobile-medium ) {
+        margin: 0 20px;
+        float: left;
+    }
+
+    @media screen and ( min-width: $mobile-large ) {
+        margin: 0 40px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        margin: 0;
+        float: right;
+    }
+}

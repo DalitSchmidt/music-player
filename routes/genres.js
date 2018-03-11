@@ -29,7 +29,7 @@ router.get('/suggestions/:term', function ( req, res ) {
     GenreModel.findAll({
         where: {
             genre_name: {
-                $like: `${term}%`
+                $like: `%${term}%`
             }
         }
     }).then(results => {

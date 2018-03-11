@@ -3,25 +3,26 @@ import Utils from '../Utils'
 
 const AlbumValidator = {
     regexes: {
-        'album_name': new RegExp("^[A-Z][A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-        'album_artist': new RegExp("^[A-Z][A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*"),
-        'album_image': new RegExp("(^http)?s?:?(\\/\\/[^\"']*\\.(?:jpg|jpeg|gif|png|bmp|tif|tiff|svg))$"),
-        'album_year': new RegExp("^[0-9]{4}$"),
-        'album_description': new RegExp("^[A-Z]"),
-        'song_name': new RegExp("^[A-Z0-9][A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*")
+        'album_name': new RegExp(/^[A-Z][A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*/),
+        'album_artist': new RegExp(/^[A-Z][A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*/),
+        'album_image': new RegExp(/^http?s?:?(\/\/[^"']*\.(?:jpg|jpeg|gif|png|bmp|tif|tiff|svg))$/),
+        'album_year': new RegExp(/^[0-9]{4}$/),
+        'album_description': new RegExp(/^[A-Z]/),
+        'song_youtube': new RegExp(/([A-Za-z0-9\\-_]{11})/),
+        'song_name': new RegExp(/^[A-Z0-9][A-Za-z0-9.-_ ,:=+!?@#$%&*(){}|~^<>`']+$]*/)
     },
 
     error_messages: {
         'album_name': 'The name of album must begin with a capital letter',
         'album_artist': 'The name of album artist must begin with a capital letter',
-        'album_image': 'The image of album cover must be a URL that ends with .JPG, .JPEG, .GIF or .PNG',
+        'album_image': 'The image of album cover must be a URL that ends with .JPG, .JPEG, .GIF, .PNG, .BMP, .TIF, .TIFF or .SVG',
         'album_year': 'The year of album must be 4 characters',
         'album_description': 'The description of album must begin with a capital letter',
         'song_youtube_id': 'The album must contain at least 5 songs',
         'song_name': 'The name of song must begin with a capital letter or with a numbers',
-        'duplicate_song': 'Song is already in list',
-        'genres': 'At least 1 genre',
-        'empty_field': 'The field cannot be empty information'
+        'duplicate_song': 'The song is already in list',
+        'genres': 'The album must contain at least 1 genre',
+        'song_youtube': 'The field cannot be empty'
     },
 
     validateField: function ( input ) {

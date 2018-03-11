@@ -105,11 +105,13 @@ const Player = {
 
         youtubeplayer.setVolume( volume )
 
-        if ( volume == 0 )
-            $volume.attr('class', "fa fa-volume-off").css('margin-left', '8px')
-        else if ( volume <= 50 )
+        if ( volume == 0 ) {
+            $volume.attr('class', 'fa fa-volume-off').css('margin-left', '8px')
+            $volume.attr('media', 'screen and (min-width:320px)').css('margin-left', '4px')
+        } else if ( volume <= 50 ) {
             $volume.attr('class', 'fa fa-volume-down').css('margin-left', '8px')
-        else if ( volume > 50 )
+            $volume.attr('media', 'screen and (min-width:320px)').css('margin-left', '2px')
+        } else if ( volume > 50 )
             $volume.attr('class', 'fa fa-volume-up').css('margin-left', '0')
     },
 

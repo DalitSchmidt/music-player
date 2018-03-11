@@ -26,7 +26,7 @@ module.exports = function ( sequelize, DataTypes ) {
             allowNull: false,
             unique: true,
             validate: {
-                is: /(^http)?s?:?(\/\/[^"']*\.(?:jpg|jpeg|gif|png|bmp|tif|tiff|svg))$/
+                is: /^http?s?:?(\/\/[^"']*\.(?:jpg|jpeg|gif|png|bmp|tif|tiff|svg))$/
             }
         },
         album_year: {

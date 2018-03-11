@@ -18,9 +18,9 @@ module.exports = function ( sequelize, DataTypes ) {
         {
             classMethods: {
                 associate: function ( models ) {
-                    /** @namespace albumToGenre */
+                    // /** @namespace albumToGenre */
                     albumToGenre.hasOne( models.Album, {foreignKey: 'album_id'} )
-                    /** @namespace models.Genre*/
+                    // /** @namespace models.Genre*/
                     albumToGenre.hasOne( models.Genre, {foreignKey: 'genre_id'} )
                 }
             }

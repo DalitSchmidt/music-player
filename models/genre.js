@@ -15,7 +15,7 @@ module.exports = function ( sequelize, DataTypes ) {
             }
         },
         genre_name: {
-            type: DataTypes.STRING(50),
+            type: DataTypes.STRING(20),
             allowNull: false,
             unique: true,
             validate: {

@@ -1,0 +1,644 @@
+$mobile-small: 320px;
+$mobile-medium: 375px;
+$mobile-large: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$laptop-large: 1440px;
+$desktop: 2560px;
+
+#aside-menu {
+    @media screen and ( min-width: $mobile-small ) {
+        margin: 0 30px;
+    }
+
+    @media screen and ( min-width: $mobile-medium ) {
+        margin: 0 60px;
+    }
+
+    @media screen and ( min-width: $mobile-large ) {
+        margin: 0 80px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        margin: 0 0 0 40px;
+    }
+
+    @media screen and ( min-width: $laptop ) {
+        margin: 0 0 75px 100px;
+    }
+
+    #album-info-menu {
+        @media screen and ( min-width: $mobile-small ) {
+            margin-top: 20px;
+            position: absolute;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            margin-top: 175px;
+            position: relative;
+        }
+    }
+
+    #album-info-controls {
+        @media screen and ( min-width: $mobile-small ) {
+            position: relative;
+            float: right;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            position: absolute;
+            float: none;
+        }
+    }
+
+    #album-info-image {
+        @media screen and ( min-width: $mobile-small ) {
+            left: 0;
+            top: 120px;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            left: 125px;
+            top: 70px;
+        }
+    }
+}
+
+#album-info-player {
+    @media screen and ( min-width: $mobile-small ) {
+        margin-top: 60px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        width: 420px;
+        margin: 50px 40px 0 0;
+    }
+
+    @media screen and ( min-width: $laptop ) {
+        width: 600px;
+        margin: 50px 50px 0 0;
+    }
+
+    @media screen and ( min-width: $laptop-large ) {
+        margin: 50px 100px 75px 0;
+    }
+
+    @media screen and ( min-width: $desktop ) {
+        width: auto;
+        margin: 50px 100px 75px 0;
+        font-size: 14px;
+    }
+
+    #player-wrapper {
+        iframe {
+            @media screen and ( min-width: $mobile-small ) {
+                top: 120px;
+                left: -70px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                top: 140px;
+                left: -40px;
+            }
+
+            @media screen and ( min-width: $mobile-large ) {
+                left: -20px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                top: 120px;
+                left: -60px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                top: 70px;
+                left: 125px;
+            }
+        }
+    }
+
+    #album-info-text {
+        @media screen and ( min-width: $mobile-small ) {
+            margin-left: 10px;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            width: auto;
+            margin-left: 125px;
+        }
+
+        #album-info-name {
+            @media screen and ( min-width: $mobile-small ) {
+                width: 250px;
+                margin-bottom: 0;
+                text-align: center;
+                font-size: 22px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                width: 350px;
+                margin: 0 10px;
+            }
+
+            @media screen and ( min-width: $mobile-large ) {
+                width: 380px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                width: auto;
+                margin: 0 0 0 10px;
+                text-align: justify;
+                font-size: 24px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                width: auto;
+                min-width: 500px;
+                margin: 0 0 10px 20px;
+                font-size: 30px;
+            }
+
+            @media screen and ( min-width: $laptop-large ) {
+                font-size: 36px;
+            }
+        }
+
+        #album-info-year {
+            @media screen and ( min-width: $mobile-small ) {
+                width: auto;
+                margin: 0 20px;
+                font-size: 14px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                margin: 0 10px;
+                font-size: 16px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                margin: 0 0 0 10px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                margin: 0 0 10px 20px;
+                font-size: 18px;
+            }
+
+            @media screen and ( min-width: $laptop-large ) {
+                font-size: 20px;
+            }
+
+            @media screen and ( min-width: $desktop ) {
+                font-size: 24px;
+            }
+        }
+
+        #album-info-genres {
+            @media screen and ( min-width: $mobile-small ) {
+                margin: -28px 0 0 73px;
+                font-size: 14px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                margin: -32px 0 0 68px;
+                font-size: 16px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                width: auto;
+                margin: -32px 0 0 70px;
+                font-size: 16px;
+                display: -webkit-box;
+                position: relative;
+                flex-direction: row;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                height: auto;
+                margin: -46px 0 0 86px;
+                font-size: 18px;
+                display: flex;
+                position: absolute;
+                flex-direction: row;
+            }
+
+            @media screen and ( min-width: $laptop-large ) {
+                margin: -50px 0 0 90px;
+                font-size: 20px;
+            }
+
+            @media screen and ( min-width: $desktop ) {
+                margin: -58px 0 0 108px;
+                font-size: 24px;
+            }
+
+            li {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-right: 20px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    margin-right: 25px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    margin-right: 30px;
+                }
+            }
+        }
+
+        #album-info-description {
+            @media screen and ( min-width: $mobile-small ) {
+                width: 250px;
+                margin-top: 5px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                width: 320px;
+                margin: 5px 0 0 10px;
+            }
+
+            @media screen and ( min-width: $mobile-large ) {
+                width: 370px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                width: 400px;
+                margin: 0 0 0 10px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                width: auto;
+                margin: 0 0 10px 20px;
+            }
+
+            @media screen and ( min-width: $desktop ) {
+                font-size: 14px;
+            }
+        }
+
+        #now-playing-song {
+            @media screen and ( min-width: $mobile-small ) {
+                margin: 0 20px;
+                font-size: 15px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                margin: 0 10px;
+                font-size: 16px;
+            }
+
+            @media screen and ( min-width: $mobile-large ) {
+                margin: 5px 10px;
+                font-size: 18px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                margin: 0 0 0 10px;
+                font-size: 20px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                width: auto;
+                min-width: 520px;
+                margin-left: 20px;
+            }
+
+            @media screen and ( min-width: $laptop-large ) {
+                min-width: 580px;
+                font-size: 22px;
+            }
+
+            @media screen and ( min-width: $desktop ) {
+                font-size: 24px;
+            }
+        }
+
+        #controls {
+            @media screen and ( min-width: $mobile-small ) {
+                height: 28px;
+                width: 210px;
+                margin: 5px 20px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                height: 32px;
+                width: 255px;
+                margin: 5px 10px;
+            }
+
+            @media screen and ( min-width: $mobile-large ) {
+                height: 34px;
+                width: 270px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                height: 35px;
+                width: 295px;
+                margin: 10px 0 0 10px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                width: 325px;
+                margin: 10px 0 0 20px;
+            }
+
+            @media screen and ( min-width: $desktop ) {
+                height: 40px;
+                width: 350px;
+            }
+
+            &.volume-width {
+                @media screen and ( min-width: $mobile-small ) {
+                    width: 255px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    width: 335px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    width: 370px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    width: 400px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: 430px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    width: 450px;
+                }
+            }
+
+            #step-backward, #play, #stop, #step-forward, #volume-up {
+                @media screen and ( min-width: $mobile-small ) {
+                    font-size: 20px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    font-size: 24px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    font-size: 25px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    font-size: 25px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin-top: 1px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    font-size: 30px;
+                }
+            }
+
+            #step-backward {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin-left: 5px;
+                }
+            }
+
+            #play {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 17px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    margin-left: 20px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin-left: 30px;
+                }
+            }
+
+            #stop {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 39px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    margin-left: 45px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin-left: 60px;
+                }
+            }
+
+            #step-forward {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 60px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    margin-left: 70px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin-left: 90px;
+                }
+            }
+
+            #song-duration {
+                @media screen and ( min-width: $mobile-small ) {
+                    width: 60px;
+                    margin: 11px 0 0 77px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    width: 85px;
+                    margin: 13px 0 0 88px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    width: 100px;
+                    margin: 14px 0 0 88px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin: 14px 0 0 115px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: 130px;
+                    margin: 15px 0 0 115px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    margin: 14px 0 0 115px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    margin: 18px 0 0 115px;
+                }
+            }
+
+            #timer {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin: 3px 0 0 140px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    margin: 5px 0 0 180px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    margin: 6px 0 0 192px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin: 6px 0 0 220px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin: 7px 0 0 250px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    margin: 6px 0 0 250px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    margin: 9px 0 0 250px;
+                    font-size: 18px;
+                }
+            }
+
+            #volume-up {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 185px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    margin-left: 225px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    margin-left: 238px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin-left: 265px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin-left: 295px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    margin-left: 305px;
+                }
+            }
+
+            #volume {
+                @media screen and ( min-width: $mobile-small ) {
+                    width: 45px;
+                    margin: 11px 0 0 207px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    width: 80px;
+                    margin: 13px 0 0 250px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    width: 100px;
+                    margin: 14px 0 0 265px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin: 14px 0 0 295px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin: 15px 0 0 325px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    margin: 14px 0 0 325px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    margin: 18px 0 0 340px;
+                }
+            }
+        }
+
+        #player-playlist {
+            @media screen and ( min-width: $mobile-small ) {
+                width: 225px;
+                margin: 10px 38px;
+                font-size: 14px;
+            }
+
+            @media screen and ( min-width: $mobile-medium ) {
+                width: 310px;
+                margin: 10px 28px;
+                font-size: 16px;
+            }
+
+            @media screen and ( min-width: $mobile-large ) {
+                width: 360px;
+                font-size: 18px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                width: 380px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                width: auto;
+                margin: 15px 0 0 40px;
+            }
+
+            @media screen and ( min-width: $laptop-large ) {
+                margin: 10px 0 0 40px;
+                font-size: 20px;
+            }
+
+            @media screen and ( min-width: $desktop ) {
+                margin: 15px 0 0 50px;
+                font-size: 26px;
+            }
+
+            li {
+                @media screen and ( min-width: $mobile-small ) {
+                    padding-left: 0;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    padding-left: 4px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    padding-left: 5px;
+                }
+
+                &.playing, &.pause {
+                    &::before {
+                        @media screen and ( min-width: $laptop ) {
+                            left: -20px;
+                        }
+
+                        @media screen and ( min-width: $desktop ) {
+                            left: -25px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

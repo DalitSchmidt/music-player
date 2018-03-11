@@ -1,0 +1,92 @@
+$mobile-small: 320px;
+$mobile-medium: 375px;
+$mobile-large: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$laptop-large: 1440px;
+$desktop: 2560px;
+
+header {
+    @media screen and ( min-width: $mobile-small ) {
+        height: 100px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        height: 80px;
+    }
+
+    #header-controls {
+        @media screen and ( min-width: $tablet ) {
+            margin: 0;
+        }
+
+        a {
+            .fa-plus-circle {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin: 5px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin: 20px 5px 0 20px;
+                }
+            }
+
+            @media screen and ( min-width: $mobile-small ) {
+                padding: 1px;
+            }
+
+            &:last-of-type {
+                @media screen and ( min-width: $mobile-medium ) {
+                    margin-left: 15px;
+                }
+            }
+        }
+
+        @media screen and ( min-width: $mobile-small ) {
+            margin-top: 5px;
+        }
+
+        @media screen and ( min-width: $mobile-medium ) {
+            margin: 10px;
+        }
+    }
+
+    #search-area {
+        @media screen and ( min-width: $mobile-small ) {
+            margin: 10px 25px 0 0;
+        }
+
+        @media screen and ( min-width: $mobile-medium ) {
+            margin: 0;
+        }
+
+        #search-term {
+            @media screen and ( min-width: $mobile-small ) {
+                margin: 0 auto;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                margin: 22px 10px 0 0;
+            }
+        }
+
+        #search-button {
+            .fa-search {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 53px;
+                    right: 33px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    top: 59px;
+                    right: 10px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    top: 30px;
+                    right: 20px;
+                }
+            }
+        }
+    }
+}

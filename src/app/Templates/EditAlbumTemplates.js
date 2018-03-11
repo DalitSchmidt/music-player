@@ -1,6 +1,14 @@
 import $ from "jquery"
 
 const EditAlbumTemplates = {
+    titleEditAlbum: function () {
+        return `<h1>Edit Album</h1>`
+    },
+
+    titleEditAlbumPlaylist: function () {
+        return `<h1>Edit Album Playlist</h1>`
+    },
+
     removeSongDialog: function ( songId ) {
         let songName = $(`[data-song-id=${songId}]`).closest('.song-item').find('.song-name').val()
         let albumArtist = $('#album-artist').val()
@@ -23,7 +31,7 @@ const EditAlbumTemplates = {
                `
     },
 
-    removeSuccessDialog: function () {
+    removeSongSuccessDialog: function () {
         return `
                 <div class="modal-content">
                     <div class="modal-header">

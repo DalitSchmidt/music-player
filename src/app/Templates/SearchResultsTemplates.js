@@ -49,7 +49,7 @@ const SearchResultsTemplates = {
                         </div>
             
                         <div class="col-md-9">
-                            <h3 class="search-results-album-name">${album.album_artist} - ${album.album_name}</h3>
+                            <h3 class="search-results-album-name">${album.album_name} - ${album.album_artist}</h3>
                             <p class="search-results-album-description">${album.album_description}</p>
                             <a href="#single-album/${album.album_id}" class="search-results-full-album-button" title="TO FULL ALBUM..." data-album-id="${album.album_id}">TO FULL ALBUM...</a>
                         </div>
@@ -61,8 +61,9 @@ const SearchResultsTemplates = {
     results: function ( albums ) {
         let html = ''
 
-        $.each(albums, ( index, album ) =>
-            html += this.result( album ))
+        $.each(albums, ( index, album ) => {
+            html += this.result(album)
+        })
 
         return html
     }

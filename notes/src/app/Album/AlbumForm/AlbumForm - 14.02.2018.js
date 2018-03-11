@@ -95,7 +95,7 @@ const AlbumForm = {
                 $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
             },
             error => {
-                /** @namespace error.responseJSON */
+                // /** @namespace error.responseJSON */
                 let html = AlbumFormTemplates.errorMessage( error.responseJSON.error )
                 $input.parent().prepend( html )
             })

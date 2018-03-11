@@ -81,19 +81,20 @@ router.get('/suggestions/artist/:term', function ( req, res ) {
     let term = req.params.term
 
     AlbumModel.findAll({
-        attributes: {
-            exclude: ['album_name', 'album_description', 'album_year', 'album_image']
-        },
+        attributes: ['album_artist'],
+        group: ['album_artist'],
         where: {
             album_artist: {
-                $like: `${term}%`
+                $like: `%${term}%`
             }
         }
     }).then(results => {
         if ( !results.length )
-            res.sendStatus(204)
-        else
+            res.status(204).send()
+        else {
+            results = results.map( artist => artist.album_artist )
             res.json({ results })
+        }
     })
 })
 
@@ -112,7 +113,7 @@ router.post('/', function ( req, res ) {
 
     // Create the songs in the DB and link theme to the album
     AlbumModel.create( album )
-        .then(result  => {
+        .then(result => {
             album_id = result.album_id
 
             return album_id
@@ -129,29 +130,33 @@ router.post('/', function ( req, res ) {
         .then(() => {
             return GenreModel.bulkCreate( new_genres,  { returning: true } )
         })
-        .then(() => {
-            let new_genres_ids = results.map(genre => genre.genre_id)
+        .then(genre_results => {
+            let new_genres_ids = genre_results.map(genre => genre.genre_id)
             let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map(genre_id => {
                 return { genre_id, album_id }
             })
 
-            return  AlbumToGenresModel.bulkCreate( album_genres_ids )
+            return AlbumToGenresModel.bulkCreate( album_genres_ids )
         })
-        .then(() => {
+        .then(result => {
             res.status(201).json({ result })
         })
         .catch(err => {
             if ( album_id ) {
-                AlbumsController.deleteAlbum( album_id ).spread(() => {
-                    let errors = err.errors[0]
+                AlbumsController.deleteAlbum( album_id ).spread(affected_rows => {
+                    if ( affected_rows === 0 )
+                        res.json({ message: `Album id ${album_id} not found` })
+                    else {
+                        let errors = err.errors[0]
 
-                    res.status(422).json({
-                        error: 'Unable to create album',
-                        reason: {
-                            message: errors.message,
-                            error: `${errors.path} '${errors.value}' already exists`
-                        }
-                    })
+                        res.status(422).json({
+                            error: 'Unable to create album',
+                            reason: {
+                                message: errors.message,
+                                error: `${errors.path} '${errors.value}' already exists`
+                            }
+                        })
+                    }
                 })
 
                 return
@@ -166,8 +171,6 @@ router.post('/', function ( req, res ) {
                     error: `${errors.path} '${errors.value}' already exists`
                 }
             })
-
-        throw new Error()
     })
 })
 

@@ -5,7 +5,7 @@ const request = require('request')
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY
 
 router.get('/:youtube_id', function ( req, res ) {
-    /** @namespace req.params.youtube_id */
+    // /** @namespace req.params.youtube_id */
     let youtube_id = req.params.youtube_id
 
     if ( youtube_id.length < 8 || youtube_id.length > 14 )

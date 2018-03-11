@@ -2,12 +2,12 @@ const express = require('express')
 const router = express.Router()
 const models = require('../models')
 const AlbumModel = models.Album
-/** @namespace models.Song */
+// /** @namespace models.Song */
 const SongModel = models.Song
 const GenresController = require('../controllers/GenresController')
 const AlbumsController = require('../controllers/AlbumsController')
 const GenreModel = models.Genre
-/** @namespace models.AlbumToGenres */
+// /** @namespace models.AlbumToGenres */
 const AlbumsToGenresModel = models.AlbumToGenres
 
 router.get('/', function ( req, res ) {
