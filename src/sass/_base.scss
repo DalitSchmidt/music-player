@@ -98,10 +98,6 @@ header {
                     &:nth-of-type(1):not(last-of-type) {
                         border-bottom: 2px solid #dadada;
                     }
-
-                    &:last-of-type {
-                        border-bottom: none;
-                    }
                 }
             }
         }

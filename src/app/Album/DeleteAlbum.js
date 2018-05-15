@@ -2,6 +2,7 @@ import $ from 'jquery'
 import AlbumAPIService from './../APIServices/AlbumAPIService'
 import AlbumTemplates from './../Templates/AlbumTemplates'
 import Router from '../Router'
+import Utils from '../Utils'
 
 const DeleteAlbum = {
     currentPage: false,
@@ -11,14 +12,13 @@ const DeleteAlbum = {
 
         AlbumAPIService.getAlbumById( album_id ).then(album => {
             let html = AlbumTemplates.deleteDialog( album )
-
             $('.modal-dialog').html( html )
-            $('body').addClass('modal-open').css('padding-right', '17px')
-            $('#modal').addClass('in').css( {'display': 'block', 'padding-right': '17px', 'overflow-y': 'scroll'} )
+
+            Utils.openModal()
         })
     },
 
-    confirmAlbumDelete: function ( e ) {
+    confirmDeleteAlbum: function ( e ) {
         let album_id = $( e.target ).data('album-id')
 
         AlbumAPIService.deleteAlbum( album_id ).then(() => {
@@ -27,11 +27,6 @@ const DeleteAlbum = {
                 $('.modal-dialog').html( html ).fadeIn('slow')
             })
         })
-    },
-
-    cancelDelete: function () {
-        $('body').removeClass('modal-open').css('padding-right', '0')
-        $('#modal').removeClass('in').css( {'display': 'none', 'padding-right': '0'} )
     },
 
     updateCurrentPage: function () {
@@ -45,8 +40,8 @@ const DeleteAlbum = {
     bindEvents: function () {
         $(window).bind('hashchange',$.proxy( this.updateCurrentPage, this ))
         $('#main-container').on('click', '#album-info-controls .remove-icon, .record .remove-icon, .search-results-record .remove-icon', $.proxy( this.deleteMessage, this ))
-        $('.modal-dialog').on('click', '#approve-delete', $.proxy( this.confirmAlbumDelete, this ))
-        $('.modal-dialog').on('click', '.cancel', $.proxy( this.cancelDelete, this ))
+        $('.modal-dialog').on('click', '#approve-delete', $.proxy( this.confirmDeleteAlbum, this ))
+        $('.modal-dialog').on('click', '.cancel', $.proxy( Utils.cancelDelete, this ))
         $('.modal-dialog').on('click', '[data-action=handle-delete]', $.proxy( this.handleDelete, this ))
     },
 

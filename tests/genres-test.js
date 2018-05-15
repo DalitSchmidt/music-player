@@ -31,7 +31,7 @@ describe('Genres REST API', () => {
         })
 
         it('Should not found the genre', done => {
-            chai.request(server).get('/api/genres/0').end(( err, res ) => {
+            chai.request( server ).get('/api/genres/0').end(( err, res ) => {
                 res.should.have.status(204)
                 done()
             })
@@ -40,7 +40,7 @@ describe('Genres REST API', () => {
 
     describe('POST /genres', () => {
         it('Should create a new genre', done => {
-            chai.request(server).
+            chai.request( server ).
             post('/api/genres').
             set('Content-Type', 'application/json').
             send(JSON.stringify({
@@ -54,18 +54,18 @@ describe('Genres REST API', () => {
             })
         })
 
-        // it('Should response with 422 because of validation errors', done => {
-        //     chai.request(server).
-        //     post('/api/genres').
-        //     set('Content-Type', 'application/json').
-        //     send(JSON.stringify({
-        //         genre_slug: 'pop-rock',
-        //         genre_name: 'Pop Rock'
-        //     })).
-        //     end((err, res) => {
-        //         res.should.have.status(422)
-        //         done()
-        //     })
-        // })
+        it('Should response with 422 because of validation errors', done => {
+            chai.request( server ).
+            post('/api/genres').
+            set('Content-Type', 'application/json').
+            send(JSON.stringify({
+                genre_slug: 'pop-rock',
+                genre_name: 'Pop Rock'
+            })).
+            end((err, res) => {
+                res.should.have.status(422)
+                done()
+            })
+        })
     })
 })

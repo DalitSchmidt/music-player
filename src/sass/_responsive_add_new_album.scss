@@ -1,0 +1,831 @@
+$mobile-small: 320px;
+$mobile-medium: 375px;
+$mobile-large: 425px;
+$tablet: 768px;
+$laptop: 1024px;
+$laptop-normal: 1280px;
+$laptop-large: 1440px;
+$desktop: 2560px;
+
+/* Add New Album */
+#add-new-album-details {
+    @media screen and ( min-width: $mobile-small ) {
+        margin: 0;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        margin: 0 40px;
+    }
+
+    @media screen and ( min-width: $laptop ) {
+        margin: 0 100px;
+    }
+
+    @media screen and ( min-width: $desktop ) {
+        margin: 0 220px;
+    }
+
+    .col-md-12 {
+        @media screen and ( min-width: $laptop ) {
+            padding: 15px 0;
+        }
+
+        @media screen and ( min-width: $laptop-normal ) {
+            padding: 15px;
+        }
+
+        #image-cover-preview {
+            @media screen and ( min-width: $mobile-small ) {
+                display: none;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                height: 640px;
+                display: inline-block;
+                float: right;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                height: 0;
+                width: 0;
+                padding: 20px 0;
+            }
+
+            @media screen and ( min-width: $laptop-normal ) {
+                padding: 0;
+            }
+
+            #image-cover-preview-circle {
+                @media screen and ( min-width: $laptop ) {
+                    top: 155px;
+                    right: 120px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    top: 135px;
+                    right: 135px;
+                }
+            }
+        }
+    }
+
+    .col-md-8 {
+        @media screen and ( min-width: $mobile-small ) {
+            margin: 0 -15px;
+            padding: 0;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            margin: 20px;
+        }
+
+        @media screen and ( min-width: $desktop ) {
+            width: 85%;
+        }
+
+        #artist-results {
+            @media screen and ( min-width: $mobile-small ) {
+                width: auto;
+                margin-left: 0;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                width: 50%;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                width: 250px;
+                margin-left: 5px;
+            }
+
+            ul > li {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin-left: 90px;
+                }
+            }
+        }
+
+        #album-genres {
+            .control-label {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    top: 5px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    top: 5px;
+                }
+            }
+
+            .error-message ~ .control-label {
+                @media screen and ( min-width: $laptop ) {
+                    top: 35px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    top: 40px;
+                }
+            }
+
+            #tags {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 0;
+                    top: 25px;
+                    position: relative;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    width: 50%;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: 70%;
+                    margin-left: 95px;
+                    top: 0;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    width: 85%;
+                    top: 0;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    width: 90%;
+                }
+
+                &.error {
+                    @media screen and ( min-width: $laptop ) {
+                        top: -5px;
+                    }
+                }
+
+                &.success {
+                    @media screen and ( min-width: $laptop-normal ) {
+                        top: 0;
+                    }
+                }
+
+                &.success > #tag-selector {
+                    @media screen and ( min-width: $mobile-small ) {
+                        margin-top: 0;
+                    }
+
+                    @media screen and ( min-width: $laptop-normal ) {
+                        margin-top: -5px;
+                    }
+                }
+
+                #tag-selector {
+                    #tags-container {
+                        @media screen and ( min-width: $mobile-small ) {
+                            max-height: 150px;
+                        }
+
+                        @media screen and ( min-width: $laptop-normal ) {
+                            max-height: 80px;
+                        }
+                    }
+                }
+            }
+
+            & > .error-message {
+                @media screen and ( min-width: $mobile-small ) {
+                    white-space: nowrap;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    white-space: normal;
+                }
+            }
+        }
+
+        #description-area {
+            #description-label {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-bottom: 0;
+                    top: 30px;
+                    position: relative;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    top: 10px;
+                }
+            }
+
+            .error-message ~ #description-label {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-bottom: 0;
+                    top: 25px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    top: 5px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    top: 5px;
+                }
+            }
+
+            & > .error-message {
+                @media screen and ( min-width: $mobile-small ) {
+                    position: relative;
+                    top: 30px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    white-space: nowrap;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    top: 5px;
+                    white-space: normal;
+                }
+            }
+        }
+
+        .form-group {
+            .form-control {
+                @media screen and ( min-width: $mobile-small ) {
+                    width: 100%;
+                    margin-left: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    width: 50%;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: 70%;
+                    margin-left: 6px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    width: 85%;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    width: 90%;
+                }
+            }
+
+            .error-message {
+                @media screen and ( min-width: $desktop ) {
+                    margin-bottom: 20px;
+                }
+            }
+
+            #album-artist {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin-left: 53px;
+                }
+            }
+
+            #album-image {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin-left: 20px;
+                }
+            }
+
+            #album-year {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin-left: 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin-left: 59px;
+                }
+            }
+
+            #album-description {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 35px;
+                    position: relative;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    float: left;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: 70%;
+                    top: 10px;
+                    right: 67px;
+                    float: right;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    width: 85%;
+                    right: 5px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    right: 18px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    width: 90%;
+                    right: 81px;
+                }
+
+                &.error {
+                    @media screen and ( min-width: $tablet ) {
+                        top: 30px;
+                    }
+
+                    @media screen and ( min-width: $laptop ) {
+                        top: 5px;
+                    }
+                }
+
+                &.success {
+                    @media screen and ( min-width: $laptop ) {
+                        top: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Add Album Playlist */
+#add-album-playlist-details {
+    @media screen and ( min-width: $mobile-small ) {
+        margin: 0;
+        top: 60px;
+        position: relative;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        margin: 255px 40px 0;
+        top: 30px;
+    }
+
+    @media screen and ( min-width: $laptop ) {
+        margin: 0 100px;
+        top: 0;
+    }
+
+    @media screen and ( min-width: $desktop ) {
+        margin: 0 220px;
+    }
+
+    .col-md-12 {
+        @media screen and ( min-width: $mobile-small ) {
+            padding: 15px 0 0;
+        }
+
+        @media screen and ( min-width: $tablet ) {
+            padding: 15px 0;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            padding: 15px 5px 0;
+        }
+
+        @media screen and ( min-width: $laptop-normal ) {
+            padding: 15px 15px 0;
+        }
+
+        #add-album-playlist-form {
+            @media screen and ( min-width: $mobile-small ) {
+                margin-left: 0;
+                padding: 10px 0;
+            }
+
+            @media screen and ( min-width: $laptop-normal ) {
+                margin-left: 20px;
+            }
+
+            .error-message {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    margin: 10px 0 30px 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    margin: 10px 0 0 15px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    margin: 10px 0 0 0;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    margin: 10px 0 5px 0;
+                }
+            }
+
+            .col-md-12 {
+                &.song-item {
+                    @media screen and ( min-width: $mobile-small ) {
+                        height: 310px;
+                        margin-top: 0;
+                        padding: 0;
+                        top: 80px;
+                        position: relative;
+                    }
+
+                    @media screen and ( min-width: $tablet ) {
+                        height: 140px;
+                        top: 80px;
+                    }
+
+                    @media screen and ( min-width: $laptop ) {
+                        height: 34px;
+                        margin-top: 50px;
+                        padding: 0;
+                        top: 0;
+                    }
+
+                    .error-message {
+                        @media screen and ( min-width: $mobile-small ) {
+                            margin-top: 0;
+                            top: -30px;
+                            position: relative;
+                        }
+
+                        @media screen and ( min-width: $tablet ) {
+                            margin-top: 0;
+                            top: -40px;
+                            position: absolute;
+                        }
+
+                        @media screen and ( min-width: $laptop ) {
+                            top: -35px;
+                        }
+                    }
+                }
+
+                .form-group {
+                    &.song > .error-message {
+                        @media screen and ( min-width: $mobile-small ) {
+                            top: -30px;
+                            position: absolute;
+                            white-space: nowrap;
+                        }
+
+                        @media screen and ( min-width: $tablet ) {
+                            top: -40px;
+                            white-space: normal;
+                        }
+
+                        @media screen and ( min-width: $laptop ) {
+                            top: -35px;
+                        }
+                    }
+                }
+            }
+
+            .youtube-id-label {
+                @media screen and ( min-width: $mobile-small ) {
+                    left: 0;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 15px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 0;
+                }
+            }
+
+            .song-name-label {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 85px;
+                    left: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    top: 8px;
+                    left: 235px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 310px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 375px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    left: 425px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    left: 880px;
+                }
+            }
+
+            .song-time-label {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 155px;
+                    left: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    top: 8px;
+                    left: 470px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 605px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 745px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    left: 860px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    left: 1760px;
+                }
+            }
+
+            .youtube-id, .song-name {
+                @media screen and ( min-width: $mobile-small ) {
+                    width: 100%;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    width: 150px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: 200px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    width: 275px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    width: 330px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    width: 38%;
+                }
+            }
+
+            .youtube-id {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 34px;
+                    left: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    top: 0;
+                    left: 80px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 100px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 90px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    left: 85px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    left: 90px;
+                }
+            }
+
+            .song-name {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 110px;
+                    left: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    top: 0;
+                    left: 315px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 395px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 460px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    left: 515px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    left: 970px;
+                }
+            }
+
+            .song-time {
+                @media screen and ( min-width: $mobile-small ) {
+                    width: 75%;
+                    top: 180px;
+                    left: 0;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    width: 60px;
+                    padding: 5px;
+                    top: 0;
+                    left: 545px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    width: 70px;
+                    padding: 5px 10px;
+                    left: 685px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 825px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    width: 80px;
+                    left: 945px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    width: 100px;
+                    left: 1850px;
+                }
+            }
+
+            .remove-icon {
+                @media screen and ( min-width: $mobile-small ) {
+                    top: 180px;
+                    left: 220px;
+                }
+
+                @media screen and ( min-width: $mobile-medium ) {
+                    left: 270px;
+                }
+
+                @media screen and ( min-width: $mobile-large ) {
+                    left: 310px;
+                }
+
+                @media screen and ( min-width: $tablet ) {
+                    top: 0;
+                    left: 610px;
+                }
+
+                @media screen and ( min-width: $laptop ) {
+                    left: 765px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 920px;
+                }
+
+                @media screen and ( min-width: $laptop-large ) {
+                    left: 1050px;
+                }
+
+                @media screen and ( min-width: $desktop ) {
+                    left: 1980px;
+                }
+            }
+        }
+    }
+
+    #add-another-song-button {
+        @media screen and ( min-width: $mobile-small ) {
+            margin: 0;
+            padding: 0;
+        }
+
+        @media screen and ( min-width: $tablet ) {
+            margin: 0 0 20px 0;
+            padding: 12px 0;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            margin: 20px 0 20px 10px;
+            padding: 12px 0;
+        }
+
+        @media screen and ( min-width: $laptop-normal ) {
+            padding: 12px;
+        }
+
+        @media screen and ( min-width: $laptop-large ) {
+            margin: 20px 0 20px 10px;
+        }
+    }
+
+    #reset-and-save-buttons {
+        @media screen and ( min-width: $mobile-small ) {
+            margin: 30px 12px;
+        }
+
+        @media screen and ( min-width: $mobile-medium ) {
+            margin: 30px 40px 20px;
+        }
+
+        @media screen and ( min-width: $mobile-large ) {
+            margin: 30px 65px 20px;
+        }
+
+        @media screen and ( min-width: $tablet ) {
+            margin: 0 10px 20px 0;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            margin: 20px 0;
+        }
+
+        @media screen and ( min-width: $laptop-normal ) {
+            margin: 20px 8px 20px 0;
+        }
+
+        #reset-fields-button, #finish-and-save-button {
+            @media screen and ( min-width: $mobile-small ) {
+                float: right;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                float: left;
+            }
+        }
+
+        #reset-fields-button {
+            @media screen and ( min-width: $mobile-small ) {
+                margin: 0 0 10px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                margin: 0;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                margin: 0 10px 0 0;
+            }
+        }
+
+        #finish-and-save-button {
+            @media screen and ( min-width: $mobile-small ) {
+                margin: 0;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                margin: 0 -10px 0 10px;
+            }
+
+            @media screen and ( min-width: $laptop ) {
+                margin: 0;
+            }
+        }
+    }
+}
+
+#add-new-album-title, #add-album-playlist-title {
+    h1 {
+        @media screen and (min-width: $mobile-small) {
+            font-size: 30px;
+        }
+    }
+
+    h1 {
+        @media screen and (min-width: $mobile-large) {
+            font-size: 32px;
+        }
+    }
+
+    h1 {
+        @media screen and (min-width: $tablet) {
+            font-size: 36px;
+        }
+    }
+}

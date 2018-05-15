@@ -2,22 +2,30 @@
 /**
  * Module dependencies.
  */
+// בקובץ זה אנו מגדירים את ההגדרות של ההאזנות לשרת
+// המשתנה app מכיל את כל היכולות המצויות בקובץ app.js באמצעות חיבור הקובץ
 const app = require('../app')
+// המשתנה debug מכיל את כל היכולות של המודול באמצעות חיבורו
 const debug = require('debug')
+// המשתנה http מכיל את כל היכולות של המודול באמצעות חיבורו
 const http = require('http')
+// המשתנה models מכיל את כל היכולות המצויות בקבצים שמצויים בתיקיית models באמצעות חיבור התיקייה
 const models = require('../models')
 
 /**
  * Get port from environment and store in Express.
  */
+// המשתנה port מכיל את החיבור לפורט שאנו מעוניינים שהשרת יאזין לו, כאשר ה- port שמספרו 3000 מוגדר כברירת מחדל
 const port = normalizePort( process.env.PORT || '3000' )
 app.set('port', port)
 
 /**
  * Create HTTP server.
  */
+// המשתנה server מכיל את החיבור לשרת באמצעות הפונקציה createServer שמצויה תחת המשתנה http ומקבלת את המשתנה app
 const server = http.createServer( app )
 
+// הפעלה של הפונקציה sync המצויה תחת ה- models של sequelize, ולאחר מכן, מאחר ואנו משתמשים ב- sequelize שהוא מודול המבוסס על פרומיס, נפעיל פרומיס על ההאזנה של השרת ל- port מסוים והצגת הודעה לאיזה פורט השרת שאקספרס מבצע בו שימוש מאזין
 models.sequelize.sync().then(() => {
     /**
      * Listen on provided port, on all network interfaces.
@@ -26,13 +34,16 @@ models.sequelize.sync().then(() => {
         debug('Express server listening on port ' + server.address().port)
     })
 
+    // הפעלה של הפונקציה on המצויה תחת המשתנה server וכאשר ה- event בשם error הופעל, תופעל הפונקציה onError
     server.on('error', onError)
+    // הפעלה של הפונקציה on המצויה תחת המשתנה server וכאשר ה- event בשם listening הופעל, תופעל הפונקציה onListening
     server.on('listening', onListening)
 })
 
 /**
  * Normalize a port into a number, string, or false.
  */
+// באמצעות הפונקציה normalizePort אנו בודקים שה- port אליו השרת של אקספרס מאזין הוא תקין
 function normalizePort( val ) {
     let port = parseInt( val, 10 )
 

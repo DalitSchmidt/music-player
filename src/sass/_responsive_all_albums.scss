@@ -3,69 +3,131 @@ $mobile-medium: 375px;
 $mobile-large: 425px;
 $tablet: 768px;
 $laptop: 1024px;
+$laptop-normal: 1280px;
 $laptop-large: 1440px;
 $desktop: 2560px;
 
+/* Album list (display of disks) */
 #album-list {
+    @media screen and ( min-width: $mobile-small ) {
+        width: 250px;
+        margin: 0 25px;
+    }
+
+    @media screen and ( min-width: $mobile-medium ) {
+        width: 300px;
+        margin: 0 30px;
+    }
+
+    @media screen and ( min-width: $mobile-large ) {
+        width: 330px;
+        margin: 0 40px;
+    }
+
     @media screen and ( min-width: $tablet ) {
+        width: auto;
+        margin: 0 50px;
         display: flex;
         flex-wrap: wrap;
     }
 
+    h2 {
+        @media screen and ( min-width: $tablet ) {
+            left: 100px;
+        }
+
+        @media screen and ( min-width: $laptop ) {
+            left: 0;
+        }
+    }
+
     .col-md-3 {
+        @media screen and ( min-width: $mobile-large ) {
+            max-width: 330px;
+        }
+
         @media screen and ( min-width: $tablet ) {
             width: 250px;
             margin: 10px 10px 50px 10px;
             flex: 1 1 0;
         }
 
+        @media screen and ( min-width: $laptop ) {
+            max-width: 280px;
+        }
+
+        @media screen and ( min-width: $laptop-normal ) {
+            max-width: 270px;
+        }
+
+        @media screen and ( min-width: $laptop-large ) {
+            margin: 10px 30px 50px 30px;
+        }
+
+        @media screen and ( min-width: $desktop ) {
+            margin: 10px 40px 50px 40px;
+        }
+
         .record {
             @media screen and ( min-width: $mobile-small ) {
-                width: 320px;
-                margin: 20px -50px;
+                width: 250px;
             }
 
             @media screen and ( min-width: $mobile-medium ) {
-                margin-left: -28px;
+                margin: 0 25px;
             }
 
             @media screen and ( min-width: $mobile-large ) {
-                margin: 0;
+                margin: 0 40px;
+            }
+
+            @media screen and ( min-width: $tablet ) {
+                margin: 0 30px;
             }
 
             @media screen and ( min-width: $laptop ) {
-                width: 300px;
+                width: 280px;
+                max-width: 280px;
+                margin: 0;
             }
 
-            .play-icon {
-                @media screen and ( min-width: $laptop ) {
-                    top: 145px;
-                }
+            @media screen and ( min-width: $laptop-normal ) {
+                width: 270px;
+                max-width: 270px;
             }
 
             .remove-icon {
                 @media screen and ( min-width: $mobile-small ) {
-                    left: 135px;
+                    left: 100px;
                 }
 
                 @media screen and ( min-width: $laptop ) {
-                    left: 125px;
+                    left: 115px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 110px;
                 }
             }
 
             .edit-icon {
                 @media screen and ( min-width: $mobile-small ) {
-                    left: 165px;
+                    left: 130px;
                 }
 
                 @media screen and ( min-width: $laptop ) {
-                    left: 155px;
+                    left: 145px;
+                }
+
+                @media screen and ( min-width: $laptop-normal ) {
+                    left: 140px;
                 }
             }
         }
     }
 }
 
+/* Modal Content/Box */
 .modal-content {
     @media screen and ( min-width: $mobile-small ) {
         width: 80%;
@@ -86,6 +148,22 @@ $desktop: 2560px;
     }
 }
 
+#approve-delete, #close-button, #edit-album-approve-delete, #edit-album-close-button {
+    @media screen and ( min-width: $mobile-medium ) {
+        margin: 0 20px;
+        float: left;
+    }
+
+    @media screen and ( min-width: $mobile-large ) {
+        margin: 0 40px;
+    }
+
+    @media screen and ( min-width: $tablet ) {
+        margin: 0;
+        float: right;
+    }
+}
+
 #cancel-button, #edit-album-cancel-button {
     @media screen and ( min-width: $mobile-small ) {
         margin-bottom: 10px;
@@ -103,21 +181,5 @@ $desktop: 2560px;
 
     @media screen and ( min-width: $tablet ) {
         margin: 0;
-    }
-}
-
-#approve-remove, #close-button, #edit-album-approve-remove, #edit-album-close-button {
-    @media screen and ( min-width: $mobile-medium ) {
-        margin: 0 20px;
-        float: left;
-    }
-
-    @media screen and ( min-width: $mobile-large ) {
-        margin: 0 40px;
-    }
-
-    @media screen and ( min-width: $tablet ) {
-        margin: 0;
-        float: right;
     }
 }

@@ -46,8 +46,8 @@
     }
 
     #album-info-image {
-        left: 125px;
         top: 70px;
+        left: 125px;
         position: absolute;
 
         img, span {
@@ -91,6 +91,7 @@
             margin: 0 20px 10px;
             padding: 0;
             text-align: justify;
+            white-space: nowrap;
             font-weight: bold;
         }
 
@@ -110,6 +111,7 @@
 
             li {
                 margin-right: 25px;
+                white-space: nowrap;
                 flex: inherit;
                 flex-direction: row;
             }
@@ -225,6 +227,7 @@
 
             li {
                 padding-left: 5px;
+                white-space: nowrap;
                 cursor: pointer;
 
                 &.playing, &.pause {
@@ -241,13 +244,13 @@
 
                 &.playing {
                     &::before {
-                        content: "\f04c";
+                        content: '\f04c';
                     }
                 }
 
                 &.pause {
                     &::before {
-                        content: "\f04b";
+                        content: '\f04b';
                     }
                 }
             }

@@ -3,9 +3,11 @@ $mobile-medium: 375px;
 $mobile-large: 425px;
 $tablet: 768px;
 $laptop: 1024px;
+$laptop-normal: 1280px;
 $laptop-large: 1440px;
 $desktop: 2560px;
 
+/* Album information & player */
 #aside-menu {
     @media screen and ( min-width: $mobile-small ) {
         margin: 0 30px;
@@ -53,13 +55,13 @@ $desktop: 2560px;
 
     #album-info-image {
         @media screen and ( min-width: $mobile-small ) {
-            left: 0;
             top: 120px;
+            left: 0;
         }
 
         @media screen and ( min-width: $laptop ) {
-            left: 125px;
             top: 70px;
+            left: 125px;
         }
     }
 }
@@ -125,6 +127,10 @@ $desktop: 2560px;
         @media screen and ( min-width: $laptop ) {
             width: auto;
             margin-left: 125px;
+        }
+
+        @media screen and ( min-width: $desktop ) {
+            max-width: 1965px;
         }
 
         #album-info-name {
@@ -219,7 +225,6 @@ $desktop: 2560px;
                 font-size: 18px;
                 display: flex;
                 position: absolute;
-                flex-direction: row;
             }
 
             @media screen and ( min-width: $laptop-large ) {
@@ -272,8 +277,16 @@ $desktop: 2560px;
                 margin: 0 0 10px 20px;
             }
 
+            @media screen and ( min-width: $laptop-normal ) {
+                min-width: 725px;
+            }
+
+            @media screen and ( min-width: $laptop-large ) {
+                min-width: 880px;
+            }
+
             @media screen and ( min-width: $desktop ) {
-                font-size: 14px;
+                font-size: 16px;
             }
         }
 
@@ -623,7 +636,12 @@ $desktop: 2560px;
                     padding-left: 4px;
                 }
 
+                @media screen and ( min-width: $tablet ) {
+                    min-width: 415px;
+                }
+
                 @media screen and ( min-width: $laptop ) {
+                    min-width: 460px;
                     padding-left: 5px;
                 }
 

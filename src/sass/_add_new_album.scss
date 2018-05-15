@@ -5,25 +5,47 @@
     .col-md-12 {
         padding: 15px;
 
-        img {
-            margin: 20px;
-            float: right;
-        }
+        #image-cover-preview {
+            img {
+                margin: 20px;
+                float: right;
+            }
 
-        &::before {
-            background: #ffffff;
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-            top: 135px;
-            right: 135px;
-            position: absolute;
-            content: ' ';
+            #image-cover-preview-circle {
+                background: #ffffff;
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                top: 135px;
+                right: 135px;
+                position: absolute;
+                content: ' ';
+            }
         }
     }
 
     .col-md-8 {
         margin: 20px;
+
+        #artist-results {
+            background: #ffffff;
+            width: 250px;
+            margin-left: 5px;
+
+            ul > li {
+                margin-left: 90px;
+                text-transform: capitalize;
+
+                &:nth-of-type(1):not(last-of-type) {
+                    border-bottom: 2px solid #dadada;
+                    margin-top: -15px;
+                }
+
+                &:last-of-type {
+                    margin-bottom: -5px;
+                }
+            }
+        }
 
         #album-genres {
             position: relative;
@@ -38,47 +60,36 @@
             }
 
             #tags {
-                height: 34px;
                 margin-left: 95px;
 
-                &.error > .tag-selector {
+                &.error > #tag-selector {
                     border-color: #ff0000;
                 }
 
-                &.success > .tag-selector {
+                &.success > #tag-selector {
                     border-color: #008000;
                 }
 
-                .tag-selector {
-                    height: 34px;
+                #tag-selector {
                     width: 100%;
                     border: 3px double #000000;
                     border-radius: 3px;
-                    padding: 3px;
+                    padding: 2px 3px 1px 3px;
                     vertical-align: baseline;
                     display: flex;
-                    //overflow: hidden;
                     cursor: text;
                     flex-wrap: wrap;
 
                     #tags-container {
-                        height: 34px;
+                        height: auto;
+                        max-height: 80px;
                         width: auto;
-                    }
-
-                    #search-genres-container {
-                        //position: relative;
-                        //overflow-y: scroll;
-                        //
-                        //&::-webkit-scrollbar {
-                        //    display: none;
-                        //}
                     }
 
                     #search-genres {
+                        background: transparent;
                         height: 22px;
                         width: auto;
-                        min-width: 50px;
                         border: none;
                         padding: 6px;
                         white-space: nowrap;
@@ -90,30 +101,29 @@
                 #genres-results {
                     background: #ffffff;
                     width: 160px;
-                    //margin-left: 5px;
+                    z-index: 1;
 
                     ul {
                         max-height: 150px;
-                        overflow-y: scroll;
                         width: 100%;
+                        margin-bottom: 0;
+                        text-transform: capitalize;
+                        overflow-y: scroll;
                     }
 
-                    /* Scrollbar styles */
                     ::-webkit-scrollbar {
-                        width: 6px;
-                        height: 6px;
+                        height: 100%;
+                        width: 2px;
                     }
 
                     ::-webkit-scrollbar-track {
-                        //box-shadow: inset 0 0 10px #a7a7a7;
-                        //border-radius: 10px;
                         background: #dadada;
                     }
 
                     ::-webkit-scrollbar-thumb {
-                        //border-radius: 10px;
-                        background: black;
-                        //box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+                        background: #000000;
+                        border-radius: 16px;
+                        margin: 0 auto;
                     }
                 }
 
@@ -121,12 +131,10 @@
                     background: #000000;
                     height: 20px;
                     border-radius: 3px;
-                    //margin: auto 0.3em auto 0;
-                    //margin: auto 0.3em 0.3em 0;
-                    margin-right: 0.3em;
-                    margin-bottom: 0.3em;
+                    margin: 0 0.3em 0.5% 0;
                     padding: 0.1em 0.4em 1.5em;
                     color: #ffffff;
+                    text-transform: capitalize;
                     vertical-align: baseline;
                     visibility: visible;
                     position: relative;
@@ -147,23 +155,22 @@
             }
         }
 
-        #artist-results {
-            background: #ffffff;
-            width: 250px;
-            margin-left: 5px;
+        #description-area {
+            max-height: 50px;
+            margin-bottom: 0;
+            top: -10px;
+            position: relative;
 
-            ul > li {
-                margin-left: 90px;
+            #description-label {
+                top: 5px;
+            }
 
-                &:nth-of-type(1):not(last-of-type) {
-                    border-bottom: 2px solid #dadada;
-                    margin-top: -10px;
-                }
+            .error-message ~ #description-label {
+                top: 5px;
+            }
 
-                &:last-of-type {
-                    border-bottom: none;
-                    margin-bottom: -5px;
-                }
+            & > .error-message {
+                top: 5px;
             }
         }
 
@@ -219,6 +226,7 @@
             border-bottom: 2px solid #dadada;
             padding: 0 5px;
             text-align: justify;
+            text-transform: capitalize;
             line-height: 30px;
             vertical-align: baseline;
             font-weight: bold;
@@ -227,10 +235,6 @@
 
             &:nth-of-type(1):not(last-of-type) {
                 border-bottom: 2px solid #dadada;
-            }
-
-            &:last-of-type {
-                border-bottom: none;
             }
         }
     }
@@ -250,7 +254,7 @@
                 margin: 10px 0 5px 15px;
             }
 
-            input, span {
+            input {
                 &.error {
                     border-color: #ff0000;
                 }
@@ -267,25 +271,22 @@
                     padding: 0;
 
                     .error-message {
-                        margin: -30px 0 30px 15px;
+                        margin-top: 30px;
+                    }
+
+                    .song {
+                        margin-top: -60px;
                     }
                 }
 
                 .form-group {
-                    //position: relative;
-
                     &.song > .error-message {
-                        top: -20px;
+                        top: -5px;
                         position: relative;
-
-                        &:first-of-type {
-                            top: -15px;
-                            //position: relative;
-                        }
                     }
                 }
 
-                input, span {
+                input {
                     &.error {
                         border-color: #ff0000;
                     }
@@ -296,13 +297,13 @@
                 }
 
                 &.error {
-                    .form-group.song input, span {
+                    .form-group.song input {
                         border-color: #ff0000;
                     }
                 }
 
                 &.success {
-                    .form-group.song input, span {
+                    .form-group.song input {
                         border-color: #008000;
                     }
                 }

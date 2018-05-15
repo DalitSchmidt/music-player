@@ -6,6 +6,7 @@ $laptop: 1024px;
 $laptop-large: 1440px;
 $desktop: 2560px;
 
+/* Header */
 header {
     @media screen and ( min-width: $mobile-small ) {
         height: 100px;
@@ -16,21 +17,19 @@ header {
     }
 
     #header-controls {
+        @media screen and ( min-width: $mobile-small ) {
+            margin-top: 5px;
+        }
+
+        @media screen and ( min-width: $mobile-medium ) {
+            margin: 10px;
+        }
+
         @media screen and ( min-width: $tablet ) {
-            margin: 0;
+            margin: 10px 0;
         }
 
         a {
-            .fa-plus-circle {
-                @media screen and ( min-width: $mobile-small ) {
-                    margin: 5px;
-                }
-
-                @media screen and ( min-width: $tablet ) {
-                    margin: 20px 5px 0 20px;
-                }
-            }
-
             @media screen and ( min-width: $mobile-small ) {
                 padding: 1px;
             }
@@ -40,17 +39,20 @@ header {
                     margin-left: 15px;
                 }
             }
-        }
 
-        @media screen and ( min-width: $mobile-small ) {
-            margin-top: 5px;
-        }
+            .fa-plus-circle {
+                @media screen and ( min-width: $mobile-small ) {
+                    margin: 5px;
+                }
 
-        @media screen and ( min-width: $mobile-medium ) {
-            margin: 10px;
+                @media screen and ( min-width: $tablet ) {
+                    margin: 20px 5px 0 20px;
+                }
+            }
         }
     }
 
+    /* Search window */
     #search-area {
         @media screen and ( min-width: $mobile-small ) {
             margin: 10px 25px 0 0;
