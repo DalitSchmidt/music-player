@@ -1,5 +1,9 @@
+// האובייקט AlbumTemplates המתפקד "כמעין" מחלקת שירות מכיל את כל הפונקציות המאפשרות לנו להציג מידע ב- DOM
+// הגדרת האובייקט בשם AlbumTemplates כקבוע
 const AlbumTemplates = {
+    // באמצעות הפונקציה album המקבלת את המשתנה album, אנו יוצרים תבנית html של האלבום להצגה ב- DOM
     album: function ( album ) {
+        // הפונקציה מחזירה תבנית html של האלבום להצגה ב- DOM
         return `
                 <div class="col-md-3">
                     <div class="record" data-album-id="${album.album_id}">
@@ -21,20 +25,29 @@ const AlbumTemplates = {
                `
     },
 
+    // באמצעות הפונקציה appendAlbums המקבלת את המשתנה albums אנו מכניסים את התבנית של האלבומים ל- DOM
     appendAlbums: function ( albums ) {
+        // המשתנה html מכיל נתונים ריקים על-מנת שנוכל לשרשר אותו ולהוסיף נתונים ל- DOM
         let html = ''
 
+        // כדי להציג את כל האלבומים ב- DOM נעבור על המשתנה albums באמצעות לולאת for
         for ( let i = 0; i < albums.length; i++ )
+            // המשתנה html משרשר אליו את הפונקציה album המכילה תבנית html של האלבום בהתאם למיקום של albums המתקבל מהלולאה
             html += this.album( albums[ i ] )
 
+        // הפונקציה מחזירה את המשתנה html המכיל תבנית html של האלבום להצגה ב- DOM
         return html
     },
 
+    // באמצעות הפונקציה noAlbums מתאפשר להציג הודעה ב- DOM האומרת שאין אלבומים ולהוספת אלבום חדש יש ללחוץ על הכפתור המתאים, כאשר אין אלבומים שמורים במסד הנתונים
     noAlbums: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנט h2 המציג ב- DOM הודעה האומרת שאין אלבומים ולהוספת אלבום חדש יש ללחוץ על הכפתור המתאים
         return `<h2 class="col-md-12">There are no albums!<br/>Click the 'Add New Album' button</h2>`
     },
 
+    // באמצעות הפונקציה deleteDialog המקבלת את המשתנה album אנו יוצרים תבנית html המציגה ב- DOM הודעה מתאימה בדבר מחיקת האלבום הרלוונטי
     deleteDialog: function ( album ) {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM הודעה מתאימה בדבר מחיקת האלבום הרלוונטי
         return `
                 <div class="modal-content">
                     <div class="modal-header">
@@ -53,7 +66,9 @@ const AlbumTemplates = {
                `
     },
 
+    // באמצעות הפונקציה deleteSuccessDialog המקבלת את המשתנים currentPage ו- albumId, אנו יוצרים תבנית html המציגה ב- DOM הודעה המאשרת שהאלבום נמחק
     deleteSuccessDialog: function ( currentPage, albumId ) {
+        // הפונקציה מחזירה תבנית html המכילה את האלמנטים המאפשרים להציג ב- DOM הודעה המאשרת שהאלבום נמחק
         return `
                 <div class="modal-content">
                     <div class="modal-header">
@@ -72,4 +87,5 @@ const AlbumTemplates = {
     }
 }
 
+// ייצוא היכולות של האובייקט AlbumTemplates החוצה
 export default AlbumTemplates
