@@ -815,15 +815,11 @@ $desktop: 2560px;
         @media screen and (min-width: $mobile-small) {
             font-size: 30px;
         }
-    }
 
-    h1 {
         @media screen and (min-width: $mobile-large) {
             font-size: 32px;
         }
-    }
 
-    h1 {
         @media screen and (min-width: $tablet) {
             font-size: 36px;
         }
