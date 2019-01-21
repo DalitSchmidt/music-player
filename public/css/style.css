@@ -271,13 +271,13 @@ h1 {
         position: absolute; }
       #add-new-album-details .col-md-8 #album-genres .error-message ~ .control-label {
         top: 35px; }
-      #add-new-album-details .col-md-8 #album-genres #tags {
+      #add-new-album-details .col-md-8 #album-genres #genres-tags {
         margin-left: 95px; }
-        #add-new-album-details .col-md-8 #album-genres #tags.error > #tag-selector {
+        #add-new-album-details .col-md-8 #album-genres #genres-tags.error > #tag-selector {
           border-color: #ff0000; }
-        #add-new-album-details .col-md-8 #album-genres #tags.success > #tag-selector {
+        #add-new-album-details .col-md-8 #album-genres #genres-tags.success > #tag-selector {
           border-color: #008000; }
-        #add-new-album-details .col-md-8 #album-genres #tags #tag-selector {
+        #add-new-album-details .col-md-8 #album-genres #genres-tags #tag-selector {
           width: 100%;
           border: 3px double #000000;
           border-radius: 3px;
@@ -286,11 +286,11 @@ h1 {
           display: flex;
           cursor: text;
           flex-wrap: wrap; }
-          #add-new-album-details .col-md-8 #album-genres #tags #tag-selector #tags-container {
+          #add-new-album-details .col-md-8 #album-genres #genres-tags #tag-selector #tags-container {
             height: auto;
             max-height: 80px;
             width: auto; }
-          #add-new-album-details .col-md-8 #album-genres #tags #tag-selector #search-genres {
+          #add-new-album-details .col-md-8 #album-genres #genres-tags #tag-selector #search-genres {
             background: transparent;
             height: 22px;
             width: auto;
@@ -299,26 +299,26 @@ h1 {
             white-space: nowrap;
             float: left;
             flex: 1 1 0%; }
-        #add-new-album-details .col-md-8 #album-genres #tags #genres-results {
+        #add-new-album-details .col-md-8 #album-genres #genres-tags #genres-results {
           background: #ffffff;
           width: 160px;
           z-index: 1; }
-          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ul {
+          #add-new-album-details .col-md-8 #album-genres #genres-tags #genres-results ul {
             max-height: 150px;
             width: 100%;
             margin-bottom: 0;
             text-transform: capitalize;
             overflow-y: scroll; }
-          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ::-webkit-scrollbar {
+          #add-new-album-details .col-md-8 #album-genres #genres-tags #genres-results ::-webkit-scrollbar {
             height: 100%;
             width: 2px; }
-          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ::-webkit-scrollbar-track {
+          #add-new-album-details .col-md-8 #album-genres #genres-tags #genres-results ::-webkit-scrollbar-track {
             background: #dadada; }
-          #add-new-album-details .col-md-8 #album-genres #tags #genres-results ::-webkit-scrollbar-thumb {
+          #add-new-album-details .col-md-8 #album-genres #genres-tags #genres-results ::-webkit-scrollbar-thumb {
             background: #000000;
             border-radius: 16px;
             margin: 0 auto; }
-        #add-new-album-details .col-md-8 #album-genres #tags .tag {
+        #add-new-album-details .col-md-8 #album-genres #genres-tags .tag {
           background: #000000;
           height: 20px;
           border-radius: 3px;
@@ -330,11 +330,11 @@ h1 {
           visibility: visible;
           position: relative;
           float: left; }
-          #add-new-album-details .col-md-8 #album-genres #tags .tag a {
+          #add-new-album-details .col-md-8 #album-genres #genres-tags .tag a {
             margin-left: 2px;
             color: #ffffff;
             cursor: pointer; }
-            #add-new-album-details .col-md-8 #album-genres #tags .tag a:hover {
+            #add-new-album-details .col-md-8 #album-genres #genres-tags .tag a:hover {
               color: #aaaaaa;
               text-decoration: none;
               opacity: 1; }
@@ -1048,52 +1048,52 @@ header {
     top: 40px; } }
 
 @media screen and (min-width: 320px) {
-  #add-new-album-details .col-md-8 #album-genres #tags {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags {
     margin-left: 0;
     top: 25px;
     position: relative; } }
 
 @media screen and (min-width: 768px) {
-  #add-new-album-details .col-md-8 #album-genres #tags {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags {
     width: 50%; } }
 
 @media screen and (min-width: 1024px) {
-  #add-new-album-details .col-md-8 #album-genres #tags {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags {
     width: 70%;
     margin-left: 95px;
     top: 0; } }
 
 @media screen and (min-width: 1280px) {
-  #add-new-album-details .col-md-8 #album-genres #tags {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags {
     width: 85%;
     top: 0; } }
 
 @media screen and (min-width: 2560px) {
-  #add-new-album-details .col-md-8 #album-genres #tags {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags {
     width: 90%; } }
 
 @media screen and (min-width: 1024px) {
-  #add-new-album-details .col-md-8 #album-genres #tags.error {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags.error {
     top: -5px; } }
 
 @media screen and (min-width: 1280px) {
-  #add-new-album-details .col-md-8 #album-genres #tags.success {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags.success {
     top: 0; } }
 
 @media screen and (min-width: 320px) {
-  #add-new-album-details .col-md-8 #album-genres #tags.success > #tag-selector {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags.success > #tag-selector {
     margin-top: 0; } }
 
 @media screen and (min-width: 1280px) {
-  #add-new-album-details .col-md-8 #album-genres #tags.success > #tag-selector {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags.success > #tag-selector {
     margin-top: -5px; } }
 
 @media screen and (min-width: 320px) {
-  #add-new-album-details .col-md-8 #album-genres #tags #tag-selector #tags-container {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags #tag-selector #tags-container {
     max-height: 150px; } }
 
 @media screen and (min-width: 1280px) {
-  #add-new-album-details .col-md-8 #album-genres #tags #tag-selector #tags-container {
+  #add-new-album-details .col-md-8 #album-genres #genres-tags #tag-selector #tags-container {
     max-height: 80px; } }
 
 @media screen and (min-width: 320px) {
