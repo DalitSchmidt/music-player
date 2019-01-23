@@ -192,7 +192,7 @@ router.put('/:album_id', function ( req, res ) {
     AlbumModel.update( album, {
         where: { album_id: album_id }
     }).then(() => {
-        GenreModel.bulkCreate( new_genres,  { returning: true } ).then(results => {
+        GenreModel.bulkCreate( new_genres, { returning: true } ).then(results => {
                 let new_genres_ids = results.map(genre => genre.genre_id)
                 let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map(genre_id => {
                     return { genre_id, album_id }

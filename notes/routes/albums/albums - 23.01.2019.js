@@ -273,7 +273,7 @@ router.put('/:album_id', function ( req, res ) {
         where: { album_id: album_id }
         // ואז מאחר ואנו משתתמשים ב- sequelize שהוא מודול המבוסס על promise, נפעיל promise בו המשתנה GenreModel מפעיל את הפונקציה bulkCreate היוצרת ומוסיפה את כל האירועים המצויים במערך של new_genres, ולאחר מכן נפעיל promise נוסף על התוצאות שמתקבלות
     }).then(() => {
-        GenreModel.bulkCreate( new_genres,  { returning: true } ).then(results => {
+        GenreModel.bulkCreate( new_genres, { returning: true } ).then(results => {
                 // המשתנה new_genres_ids מכיל את המשתנה results שמפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת את ה- genre_id
                 let new_genres_ids = results.map(genre => genre.genre_id)
                 // המשתנה album_genres_ids מכיל את המערך המאוחד של הנתונים המצויים במשתנה old_genres_ids ומפעיל את הפונקציה map היוצרת מערך חדש עם התוצאות של הפונקציה הקוראת בכל אלמנט במערך, כאשר במקרה שלנו היא משייכת את ה- genre_id ו- album_id
