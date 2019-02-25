@@ -54,17 +54,17 @@ const SingleAlbum = {
 
     getAlbum: function ( album_id ) {
         AlbumAPIService.getAlbumById( album_id ).then(album => {
-                this.setAlbumInfoMenu()
-                this.setAlbumInfoControls( album.album_id )
-                this.setAlbumInfoImage( album.album_image )
-                this.setAlbumInfo( album )
-                this.setNowPlayingSong()
-                this.setAlbumControls()
-                this.setAlbumPlaylist( album.songs )
-                Player.setSong( $('#player-playlist li').first() )
-            }, () => {
-                Router.redirect('all-albums')
-            })
+            this.setAlbumInfoMenu()
+            this.setAlbumInfoControls( album.album_id )
+            this.setAlbumInfoImage( album.album_image )
+            this.setAlbumInfo( album )
+            this.setNowPlayingSong()
+            this.setAlbumControls()
+            this.setAlbumPlaylist( album.songs )
+            Player.setSong( $('#player-playlist li').first() )
+        }, () => {
+            Router.redirect('all-albums')
+        })
     },
 
     bindEvents: function () {
@@ -76,6 +76,7 @@ const SingleAlbum = {
 
         if ( !album_id ) {
             Router.redirect()
+
             return
         }
 

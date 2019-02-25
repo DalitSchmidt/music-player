@@ -24,6 +24,7 @@ const SearchBar = {
 
         if ( term.length < 2 ) {
             this.clearResults()
+
             return
         }
 
@@ -50,7 +51,7 @@ const SearchBar = {
 
     bindEvents: function () {
         $('#search-form').on('submit', $.proxy( this.searchTerm, this ))
-        $('#search-term').on('keyup', Utils.debounce( $.proxy( this.getSuggestions, this ), 500) )
+        $('#search-term').on('keyup', Utils.debounce( $.proxy( this.getSuggestions, this ), 500))
         $('header').on('click', '#search-area.has-suggestions li', $.proxy( this.clearResults, this ))
         $('header').on('mouseleave', '#search-area.has-suggestions', $.proxy( this.clearResults, this ))
     },

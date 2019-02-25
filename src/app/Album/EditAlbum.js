@@ -36,11 +36,12 @@ const EditAlbum = {
 
     getAlbum: function () {
         AlbumAPIService.getAlbumById( this.album_id ).then(album => {
-                this.setValues( album )
-            }, () => {
-                Router.redirect()
-                return
-            })
+            this.setValues( album )
+        }, () => {
+            Router.redirect()
+
+            return
+        })
     },
 
     deleteSongMessage: function ( e ) {
@@ -59,6 +60,7 @@ const EditAlbum = {
 
         $('.modal-dialog').fadeOut('slow', () => {
             $(`.song-item[data-song-id=${song_id}]`).remove()
+
             let html = EditAlbumTemplates.deleteSongSuccessDialog( song_id )
             $('.modal-dialog').html( html ).fadeIn('slow')
         })
@@ -104,6 +106,7 @@ const EditAlbum = {
 
         if ( !this.album_id ) {
             Router.redirect()
+
             return
         }
 

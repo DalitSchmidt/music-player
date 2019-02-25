@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import AlbumValidator from './AlbumValidator'
+import AlbumForm from './AlbumForm'
 import SearchAPIService from '../APIServices/SearchAPIService'
 import AlbumFormTemplates from '../Templates/AlbumFormTemplates'
 import Utils from '../Utils'
@@ -17,7 +17,7 @@ const AlbumGenres = {
         $('#search-genres').val('')
 
         if ( $('#genres-tags.error').length )
-            this.validateGenres()
+            AlbumForm.validateGenres()
     },
 
     searchGenre: function ( term ) {
@@ -99,16 +99,10 @@ const AlbumGenres = {
         $('#album-genres .error-message').remove()
 
         let tag_names = [], error_message, html
-        let $input = $('#album-genres')
 
         $.each( $('.tag'), ( index, item ) => {
             tag_names.push( $( item ).attr('title') )
         })
-
-        if ( AlbumValidator.validateInputs( this.collectGenres(), 1, 'genres', $input ) ) {
-            $input.find('#genres-tags').removeClass('error').addClass('success')
-            $input.find('.error-message').remove()
-        }
 
         if ( tag_names.indexOf( tag_name ) !== -1 ) {
             error_message = 'The genre is already in list'

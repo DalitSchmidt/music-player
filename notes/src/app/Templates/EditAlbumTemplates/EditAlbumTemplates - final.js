@@ -1,19 +1,31 @@
+// ייבוא היכולות של jQuery על-מנת שהאובייקט EditAlbumTemplates יוכל להשתמש בהן
 import $ from 'jquery'
+// ייבוא היכולות של האובייקט Utils על-מנת שהאובייקט EditAlbumTemplates יוכל להשתמש בהן
 import Utils from '../Utils'
 
+// האובייקט בשם EditAlbumTemplates המתפקד כ"מעין" מחלקת שירות מכיל את כל הפונקציות שבאמצעותן מתאפשר להציג מידע ב- DOM וקשורות לטופס עריכת אלבום
+// הגדרה של האובייקט EditAlbumTemplates כקבוע
 const EditAlbumTemplates = {
+    // באמצעות הפונקציה titleEditAlbum מתאפשר ליצור תבנית html המציגה ב- DOM את הכותרת של העמוד בו אנו נמצאים
     titleEditAlbum: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנט h1 המציג ב- DOM את הכותרת של העמוד בו אנו נמצאים
         return `<h1>Edit Album</h1>`
     },
 
+    // באמצעות הפונקציה titleEditAlbumPlaylist מתאפשר ליצור תבנית html המציגה ב- DOM את הכותרת של החלק בו אנו נמצאים בעמוד
     titleEditAlbumPlaylist: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנט h1 המציג ב- DOM את הכותרת של החלק בו אנו נמצאים בעמוד
         return `<h1>Edit Album Playlist</h1>`
     },
 
+    // באמצעות הפונקציה deleteSongDialog (שמקבלת את המשתנה songId המכיל את המזהה הייחודי של השיר) מתאפשר ליצור תבנית html המציגה ב- DOM הודעה מתאימה בדבר המחיקה של השיר הרלוונטי בטרם ביצוע פעולת המחיקה
     deleteSongDialog: function ( songId ) {
+        // המשתנה songName מכיל את הערך המצוי באלמנט שיש לו class בשם song-name הקרוב ביותר לאלמנט שיש לו class בשם song-item המצוי באלמנט שיש לו attribute מסוג data-song-id המכיל את ה- data בשם song-id, ולמעשה המשתנה songName מכיל את שם השיר המצוי באלמנט מסוג input הקרוב ביותר לכפתור המחיקה שנלחץ
         let songName = $(`[data-song-id=${songId}]`).closest('.song-item').find('.song-name').val()
+        // המשתנה albumArtist מכיל את הערך המצוי באלמנט מסוג input שיש לו מזהה ייחודי בשם album-artist
         let albumArtist = $('#album-artist').val()
 
+        // הפונקציה מחזירה תבנית html המכילה אלמנטים המאפשרים להציג ב- DOM הודעה מתאימה בדבר המחיקה של השיר  הרלוונטי בטרם ביצוע פעולת המחיקה
         return `
                 <div class="modal-content">
                     <div class="modal-header">
@@ -32,7 +44,9 @@ const EditAlbumTemplates = {
                `
     },
 
+    // באמצעות הפונקציה deleteSongSuccessDialog מתאפשר ליצור תבנית html המציגה ב- DOM הודעה המאשרת שהשיר נמחק
     deleteSongSuccessDialog: function () {
+        // הפונקציה מחזירה תבנית html המכילה אלמנטים המאפשרים להציג ב- DOM הודעה המאשרת שהשיר נמחק
         return `
                 <div class="modal-content">
                     <div class="modal-header">
@@ -50,11 +64,16 @@ const EditAlbumTemplates = {
                `
     },
 
+    // באמצעות הפונקציה successMessageEditAlbum מתאפשר ליצור תבנית html המציגה ב- DOM הודעת הצלחה עם עריכת הנתונים ועדכון האלבום במסד הנתונים
     successMessageEditAlbum: function () {
+        // המשתנה albumId מפעיל את הפונקציה getAlbumID המצויה תחת האובייקט Utils ושבאמצעותה מתאפשר לקבל את המזהה הייחודי של האלבום המצוי ב- URL
         let albumId = Utils.getAlbumID()
+        // המשתנה albumName מכיל את הערך המצוי באלמנט מסוג input שיש לו מזהה ייחודי בשם album-name
         let albumName = $('#album-name').val()
+        // המשתנה albumArtist מכיל את הערך המצוי באלמנט מסוג input שיש לו מזהה ייחודי בשם album-artist
         let albumArtist = $('#album-artist').val()
 
+        // הפונקציה מחזירה תבנית html המכילה אלמנטים המאפשרים להציג ב- DOM הודעת הצלחה עם עריכת הנתונים ועדכון האלבום במסד הנתונים
         return `
                 <div class="modal-content">
                     <div class="modal-header">
@@ -73,4 +92,5 @@ const EditAlbumTemplates = {
     }
 }
 
+// ייצוא היכולות של האובייקט EditAlbumTemplates החוצה
 export default EditAlbumTemplates

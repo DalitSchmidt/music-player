@@ -193,36 +193,33 @@ router.put('/:album_id', function ( req, res ) {
         where: { album_id: album_id }
     }).then(() => {
         GenreModel.bulkCreate( new_genres, { returning: true } ).then(results => {
-                let new_genres_ids = results.map(genre => genre.genre_id)
-                let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map(genre_id => {
-                    return { genre_id, album_id }
-                })
-                AlbumToGenresModel.destroy({
-                    where: {
-                        album_id: album_id
-                    }
-                }).then(() => {
-                    AlbumToGenresModel.bulkCreate( album_genres_ids ).then(() => {
-                            SongModel.destroy({
-                                where: {
-                                    album_id: album_id
-                                }
-                            }).then(() => {
-                                let songs = album.songs.map(song => {
-                                    song.album_id = album_id
-
-                                    return song
-                                })
-                                SongModel.bulkCreate( songs ).then(result => {
-                                        res.json( result )
-                                    }
-                                )
-                            })
+            let new_genres_ids = results.map(genre => genre.genre_id)
+            let album_genres_ids = old_genres_ids.concat( new_genres_ids ).map(genre_id => {
+                return { genre_id, album_id }
+            })
+            AlbumToGenresModel.destroy({
+                where: {
+                    album_id: album_id
+                }
+            }).then(() => {
+                AlbumToGenresModel.bulkCreate( album_genres_ids ).then(() => {
+                    SongModel.destroy({
+                        where: {
+                            album_id: album_id
                         }
-                    )
+                    }).then(() => {
+                        let songs = album.songs.map(song => {
+                            song.album_id = album_id
+
+                            return song
+                        })
+                        SongModel.bulkCreate( songs ).then(result => {
+                            res.json( result )
+                        })
+                    })
                 })
-            }
-        )
+            })
+        })
     }).catch(err => {
         let errors = err.errors[0]
 

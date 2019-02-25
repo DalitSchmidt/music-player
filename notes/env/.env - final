@@ -1,1 +1,3 @@
+// קובץ זה מכיל את המשתנה סביבה המתבצע בו שימוש
+// הגדרה של המשתנה סביבה בשם YOUTUBE_API_KEY המכיל את המפתח הייחודי ל- API של YouTube
 YOUTUBE_API_KEY = AIzaSyB-veHdUK_Ax_04bY6C-o-uC9MCbs21w9w

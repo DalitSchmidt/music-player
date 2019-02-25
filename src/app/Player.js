@@ -82,8 +82,8 @@ const Player = {
                 $time.text( Utils.calculateTime( this.timer ) )
             }
         } else if ( youtubeplayer.getPlayerState() === 2 ) {
-                clearInterval( this.interval )
-                this.interval = false
+            clearInterval( this.interval )
+            this.interval = false
         }
     },
 
@@ -197,8 +197,10 @@ const Player = {
     initYouTube: function () {
         let tag = document.createElement('script')
         tag.src = 'https://www.youtube.com/iframe_api'
+
         let first_script_tag = document.getElementsByTagName('script')[0]
         first_script_tag.parentNode.insertBefore( tag, first_script_tag )
+
         Router.bindEvents()
 
         if ( isPlayerInit )

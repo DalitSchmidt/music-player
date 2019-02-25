@@ -74,13 +74,13 @@ const AlbumForm = {
         $input.parents('.song-item').removeClass('error')
 
         AlbumAPIService.getYouTubeID( youtube_id ).then(video => {
-                $input.closest('.song-item').find('input[name=song_time]').val( video.duration )
-                $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
-            },
-            error => {
-                let html = AlbumFormTemplates.errorMessage( error.responseJSON.error )
-                $input.parent().prepend( html )
-            })
+            $input.closest('.song-item').find('input[name=song_time]').val( video.duration )
+            $input.closest('.song-item').find('.song-time').html( Utils.calculateTime( video.duration ) )
+        },
+        error => {
+            let html = AlbumFormTemplates.errorMessage( error.responseJSON.error )
+            $input.parent().prepend( html )
+        })
     },
 
     removeSongItem: function ( e ) {
@@ -179,7 +179,7 @@ const AlbumForm = {
                     return
                 }
 
-                has_duplications = AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', $( item ) )
+                has_duplications = AlbumValidator.validateDuplications( songs, 'song_youtube', song_youtube, 'duplicate_song', song )
 
                 if ( !has_duplications && AlbumValidator.validateField( song.find('input[name=song_name]') ) ) {
                     songs.push({ song_youtube, song_name, song_time })
@@ -226,6 +226,15 @@ const AlbumForm = {
         if ( AlbumValidator.validateField( $input ) ) {
             $input.removeClass('error').addClass('success')
             $input.siblings('.error-message').remove()
+        }
+    },
+
+    validateGenres: function () {
+        let $input = $('#album-genres')
+
+        if ( AlbumValidator.validateInputs( this.collectGenres(), 1, 'genres', $input ) ) {
+            $input.find('#genres-tags').removeClass('error').addClass('success')
+            $input.find('.error-message').remove()
         }
     },
 
